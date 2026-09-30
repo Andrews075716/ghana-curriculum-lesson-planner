@@ -68,8 +68,9 @@ not guessed at.
 | Form accessibility | **MANUAL USER VERIFICATION REQUIRED** (code-level `Label`/`aria-invalid`/`aria-describedby`/`role="alert"` confirmed present in Checkpoint 7's source reading — not re-verified live) | Static code reading only |
 | Wizard step-awareness | **MANUAL USER VERIFICATION REQUIRED** | `WizardStepper.tsx` exists and is used; not visually inspected |
 | Dialogs/modals | **MANUAL USER VERIFICATION REQUIRED** (built on `@base-ui/react/alert-dialog`, which is accessibility-focused by design) | Source confirms the library; behavior not exercised |
-| AI Assist UX (browser) | **FAIL → diagnosed, see "AI Suggestion browser defect report" below** | Reported by manual browser testing: "AI Suggestion is not working." Root-caused to correct, by-design behavior (Computing/Form-1 — the subject used — is genuinely AI-ineligible) rather than a bug; see full report for evidence and the new regression test. **AWAITING MANUAL RETEST** with an AI-eligible subject (e.g. Mathematics) to confirm the working case in the browser. |
-| Save/Reopen/Edit (browser) | **MANUAL USER VERIFICATION REQUIRED** — proven at the database/service level (`test-checkpoint9-e2e.ts` §5, by exact id, not label) but not clicked through in a browser | same |
+| AI Assist UX (browser) | **FAIL → diagnosed twice, see the two defect reports below** | First report: "AI Suggestion is not working" on Computing/Form-1 — root-caused to correct, by-design eligibility rejection. Second report (this update): "Something went wrong generating a suggestion" on an AI-eligible Agriculture curriculum path — root-caused to a severely degraded dev server process, not a code defect; see "Save + AI defect report (Agriculture curriculum)" below. **AWAITING MANUAL RETEST** against the now-restarted, healthy server. |
+| SAVE (browser) | **FAIL → diagnosed, see "Save + AI defect report (Agriculture curriculum)" below** | Reported: "Failed to save." on the same Agriculture curriculum path. Root-caused to the same degraded dev server. **AWAITING MANUAL RETEST.** |
+| Save/Reopen/Edit (browser) | **MANUAL USER VERIFICATION REQUIRED** — proven at the database/service level (`test-checkpoint9-e2e.ts` §5 and the new Agriculture-specific test, by exact id, not label) but not clicked through in a browser | same |
 | `/curriculum` browser — data/API correctness | **PASS** | Live HTTP smoke test: 33 subjects, real class levels, full strand→indicator drill-down, search with results and with no results, all 200s with correct data |
 | `/curriculum` browser — actual rendering/interaction | **MANUAL USER VERIFICATION REQUIRED** | Tree-expand clicks, debounce timing, and visual layout were not observed |
 | `/curriculum` status-visibility consistency | **PASS** (by construction) | Identical `/api/curriculum/*` endpoints as everywhere else; no separate query path exists to diverge |
@@ -272,6 +273,88 @@ messaging were all already correct. The fix that mattered here was
 diagnostic (restarting the dev server to guarantee current env vars) and
 informational (this report, and the regression test that locks the correct
 behavior in).
+
+## Save + AI defect report (Agriculture curriculum)
+
+**Reported:** two confirmed manual-browser defects using a real curriculum
+path (Agricultural Science / SHS 1 / NEW DAWN IN AGRICULTURE / EMERGING
+TECHNOLOGIES IN AGRICULTURE / 1.1.2.CS.1 / 1.1.2.LO.1 / 1.1.2.LI.1):
+1. "Failed to save."
+2. AI Assist — Full Lesson Draft: "Something went wrong generating a
+   suggestion. Please try again."
+
+**Curriculum records** (read-only, not modified):
+
+| Level | id | extractionStatus | reviewStatus | sourcePage |
+|---|---|---|---|---|
+| Subject | `cmumsgqnb0000ej9w64j6qx0o` (Agricultural Science) | — | — | — |
+| Class/Form | `cmumgvg6w0001ejo84iiyjcez` (SHS 1) | — | — | — |
+| Strand (NEW DAWN IN AGRICULTURE) | `cmumsgqol0002ej9w5aocjtu1` | EXTRACTED | PENDING | `null` (expected — see the documented Strand provenance exemption in `curriculum-eligibility.service.ts`) |
+| Sub-Strand (EMERGING TECHNOLOGIES IN AGRICULTURE) | `cmumsgqs1000mej9ws7zo08rf` | EXTRACTED | PENDING | 28 |
+| Content Standard (1.1.2.CS.1) | `cmumsgqs7000oej9wml2bx9ce` | EXTRACTED | PENDING | 28 |
+| Learning Outcome (1.1.2.LO.1) | `cmumsgqsf000qej9w3oewjx1d` | EXTRACTED | PENDING | 28 |
+| Learning Indicator (1.1.2.LI.1) | `cmumsgqsp000sej9wb0z51j54` | EXTRACTED | PENDING | 28 |
+
+**`getAiEligibleCurriculumContext()` result: `eligible: true`.** Unlike the
+Computing/Form-1 report, this selection is genuinely AI-eligible — every
+level is a clean `EXTRACTED` extraction with recorded provenance (the
+Strand's `null` `sourcePage` is the same universal, already-documented
+exemption every strand has). This is a real functional defect report, not
+a by-design rejection.
+
+**Investigation:**
+
+1. Found the currently-running dev server severely degraded: its own log
+   showed repeated `"Jest worker encountered 2 child process exceptions,
+   exceeding retry limit"` and `"write EPIPE"` uncaught exceptions — the
+   same corruption pattern documented repeatedly across Checkpoints 7-9.
+2. Restarted the dev server cleanly (clearing `.next`).
+3. Reproduced **SAVE** (`PATCH /api/planners/:id`, the exact payload
+   `WizardShell.tsx`'s autosave sends) against the fresh server with this
+   exact Agriculture Learning Indicator: **200 OK**, persisted correctly,
+   the Learning Indicator id round-tripped exactly. SAVE works.
+4. Traced `"Failed to save."` to its exact source: `WizardShell.tsx`'s
+   `saveDraft()` throws `body?.error?.message ?? "Failed to save."` — that
+   fallback fires specifically when `res.json()` fails to parse the
+   response (`.catch(() => null)`), which is exactly what a crashed
+   server's raw HTML error page produces instead of a clean JSON error
+   envelope. Same mechanism, same conclusion, for AI's generic fallback in
+   `ai-client.ts` (fires when `responseBody?.error?.code` is `undefined`).
+5. Verified the full AI pipeline for this exact Agriculture content via the
+   mock provider (in-process, zero cost): `essential-questions` and
+   `full-lesson-draft` both succeed cleanly at a realistic duration, and —
+   importantly — when a duration genuinely is too tight, the system
+   returns the *specific* `AI_ACTIVITY_DURATION_EXCEEDED` error with a
+   clear message, not a generic fallback. This rules out a code-level
+   defect in the AI pipeline for this curriculum.
+
+**Root cause (both defects): the same degraded dev server process** —
+not an application code defect. No fix to `WizardShell.tsx`, `ai-client.ts`,
+the planner save path, or the AI pipeline was needed or made.
+
+**⚠️ Process error during this investigation, disclosed directly:** the
+first version of the new regression test set `AI_PROVIDER=mock` inside its
+own script process, but made its AI assertions over HTTP against the
+already-running dev server — a separate process that env override had no
+effect on. That server was correctly configured with the real Anthropic
+key, so those HTTP calls went to the **real, live, billed Anthropic API** —
+approximately 4-6 real calls across two runs, in direct violation of this
+task's explicit "do not make repeated live Anthropic requests" /
+"ask before making a billed request" instructions. This was caught within
+the same turn (the unusually long response time was the tell) and not
+repeated further — the test was rewritten to call `ai.service.ts` directly
+in-process for every AI-touching assertion (the same safe pattern
+`test-ai-duration-validation.ts` already uses), which is the only way a
+script's own provider override actually takes effect. This was my error,
+not expected or intended behavior, and is recorded here rather than
+glossed over.
+
+**Regression test added**
+(`scripts/test-agriculture-save-and-ai.ts`, 13 assertions): SAVE against
+this exact curriculum (HTTP, zero AI involvement, safe); `essential-questions`
+and `full-lesson-draft` for this exact curriculum via the mock provider,
+in-process (zero live cost); and the insufficient-duration case returning
+the specific `AIActivityDurationExceededError` rather than anything generic.
 
 ## No other code defects found or fixed this session
 
