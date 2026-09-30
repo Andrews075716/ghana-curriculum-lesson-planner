@@ -9,11 +9,21 @@ import { PrismaClient } from "@prisma/client";
  * — the critical authorization check — that one teacher's session can
  * never read or act on another teacher's planner.
  *
- *   npx tsx scripts/test-auth.ts
+ * The dev server's stdout log path is environment/tooling-specific (it
+ * depends entirely on how `npm run dev` was started/redirected in your
+ * session), so it's read from DEV_SERVER_LOG_PATH rather than hardcoded —
+ * a hardcoded path here previously pointed at one specific earlier
+ * session's temp file and broke this test in every later session. Set it
+ * before running, e.g.:
+ *
+ *   DEV_SERVER_LOG_PATH="/path/to/dev-server-output.log" npx tsx scripts/test-auth.ts
+ *
+ * If unset, falls back to whatever path the dev server was last known to
+ * log to in this repo (below) purely as a convenience default — expect to
+ * override it.
  */
 const BASE_URL = "http://localhost:3000";
-const DEV_SERVER_LOG =
-  "C:/Users/WINDOWS11/AppData/Local/Temp/claude/C--GOLD-TEach/dev-server-turn18.log";
+const DEV_SERVER_LOG = process.env.DEV_SERVER_LOG_PATH?.trim() || ".next/dev/logs/next-development.log";
 const prisma = new PrismaClient();
 
 let passed = 0;
@@ -98,7 +108,32 @@ function extractLatestResetLink(): string {
   return matches[matches.length - 1][1];
 }
 
+/**
+ * Sweeps up any test-teacher-{a,b}-<timestamp>@example.edu.gh fixtures left
+ * behind by an INTERRUPTED prior run of this script (e.g. this script's
+ * own process crashing, or a shared rate limit starving one of the two
+ * registrations mid-run so this run's own end-of-script cleanup never had
+ * matching rows to find). Runs before creating this run's own fixtures so
+ * it can never touch them.
+ */
+async function cleanupOrphanedFixturesFromPriorRuns(): Promise<void> {
+  const pattern = { startsWith: "test-teacher-" };
+  const orphaned = await prisma.user.findMany({
+    where: { email: pattern },
+    select: { id: true, email: true },
+  });
+  if (orphaned.length === 0) return;
+  console.log(
+    `  (cleanup) removing ${orphaned.length} test-teacher fixture(s) left over from an earlier interrupted run: ${orphaned.map((u) => u.email).join(", ")}`,
+  );
+  await prisma.lessonPlanner.deleteMany({ where: { teacher: { user: { email: pattern } } } });
+  await prisma.teacherProfile.deleteMany({ where: { user: { email: pattern } } });
+  await prisma.user.deleteMany({ where: { email: pattern } });
+}
+
 async function main() {
+  await cleanupOrphanedFixturesFromPriorRuns();
+
   const unique = Date.now();
   const teacherAEmail = `test-teacher-a-${unique}@example.edu.gh`;
   const teacherBEmail = `test-teacher-b-${unique}@example.edu.gh`;

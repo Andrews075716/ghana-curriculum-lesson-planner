@@ -129,6 +129,18 @@ async function main() {
     "planner C's lesson (no reflection content) is NOT a candidate",
   );
 
+  // The fixture indicator above (COMP-F1-...) is the legacy pre-Checkpoint-6
+  // seed data, which is deliberately AI-ineligible (see
+  // curriculum-eligibility.service.ts) — so depending on whether this
+  // environment has a real AI_PROVIDER configured, the request fails at
+  // the provider-availability check (503 AI_UNAVAILABLE, no provider) or
+  // the curriculum-eligibility check (422 AI_CURRICULUM_INELIGIBLE, a real
+  // provider IS configured but this fixture isn't usable) — either way,
+  // safely, before ever reaching a real provider call. Both are correct;
+  // this test only cares that reflectionSourceLessonId doesn't change
+  // WHICH of these two safe outcomes occurs or leak anything extra.
+  const SAFE_FAILURE_CODES = new Set(["AI_UNAVAILABLE", "AI_CURRICULUM_INELIGIBLE"]);
+
   console.log("9) Passing a reflectionSourceLessonId into an AI action doesn't change the failure mode");
   await patchJson(`/api/planners/${plannerBId}`, {
     classSection: "Form 1",
@@ -141,8 +153,9 @@ async function main() {
     reflectionSourceLessonId: lessonAId,
   });
   assert(
-    withOwnReflection.status === 503 && withOwnReflection.body.error?.code === "AI_UNAVAILABLE",
-    "with a valid, owned reflectionSourceLessonId -> still just AI_UNAVAILABLE (AI_PROVIDER=none), no new error type",
+    (withOwnReflection.status === 503 || withOwnReflection.status === 422) &&
+      SAFE_FAILURE_CODES.has(withOwnReflection.body.error?.code),
+    `with a valid, owned reflectionSourceLessonId -> still just a safe failure (got ${withOwnReflection.status} ${withOwnReflection.body.error?.code}), no new error type`,
   );
 
   console.log("10) A reflectionSourceLessonId for a lesson that doesn't exist doesn't leak information or crash");
@@ -150,8 +163,9 @@ async function main() {
     reflectionSourceLessonId: "does-not-exist-at-all",
   });
   assert(
-    withBogusReflection.status === 503 && withBogusReflection.body.error?.code === "AI_UNAVAILABLE",
-    "with a bogus reflectionSourceLessonId -> same AI_UNAVAILABLE, not a different/leaky error",
+    (withBogusReflection.status === 503 || withBogusReflection.status === 422) &&
+      SAFE_FAILURE_CODES.has(withBogusReflection.body.error?.code),
+    `with a bogus reflectionSourceLessonId -> same safe failure (got ${withBogusReflection.status} ${withBogusReflection.body.error?.code}), not a different/leaky error`,
   );
 
   console.log(`\n${passed} passed, ${failed} failed`);

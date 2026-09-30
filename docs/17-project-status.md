@@ -2,17 +2,30 @@
 
 [← Back to documentation home](README.md)
 
-> **Freshness notice (2026-09-30):** this document predates Checkpoint 6
-> (curriculum extraction/import for all 33 subjects) and predates Git being
-> initialized in this repository. It was written when only Computing/Form 1
-> had curriculum data and no `.git` directory existed. Those two facts below
-> are corrected inline; everything else in this document (auth, wizard,
-> AI-assist, PDF export, etc.) reflects an earlier snapshot and has not been
-> re-verified as part of this correction — see
-> [checkpoint-7-audit.md](checkpoint-7-audit.md) for the current,
-> independently re-verified state of curriculum/planner integration
-> specifically, and `data/curriculum/extraction-progress.json` for
-> curriculum-extraction status.
+> **Freshness notice (2026-09-30, updated after Checkpoint 9):** this
+> document predates Checkpoints 6-9 (curriculum extraction/import for all 33
+> subjects, curriculum/planner integration, curriculum eligibility policy,
+> curriculum-safe AI integration, and full end-to-end validation) and
+> predates Git being initialized in this repository. It was written when
+> only Computing/Form 1 had curriculum data and no `.git` directory existed.
+> The curriculum-count and git-repo facts below are corrected inline (from
+> Checkpoint 7); everything else in this document (auth, wizard, AI-assist,
+> PDF export, etc.) reflects an earlier snapshot and was largely superseded
+> by end-to-end testing across Checkpoints 8-9. **For current, independently
+> re-verified state, see (in order of recency):**
+> [checkpoint-9-e2e-validation.md](checkpoint-9-e2e-validation.md) (full
+> end-to-end validation, 549 passing assertions, production-readiness
+> assessment — the authoritative current status),
+> [checkpoint-9-e2e-audit.md](checkpoint-9-e2e-audit.md) (requirement-by-requirement
+> gap matrix), [checkpoint-8-ai-integration.md](checkpoint-8-ai-integration.md)
+> (AI architecture), [checkpoint-7-audit.md](checkpoint-7-audit.md)
+> (curriculum/planner integration), and
+> `data/curriculum/extraction-progress.json` (curriculum-extraction status).
+> Notably, this document's "Not started" list below (My Planners,
+> `/curriculum`, `/classes`, `/resources`, `/assessments`, additional
+> subjects) is now substantially stale — all of those except the standalone
+> `/curriculum` browser are confirmed COMPLETE with passing test coverage as
+> of Checkpoint 9.
 
 This document is the single most important one for anyone picking up this project: it states plainly what works, what's half-built, and what's next, based strictly on repository evidence gathered while writing this documentation set (see the inspection method in [README.md](README.md)).
 
