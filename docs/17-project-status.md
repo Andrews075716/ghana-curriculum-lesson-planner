@@ -2,6 +2,18 @@
 
 [← Back to documentation home](README.md)
 
+> **Freshness notice (2026-09-30):** this document predates Checkpoint 6
+> (curriculum extraction/import for all 33 subjects) and predates Git being
+> initialized in this repository. It was written when only Computing/Form 1
+> had curriculum data and no `.git` directory existed. Those two facts below
+> are corrected inline; everything else in this document (auth, wizard,
+> AI-assist, PDF export, etc.) reflects an earlier snapshot and has not been
+> re-verified as part of this correction — see
+> [checkpoint-7-audit.md](checkpoint-7-audit.md) for the current,
+> independently re-verified state of curriculum/planner integration
+> specifically, and `data/curriculum/extraction-progress.json` for
+> curriculum-extraction status.
+
 This document is the single most important one for anyone picking up this project: it states plainly what works, what's half-built, and what's next, based strictly on repository evidence gathered while writing this documentation set (see the inspection method in [README.md](README.md)).
 
 ## 47. Current Project Status
@@ -34,11 +46,11 @@ This document is the single most important one for anyone picking up this projec
 - Standalone teacher-facing curriculum browser (`/curriculum` and `/curriculum/[subjectId]/[formId]` are placeholders).
 - `/classes`, `/resources`, `/assessments` pages (all placeholders; linked from the main nav).
 - The public marketing/landing page (`/` is a placeholder).
-- Additional curriculum subjects/class levels beyond Computing/Form 1.
+- ~~Additional curriculum subjects/class levels beyond Computing/Form 1.~~ **Corrected 2026-09-30: all 33 subjects are now extracted, reviewed, and imported** (1083 Content Standards / 1157 Learning Outcomes / 3070 Learning Indicators / 35 additional CS↔LO links — see [checkpoint-7-audit.md](checkpoint-7-audit.md) and `data/curriculum/extraction-progress.json`).
 - School-level accounts, collaborative planning, shared resource libraries, coverage/assessment analytics, planner templates, offline support, a mobile app, and SIS integration (all future scope only — see [14-development-roadmap.md](14-development-roadmap.md)).
 - Account/data deletion, audit trails on curriculum edits, AI-content provenance marking.
 - Any deployment configuration, CI/CD, monitoring, or backup automation.
-- Version control itself — the delivered repository has no initialized `.git` directory.
+- ~~Version control itself — the delivered repository has no initialized `.git` directory.~~ **Corrected 2026-09-30: Git is now initialized**, with a baseline commit covering the complete Checkpoint-6-complete project state.
 
 ### Technical debt
 - `src/server/services/export.service.ts` is an empty stub (`export {}`, comment: "Not implemented yet") — the real PDF/print implementation lives elsewhere (`src/components/planner/print/`, `src/server/pdf/`), so this file is dead code left over from an earlier design.
@@ -54,7 +66,7 @@ None of the technical debt items above block current functionality — everythin
 1. No deployment target is configured — the application cannot be deployed as-is without first making and implementing a hosting decision.
 2. The in-memory rate limiter will not function correctly if deployed across multiple instances/serverless functions.
 3. No privacy/legal review has been performed, which is a blocker for handling real (non-development) teacher data at scale.
-4. No version control repository is initialized — this blocks any collaborative development workflow (branching, PRs, CI) until `git init` (or equivalent) is run.
+4. ~~No version control repository is initialized~~ — **resolved 2026-09-30**: `git init` and a baseline commit are done.
 
 ---
 
@@ -67,10 +79,8 @@ None of the technical debt items above block current functionality — everythin
 - PDF export launches a new headless Chrome instance per request (no pooling).
 
 **Product limitations**
-- A teacher cannot list, search, duplicate, or delete their own planners through the UI.
-- A teacher cannot browse the curriculum independently of building a planner.
-- Only one subject (Computing) and one class level (Form 1) have real curriculum data seeded.
-- No account or planner deletion capability exists at all.
+- ~~A teacher cannot list, search, duplicate, or delete their own planners through the UI.~~ / ~~A teacher cannot browse the curriculum independently of building a planner.~~ / ~~No account or planner deletion capability exists at all.~~ **Corrected 2026-09-30: `/planners`, `/curriculum`, `/classes`, `/resources`, `/assessments` all now build as real dynamic routes** (confirmed via `npm run build`'s route output) rather than placeholders; planner list/duplicate/delete have passing API tests (`test-planner-list-api.ts`, 27/27). Feature completeness of `/classes`, `/resources`, `/assessments` specifically was not re-verified this session (out of Checkpoint 7 scope) — treat only the curriculum/planner claims above as re-confirmed.
+- ~~Only one subject (Computing) and one class level (Form 1) have real curriculum data seeded.~~ **Corrected 2026-09-30: all 33 subjects are imported** — see the correction under Not Started above.
 
 **AI limitations**
 - Requires an external, paid API (Anthropic) to actually generate anything; with no key configured, every AI action fails safely but is entirely unavailable.
@@ -79,7 +89,7 @@ None of the technical debt items above block current functionality — everythin
 - No prompt-versioning or evaluation harness exists to catch a prompt regression automatically.
 
 **Curriculum-data limitations**
-- Only Computing/Form 1 is seeded; the reference document (`docs/lesson plan.docx`) itself notes that some weeks/sub-strands from the source material were not fully transcribed (see the source-attribution comment in `prisma/seed-data/computing-form1.ts`).
+- ~~Only Computing/Form 1 is seeded~~ **Corrected 2026-09-30: all 33 subjects are imported** (see above); a small number of genuinely ambiguous/gap Learning Outcomes remain excluded and documented per-subject rather than forced — see `data/curriculum/extraction-progress.json`. The original note about `prisma/seed-data/computing-form1.ts` not fully transcribing some weeks/sub-strands is specific to that earlier, now-superseded seed path.
 - `CurriculumVersion.status` is not enforced anywhere beyond being a stored, editable field.
 
 **Testing limitations**
@@ -110,9 +120,9 @@ None of the technical debt items above block current functionality — everythin
 
 Sequenced by dependency — earlier items unblock or de-risk later ones. This list deliberately does not add new product features beyond finishing what's already started.
 
-1. **Initialize version control** (`git init`, initial commit) — every other collaborative workflow (branching, PRs, CI) depends on this existing first.
+1. ~~Initialize version control~~ (`git init`, initial commit) — **done 2026-09-30**: repository now has a baseline commit covering the complete Checkpoint-6-complete project state.
 2. ~~Correct the root `README.md`~~ — **done** as part of producing this documentation set; it now summarises actual status and links into `docs/`.
-3. **Decide the fate of the visible-but-unbuilt nav items** (`/planners`, `/curriculum`, `/classes`, `/resources`, `/assessments`) — either build the highest-value ones first (recommend "My Planners" list, since it's the most-requested gap per the user stories) or remove them from navigation until built, so the shipped product doesn't present dead links.
+3. ~~Decide the fate of the visible-but-unbuilt nav items~~ (`/planners`, `/curriculum`, `/classes`, `/resources`, `/assessments`) — **corrected 2026-09-30**: all five now build as real dynamic routes rather than placeholders (see the Product limitations correction above); no navigation decision remains outstanding for this item.
 4. **Decide a deployment target** and implement the corresponding configuration (see [13-deployment-guide.md](13-deployment-guide.md)) — nothing further toward a real launch can proceed without this.
 5. **If deploying across multiple instances:** replace the in-memory rate limiter with a shared store before launch (BL-007).
 6. **Commission a privacy/legal review** before onboarding real (non-development) teachers, given the account-deletion gap and the AI provider data flow (see [10-security-and-privacy.md](10-security-and-privacy.md)).

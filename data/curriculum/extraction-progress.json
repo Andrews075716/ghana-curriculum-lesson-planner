@@ -289,8 +289,8 @@
       }
     },
     "checkpoint7_planner_integration": {
-      "status": "NOT_STARTED",
-      "description": "Wire the imported curriculum into the Create Planner cascading selector, filtered by review/approval status (Phase 13)."
+      "status": "COMPLETE",
+      "description": "Wire the imported curriculum into the Create Planner cascading selector (Phase 13). NOTE: this entry was found stale (still read NOT_STARTED) during a 2026-09-30 post-restart recovery audit even though the implementation was already substantially done in source; status corrected here based on direct re-verification, not by trusting the prior value. 25/27 audited sub-requirements COMPLETE, including the hybrid primary-CS/additional-CS-via-LearningOutcomeContentStandardLink union query, all 7 cascading selectors with reset/loading/error/empty states, save/restore, and edit behaviour (287 pre-existing + 20 newly-added test assertions, 0 failures). One item is a reported-not-decided policy question (no query filters on reviewStatus/extractionStatus today, so NEEDS_REVIEW curriculum nodes are currently visible to teachers alongside EXTRACTED ones — intentional per Checkpoint 6's 'do not hide unapproved data' rule, but whether NEEDS_REVIEW should eventually be visually flagged is unresolved). Two items (responsive layout, full accessibility audit) were not independently re-verified this session (no browser tooling used). Full detail: docs/checkpoint-7-audit.md."
     },
     "checkpoint8_ai_integration": {
       "status": "NOT_STARTED",
