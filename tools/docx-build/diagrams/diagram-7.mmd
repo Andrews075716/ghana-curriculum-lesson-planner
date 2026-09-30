@@ -1,0 +1,14 @@
+flowchart TD
+    A[Admin signs in] --> B{Manage individually<br/>or bulk import?}
+    B -- Individually --> C["Open admin curriculum pages:<br/>subjects, class-levels, versions, or tree"]
+    C --> D[Create / Edit / Delete a node]
+    D --> E{Node has children?}
+    E -- Yes --> F[Delete blocked — 409 Conflict]
+    E -- No --> G[Delete succeeds]
+    B -- Bulk import --> H["Open admin curriculum import page —<br/>upload CSV or JSON"]
+    H --> I[POST .../import/preview<br/>validate + diff, no writes]
+    I --> J{Any error-severity issue?}
+    J -- Yes --> K[Fix file and re-upload]
+    J -- No --> L[Confirm Import]
+    L --> M[POST .../import/commit<br/>re-validates, then one transaction]
+    M --> N([Curriculum updated])

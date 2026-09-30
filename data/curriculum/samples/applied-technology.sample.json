@@ -1,0 +1,59 @@
+{
+  "$comment": "Phase 7 representative extraction sample. Chosen to exercise the NEW 'pathway' field (branching options in Years 2-3) that the canonical schema needed to add after full inventory. Data taken verbatim from docs/inventory-parts/applied-technology.md.",
+  "subject": {
+    "name": "Applied Technology",
+    "code": null,
+    "sourceDocument": "curriculum-sources/Applied-Technology-Curriculum.pdf"
+  },
+  "curriculumVersion": {
+    "name": "NaCCA SHS September 2023",
+    "year": 2023,
+    "issuingAuthority": "National Council for Curriculum and Assessment (NaCCA), Ministry of Education, Republic of Ghana"
+  },
+  "classLevels": ["SHS 1", "SHS 2", "SHS 3"],
+  "structuralNote": "Year One is common to all learners (no pathway). Years Two and Three branch into 3 mutually exclusive options, each with its own Scope-and-Sequence table and Strand subset. This sample includes one Strand from the common Year 1, and shows the 'pathway' field populated (non-null) for a Year 2 Strand under Option One to demonstrate the schema extension - the Option One Year 2 Learning Outcome text itself was not in the sampled pages, so only the Strand-level structural entry is included for Year 2/Option One (no fabricated LO/CS/LI content).",
+  "strands": [
+    {
+      "name": "AUTOMOTIVE TECHNOLOGY",
+      "sequence": 1,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": { "page": 25, "pdfPageIndex": null },
+      "subStrands": [
+        {
+          "name": "INTRODUCTION TO ENGINE TECHNOLOGY",
+          "sequence": 1,
+          "source": { "page": 25, "pdfPageIndex": null },
+          "teachingLearningResources": [],
+          "learningOutcomes": [
+            {
+              "code": "1.1.1L.O.1",
+              "codeNoteOnFormat": "Printed verbatim as '1.1.1L.O.1' in the source (period misplaced inside 'LO') - preserved exactly as printed, not corrected to '1.1.1.LO.1'.",
+              "description": "Analyse and use relevant principles underlying engines to service, and repair spark ignition (SI) and compression ignition (CI) engines",
+              "sequence": 1,
+              "source": { "page": 25, "pdfPageIndex": null },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication and collaboration skills: As learners work in groups they listen to peers and ask relevant questions based on what they heard. Learning from and contributing to the learning of others. Able to adapt their presentation to better engage the audience during its delivery. Able to identify and analyse different points of view they hear in a discussion and explain how they are different. Critical thinking and Problem-solving skills: Ability to use justifiable principles to choose between the types that they have identified. Apply knowledge to real life workings in the use of engines.",
+                "gesi": "Learners having experienced a teaching approach that ensures gender equality and social inclusion, where they work with each other in an inclusive way; cross-sharing knowledge and understanding among groups and individuals lead them to: Examine and dispel misconceptions/myths about gender as they relate to technical education. Interrogate their stereotypes and biases about gender and the role men and women play in technical education. Sensitive to the interrelatedness of the various aspects of engine systems. Value and promote health and safety in workshop and in society.",
+                "sel": "All learning experiences related to engine technology should give learners the opportunities to develop the social emotional learning competencies, which include self-awareness, self-management, social awareness, relationship skills, and responsible decision-making.",
+                "nationalCoreValues": [],
+                "nationalCoreValuesNote": "Not present/not sampled for this specific Learning Outcome block."
+              },
+              "contentStandards": [],
+              "contentStandardsNote": "Content Standard/Learning Indicator/Assessment table for this Sub-Strand was not in the sampled pages - not fabricated here."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AUTOMOTIVE TECHNOLOGY",
+      "sequence": 1,
+      "classLevel": "SHS 2",
+      "pathway": "Option One - Automobile and Metal Technology",
+      "source": { "page": 22, "pdfPageIndex": null },
+      "subStrands": [],
+      "subStrandsNote": "Only the Scope-and-Sequence summary line for this Strand/Option/Year combination was sampled (Content Standards 8 / Learning Outcomes 8 / Learning Indicators 48 for the whole Option One, SHS 2-3 combined, not broken out per Strand in the sample) - no specific Learning Outcome/Content Standard text was read for this Year 2 branch, so none is fabricated here. This entry exists only to demonstrate the schema's 'pathway' field is populated correctly for a branching subject."
+    }
+  ]
+}

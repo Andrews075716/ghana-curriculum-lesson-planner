@@ -1,0 +1,1774 @@
+{
+  "subject": {
+    "name": "Biomedical Science",
+    "code": null,
+    "sourceDocument": "curriculum-sources/BIOMEDICAL-SCIENCE-Curriculum.pdf"
+  },
+  "curriculumVersion": {
+    "name": "NaCCA SHS September 2023",
+    "year": 2023,
+    "issuingAuthority": "National Council for Curriculum and Assessment (NaCCA), Ministry of Education, Republic of Ghana (in association with Ghana Education Service)"
+  },
+  "classLevels": ["SHS 1", "SHS 2", "SHS 3"],
+  "extractionNotes": [
+    "Document structure: SCOPE AND SEQUENCE table (PDF page 23, printed 'BIOMEDICAL SCIENCE | 21') lists 7 named sub-strands under 4 strands, each sub-strand recurring once per Year (One/Two/Three) with its own Learning Outcome(s)/Content Standard(s)/Learning Indicators. Totals per the table: Year 1 = 7 CS/7 LO/22 LI, Year 2 = 8 CS/8 LO/25 LI, Year 3 = 7 CS/7 LO/22 LI; grand total 22 CS / 22 LO / 69 LI, matching the prior inventory pass exactly. Verified by summing all extracted Learning Indicators below.",
+    "Strand 4's printed name is 'BIOMEDICAL INNOVATIONS' at the Year One heading (PDF page 48) but 'BIOMEDICAL INNOVATION' (singular) at the Year Two (PDF page 78) and Year Three (PDF page 102) headings. Both spellings preserved verbatim; see strands[3].namePrintedVariants and reviewNote.",
+    "Sub-Strand 'Diagnostic Devices' / 'Therapeutic Devices' (Strand 3) are spelled plural in the Scope and Sequence summary table but singular ('DIAGNOSTIC DEVICE', 'THERAPEUTIC DEVICE') at every in-body Sub-Strand heading across all three years. Body-heading (singular) spelling used as the canonical 'name' field; both variants recorded in namePrintedVariants and flagged NEEDS_REVIEW on the affected sub-strands.",
+    "No sub-strand or Learning Outcome row in this document carries a standalone 'SEL:' labelled bullet block anywhere (confirmed by exhaustive search of all 22 Learning Outcome rows) despite every row header reading 'GESI, SEL and Shared National Values' (with footnote markers 1/2, 3/4, 5/6 recurring per page for 'Gender Equality and Social Inclusion' / 'Socio-Emotional Learning'). guidance.sel is therefore omitted (null) throughout this file; guidance.gesi and guidance.nationalCoreValues are present for all 22 Learning Outcomes.",
+    "Year 2, Sub-Strand 'Biosafety' (2.1.2): the Assessment column codes are printed out of numeric sequence relative to their Learning Indicators — 2.1.2.LI.1 pairs with 2.1.2.AS.1 (correct), but 2.1.2.LI.2 is printed adjacent to '2.1.2.AS.3' and 2.1.2.LI.3 is printed adjacent to '2.1.2.AS.2' (i.e. AS.2 and AS.3 appear swapped). Preserved verbatim as printed; flagged NEEDS_REVIEW on that sub-strand.",
+    "Year 2, Sub-Strand 'Diseases and Disorders' (2.2.2), Content Standard 2.2.2.CS.2 (bacteria/viruses, 5 Learning Indicators): the Assessment column codes are printed badly out of sequence — in raw reading order they appear as AS.1, AS.4, AS.3, AS.2, AS.5 rather than AS.1-AS.5 in order, and the page break falls mid-table making the LI.3/LI.4 boundary and their nearest AS code ambiguous. Codes were paired to each LI by closest visual adjacency in the -layout extraction (LI.1->AS.1, LI.2->AS.4, LI.3->AS.3, LI.4->AS.2, LI.5->AS.5) and preserved verbatim; flagged NEEDS_REVIEW as this pairing is not fully certain from the text layer alone.",
+    "Year 2, Sub-Strand 'Therapeutic Device' (2.3.2), Content Standard 2.3.2.CS.1: only two Assessment code+DoK blocks are printed for the two Learning Indicators LI.1/LI.2, in the order AS.2 then AS.1 (reversed). Preserved verbatim as printed (LI.1->AS.2, LI.2->AS.1); flagged NEEDS_REVIEW. LI.3 correctly pairs with AS.3.",
+    "Year 3, Strand 4, Sub-Strand 'Research and Design in Biomedical Science' (3.4.1): the Learning Outcome 3.4.1.LO.1's entire 21st Century Skills/GESI/National Core Values guidance block (PDF page 102), and the Content Standard 3.4.1.CS.1's Teaching and Learning Resources list (PDF page 103, 'Sample manual', 'Regulatory documents'), are verbatim duplicates of the preceding sub-strand's content (3.3.2 Therapeutic Device, PDF pages 100-101) and do not match the actual subject matter of 3.4.1 (statistics/experimental design vs. therapeutic-device operating manuals and medical-device regulation). Apparent copy-paste error in the source document. Preserved verbatim, not corrected; flagged NEEDS_REVIEW. The Assessment code for 3.4.1.LI.1 is also printed with a stray space as '3.4.1. AS.1' (preserved verbatim).",
+    "A small number of individual words elsewhere in the source text layer are corrupted by an apparent font/ligature decoding fault specific to the 'fi' ligature glyph, rendering as the character 'Þ' (e.g. 'speciÞic' for 'specific', 'signiÞcance' for 'significance', both on PDF page 61-62, Year 2 Anatomy and Physiology 2.2.1). This is a pdftotext/font-encoding artifact (the word 'specific' extracts correctly elsewhere in the same paragraph) rather than genuine document content; the two affected words have been normalised to their correct spelling in this file rather than storing the decoding artifact, per the extraction-tooling distinction (not a curriculum-content correction).",
+    "Teaching and Learning Resources lists throughout this document are printed as multi-column bullet grids that wrap unpredictably across page breaks, and in several places the Assessment column's DoK text or the 'Teaching and Learning Resources' header itself visually bleeds into an adjacent cell during text extraction (e.g. Year 1 Biosafety TLR shows a trailing 'Chart'/'Computer' pair separated from the main grid; Year 2 Research and Design's Content Standard description is interrupted mid-cell by the words 'Teaching and Learning Resources'). Item lists were reconstructed conservatively in reading order; these routine layout-wrap artifacts are noted here rather than flagged individually on every affected sub-strand.",
+    "Front matter (PDF pages 1-24, printed pages i/1-22): shared SHS boilerplate covering the SHS Curriculum Overview, Philosophy/Vision/Goal/Rationale of Biomedical Science, 21st Century Skills, GESI, SEL's Five Core Competencies, Learning and Teaching Approaches, UDL, the Bloom's/Webb's DoK assessment framework, the Curriculum Development Panel list, and the Scope-and-Sequence summary table — not re-extracted per-node per the schema's Phase 5 design notes (document-level context, not curriculum-tree content). PDF page 3 also contains a leftover/garbled title-block artifact from a different subject's front matter (noted in the prior inventory pass), consistent with a shared production template across the SHS PDF batch; not part of Biomedical Science's own content and not extracted."
+  ],
+  "strands": [
+    {
+      "name": "BIOMEDICAL SCIENCE IN SOCIETY",
+      "code": null,
+      "sequence": 1,
+      "pathway": null,
+      "subStrands": [
+        {
+          "name": "BIOMEDICAL SCIENCE PRACTICE",
+          "sequence": 1,
+          "classLevel": "SHS 1",
+          "source": { "page": 23, "pdfPageIndex": 25 },
+          "teachingLearningResources": ["Video", "Documentaries", "Online resources", "Glocal articles", "Reports", "Pictures", "Charts", "Textbook"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 26, "pdfPageIndex": 28 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "PENDING",
+          "learningOutcomes": [
+            {
+              "code": "1.1.1.LO.1",
+              "description": "Describe what biomedical science is and how scientific investigation is applied in biomedical science.",
+              "sequence": 1,
+              "source": { "page": 23, "pdfPageIndex": 25 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Critical Thinking: As learners watch videos and interact with other learners, they critically observe, analyse and relate the roles biomedical scientists play in their environment to what was observed in the videos. As learners research on the various ways of solving problems related to biomedical science, they critically apply the knowledge to biomedical science problems in society. Collaboration: Learners work in mixed-ability groups and relate their observations to peers, brainstorm and come out with agreed answers. Learners learn to accept constructive feedback from peers. Learners work in gender-balanced and culturally diverse groups and take turns to relay the information they have gathered to their peers. The right ambience should be created to allow each and every learner to collaborate with others, building on points raised and agreeing on the collective observations while amicably resolving issues of differences in opinions. Communication: Learners get the opportunity to write their observations and communicate ideas to peers. Learners brainstorm and share their views in an encouraging environment. Leadership: Roles and responsibilities for various tasks can be assigned to individual group members. Digital Literacy: Learners research and gather information from the Internet using technological tools such as phones, computers, etc. Problem Solving: Learners use several information sources and pick out useful information as applicable to their work.",
+                "gesi": "Learners work in mixed-ability groups. Learners appreciate, value, and embrace diversity as they work with other group members. Learners embrace different opinions as they share their personal experiences with biomedical scientists in their environment. Learners embrace different opinions as they share their personal experiences to solve problem with the acquired knowledge in biomedical science. All learners will be given the opportunity to provide oral contributions confidently and effectively to different participants in different contexts.",
+                "gesiSelHeaderSeen": "GESI1, SEL2 and Shared National Values",
+                "nationalCoreValues": ["Tolerance", "Patience"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.1.CS.1",
+                  "description": "Demonstrate an understanding of Biomedical Science.",
+                  "sequence": 1,
+                  "source": { "page": 25, "pdfPageIndex": 27 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.1.LI.1",
+                      "description": "Explain what biomedical science is and what it is not.",
+                      "sequence": 1,
+                      "source": { "page": 25, "pdfPageIndex": 27 },
+                      "pedagogicalExemplars": [
+                        "Digital Learning: Watch videos and pictures of biomedical scientists in practice as well as the products of biomedical science.",
+                        "Talk for Learning: Through a whole class session, discuss observations made and relate them to personal experiences with biomedical scientists and/or products of biomedical science.",
+                        "Collaborative Learning: Through think-pair-share, identify the key features of biomedical science as a field of study and outline some misconceptions about the subject."
+                      ],
+                      "assessment": { "code": "1.1.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.1.LI.2",
+                      "description": "Identify problems in the society that can be solved by applying biomedical science.",
+                      "sequence": 2,
+                      "source": { "page": 25, "pdfPageIndex": 27 },
+                      "pedagogicalExemplars": [
+                        "Problem-Based Learning: In groups, identify and research into problems within the society and explain how biomedical science can be applied to solve these problems.",
+                        "Talk for Learning: Through a class discussion, identify other issues or problems outside the local society that can be addressed through biomedical science."
+                      ],
+                      "assessment": { "code": "1.1.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.1.LI.3",
+                      "description": "Explain how the scientific method can be applied to undertake investigations or address problems in biomedical science.",
+                      "sequence": 3,
+                      "source": { "page": 25, "pdfPageIndex": 27 },
+                      "pedagogicalExemplars": [
+                        "Structuring Talk for Learning: In a group discussion, initiate an interactive talk session on how a local problem could be addressed through the scientific method, focusing on the main steps of the scientific method.",
+                        "Problem-Based Learning: In mixed-ability groups develop a hypothesis on a local/societal problem that falls under the field of biomedical science. Develop a PowerPoint/poster presentation on how the hypothesis can be investigated using the scientific method."
+                      ],
+                      "assessment": { "code": "1.1.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BIOMEDICAL SCIENCE PRACTICE",
+          "sequence": 1,
+          "classLevel": "SHS 2",
+          "source": { "page": 51, "pdfPageIndex": 53 },
+          "teachingLearningResources": ["Videos", "Documentaries and pictures of the various biomedical scientist professionals", "Documentaries and pictures of the biomedical scientists in relation to forensic", "Documentaries and pictures of the biomedical scientists in medical device production and regulation"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 54, "pdfPageIndex": 56 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "PENDING",
+          "learningOutcomes": [
+            {
+              "code": "2.1.1.LO.1",
+              "description": "Describe various roles of biomedical scientists in the society.",
+              "sequence": 1,
+              "source": { "page": 51, "pdfPageIndex": 53 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Creativity/Critical Thinking: Learners watch videos/images or observe biomedical scientists at work. They critically observe, analyse and relate the various biomedical science careers and relate these observations to the prevention, diagnosis and treatment of diseases. Collaboration: Learners work in mixed-ability/ gender groups and relate their observations to peers, brainstorm and come out with agreed answers. Learners learn to accept constructive feedback from peers. Curiosity/Critical Thinking: Learners watch videos/images or observe the work of biomedical scientists in forensics. They critically observe, analyse and relate the knowledge acquired to a criminal investigation. Tolerance: Learners learn to accept constructive feedback from peers. Communication: Learners communicate their thoughts and opinions on videos watched on the role biomedical science play in medical device production among their peers, and brainstorm with the guide of the teacher. Information Literacy: By watching video documentaries/pictures as they learn to relate these documentaries to what is being studied in the classroom.",
+                "gesi": "Learners work in mixed-ability groups (different gender with diverse backgrounds). Learners appreciate, value, and embrace diversity as they work with other group members. Learners embrace different opinions as they share their personal experiences with biomedical science professionals in their environment. Learners embrace different opinions as they build on what others say on the role biomedical science professionals play in the area of medical device production.",
+                "gesiSelHeaderSeen": "GESI3, SEL4 and Shared National Values",
+                "nationalCoreValues": ["Respect", "Patience", "Friendliness"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.1.1.CS.1",
+                  "description": "Explore the various roles of biomedical scientists in the society.",
+                  "sequence": 1,
+                  "source": { "page": 53, "pdfPageIndex": 55 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.1.1.LI.1",
+                      "description": "Investigate and discuss a variety of biomedical science careers that relate to the prevention, diagnosis, and treatment of diseases.",
+                      "sequence": 1,
+                      "source": { "page": 53, "pdfPageIndex": 55 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Learners visit the workplace of selected biomedical scientists or watch videos of biomedical scientists at work or observe pictures of biomedical science professionals. Learners make notes of their observations and discuss the various careers in biomedical science.",
+                        "Activity-Based Learning: Work in groups to role-play the various professionals and how they work daily in relation to the prevention, diagnosis and treatment of diseases."
+                      ],
+                      "assessment": { "code": "2.1.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.1.LI.2",
+                      "description": "Discuss and describe the role of biomedical science professionals in forensics.",
+                      "sequence": 2,
+                      "source": { "page": 53, "pdfPageIndex": 55 },
+                      "pedagogicalExemplars": [
+                        "Digital Learning: Watch videos on the roles played by biomedical scientists in forensics and summarise conversations observed in the video. Engage in a discussion on the topic in class using the videos watched and students' notes as a starting point.",
+                        "Experiential Learning: Visit the workplace of forensic scientists to make observations on the roles of biomedical scientists in the field of forensics."
+                      ],
+                      "assessment": { "code": "2.1.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.1.LI.3",
+                      "description": "Explore any two/three biomedical career fields related to clinical or research studies and describe these career fields.",
+                      "sequence": 3,
+                      "source": { "page": 53, "pdfPageIndex": 55 },
+                      "pedagogicalExemplars": [
+                        "Exploratory Learning: Prior to the lesson, research individually about the biomedical career fields relating to clinical or research studies such as microbiologist, clinical laboratory technician, toxicologist, biomedical scientist, biotechnologist, etc. in relation to core duties, skills requirements and educational pathways.",
+                        "Project-Based Learning: Conduct personal research and create a mind map/chart on any three biomedical career fields and associated responsibilities and training required."
+                      ],
+                      "assessment": { "code": "2.1.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BIOMEDICAL SCIENCE PRACTICE",
+          "sequence": 1,
+          "classLevel": "SHS 3",
+          "source": { "page": 80, "pdfPageIndex": 82 },
+          "teachingLearningResources": ["Videos, documentaries and pictures of the various acts of malpractice and negligence.", "Videos and documentaries on how informed consent is carried out.", "Sample consent forms"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 83, "pdfPageIndex": 85 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "3.1.1.LI.3's description ('Identify and explain personal and long-term consequences of unethical or illegal behaviour in the workplace.') is interrupted mid-sentence by the words 'Teaching and Learning Resources' in the raw text layer (a page-break column-collision artifact); the description has been reconstructed by removing the interrupting header text, not by inventing wording. Preserved fully verbatim otherwise.",
+          "learningOutcomes": [
+            {
+              "code": "3.1.1.LO.1",
+              "description": "Explain actions that can constitute malpractice, liability and/or negligence and how the biomedical scientist can guard against them.",
+              "sequence": 1,
+              "source": { "page": 80, "pdfPageIndex": 82 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Critical Thinking/Observation: Learners critically observe as they watch videos/images of various acts of malpractice. They critically analyse and relate these observations to identify the various acts of malpractice and professional wrongdoing. Collaboration: Learners work in mixed-ability groups and relate their observations to peers, brainstorm and come out with agreed answers. Learners work in mixed-ability groups to brainstorm and practice informed consent for medical treatment. Tolerance: Learners learn to accept constructive feedback from peers. Learners accept diverse knowledge from one another without criticism, giving good feedback to one another's ideas. Communication: Learners share their thoughts on informed consent for a medical treatment and its consequences as they practice it in groups. Learners share their thoughts on the code of ethics and conduct that is carried out by biomedical professionals. Ethical Reasoning: Learners identify the code of ethics and code of conduct that is required for biomedical professionals.",
+                "gesi": "Learners work in mixed-ability groups. Learners appreciate, value, and embrace diversity as they work with other group members. Learners embrace different opinions as they share their personal experiences with biomedical science professionals in their environment. Learners embrace different opinions as they share their thought on the code of ethics and code of conducts required for a biomedical profession. Not laughing or teasing learners to boost their morale to contribute meaningfully to discussions. All learners are given the opportunity to provide oral presentations confidently and effectively to other learners.",
+                "gesiSelHeaderSeen": "GESI5, SEL6 and Shared National Values",
+                "nationalCoreValues": ["Respect", "Unity"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "3.1.1.CS.1",
+                  "description": "Demonstrate knowledge of good professional practice as biomedical scientists.",
+                  "sequence": 1,
+                  "source": { "page": 82, "pdfPageIndex": 84 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.1.1.LI.1",
+                      "description": "Explain common practices that could result in malpractice, liability and/or negligence in the field of biomedical science.",
+                      "sequence": 1,
+                      "source": { "page": 82, "pdfPageIndex": 84 },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: Discuss possible sources and causes of malpractice of professionals in the field of biomedical science, e.g., professional wrongdoing (being careless or breaking the law or the rules of their profession) that results in injury or damage. Discuss examples of malpractice including failure to diagnose a patient's medical condition (misdiagnosis), patient injury during treatment, often resulting in disability or death, failure to treat a patient's condition, medication errors, defective medical devices, inappropriate use of medical device and poor documentation.",
+                        "Exploratory Learning: Brainstorm on the difference between malpractice and negligence, and the definition of medical liability. Watch videos or pictures or listen to hypothetical scenarios on different events involving medical malpractices and then identify the various cases of malpractice/negligence and the possible liabilities.",
+                        "Activity-Based Learning: Create posters on different acts of malpractice or negligence in the field of biomedical science."
+                      ],
+                      "assessment": { "code": "3.1.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.1.LI.2",
+                      "description": "Describe the purpose of Informed Consent from the patient and healthcare provider perspective.",
+                      "sequence": 2,
+                      "source": { "page": 84, "pdfPageIndex": 86 },
+                      "pedagogicalExemplars": [
+                        "Managing Talk for Learning: With the aid of informed consent forms, the teacher discusses and explains informed consent to the learners. The teacher should also explain that an informed consent form is a legal document that ensures smooth ongoing communication between the client and the provider.",
+                        "Collaborative Learning: Discuss the benefits of informed consent to the patient/participant (improved patient welfare, increased patient empowerment, etc.) and provider (reduction of medical errors, reduced liabilities, etc.).",
+                        "Activity-Based Learning: Learners work in groups to develop an informed consent form comprising of a description of the clinical problem, the proposed treatment, and alternatives including no treatment; discussion of the risks and benefits of the proposed treatment with comparisons to the risks and benefits of alternatives, and discussion of medical/clinical uncertainties regarding the proposed treatment; assessment of the patient's understanding of the information provided by the medical provider; and solicitation of the patient's preference and consent for treatment. After the design of the consent form, learners play the roles of provider and patient to the class, as they present their work."
+                      ],
+                      "assessment": { "code": "3.1.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.1.LI.3",
+                      "description": "Identify and explain personal and long-term consequences of unethical or illegal behaviour in the workplace.",
+                      "sequence": 3,
+                      "source": { "page": 85, "pdfPageIndex": 87 },
+                      "pedagogicalExemplars": [
+                        "Managing Talk for Learning: Discuss what is meant by the code of ethics and the code of conduct of biomedical professionals. The teacher leads the discussion on the implications of unethical or illegal behaviours in the workplace."
+                      ],
+                      "assessment": { "code": "3.1.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BIOSAFETY",
+          "sequence": 2,
+          "classLevel": "SHS 1",
+          "source": { "page": 27, "pdfPageIndex": 29 },
+          "teachingLearningResources": ["Flashcards", "Pictures", "Sticky Notes/Flip charts", "Standards and regulatory documents", "Glo germ/dye/coloured powder", "Chart", "Picture Video", "Chart", "Computer"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 30, "pdfPageIndex": 32 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Teaching and Learning Resources grid (PDF page 32) prints a duplicate 'Chart' plus 'Computer' displaced to the far right, adjacent to the tail end of Assessment 1.1.2.AS.3's DoK text, apparently due to a page-break column collision rather than being a genuine 4th TLR row; preserved verbatim as extracted rather than removed.",
+          "learningOutcomes": [
+            {
+              "code": "1.1.2.LO.1",
+              "description": "Describe various biohazards and critically analyse their routes of exposure.",
+              "sequence": 1,
+              "source": { "page": 27, "pdfPageIndex": 29 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Critical Thinking: Through observing, analysing and identifying the various risk level of biohazards. Decision Making and Information Literacy: Learners think through the information that has been acquired in order to justify the risk level of biohazards. Collaboration: Learners are mixed in groups and brainstorm to justify the use of biohazardous symbols as well as the risk level. Learners learn to accept constructive feedback from peers. Critical Observation: Learners critically examine the stained surfaces and suggest the various routes of pathogen exposure to the human body. Creativity: Learners creatively use their knowledge to create a mind map for the various routes of pathogen exposure. Curiosity: Learners' curiosity and level of awareness are aroused as they see teacher shake hands while they walk in and see stains transferred to surfaces. Decision Making: Learners determine the inappropriate representation of safety in the laboratory and how to represent safety in the laboratory properly. Self-Awareness: Learners conduct themselves in good manner by following the dos and don'ts of safety in the laboratory.",
+                "gesi": "Learners work in mixed-gender and mixed-ability groups. Embrace diversity and practice inclusion as they discuss the topics. Avoid discriminating against persons from different backgrounds in terms of religion, gender, ethnicity or ethnicity. Give more time to slow learners to complete tasks. Give exceptional learners additional tasks.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Discipline", "Obedience", "Respect"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.2.CS.1",
+                  "description": "Demonstrate an understanding of biohazards and analyse their routes of exposure.",
+                  "sequence": 1,
+                  "source": { "page": 29, "pdfPageIndex": 31 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.2.LI.1",
+                      "description": "Discuss the various biohazards as well as the risk groups.",
+                      "sequence": 1,
+                      "source": { "page": 29, "pdfPageIndex": 31 },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: With the aid of flashcards or pictures showing various biohazards, engage learners to identify and discuss the peculiar features.",
+                        "Collaborative Learning: In large groups, identify and group a set of randomised biohazards according to their risk levels (Level 1, 2, 3 and 4). Explain the reasons behind the groupings (of the randomised symbols) through class presentations.",
+                        "Activity-Based Learning: Identify various hazards in varied scenarios within the community (or through the use of videos or pictures), sketch the representative symbol and determine potential negative outcome(s) of a given hazard and the frequency of occurrence (i.e., “risk”). Learners assess if the risk is acceptable."
+                      ],
+                      "assessment": { "code": "1.1.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.2.LI.2",
+                      "description": "Explain the routes of exposure of pathogens to humans.",
+                      "sequence": 2,
+                      "source": { "page": 29, "pdfPageIndex": 31 },
+                      "pedagogicalExemplars": [
+                        "Demonstrative Learning: Ask volunteers to apply a dye or coloured powder on bare hands and shake hands with different people to demonstrate how pathogens spread.",
+                        "Structuring Talk for Learning: Brainstorm on how humans are exposed to pathogens, for example through direct contact, inhalation, ingestion, and inoculation.",
+                        "Collaborative Learning: Work in pairs to create mind maps on ways humans are exposed to pathogens."
+                      ],
+                      "assessment": { "code": "1.1.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.2.LI.3",
+                      "description": "Analyse laboratory-acquired infections (LAIs), including some case studies.",
+                      "sequence": 3,
+                      "source": { "page": 29, "pdfPageIndex": 31 },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: Watch videos on a case study of LAI (e.g., \"Outbreak\") or listen to summarised conversations on LAI and write down at least three items or practices observed that may have been inaccurate or are interesting representations of safety in the laboratory.",
+                        "Exploratory Learning: Engage on a field trip to a laboratory for a talk on LAIs or invite a resource person to the class.",
+                        "Collaborative Learning: Through think-pair-share, write down examples, sources and prevention of LAIs"
+                      ],
+                      "assessment": { "code": "1.1.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BIOSAFETY",
+          "sequence": 2,
+          "classLevel": "SHS 2",
+          "source": { "page": 55, "pdfPageIndex": 57 },
+          "teachingLearningResources": ["Textbooks", "Chats", "Writing boards", "Projector", "PPEs", "Dye", "Lab space", "Videos", "Notebooks", "Whiteboards"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 57, "pdfPageIndex": 59 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "1) Assessment codes are printed out of sequence: 2.1.2.LI.1->2.1.2.AS.1 (correct), but 2.1.2.LI.2 is printed adjacent to '2.1.2.AS.3' and 2.1.2.LI.3 is printed adjacent to '2.1.2.AS.2' (AS.2/AS.3 swapped). Preserved verbatim. 2) Teaching and Learning Resources grid (PDF page 59) lists 'Chats' (likely intended 'Charts', preserved verbatim as a possible source typo) and shows 'Textbooks'/'Whiteboards'/'Notebooks' repeated/displaced far right of the main grid, apparently a page-break column-collision artifact.",
+          "learningOutcomes": [
+            {
+              "code": "2.1.2.LO.1",
+              "description": "Explain the need for protection from biohazard exposure.",
+              "sequence": 1,
+              "source": { "page": 55, "pdfPageIndex": 57 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication: Learners communicate their knowledge among themselves through oral presentation on the biosafety level. Learners learn to articulate their observations and opinions on ways to reduce risks of hazards to their colleagues. Creativity: Learners identify the biosafety in the environment and create diagrams for the biosafety within their environment. Critical Observation: Learners critically examine the donning and removal of PPEs to avoid cross-contamination. Curiosity: Learner's curiosity and level of awareness are aroused as they go through the whole process and donning and removal of the PPEs. Learners develop their sense of curiosity as they identify the various hazards in a typical lab. Collaboration: Learners appreciate the diversity in persons and learn to work together to accomplish tasks. Learners by watching the video gain information literacy as they learn to relate these real-life scenarios to what is being taught.",
+                "gesi": "Avoid laughing or teasing mates who make mistakes in answering/talking. Both male and female learners are given equal opportunities to practice the donning and removing of PPEs. Through the creation of respectful atmosphere for all, both males and females feel secure in each other's company. Learners learn to tolerate each other's attitudes as they practice the wearing and removing their PPEs. As learners work in pairs, they value and work in favour of a democratic and inclusive societal balance. As learners work in pairs, they are made aware of their personal biases and stereotypes as well as learn how to embrace diversity and practice inclusion.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Tolerance", "Respect"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.1.2.CS.1",
+                  "description": "Demonstrate an understanding of the essence of protection from biohazard exposure.",
+                  "sequence": 1,
+                  "source": { "page": 56, "pdfPageIndex": 58 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.1.2.LI.1",
+                      "description": "Describe features of the biosafety levels and proper practice.",
+                      "sequence": 1,
+                      "source": { "page": 56, "pdfPageIndex": 58 },
+                      "pedagogicalExemplars": [
+                        "Managing Talk for Learning: The teacher leads the class to identify the pathogens (virus, bacteria, fungi, etc.) and toxins that present risks to humans. Learners discuss and group the risks by aligning them to the biosafety levels.",
+                        "Collaborative Learning: From the discussion, learners define biological safety level as a description of the minimum set of standard practices, safety equipment, and facility requirements that provide protection to personnel, the environment, and community when working with biological hazards.",
+                        "Activity-Based Learning: Work together to group risks and create diagrams to represent the various biosafety levels (BSL) and justify the basis for the groupings.",
+                        "Talk for Learning: Discuss the features of the BSLs and corresponding proper lab practice. NB: Learners need to be aware of the high risk associated with BSL-3 and BSL-4 facilities"
+                      ],
+                      "assessment": { "code": "2.1.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.2.LI.2",
+                      "description": "Demonstrate proper setup of biosafety cabinet and its environment.",
+                      "sequence": 2,
+                      "source": { "page": 56, "pdfPageIndex": 58 },
+                      "pedagogicalExemplars": [
+                        "Structured Learning: Learners visit labs or watch videos of a typical lab setting to identify hazards (pathogens, spillage, toxins, sharp objects etc.) in a typical lab and describe some potential negative outcome(s) of a given hazard and the frequency of occurrence (risk).",
+                        "Collaborative Learning: Learners work in pairs to proffer solutions to reduce risk of hazards such as proper disposal, proper labelling, proper arrangement of items, facility design that avoids moving contaminated and uncontaminated materials through the same space.",
+                        "Demonstrative Learning: Observe an expert or resource person as they set up biosafety cabinet. Take turns to demonstrate the proper setup of the biosafety cabinet."
+                      ],
+                      "assessment": { "code": "2.1.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Assessment code printed adjacent to this Learning Indicator is '2.1.2.AS.3' rather than the expected '2.1.2.AS.2'; preserved verbatim (see sub-strand-level reviewNote)."
+                    },
+                    {
+                      "code": "2.1.2.LI.3",
+                      "description": "Demonstrate proper methods for donning and removal of personal protective equipment (PPE) such as gloves, lab coats, eye protection and respiratory protection.",
+                      "sequence": 3,
+                      "source": { "page": 57, "pdfPageIndex": 59 },
+                      "pedagogicalExemplars": [
+                        "Demonstrative Learning: Learners fully wear their PPEs (lab coat, face masks, gloves, face shields, close-toed shoes, etc.) and cover them with Glo Germ or other dyes. Afterwards, let learners remove the PPEs and check for the dye contamination. Demonstrate proper procedures for removing PPEs so that there is no cross-contamination."
+                      ],
+                      "assessment": { "code": "2.1.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Assessment code printed adjacent to this Learning Indicator is '2.1.2.AS.2' rather than the expected '2.1.2.AS.3'; preserved verbatim (see sub-strand-level reviewNote)."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "BIOSAFETY",
+          "sequence": 2,
+          "classLevel": "SHS 3",
+          "source": { "page": 84, "pdfPageIndex": 86 },
+          "teachingLearningResources": ["Internet", "Pictures", "Different biological agent", "Videos", "Textbooks", "Projector", "Flip charts"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 86, "pdfPageIndex": 88 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "PENDING",
+          "learningOutcomes": [
+            {
+              "code": "3.1.2.LO.1",
+              "description": "Apply the principles of biosafety to setup experiments.",
+              "sequence": 1,
+              "source": { "page": 84, "pdfPageIndex": 86 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Collaboration: Learners work in mixed-ability groups to brainstorm and develop a mitigation plan to avoid accidents for a selected biological agent. Learners work in mixed-ability groups and relate their observations to peers, brainstorm and come out with agreed answers. Learners learn to accept constructive feedback from peers. Critical Thinking/Observation: Learners critically observe as they watch images of various wrongdoings in the picture. They critically analyse and relate these observations to identify the various acts of risks and develop a mitigation plan for it. Learners critically analyse to segregate the various forms of waste streams collected for proper disposal. Oral Communication: Learners learn to articulate their opinions on how waste is collected and properly disposed of at home and school. Information Literacy: Learners by reviewing literature and brainstorming gain information literacy.",
+                "gesi": "Learners appreciate, value, and embrace diversity as they are made to work in groups. Learners embrace diverse opinions as they share their ideas. Not laughing or teasing learners to boost their morale to contribute meaningfully to discussions. All learners are given the opportunity to provide oral presentations confidently and effectively to other learners. Learners embrace different opinions as they discuss the role of biosafety officers in biomedical research laboratories.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Tolerance", "Respect", "Patience"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "3.1.2.CS.1",
+                  "description": "Demonstrate knowledge and understanding of the principles of biosafety in setting up experiments.",
+                  "sequence": 1,
+                  "source": { "page": 85, "pdfPageIndex": 87 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.1.2.LI.1",
+                      "description": "Undertake proper planning of experiments to avoid accidents.",
+                      "sequence": 1,
+                      "source": { "page": 85, "pdfPageIndex": 87 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: In mixed-ability groups, plan an experiment by selecting a biological agent, a procedure to work with, identify risks, develop a mitigation plan and evaluate risk mitigation plans and carry out the experiment.",
+                        "Exploratory Learning: Teacher shows several pictures of scenarios in a laboratory setup and learners identify what is wrong in the pictures in relation to safety in the laboratory."
+                      ],
+                      "assessment": { "code": "3.1.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.2.LI.2",
+                      "description": "Identify the correct waste stream and demonstrate proper disposal of hazardous waste in the laboratory.",
+                      "sequence": 2,
+                      "source": { "page": 85, "pdfPageIndex": 87 },
+                      "pedagogicalExemplars": [
+                        "Digital Learning: Watch online videos or pictures on various waste streams that are generated in the hospital and how they can be properly disposed of.",
+                        "Collaborative Learning: Share experiences on the various waste streams that are collected at homes, schools, etc, and how to properly dispose of them. Brainstorm to agree on how best the various hazardous waste streams can be properly disposed in the laboratories."
+                      ],
+                      "assessment": { "code": "3.1.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.2.LI.3",
+                      "description": "Identify and describe the role of biosafety professionals in biomedical research laboratories.",
+                      "sequence": 3,
+                      "source": { "page": 85, "pdfPageIndex": 87 },
+                      "pedagogicalExemplars": [
+                        "Exploratory Learning: Embark on a visit to a biomedical laboratory or invite a biosafety professional to give a talk on the role of biosafety officers in minimizing infectious disease risks to persons.",
+                        "Project-Based Learning: Work individually to write a report based on the interaction with the resource person (and also be researching from other sources) about the role of biosafety officers in ensuring compliance with safety policies and procedures."
+                      ],
+                      "assessment": { "code": "3.1.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HUMAN BODY SYSTEMS",
+      "code": null,
+      "sequence": 2,
+      "pathway": null,
+      "subStrands": [
+        {
+          "name": "ANATOMY AND PHYSIOLOGY",
+          "sequence": 1,
+          "classLevel": "SHS 1",
+          "source": { "page": 31, "pdfPageIndex": 33 },
+          "teachingLearningResources": ["Textbook", "Anatomical models", "Anatomical diagrams", "Virtual anatomical visualization platforms", "Videos", "Charts"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 34, "pdfPageIndex": 36 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "PENDING",
+          "learningOutcomes": [
+            {
+              "code": "1.2.1.LO.1",
+              "description": "Identify the various human body systems and establish the interrelations between the systems for life.",
+              "sequence": 1,
+              "source": { "page": 31, "pdfPageIndex": 33 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Critical Observation: Learners critically observe diagrams and models and group them together under the various body systems. Communication: Learners contribute to the discussion by expressing their thoughts among their peers in an environment that is free from fear or intimidation. Literacy: Learners by critically studying models, diagrams and watching videos, learn the characteristics of the organs that make up the body system by making critical observations of how the various organs are adopted for their various functions. Attention to Detail: Learners by critically observing the features of the organs that make them adopted for their functions learn how to pay attention to details to make critical observations. Collaboration: Learners work in mixed-ability groups and relate their observations on the interconnectedness of the human body system to peers and come out with agreed answers. Learners learn to accept constructive feedback from peers. In mixed-ability groups, learners relate their observations on the interconnectedness of the human body system and come out with a mind map of how the body systems work together to support life. Learners learn to accept constructive feedback from peers. Creativity: Learners use their knowledge to create a mind map of the interconnectedness of the human body system. Critical Thinking: Learners use the homeostasis knowledge to achieve the homeostasis effect to the human body system. Problem Solving: Learners acquire problem-solving skills as they observe multiple sources of information and creating their own maps and tables to illustrate the interconnectedness of the systems for good health.",
+                "gesi": "Learners work in mixed-gender and mixed-ability groups. Embrace diversity and practice inclusion as they discuss the topics. Avoid discriminating against persons from different backgrounds in terms of religion, gender, ethnicity or ethnicity. Give more time to slow learners to complete tasks. Give exceptional learners additional tasks. Be conscious of your personal biases.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Respect", "Punctuality", "Discipline"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.2.1.CS.1",
+                  "description": "Demonstrate an understanding of the human body systems and how they are interconnected.",
+                  "sequence": 1,
+                  "source": { "page": 33, "pdfPageIndex": 35 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.2.1.LI.1",
+                      "description": "Explore the structure, functions and parts of the major human body systems involved in communication, power, movement, protection, and homeostasis.",
+                      "sequence": 1,
+                      "source": { "page": 33, "pdfPageIndex": 35 },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: Work in groups to study various human body systems such as the nervous, respiratory, circulatory, digestive, endocrine and musculoskeletal systems for group presentations in class.",
+                        "Exploratory Learning: Using charts, models or videos, assist learners to identify the parts and functions of each of the human body systems discussed."
+                      ],
+                      "assessment": { "code": "1.2.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.1.LI.2",
+                      "description": "Explain the interconnections between the human body systems and how these systems work together to maintain health and homeostasis.",
+                      "sequence": 2,
+                      "source": { "page": 33, "pdfPageIndex": 35 },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: Work in groups to establish the relationship among body systems in performing specific body functions (e.g., how the digestive system affects the muscle and skeletal systems) using available resources (e.g., videos, PowerPoint presentations, textbooks or webpages).",
+                        "Activity-Based Learning: Create concept maps to link different body systems that work together to perform various functions.",
+                        "Initiating Talk for Learning: Engage learners in a class discussion to explain homeostasis and how the body achieves homeostasis. Learners identify systems working together to maintain homeostasis and health of an individual."
+                      ],
+                      "assessment": { "code": "1.2.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.1.LI.3",
+                      "description": "Evaluate how the interconnections and interactions of multiple body systems are necessary for life.",
+                      "sequence": 3,
+                      "source": { "page": 33, "pdfPageIndex": 35 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning: Learners work in groups to create a map of the interconnectedness of the body systems and how they work together to support life. Using an appropriate table/figure as a reference, learners illustrate how injury (e.g., compound fracture with bone protruding through the skin, reflex action etc.) or an unfavourable condition elicits responses in other organ systems for health."
+                      ],
+                      "assessment": { "code": "1.2.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ANATOMY AND PHYSIOLOGY",
+          "sequence": 1,
+          "classLevel": "SHS 2",
+          "source": { "page": 58, "pdfPageIndex": 60 },
+          "teachingLearningResources": ["Anatomical textbook", "Pictures", "Projector", "Anatomical models", "Charts", "EEG recording facility", "Flip charts"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 60, "pdfPageIndex": 62 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "PENDING",
+          "learningOutcomes": [
+            {
+              "code": "2.2.1.LO.1",
+              "description": "Identify the various regions of the brain, describe their functions and their interconnectedness with some body systems for communication.",
+              "sequence": 1,
+              "source": { "page": 58, "pdfPageIndex": 60 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Creativity/Critical Thinking: Learners use materials to create a picture map of the brain and critically analyse parts of the human brain. Communication: Learners share ideas among their peers as they work in groups. Collaboration: Learners work in groups and accept diverse views from each individual, then work together to bring about team results. Tolerance: Learners accept the different opinions from one another and never condemn anyone's opinion as they work in groups. Digital Literacy: Learners access and interpret data collected from the EEG using their computer literacy. Global Citizenship: Learners become fit globally as they can operate on the EEG and perform the troubleshooting, which is used in hospitals in every part of the world.",
+                "gesi": "Learners work in mixed-ability groups (different gender with diverse backgrounds). Learners embrace different opinions as they create a picture map of the distinct structural and functional characteristics of each region of the brain. Learners embrace diverse opinions as they share their ideas. Assign roles to members in the group and work together in peace and harmony to promote inclusion and responsibility.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Trustworthiness", "Unity", "Patience"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.1.CS.1",
+                  "description": "Demonstrate an understanding of the interconnectedness of some body systems for communication.",
+                  "sequence": 1,
+                  "source": { "page": 59, "pdfPageIndex": 61 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.1.LI.1",
+                      "description": "Explain the role the brain and brain mapping play in the communication system of the human body.",
+                      "sequence": 1,
+                      "source": { "page": 59, "pdfPageIndex": 61 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Using charts, diagrams or 3D models, learners discuss and note major regions of the brain and their general functions. Learners sketch and colour the various regions with unique colours.",
+                        "Activity-Based Learning: Learners work in groups with their given illustrations/models and other literature to create a picture map of the distinct structural and functional characteristics of each region of the brain. Learners also investigate and document the specific functions of the lobes of the cerebral cortex (motor, sensory, auditory and visual cortexes)."
+                      ],
+                      "assessment": { "code": "2.2.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.1.LI.2",
+                      "description": "Determine how communication works in the body and its effects.",
+                      "sequence": 2,
+                      "source": { "page": 59, "pdfPageIndex": 61 },
+                      "pedagogicalExemplars": [
+                        "Digital Learning: The teacher uses a video or picture or a 3D model to illustrate how the neurons use electrical impulses and chemical signals to transmit information to different brain areas, and between the brain and the rest of the nervous system.",
+                        "Collaborative Learning: Brainstorm on how specific impulses are transmitted, including reflex actions. In groups, investigate how membrane potentials are generated in neurons and how changes in the membrane potential of individual neurons generate action potential by neuron's plasma membrane permeability changes for communication with other neurons and cell types. Learners to present their findings to their colleagues for feedback."
+                      ],
+                      "assessment": { "code": "2.2.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.1.LI.3",
+                      "description": "Describe the importance of technological tools in biomedical sciences to measure parameters associated with communication in the human body.",
+                      "sequence": 3,
+                      "source": { "page": 59, "pdfPageIndex": 61 },
+                      "pedagogicalExemplars": [
+                        "Experiential/Digital Learning: Learners visit a hospital or watch a video to see how the electrical activity of the brain (electroencephalogram [EEG]) can be monitored using external electrodes. Learners note the differences in the frequency and amplitude of electrical patterns (brain waves) observed.",
+                        "Collaborative Learning: Teacher leads a discussion on the types of brain waves (alpha, beta, theta and delta), their characteristics and the respective states of consciousness they represent. Discuss the EEG of clinical conditions with peculiar brain wave patterns such as seizure. Observe samples of EEG to identify and indicate the clinical significance of the brain waves."
+                      ],
+                      "assessment": { "code": "2.2.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "ANATOMY AND PHYSIOLOGY",
+          "sequence": 1,
+          "classLevel": "SHS 3",
+          "source": { "page": 87, "pdfPageIndex": 89 },
+          "teachingLearningResources": ["Textbooks", "Anatomical diagrams of the digestive system", "Pictures or charts showing enzyme action", "Map of enzymes and substrates", "Online resources etc.", "Anatomical models", "Pictures", "Videos", "Projector", "White boards", "Models"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 90, "pdfPageIndex": 92 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Teaching and Learning Resources grid (PDF page 92) shows 'White boards' and 'Models' displaced far right of the main grid, adjacent to Assessment 3.2.1.AS.4's DoK text, apparently a page-break column-collision artifact rather than a genuine separate row; preserved verbatim.",
+          "learningOutcomes": [
+            {
+              "code": "3.2.1.LO.1",
+              "description": "Describe the role of enzymes in digestion and explain how food, water and oxygen is transported by the cardiovascular and respiratory systems.",
+              "sequence": 1,
+              "source": { "page": 87, "pdfPageIndex": 89 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication: Learners make contributions towards a mutual goal among their peers in an environment that is free from fear or intimidation. Critical Thinking: As learners critically analyse their experiences and share with the class. Learners analyse their heart rate and critically express their thought on how to regulate their heart rate. Learners critically analyse the five joints and are able to use materials within their society to build joints and the associated skeletal muscles. Collaboration: Learners sit in well-mixed (gender-balanced and culturally diverse) groups and take turns to relay their individual research findings to their peers. The right ambience should be created to allow each and every learner to collaborate with others, building on points raised and putting down their collective findings while amicably resolving conflicting findings. Learners work in mixed-ability groups and take turns to relay their observation on the transport of food, water and oxygen carried out by the cardiovascular and the respiratory system. Leadership: As learners work in groups to research and create maps to show the transport of products of digestion, water, oxygen and the how cardiovascular and respiratory system helps in the circulation, they create and share tasks and responsibilities among themselves. Creativity: Learners are able to use different materials within their society to build the five joints and the associated skeletal muscle.",
+                "gesi": "Learners work in mixed-ability groups (different gender with diverse backgrounds). Learners embrace different opinions as they relate their personal experience of how the key unlocks specific locker to the way enzymes are specific to substrate. Learners appreciate, value, and embrace diversity as they work with other group members. Assign roles to members in the group and ensure they work together in peace and harmony to promote inclusion and responsibility.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Respect", "Humility", "Tolerance", "Patience"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "3.2.1.CS.1",
+                  "description": "Demonstrate an understanding of the interconnectedness of the body systems in energy generation and use (digestive, circulatory and musculoskeletal systems).",
+                  "sequence": 1,
+                  "source": { "page": 89, "pdfPageIndex": 91 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.2.1.LI.1",
+                      "description": "Explain what enzymes are and their role in the digestive system.",
+                      "sequence": 1,
+                      "source": { "page": 89, "pdfPageIndex": 91 },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: Learners discuss what enzymes are and the role of digestive enzymes in the breaking down of food for absorption.",
+                        "Experiential Learning: Working in mixed-ability groups, use sets of lock and key, or spanner and bolt analogy to explain why only certain keys or spanners can unlock a given lock or bolt. The class brainstorms how different enzymes are specific to certain substrates similar to the lock-and-key model.",
+                        "Managing Talk for Learning: Learners discuss how enzymes break down food, and the subsequent use of enzymes in laundry detergents to digest food stains in clothing."
+                      ],
+                      "assessment": { "code": "3.2.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.1.LI.2",
+                      "description": "Explain the transport of oxygen, food, and water to all cells in the body through the connection between the respiratory and cardiovascular systems.",
+                      "sequence": 2,
+                      "source": { "page": 89, "pdfPageIndex": 91 },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: Learners think-pair-share their views on the importance of oxygen, food and water to the functioning and survival of humans. Discuss the role played by the connection of the respiratory and cardiovascular system when food, water and oxygen are taken in.",
+                        "Digital Learning: Watch a video or animation, anatomical illustration, models, chart or cartoon illustration of how food, water and oxygen get into the bloodstream and are transported by the cardiovascular system and note the key observations.",
+                        "Activity-Based Learning: Learners work in mixed-ability groups to create mind maps or illustrations to show how the products of digestion, water and oxygen from the lungs get into the cardiovascular system and are circulated throughout the human body. Learners then present their sketches to the class and receive feedback."
+                      ],
+                      "assessment": { "code": "3.2.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.1.LI.3",
+                      "description": "Describe how the interconnectedness of the body systems aid in energy generation.",
+                      "sequence": 3,
+                      "source": { "page": 89, "pdfPageIndex": 91 },
+                      "pedagogicalExemplars": [
+                        "Activity-Based Learning: In mixed-ability groups and using stethoscopes or palpations, learners note the variations in heart rate among group members.",
+                        "Talk for Learning: Brainstorm on why heart function varies and describe the factors that can cause heart function variability."
+                      ],
+                      "assessment": { "code": "3.2.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.1.LI.4",
+                      "description": "Demonstrate an understanding of how joints and muscles use energy to contribute to the movement of the human body.",
+                      "sequence": 4,
+                      "source": { "page": 90, "pdfPageIndex": 92 },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: Learners working in groups identify, at least, five joints in the body and discuss the role of a joint in locomotion.",
+                        "Project-Based Learning: Groups then build a joint and associated representative skeletal muscle using local materials to demonstrate to the class how movement occurs at the joint. Learners also show how muscles use molecular energy (ATP) for movement using library resources or Internet."
+                      ],
+                      "assessment": { "code": "3.2.1.AS.4", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DISEASES AND DISORDERS",
+          "sequence": 2,
+          "classLevel": "SHS 1",
+          "source": { "page": 35, "pdfPageIndex": 37 },
+          "teachingLearningResources": ["Computer", "Projector", "Video", "Flash cards with names of a common diseases", "Tablets or mobile phones", "Online resources", "Textbooks"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 38, "pdfPageIndex": 40 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "PENDING",
+          "learningOutcomes": [
+            {
+              "code": "1.2.2.LO.1",
+              "description": "Explain what a disease is with examples, identify the symptoms of common diseases and illustrate how the symptoms of diseases lead to diagnosis.",
+              "sequence": 1,
+              "source": { "page": 35, "pdfPageIndex": 37 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication: Learners contribute to the discussion by expressing their thoughts among their peers in an environment that is free from fear or intimidation. Learners contribute to the discussion by expressing their thoughts among their peers in an environment that is free from fear or intimidation and also learn public speaking skills as they take turns to present their work. Critical Thinking: Learners by critically studying models, diagrams and watching videos learn the characteristics of the organs that make up the body system by making critical observations of how the various organs are adopted for their various functions. As learners watch the videos and contribute to the discussion. Based on their personal experiences, they are able to relate their previous knowledge and experiences to what is being learnt. Digital Literacy: As learners research and use technological tools to prepare their presentations, they gain experiential training on how illnesses are diagnosed and treated. Leadership: As learners work in groups to research and prepare their presentations, they create and share tasks and responsibilities among themselves. Information and Technology Literacy: As learners watch videos and understand the graph chart of sickle cell disease over the period of years, learners are able to contribute their knowledge on how the spread of sickle cell disease and how it can be reduced drastically. Critical Observation: Learners can critically identify a sickle cell patient as the learner has gained knowledge of the symptoms and behavioural characteristics of a sickle cell patient.",
+                "gesi": "Learners embrace different opinions as they share their personal experiences to unravel the mystery behind diseases and their symptoms. Learners understand and embrace people living with sickle cell disease and the lifestyle of the sickle cell disease patients. Learners work in mixed-gender and mixed-ability groups. Embrace diversity and practice inclusion as they discuss the topics. Avoid discriminating against persons from different backgrounds in terms of religion, gender, ethnicity or ethnicity. Give more time to slow learners to complete tasks. Give exceptional learners additional tasks.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Tolerance", "Respect"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.2.2.CS.1",
+                  "description": "Show an understanding of common diseases and conditions that can disrupt the functioning of cells, tissues and organs within the body.",
+                  "sequence": 1,
+                  "source": { "page": 37, "pdfPageIndex": 39 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.2.2.LI.1",
+                      "description": "Explain what a disease is.",
+                      "sequence": 1,
+                      "source": { "page": 37, "pdfPageIndex": 39 },
+                      "pedagogicalExemplars": [
+                        "Managing Talk for Learning: Learners share their personal experiences of symptoms experienced when they are unwell. Watch a video on the different types of diseases and write down key observations.",
+                        "Activity-Based Learning: Create posters on diseases in terms of their explanations, features, and symptoms. Classify diseases as acute or chronic."
+                      ],
+                      "assessment": { "code": "1.2.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.2.LI.2",
+                      "description": "Explore how initial symptoms of an illness lead to diagnosis and treatment.",
+                      "sequence": 2,
+                      "source": { "page": 37, "pdfPageIndex": 39 },
+                      "pedagogicalExemplars": [
+                        "Demonstrative Learning: Learners are put in groups to do a role-play on diagnosing and treating illness.",
+                        "Exploratory Learning: After the role-play, review the whole process of how diagnosis and treatments are deduced from initial symptoms. Learners are made to further research how this is done in real-life settings and present their findings to the class."
+                      ],
+                      "assessment": { "code": "1.2.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.2.LI.3",
+                      "description": "Explore the symptoms and factors contributing to sickle cell disease and its impact on humans.",
+                      "sequence": 3,
+                      "source": { "page": 37, "pdfPageIndex": 39 },
+                      "pedagogicalExemplars": [
+                        "Inquiry-Based Learning: In groups, research from various sources about how sickle cell disease occurs in humans and the symptoms of the disease.",
+                        "Activity-Based Learning: Learners undertake the cross-mapping for the sickle genes to show how it is transferred from parents to offspring. Based on the crossings, deduce how the disease can be curtailed in humans."
+                      ],
+                      "assessment": { "code": "1.2.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DISEASES AND DISORDERS",
+          "sequence": 2,
+          "classLevel": "SHS 2",
+          "source": { "page": 61, "pdfPageIndex": 63 },
+          "teachingLearningResources": ["Projector", "Pictures", "Anatomical model", "Charts sample blood sugar tests", "Glucometer", "Anatomical models", "Pictures", "Charts"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 65, "pdfPageIndex": 67 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "This sub-strand has two Content Standards (2.2.2.CS.1, 3 Learning Indicators; 2.2.2.CS.2, 5 Learning Indicators) under two Learning Outcomes, matching the Scope and Sequence table's '2 2 8' count for Year 2 Diseases and Disorders. For Content Standard 2.2.2.CS.2 (bacteria/viruses), the Assessment column codes are printed badly out of sequence relative to their Learning Indicators (raw order AS.1, AS.4, AS.3, AS.2, AS.5) with a page break falling mid-table; pairing to LI.2/LI.3/LI.4 in particular is uncertain. See extractionNotes for detail. Preserved verbatim as best-paired.",
+          "learningOutcomes": [
+            {
+              "code": "2.2.2.LO.1",
+              "description": "Describe how malfunctions in the nervous and endocrine systems affect other body systems and lifestyle.",
+              "sequence": 1,
+              "source": { "page": 61, "pdfPageIndex": 63 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Problem Solving: Learners identify solutions to the disorder of the nervous system through the use of appropriate literature articles and community interactions. Collaboration: Learners work in groups as they interact and share ideas among themselves to bring about a good team result. Learners work with their peers in mixed-ability groups to come out with the desired outcome. Tolerance: Learners accept diverse knowledge from one another without criticism giving good feedback to one another's ideas as they work in groups. Problem Solving, Critical Thinking and Communication: Learners contribute to the discussion by critically thinking and expressing their thoughts among their peers in an environment that is free from fear or intimidation and also learn public speaking skills as they take turns to share their ideas. Leadership/Followership: As learners work in groups to research and create maps of endocrine malfunction, they create and share tasks and responsibilities among themselves. Communication: Learners contribute to the discussion by expressing their thoughts among their peers in an environment that is free from fear or intimidation and also learn public speaking skills as they take turns to contribute to the discussion. Curiosity: Learners develop their sense of curiosity as they go through the process of diagnosing diabetes using fasting blood sugar.",
+                "gesi": "As learners work in groups, they are made aware of their personal biases and stereotypes and learn to embrace diversity and practice inclusion. Learners assign roles to members in the group and work together in peace and harmony to promote inclusion and responsibility. Use of mixed-ability and/or gender-balanced groupings. Learners embrace different opinions as they unravel the mystery behind diagnosis, prevention and treatment of diabetes. Learners appreciate, value, and embrace diversity as well as appreciate the opinions of others as they investigate the connection between insulin and blood glucose.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Patience", "Respect", "Humility"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.2.CS.1",
+                  "description": "Apply knowledge of human body systems to indicate how damage to one system can impact function in another system.",
+                  "sequence": 1,
+                  "source": { "page": 63, "pdfPageIndex": 65 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.2.LI.1",
+                      "description": "Explain how serious nervous system disorders impact quality of life.",
+                      "sequence": 1,
+                      "source": { "page": 63, "pdfPageIndex": 65 },
+                      "pedagogicalExemplars": [
+                        "Managing Talk for Learning: With the aid of pictures and videos, learners discuss conditions, diseases, and injuries that can cause nervous system problems (cerebral palsy, multiple sclerosis, stroke, vascular disorders, injuries, especially injuries to the head and spinal cord, etc.).",
+                        "Project-Based Learning: Learners work in groups, referring to appropriate literature and engaging in community interactions (experiences) to enumerate diseases and injuries that can cause structural, biochemical, or electrical abnormalities in the brain, spinal cord, or other nerves and the resulting symptoms (paralysis, muscle weakness, poor coordination, loss of sensation, seizures, confusion, pain, altered levels of consciousness, etc.)."
+                      ],
+                      "assessment": { "code": "2.2.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.2.LI.2",
+                      "description": "Interpret the symptoms and physical characteristics of a given patient to determine an endocrine system malfunction (e.g., Hyperthyroidism).",
+                      "sequence": 2,
+                      "source": { "page": 63, "pdfPageIndex": 65 },
+                      "pedagogicalExemplars": [
+                        "Digital Learning: Watch a video or listen to a PowerPoint presentation on the endocrine system, its functions, defects and symptoms of its malfunctioning.",
+                        "Talk for Learning: Brainstorm on how the body makes and releases hormones that control mood, development and growth; enumerate the functions of hormones (at least two each) that control mood, development and growth. Based on the previous discourse on the functions of hormones, learners suggest and discuss possible symptoms and characteristics of a patient with specified endocrine system malfunction."
+                      ],
+                      "assessment": { "code": "2.2.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.2.LI.3",
+                      "description": "Identify and discuss the causes, symptoms, treatments, effects and impact of diabetes on the human body and human lifestyle.",
+                      "sequence": 3,
+                      "source": { "page": 63, "pdfPageIndex": 65 },
+                      "pedagogicalExemplars": [
+                        "Managing Talk for Learning: Learners go through the diagnosis of diabetes using fasting blood sugar level values. Learners investigate the connection between insulin and blood glucose and how feedback systems in the body regulate the function of key hormones. Learners discuss and note the causes (genetic, drugs, lifestyle, etc.), symptoms (weight loss, frequent urination, blurry vision, extreme fatigue, sores that do not heal and effects of diabetes on the body), treatment options (medication, diet, exercise, etc.) and effects on lifestyle (damage to blood vessels, which can lead to heart attack, stroke, and problems with the kidneys, eyes, gums, feet and nerves, erectile dysfunction, etc).",
+                        "Experiential Learning: Learners gather different kinds of vegetables, fruits, whole grains, meat and meat products. Learners apply their knowledge of the digestive system to state the digestive end products of these foods. Learners are guided by the teacher to understand why they should choose non-fat dairy and lean meats and also limit foods that are high in sugar and fat. Remember carbohydrates turn into sugar.",
+                        "Activity-Based Learning: Individually, create mind maps on diabetes, its causes, symptoms, prevention and treatment."
+                      ],
+                      "assessment": { "code": "2.2.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "code": "2.2.2.LO.2",
+              "description": "Understand how the structure of bacteria and virus dictates treatment protocols, concept of immune response and the impact of infections in the society.",
+              "sequence": 2,
+              "source": { "page": 62, "pdfPageIndex": 64 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Problem Solving: Learners determine the suitable treatment for diseases that are caused by bacteria and virus. Creativity: Learners use materials within their environment to make the model of bacteria and virus. Communication: Learners share their findings of the work they have done to one another in the class through presentation. Learners contribute to the discussion by expressing their thoughts among their peers in an environment that is free from fear or intimidation. Learners contribute to the discussion by expressing their thoughts among their peers in an environment that is free from fear or intimidation and also learn public speaking skills as they take turns to share their ideas. Learners work in group and share ideas together about their personal experience on signs and symptoms they showed when sick and how they were able to prevent it. Information Literacy: As learners critically analyse the contributions of their peers, they to understand the mechanism of antibiotics. Emotional Intelligence: Learners develop their emotional intelligence as their submissions are critiqued by other learners. Creative Thinking: Learners are guided on how the body responds to foreign invasions and immune response. Information and Technology: Literacy: As learners watch videos and punctures, they gain experiential training on how to use these technological tools to identify antigens and understand immunity. Tolerance: Learners accept the diverse views from one another about their own experiences of the diseases that they have encountered as they work in groups. Collaboration: Learners work together in groups and share ideas to bring about a good teamwork result.",
+                "gesi": "Not laughing or teasing learners to boost their morale to contribute meaningfully to discussions. Providing positive feedback to all learners. Gender-balanced grouping of learners. Forming mixed-ability groups. Learners appreciate, value and embrace diversity as they share and learn from one another's contributions in a friendly environment.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Unity", "Friendliness", "Patience", "Humility"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.2.CS.2",
+                  "description": "Demonstrate knowledge of bacteria and viruses as causative agents of infectious diseases.",
+                  "sequence": 1,
+                  "source": { "page": 66, "pdfPageIndex": 68 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.2.LI.1",
+                      "description": "Identify the structural differences between bacteria and viruses.",
+                      "sequence": 1,
+                      "source": { "page": 66, "pdfPageIndex": 68 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning: Learners observe specimens of bacteria and viruses in videos or glass slides, and document the structural differences between bacteria and videos. The learners then produce models/drawings of a specified bacterium and a virus particle. Using appropriate literature, learners investigate the treatment protocols for bacterial and viral diseases. Learners present their findings to the class and receive feedback."
+                      ],
+                      "assessment": { "code": "2.2.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.2.LI.2",
+                      "description": "Explore the symptoms, prevalence, and treatment of bacterial and viral infections considering infections of the reproductive system.",
+                      "sequence": 2,
+                      "source": { "page": 66, "pdfPageIndex": 68 },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: With the aid of charts and resources, identify the commonalities between bacterial infections in terms of their symptoms and treatment. Share experiences on symptoms, prevalence and treatment of viral infections in groups.",
+                        "Digital Learning: Research and develop PowerPoint presentations on the social and global impact of infectious diseases (e.g., COVID) for class presentations and feedback.",
+                        "Project-Based Learning: Learners design and produce a public health campaign to educate peers about the dangers and prevention of infectious diseases on posters."
+                      ],
+                      "assessment": { "code": "2.2.2.AS.4", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Assessment code printed adjacent to this Learning Indicator is '2.2.2.AS.4' rather than the expected '2.2.2.AS.2'; see sub-strand-level reviewNote."
+                    },
+                    {
+                      "code": "2.2.2.LI.3",
+                      "description": "Explore the immune response in relation to the introduction of antigens.",
+                      "sequence": 3,
+                      "source": { "page": 68, "pdfPageIndex": 70 },
+                      "pedagogicalExemplars": [
+                        "Managing Talk for Learning: Teacher leads a discussion with the class on ways they think the body responds to the invasion of foreign and harmful materials. Engage in a discussion on immune response and the meaning of the term “antigens”",
+                        "Activity-Based Learning: Learners watch videos and pictures (or refer to books and other sources) to group identified antigens as exogenous (foreign to the host immune system), endogenous (produced by intracellular bacteria and virus replicating inside a host cell), and autoantigens (produced by the host)."
+                      ],
+                      "assessment": { "code": "2.2.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Assessment code printed nearest to this Learning Indicator's start is '2.2.2.AS.3', but '2.2.2.AS.2' is printed immediately after this LI's text ends, closer to the following LI.4; pairing uncertain. See sub-strand-level reviewNote."
+                    },
+                    {
+                      "code": "2.2.2.LI.4",
+                      "description": "Analyse how antibiotics are used to treat infections and explain how the effectiveness depends on the causative bacteria.",
+                      "sequence": 4,
+                      "source": { "page": 69, "pdfPageIndex": 71 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Using pictures/charts/videos, the teacher guides the class to brainstorm the mechanisms of antibiotic action in killing of bacterial cells or stoppage of bacterial multiplication. Learners should discuss the dependence of the efficacy of an antibiotic in relation to the bacteria type (gram positive vs gram negative bacteria)."
+                      ],
+                      "assessment": { "code": "2.2.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Assessment code printed nearest to this Learning Indicator is '2.2.2.AS.2', immediately following its heading; pairing with LI.3 above is also plausible. See sub-strand-level reviewNote."
+                    },
+                    {
+                      "code": "2.2.2.LI.5",
+                      "description": "Discuss the global and social impact of an infectious disease that is caused by bacteria and viruses.",
+                      "sequence": 5,
+                      "source": { "page": 69, "pdfPageIndex": 71 },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: With the aid of charts and resources, identify the commonalities between bacterial infections in terms of their symptoms and treatment. Share experience on symptoms, prevalence, and treatment of viral infections in groups.",
+                        "Digital Learning: Research and develop PowerPoint presentations on social and global impact of infectious diseases (e.g, COVID) for class presentation and feedback.",
+                        "Project-Based Learning: Learners design and produce a public health campaign to educate peers about the dangers and prevention of infectious diseases on posters."
+                      ],
+                      "assessment": { "code": "2.2.2.AS.5", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DISEASES AND DISORDERS",
+          "sequence": 2,
+          "classLevel": "SHS 3",
+          "source": { "page": 91, "pdfPageIndex": 93 },
+          "teachingLearningResources": ["Sticks and balls from local materials sketch boards or pads", "Internet", "Textbooks", "Writing board", "Projector", "Sample cholesterol measurement results"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 93, "pdfPageIndex": 95 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Teaching and Learning Resources grid (PDF page 95) shows 'Sample angiograms or images' displaced far right of the main grid, adjacent to Assessment 3.2.2.AS.4's DoK text, apparently a page-break column-collision artifact rather than a genuine separate row; preserved verbatim as an additional TLR item ('Sample angiograms or images').",
+          "learningOutcomes": [
+            {
+              "code": "3.2.2.LO.1",
+              "description": "Describe the different types of lipids in the body, explain how cholesterol-lipoprotein complexes affect risk of heart diseases and how risk of heart diseases may be assessed.",
+              "sequence": 1,
+              "source": { "page": 91, "pdfPageIndex": 93 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication: Learners share their ideas orally as they discuss their thoughts on the structure and the properties of the different types of lipid molecules. Learners share their ideas orally as they discuss their thoughts on food products that contain cholesterol and its economic importance to the human body system. Creativity: Learners use different materials to design the structures of the different types of lipids molecules. Collaboration: Learners work in groups as they share their ideas on the LDL and HDL to come out with a finalised solution for the work. Leadership: As learners work in groups to research and prepare their presentations, they create and share tasks and responsibilities among themselves. Information Literacy: As learners analyse information from online resources and they begin to synthesise the information gathered and make meaning to solve the task assigned.",
+                "gesi": "Learners not laughing or teasing their mates who make mistakes in answering/talking. Learners appreciate, value, and embrace diversity as they work in pairs. Assign roles to members in the group and ensure they work together in peace and harmony to promote inclusion and responsibility. Learners embrace different opinions as they discuss why cholesterol is necessary in the body and how it is transported as lipoprotein-cholesterol. All learners are given the opportunity to provide oral presentations confidently and effectively to other learners.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Tolerance", "Humility", "Truthfulness"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "3.2.2.CS.1",
+                  "description": "Demonstrate an understanding of the function of cholesterol in the body and its role in heart disease.",
+                  "sequence": 1,
+                  "source": { "page": 92, "pdfPageIndex": 94 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.2.2.LI.1",
+                      "description": "Describe the different types of lipid molecules and their different physical properties and functions.",
+                      "sequence": 1,
+                      "source": { "page": 92, "pdfPageIndex": 94 },
+                      "pedagogicalExemplars": [
+                        "Structuring Talk for Learning: The teacher shows the structure of the different types of lipid molecules (fatty acids, fats, steroids and complex lipids) using stick and ball models and sketches. Learners are engaged to discuss what properties lipid molecules share and how a lipid molecule is defined.",
+                        "Activity-Based Learning: Learners work in pairs to document examples of the different types of lipids in humans and their primary functions from relevant literature. For each lipid type, learners sketch and model using stick and ball."
+                      ],
+                      "assessment": { "code": "3.2.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.2.LI.2",
+                      "description": "Explain how cholesterol is transported in the blood by high density lipoprotein (HDL) and low-density lipoprotein (LDL) and the role each of them plays in the body.",
+                      "sequence": 2,
+                      "source": { "page": 92, "pdfPageIndex": 94 },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: With the aid of charts, videos or information graphs, engage in a class discussion on why cholesterol is necessary in the body and how cholesterol is transported as lipoprotein-cholesterol.",
+                        "Collaborative Learning: Learners work in mixed-ability groups to do a write-up on the differences between high density lipoprotein (HDL) and low-density lipoprotein (LDL) and their roles in the body and present to the class for comments."
+                      ],
+                      "assessment": { "code": "3.2.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.2.LI.3",
+                      "description": "Describe how the concentrations of these complexes (HDL and LDL) affect a person’s risk of heart disease.",
+                      "sequence": 3,
+                      "source": { "page": 92, "pdfPageIndex": 94 },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: Invite a resource person to give a talk or show a video or a summarized writeup on a chart on how HDL and LDL are measured and the normal concentrations of these complexes. Class discuss how high levels of LDL cholesterol or low levels of HDL cholesterol, raises risk for heart disease, blocked vessels and stroke."
+                      ],
+                      "assessment": { "code": "3.2.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.2.LI.4",
+                      "description": "Describe the function of an angiogram in diagnosing blocked vessels and discuss the risk factors for heart disease.",
+                      "sequence": 4,
+                      "source": { "page": 93, "pdfPageIndex": 95 },
+                      "pedagogicalExemplars": [
+                        "Structuring Talk for Learning: Learners identify blocked vessels on sample angiograms or angiogram images. Then learners list the risk factors for heart disease and share their opinions about why they think the listed factors are risk factors."
+                      ],
+                      "assessment": { "code": "3.2.2.AS.4", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BIOMEDICAL INTERVENTION",
+      "code": null,
+      "sequence": 3,
+      "pathway": null,
+      "subStrands": [
+        {
+          "name": "DIAGNOSTIC DEVICE",
+          "namePrintedVariants": ["DIAGNOSTIC DEVICE (in-body Sub-Strand heading, all three years)", "Diagnostic Devices (Scope and Sequence summary table, plural)"],
+          "sequence": 1,
+          "classLevel": "SHS 1",
+          "source": { "page": 39, "pdfPageIndex": 41 },
+          "teachingLearningResources": ["Textbooks", "Online resources", "Pictures", "Charts", "Videos", "Pictures", "Internet"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 41, "pdfPageIndex": 43 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Sub-Strand name is printed singular ('DIAGNOSTIC DEVICE') at every in-body heading but plural ('Diagnostic Devices') in the Scope and Sequence summary table; both preserved verbatim (see namePrintedVariants). Teaching and Learning Resources grid (PDF page 43) also shows the tail of Assessment 1.3.1.AS.3's DoK text ('Level 4 Extended critical thinking and reasoning') interleaved into the TLR row area, a page-break column-collision artifact.",
+          "learningOutcomes": [
+            {
+              "code": "1.3.1.LO.1",
+              "description": "Explain medical intervention. Identify and describe various diagnostic medical interventions.",
+              "sequence": 1,
+              "source": { "page": 39, "pdfPageIndex": 41 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication: Learners learn communication skills by talking about the knowledge acquired on the various forms of medical interventions, without discrimination and intimidation. Learners contribute to the discussion by expressing their thoughts among their peers about the experience each member has gained on using diagnostic devices through the videos watched and the field trip organised. Critical Observation: Learners critically observe and categorise the various forms of medical interventions. As learners watch videos and embark on a field trip, they critically observe and learn how the various diagnostic devices are used in the hospital, clinics and laboratory. Oral Communication: Learners learn to freely express themselves freely without intimidation and teasing from colleagues and teachers. Critical Thinking, Curiosity and Digital Literacy: As learners use the Internet to look for information, critique data by inquiry and present their findings. Leadership: As learners work in groups to research and prepare their presentations, they create and share tasks and responsibilities among themselves.",
+                "gesi": "Learners embrace different opinions as they share their personal knowledge on the various medical interventions. Learners appreciate both the local and foreign resources that are used to advance the primitive diagnostic devices into modern diagnostic devices. Learners appreciate the uniqueness of each gender through male and female participation in the operation of the diagnostic devices. Avoid discriminating against persons from different backgrounds in terms of religion, gender, or ethnicity. Give more time to slow learners to complete tasks. Give exceptional learners additional tasks.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Patience", "Respect", "Honesty"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.3.1.CS.1",
+                  "description": "Explore medical interventions and their relevance to diagnosis.",
+                  "sequence": 1,
+                  "source": { "page": 40, "pdfPageIndex": 42 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.3.1.LI.1",
+                      "description": "Explain medical intervention in relation to diagnosis, therapy and prevention.",
+                      "sequence": 1,
+                      "source": { "page": 40, "pdfPageIndex": 42 },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: Teacher leads a discussion on the essence of medical intervention and how it is needed for the diagnosis and therapy or treatment of diseases as well as the preventive measures of diseases.",
+                        "Digital Learning: Based on the discussion, work in groups to create word clouds or create online journals on medical interventions in terms of diagnosis, prevention and therapy."
+                      ],
+                      "assessment": { "code": "1.3.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.3.1.LI.2",
+                      "description": "Compare and contrast primitive diagnostic medical interventions and modern diagnostic devices.",
+                      "sequence": 2,
+                      "source": { "page": 40, "pdfPageIndex": 42 },
+                      "pedagogicalExemplars": [
+                        "Structuring Talk for Learning: Show a video or invite a resource person to give a presentation on developments in medical diagnostic devices and interventions from ancient to modern times.",
+                        "Talk for Learning: Discuss the challenges with the primitive diagnostic medical intervention and research on the steps that were taken to advance the primitive form into modern diagnostic devices.",
+                        "Activity-Based Learning: Create a flow chart on the various stages in the advancement of diagnostic devices from ancient to modern times. In pairs, create a table on the similarities and differences between primitive and modern modes of medical diagnosis."
+                      ],
+                      "assessment": { "code": "1.3.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.3.1.LI.3",
+                      "description": "Explore the significance of the various diagnostic devices used for medical intervention.",
+                      "sequence": 3,
+                      "source": { "page": 40, "pdfPageIndex": 42 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Embark on a field trip and watch videos on how the various diagnostic devices are used in medical practice for the treatment of diseases.",
+                        "Project-Based Learning: In groups, present a report on how the various diagnostic devices are used as well as how the troubleshooting is done in order to yield a positive test result for the patients."
+                      ],
+                      "assessment": { "code": "1.3.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DIAGNOSTIC DEVICE",
+          "namePrintedVariants": ["DIAGNOSTIC DEVICE (in-body Sub-Strand heading, all three years)", "Diagnostic Devices (Scope and Sequence summary table, plural)"],
+          "sequence": 1,
+          "classLevel": "SHS 2",
+          "source": { "page": 68, "pdfPageIndex": 70 },
+          "teachingLearningResources": ["Online resources", "Articles", "Reports", "Pictures", "Videos", "Charts", "Diagnostic medical device", "Flip chart", "Textbooks"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 71, "pdfPageIndex": 73 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "PENDING",
+          "learningOutcomes": [
+            {
+              "code": "2.3.1.LO.1",
+              "description": "Describe the importance of technology in clinical diagnosis, the composition of diagnostic medical devices and explain basic principles relating to diagnostic medical device design.",
+              "sequence": 1,
+              "source": { "page": 68, "pdfPageIndex": 70 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Digital Literacy: Learners understand the technologies used in diagnosis. This builds up the computer literacy of the learner. Communication: Learners share ideas of the biomedical instrumentation they have seen in the hospitals and how it was operated. Learners discuss the step-by-step approach of disassembling and assembling of the diagnostic devices and how each part functions. Problem Solving: Learners can clearly identify and group the various medical instruments under diagnostic device and therapeutic device. Collaboration: Learners work in mixed-ability groups and share their research findings with their group members, brainstorm and come out with agreed answers. Curiosity: Learners inquire a lot from the teacher as the learner watch the step-by-step approach in disassembling and assembling of a diagnostic medical device. Critical Thinking: Learners observe and analyse how the various components of the medical diagnostic device work together to yield one result or function. Learners develop their critical thinking ability as they brainstorm the requirements of medical device design. Attention to Detail: Learners learn to pay attention to details as they curiously observe the whole process. Information Literacy: Learners brainstorm to gather information and analyse and synthesise the information to make meaning. Oral Communication: Learners learn to articulate their opinions on the bioinstrumentation principles. Emotional Intelligence: Learners develop emotional intelligence as their submissions are critiqued by other learners.",
+                "gesi": "Learners work in mixed-ability groups. Learners appreciate, value, and embrace diversity as they work with other group members. Learners embrace different opinions as they share their research and brainstorm. Learners appreciate gender from diverse background as they take turns to contributing to the disassembling and assembling of a diagnostic medical device. Learners embrace different opinions as they brainstorm on the bioinstrumentation principles.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Humility", "Truthfulness", "Honesty"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.3.1.CS.1",
+                  "description": "Demonstrate an understanding of the concepts applied to build diagnostic devices.",
+                  "sequence": 1,
+                  "source": { "page": 70, "pdfPageIndex": 72 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.3.1.LI.1",
+                      "description": "Investigate the application of technology in the provision of healthcare.",
+                      "sequence": 1,
+                      "source": { "page": 70, "pdfPageIndex": 72 },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Learners engage in a discussion on technologies available for the diagnosis, treatment and prevention of diseases in humans.",
+                        "Exploratory Learning: Visit a hospital to observe a variety of biomedical instruments or watch pictures and videos of these resources.",
+                        "Activity-Based Learning: Work in groups to categorize biomedical instruments into diagnostic and therapeutic devices. Examples of diagnostic medical devices to include ECG monitor, EEG monitor, sphygmomanometer, pulse oximeter, endoscope, ophthalmoscope, thermometer, imaging equipment (X-ray, ultrasound etc.), microscope, etc. Therapeutic devices include ventilator, artificial heart, pacemaker, infant incubator, muscle/nerve stimulator electrosurgery machine etc.",
+                        "Talk for Learning: Explore the various physiological measures (blood pressure, heartbeat, temperature, blood sugar level, morphology by imaging, etc.) for diagnosis and how patterns and recorded values may be indicative of abnormalities."
+                      ],
+                      "assessment": { "code": "2.3.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.3.1.LI.2",
+                      "description": "Identify the components of a diagnostic device and its functions.",
+                      "sequence": 2,
+                      "source": { "page": 70, "pdfPageIndex": 72 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: With the help of a technician, learners disassemble a diagnostic medical device (e.g., glucometer, ECG monitor etc.) and try to identify the various components under the type of measurand, electrode or sensor, signal processing unit and display or recording unit. The device is then re-assembled as a unit. Learners discuss the functions of the various components and brainstorm how the individual components work together to achieve the overall objective of the device."
+                      ],
+                      "assessment": { "code": "2.3.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.3.1.LI.3",
+                      "description": "Discuss the bioinstrumentation principles used in the construction of a diagnostic device.",
+                      "sequence": 3,
+                      "source": { "page": 70, "pdfPageIndex": 72 },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: The teacher starts brainstorming sessions on the requirements of medical device design and construction to be effective for the intended purpose and confirm prescribed safety principles in order not to compromise public safety.",
+                        "Exploratory Learning: With the aid of realia, models or pictures, learners explore how access to and measure and, accuracy, sensitivity and specificity affect the performance of medical devices. Inaccessible measure and may require invasive procedures."
+                      ],
+                      "assessment": { "code": "2.3.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DIAGNOSTIC DEVICE",
+          "namePrintedVariants": ["DIAGNOSTIC DEVICE (in-body Sub-Strand heading, all three years)", "Diagnostic Devices (Scope and Sequence summary table, plural)"],
+          "sequence": 1,
+          "classLevel": "SHS 3",
+          "source": { "page": 94, "pdfPageIndex": 96 },
+          "teachingLearningResources": ["Projector", "Textbook", "Internet", "Medical device"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 97, "pdfPageIndex": 99 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "PENDING",
+          "learningOutcomes": [
+            {
+              "code": "3.3.1.LO.1",
+              "description": "Design and construct some basic medical devices and pitch them to potential investors.",
+              "sequence": 1,
+              "source": { "page": 94, "pdfPageIndex": 96 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Collaboration: Learners work in groups as they share their ideas on the production, procurement and maintenance of a diagnostic device for a final presentation in the class. Learners work in groups as they share their ideas to develop a good marketing plan for a diagnostic device so as to attract investors. Learners work in groups as they share their ideas on how to improve the existing diagnostic device. Problem Solving: Learners use several information sources and pick out useful information as applicable for improving the design and construction of the existing diagnostic device. Leadership: As learners work in groups to research online to advance a diagnostic device, they create and share tasks and responsibilities among themselves. Digital Literacy: Learners get hands-on experience with the technology used for the diagnostic device as they practice the assembling and disassembling of the diagnostic device. Innovation: Learners adopt new ideas that can be used to advance an existing diagnostic device into the modern form. Critical Thinking: Learners critically analyse to adopt the best marketing strategy for the diagnostic device to attract investors for their product.",
+                "gesi": "Learners embrace different opinions as they discuss the production, procurement and maintenance of diagnostic devices. Learners learn to amicably resolve conflicts and embrace differing opinions as they work in groups. Learners appreciate, value, and embrace diversity as they work with other group members. Learners assign roles to members in the group and work together in peace and harmony to promote inclusion and responsibility. All learners are given the opportunity to provide oral presentations confidently and effectively to other learners. Learners embrace different opinions as they discuss the best marketing plan to pitch the diagnostic device for investors.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Patience", "Respect", "Discipline"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "3.3.1.CS.1",
+                  "description": "Demonstrate understanding of the knowledge and skills required to design and construct some basic medical devices.",
+                  "sequence": 1,
+                  "source": { "page": 96, "pdfPageIndex": 98 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.3.1.LI.1",
+                      "description": "Evaluate the role of biomedical engineers in the production, acquisition and maintenance of medical devices.",
+                      "sequence": 1,
+                      "source": { "page": 96, "pdfPageIndex": 98 },
+                      "pedagogicalExemplars": [
+                        "Exploratory Learning: In groups, visit various medical or production centres to learn about the activities in the production (e.g., medical need, design, prototyping, etc.), acquisition (e.g., advice on new medical technology, safety, efficacy, and cost-effectiveness) and maintenance (e.g., testing, software upgrade, repairs, calibration, etc.) of medical devices. Subsequently, the individual groups make presentations to the class for further discussion."
+                      ],
+                      "assessment": { "code": "3.3.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.3.1.LI.2",
+                      "description": "Design and construct a simple diagnostic device/assemble the units of a medical device.",
+                      "sequence": 2,
+                      "source": { "page": 96, "pdfPageIndex": 98 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning: Learners work in mixed-ability groups to design and build a diagnostic medical device such as a thermometer, heartbeat monitor, breath alcohol monitor, paper-based colorimetric sensors, etc. Learners may consult existing literature and experts, review existing devices and offer improvements, etc. Groups present their works at the end of the specified period.",
+                        "Experiential Learning: An invited resource person gives a talk about a specified diagnostic medical device. After the talk, the resource person leads the class to disassemble the device and identify the parts and functions. The device is then assembled. The resource person leads learners to repeat the disassembling and assembling processes to familiarize learners with the device."
+                      ],
+                      "assessment": { "code": "3.3.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.3.1.LI.3",
+                      "description": "Develop a marketing plan to pitch the designed device to potential investors.",
+                      "sequence": 3,
+                      "source": { "page": 96, "pdfPageIndex": 98 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning: Learners work in mixed-ability groups to develop a marketing plan to pitch a designed device or a specified device to the class. In this case, other members of the class would act as the potential investors. The groups present their plan to the class and receive feedback."
+                      ],
+                      "assessment": { "code": "3.3.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "THERAPEUTIC DEVICE",
+          "namePrintedVariants": ["THERAPEUTIC DEVICE (in-body Sub-Strand heading, all three years)", "Therapeutic Devices (Scope and Sequence summary table, plural)"],
+          "sequence": 2,
+          "classLevel": "SHS 1",
+          "source": { "page": 42, "pdfPageIndex": 44 },
+          "teachingLearningResources": ["Textbook", "Pictures", "Online resources", "Medical devices", "Videos", "Computer", "Projector"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 45, "pdfPageIndex": 47 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Sub-Strand name is printed singular ('THERAPEUTIC DEVICE') at every in-body heading but plural ('Therapeutic Devices') in the Scope and Sequence summary table; both preserved verbatim (see namePrintedVariants).",
+          "learningOutcomes": [
+            {
+              "code": "1.3.2.LO.1",
+              "description": "Identify the forms of therapy and describe the roles of various therapists and the tools they use in healthcare delivery.",
+              "sequence": 1,
+              "source": { "page": 42, "pdfPageIndex": 44 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Digital Literacy: Learners gain some mastery using digital tools through use of online resources and computing resources. Learners have the opportunity to design, prepare and present their presentations using ICT tools. Curiosity: Learners develop their sense of curiosity as they recount the experiences themselves and loved ones and asked questions. Learners become aware their environment as they view videos or visit health facilities. Learners are required to carefully observe scenes and identify devices. Communication: Learners learn to articulate their observations and opinions to the colleagues. Learners learn to express their opinions and ideas in a supported environment. Learners communicate their works to the class using visual aids. Collaboration: Learners appreciate the diversity in persons and learn to work together to accomplish tasks. Learners work with their peers to produce required outcomes. Creativity: Leaners learn to identify and classify items using mind maps. Tolerance/Emotional Intelligence: Learners learn to tolerate their peers as they present and also criticise their presentations.",
+                "gesi": "Use of both local and global examples. Devoting more time to identified slow learners. Not laughing or teasing learners to boost their morale to contribute meaningfully to discussions. Providing positive feedback from colleagues and teachers. Gender-balanced grouping of learners. Ensuring formation of mixed-ability groups. Assigning roles to members of the group to promote inclusion and responsibility. Use videos that are not skewed against a particular gender.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Unity", "Punctuality", "Discipline"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.3.2.CS.1",
+                  "description": "Demonstrate an understanding of the use of therapeutic devices for medical intervention.",
+                  "sequence": 1,
+                  "source": { "page": 44, "pdfPageIndex": 46 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.3.2.LI.1",
+                      "description": "Identify the various forms of therapy.",
+                      "sequence": 1,
+                      "source": { "page": 44, "pdfPageIndex": 46 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Invite a resource person to give a talk or teacher should deliver a PowerPoint presentation on various forms of therapy.",
+                        "Collaborative Learning: Based on the talk, work in groups to identify the different types of therapies, and consult books and other relevant sources to categorise them into the various forms of therapy.",
+                        "Activity-Based Learning: Individually write short notes on the various forms of therapy based on the presentation and the sources contacted."
+                      ],
+                      "assessment": { "code": "1.3.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.3.2.LI.2",
+                      "description": "Investigate who a therapist is and enumerate the various specialties.",
+                      "sequence": 2,
+                      "source": { "page": 44, "pdfPageIndex": 46 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Embark on a visit to a therapist or listen to a presentation by a therapist about their profession and job schedule.",
+                        "Activity-Based learning: In groups, role-play the duties of the various professionals involved in the provision of therapy."
+                      ],
+                      "assessment": { "code": "1.3.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.3.2.LI.3",
+                      "description": "Identify the various therapeutic devices used by the therapist.",
+                      "sequence": 3,
+                      "source": { "page": 44, "pdfPageIndex": 46 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Embark on a field trip to a hospital or watch videos/pictures showing examples of therapy being undertaken, to observe and document the various therapeutic devices used in therapy.",
+                        "Project-Based Learning: In groups, create charts on various therapeutic devices and their uses."
+                      ],
+                      "assessment": { "code": "1.3.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "THERAPEUTIC DEVICE",
+          "namePrintedVariants": ["THERAPEUTIC DEVICE (in-body Sub-Strand heading, all three years)", "Therapeutic Devices (Scope and Sequence summary table, plural)"],
+          "sequence": 2,
+          "classLevel": "SHS 2",
+          "source": { "page": 72, "pdfPageIndex": 74 },
+          "teachingLearningResources": ["Videos", "Charts", "Pictures", "Projector"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 75, "pdfPageIndex": 77 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Content Standard 2.3.2.CS.1 has 3 Learning Indicators but only two Assessment code+DoK blocks are printed for LI.1/LI.2, in the order AS.2 then AS.1 (reversed); preserved verbatim (LI.1->AS.2, LI.2->AS.1). LI.3 correctly pairs with AS.3. Sub-Strand name also printed singular in-body vs. plural in the Scope table (see namePrintedVariants).",
+          "learningOutcomes": [
+            {
+              "code": "2.3.2.LO.1",
+              "description": "Describe some treatment and management strategies for cancer, disabilities, damaged tissues and organs.",
+              "sequence": 1,
+              "source": { "page": 72, "pdfPageIndex": 74 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Information Literacy: Learners brainstorm the mechanism of therapeutic remedies and synthesise the information to make meaning by relating it to chemotherapy and cancer treatment. Learners catalogue their results from their personal research and format them to prepare their presentations. Critical Thinking: Learners develop their critical thinking ability as they brainstorm therapeutic remedies. Learners critically analyse and prepare their research findings for presentation. As learners watch these videos/documentaries and interact with the other learning materials, they critically observe and analyse the applications of regenerative medicine in their communities. Oral Communication: Learners learn to articulate their opinions on the physical, mental and emotional effects of chemotherapy. Emotional Intelligence: Learners develop emotional intelligence as their submissions are critiqued by other learners and also appreciate the emotional and mental effects of radiation therapy and chemotherapy. Critical Observation: As learners watch videos and pictures, they critically observe and acquire knowledge on how prosthesis and orthotics restore function to the limbs. Communication: Learners contribute to the discussion by expressing their thoughts among their peers about the experience each member has gained on the use of the prosthesis through the videos, pictures and personal experiences. Collaboration: Learners sit in well mixed (gender-balanced and culturally diverse) groups and take turns to relay their individual research findings to their peers. Leadership: As learners work in groups to research on a common topic, they create and share tasks and responsibilities among themselves to achieve the set goals for the group.",
+                "gesi": "Consciously ensuring that learners who make mistakes while talking are not laughed at or mocked but are corrected in a manner that will encourage them for trying. Encourage learners to attempt questions a couple of times while the teacher provide constructive criticism for improvement to boost learner confidence. Learners appreciate, value, and embrace diversity as they are made to work in groups. Learners learn to amicably resolve conflicts and embrace differing opinions. Learners develop emotional intelligence as their submissions are critiqued by others for the betterment of the group.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Humility", "Truthfulness", "Honesty"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.3.2.CS.1",
+                  "description": "Explore how therapies are used in health facilities to address health problems.",
+                  "sequence": 1,
+                  "source": { "page": 74, "pdfPageIndex": 76 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.3.2.LI.1",
+                      "description": "Explain the use of prostheses and orthoses to manage, correct and treat disabilities.",
+                      "sequence": 1,
+                      "source": { "page": 74, "pdfPageIndex": 76 },
+                      "pedagogicalExemplars": [
+                        "Exploratory Learning: Individually, conduct a research on the Internet about the usage of prostheses and orthoses.",
+                        "Cooperative Learning: Engage in a class discussion to arrive on the definition and functions of prothesis and orthosis, using examples from videos, pictures and experiences of learners. Discuss the pathological effects of disease, trauma, malformation and loss of the lower and upper limbs and relate them to functional loss. Talk about examples of prostheses and orthoses and their sites of application.",
+                        "Project-Based Learning: Learners research and identify examples of functional losses of the limbs, deduce whether these effects are as a result of pathological effects, trauma, malformation or loss of upper/lower limbs and propose solutions to these effects using prosthesis or orthoses.",
+                        "Collaborative Learning: Make group presentations to the class based on the findings."
+                      ],
+                      "assessment": { "code": "2.3.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Assessment code printed for this Learning Indicator is '2.3.2.AS.2' rather than the expected '2.3.2.AS.1'; see sub-strand-level reviewNote."
+                    },
+                    {
+                      "code": "2.3.2.LI.2",
+                      "description": "Investigate the treatments and therapies available to treat cancer and its physical, mental and emotional effects.",
+                      "sequence": 2,
+                      "source": { "page": 74, "pdfPageIndex": 76 },
+                      "pedagogicalExemplars": [
+                        "Digital Learning: With the aid of videos, pictures and PowerPoint presentations, explore the mechanisms of therapeutic remedies such as chemotherapy, radiation therapy and stem cell implant to treat cancer.",
+                        "Collaborative Learning: Learners discuss the physical, mental and emotional effects of chemotherapy and radiation therapy such as hair loss, vomiting, fatigue, nausea, headache, memory and concentration problems."
+                      ],
+                      "assessment": { "code": "2.3.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Assessment code printed for this Learning Indicator is '2.3.2.AS.1' rather than the expected '2.3.2.AS.2'; see sub-strand-level reviewNote."
+                    },
+                    {
+                      "code": "2.3.2.LI.3",
+                      "description": "Explore the future application of regenerative medicine for patients with disabilities.",
+                      "sequence": 3,
+                      "source": { "page": 75, "pdfPageIndex": 77 },
+                      "pedagogicalExemplars": [
+                        "Structured Talk for Learning: Learners are introduced to the strategies for regenerative medicine such as cell therapy (injection of stem cells at diseased sites), implantation of tissue constructs and artificial organs through a PowerPoint presentation or a video.",
+                        "Experiential Learning: Learners watch pictures or documentaries on regenerative medicine and suggest ways it could be applied to solve medical problems in the communities.",
+                        "Digital Learning: Design group word clouds on regenerative medicine."
+                      ],
+                      "assessment": { "code": "2.3.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "THERAPEUTIC DEVICE",
+          "namePrintedVariants": ["THERAPEUTIC DEVICE (in-body Sub-Strand heading, all three years)", "Therapeutic Devices (Scope and Sequence summary table, plural)"],
+          "sequence": 2,
+          "classLevel": "SHS 3",
+          "source": { "page": 98, "pdfPageIndex": 100 },
+          "teachingLearningResources": ["Medical device", "Internet", "Sample manual", "Projector", "Textbook", "Regulatory documents"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 99, "pdfPageIndex": 101 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Content Standard 3.3.2.CS.1 and its Teaching and Learning Resources label are printed inside the 'Content Standards' column header cell itself on PDF page 101 (a page-break layout artifact, the CS description reads across into what looks like a 'Teaching and Learning Resources' sub-label positioned oddly above the table); the CS description and TLR items themselves were recoverable and are preserved verbatim. Sub-Strand name also printed singular in-body vs. plural in the Scope table (see namePrintedVariants).",
+          "learningOutcomes": [
+            {
+              "code": "3.3.2.LO.1",
+              "description": "Identify constituent components of a therapeutic device, develop an operating manual for a medical device and describe the regulatory processes for medical devices.",
+              "sequence": 1,
+              "source": { "page": 98, "pdfPageIndex": 100 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Digital Literacy: Learners get hands-on experience on the technology used for the therapeutic device as they practice the assembling and disassembling of the therapeutic devices. Collaboration: Learners work in groups using online resources and develop an operating manual for a medical device as each member shares his or her opinion. Leadership: As learners work in groups to research online and brainstorm to develop an operating manual for a medical device, they share tasks and responsibilities among themselves. Communication: Learners learn to articulate their opinions on the work performed by the regulatory agencies and comment on the suggestions made. Ethical Reasoning: Learns identify the ethical rule used by the regulatory agencies for checking the fraudulent adverts on the medical devices.",
+                "gesi": "Consciously ensuring that learners who make mistakes while talking are not laughed at or mocked but are corrected in a manner that will encourage them for trying. Encourage learners to attempt questions a couple of times while the teacher provide constructive criticism for improvement to boost learner confidence. Learners appreciate, value, and embrace diversity as they work with other group members. Learners embrace different opinions as they develop an operating manual for a medical device. All learners are given the opportunity to provide oral presentations confidently and effectively to other learners.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Humility", "Truthfulness", "Honesty"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "3.3.2.CS.1",
+                  "description": "Demonstrate an understanding of the interconnections among components of therapeutic devices and explain the medical device regulation process.",
+                  "sequence": 1,
+                  "source": { "page": 99, "pdfPageIndex": 101 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.3.2.LI.1",
+                      "description": "Disassemble and assemble components of the therapeutic device.",
+                      "sequence": 1,
+                      "source": { "page": 99, "pdfPageIndex": 101 },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: An invited resource person brings and gives a talk about a specified therapeutic medical device. After the talk, the resource person leads the class to disassemble the device and identify the parts and functions. The device is then assembled. The resource person leads learners to repeat the disassembling and assembling processes to familiarize learners with the device."
+                      ],
+                      "assessment": { "code": "3.3.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.3.2.LI.2",
+                      "description": "Develop an operating manual for a therapeutic device.",
+                      "sequence": 2,
+                      "source": { "page": 99, "pdfPageIndex": 101 },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: The teacher leads the discussion on the guidelines and requirements for writing an operating manual for a medical device.",
+                        "Activity-Based Learning: Learners work in mixed-ability groups to review relevant documents and brainstorm to develop an operating manual for a specified medical device."
+                      ],
+                      "assessment": { "code": "3.3.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.3.2.LI.3",
+                      "description": "Discuss the role of regulatory agencies in the production and marketing of medical devices.",
+                      "sequence": 3,
+                      "source": { "page": 99, "pdfPageIndex": 101 },
+                      "pedagogicalExemplars": [
+                        "Structuring Talk for Learning: Learners discuss the role of regulatory agencies such as Food and Drugs Authority and Ghana Standards Authority in ensuring that medical devices for sale and in use are safe and effective. Class brainstorms the effect of fraudulent adverts on equipment sales and how regulatory institutions can help."
+                      ],
+                      "assessment": { "code": "3.3.2.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BIOMEDICAL INNOVATIONS",
+      "namePrintedVariants": ["BIOMEDICAL INNOVATIONS (Year One Strand heading, PDF page 48)", "BIOMEDICAL INNOVATION (Year Two Strand heading, PDF page 78, and Year Three Strand heading, PDF page 102)"],
+      "code": null,
+      "sequence": 4,
+      "pathway": null,
+      "extractionStatus": "EXTRACTED",
+      "reviewStatus": "NEEDS_REVIEW",
+      "reviewNote": "Strand name is spelled 'BIOMEDICAL INNOVATIONS' (plural) at the Year One heading but 'BIOMEDICAL INNOVATION' (singular) at the Year Two and Year Three headings; the Scope and Sequence summary table itself spells it 'Biomedical Innovations' (plural). Both spellings preserved verbatim per year; 'BIOMEDICAL INNOVATIONS' used as this record's canonical name (matching the summary table and Year One).",
+      "subStrands": [
+        {
+          "name": "RESEARCH AND DESIGN IN BIOMEDICAL SCIENCE",
+          "sequence": 1,
+          "classLevel": "SHS 1",
+          "source": { "page": 46, "pdfPageIndex": 48 },
+          "teachingLearningResources": ["Computer", "Phone", "Projector", "Internet connection"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 49, "pdfPageIndex": 51 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "PENDING",
+          "learningOutcomes": [
+            {
+              "code": "1.4.1.LO.1",
+              "description": "Use credible online resources to research and propose solutions to healthcare problems.",
+              "sequence": 1,
+              "source": { "page": 46, "pdfPageIndex": 48 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication: Learners contribute to the discussion by expressing their thoughts among their peers in an environment that is free from fear or intimidation and also learn public speaking skills as they take turns to share their ideas. Information and Technology Literacy: As learners research and use technological tools to prepare their presentations, they gain experiential training on how to assess credible information on the internet. Collaboration: Learners work with their peers in mixed-ability groups to come out with the desired outcome. Digital Literacy: Learners learn to use the Internet to search for credible information. Learners learn to use the Internet for research. Critical Thinking: Learners apply assessment criteria to indicate the credibility of an Internet source and justify the choice of judgment. Learners identify health problems in the society, consult others and critically analyse the remedies published or recommended to churn out proposed solutions to identified problems. Problem Solving: Learners use online and media resources to review the solutions of others to specified health problems and formulate their own solutions.",
+                "gesi": "Learners embrace diverse opinions as they share their ideas. Assign roles to members in the group and work together in peace and harmony to promote inclusion and responsibility. Use of mixed-ability and/or gender-balanced groupings. As learners use the worldwide web, they appreciate global and cross-cutting themes. All learners given the opportunity to provide written and/or oral communication of ideas and thoughts.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Unity", "Punctuality", "Discipline"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.4.1.CS.1",
+                  "description": "Demonstrate knowledge on how to access and use information from credible sources.",
+                  "sequence": 1,
+                  "source": { "page": 48, "pdfPageIndex": 50 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.4.1.LI.1",
+                      "description": "Analyse website content and assess overall credibility of the information.",
+                      "sequence": 1,
+                      "source": { "page": 48, "pdfPageIndex": 50 },
+                      "pedagogicalExemplars": [
+                        "Managing Talk for Learning: Engage in a class discussion on how to assess the credibility of information on websites (reputation of the host, relevance of information, currency of date, asking experts, check supporting sources, consideration of personal biases, etc.) Brainstorm on the implication of false information on research and science.",
+                        "Project-Based Learning: Break learners into groups and let learners research about a given topic on the Internet (e.g., treatment of sickle cell). Each group assesses the credibility of the information based on the criteria provided. Groups present their findings to the class."
+                      ],
+                      "assessment": { "code": "1.4.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.4.1.LI.2",
+                      "description": "Use online search engines and journal databases to locate reliable scientific articles.",
+                      "sequence": 2,
+                      "source": { "page": 48, "pdfPageIndex": 50 },
+                      "pedagogicalExemplars": [
+                        "Exploratory Learning: Learners use online search engines like Google to search for credible information and give reasons they think the information is credible."
+                      ],
+                      "assessment": { "code": "1.4.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.4.1.LI.3",
+                      "description": "Use different approaches to propose solutions to healthcare problems in the country.",
+                      "sequence": 3,
+                      "source": { "page": 48, "pdfPageIndex": 50 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning: Learners work in pairs to identify a healthcare problem in their environment and consult online resources, resource persons, books or libraries to search for possible remedies to the identified problem. Learners then propose solution using the information derived from the various sources."
+                      ],
+                      "assessment": { "code": "1.4.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.4.1.LI.4",
+                      "description": "Make an effective presentation of scientific information on a healthcare issue.",
+                      "sequence": 4,
+                      "source": { "page": 49, "pdfPageIndex": 51 },
+                      "pedagogicalExemplars": [
+                        "Activity-Based Learning: Individually, prepare a PowerPoint presentation to the class on an identified healthcare problem, its causes, effects/symptoms and possible solutions."
+                      ],
+                      "assessment": { "code": "1.4.1.AS.4", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "RESEARCH AND DESIGN IN BIOMEDICAL SCIENCE",
+          "sequence": 1,
+          "classLevel": "SHS 2",
+          "source": { "page": 76, "pdfPageIndex": 78 },
+          "teachingLearningResources": ["Printed articles", "Internet", "Projector", "Writing boards", "Projector"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 78, "pdfPageIndex": 80 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Content Standard 2.4.1.CS.1's description ('Demonstrate understanding and application of a variety of biomedical experimental designs.') and the 'Teaching and Learning Resources' header/list are printed collided into the same left-hand table column on PDF page 80 (a page-break layout artifact); both were recoverable and are preserved verbatim. The TLR grid shows 'Projector' twice, preserved as printed.",
+          "learningOutcomes": [
+            {
+              "code": "2.4.1.LO.1",
+              "description": "Use scientific literature and statistics to design experiments and analyse results.",
+              "sequence": 1,
+              "source": { "page": 76, "pdfPageIndex": 78 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Critical Thinking: Learners critically analyse the credibility, accuracy and reliability of scientific journals. As learners contribute and participate in the discussion, they think critically. Collaboration: Learners brainstorm in their groups to come out with their research topics. Communication: Learners make their contributions to their peers in an environment that is free from fear or intimidation. Information Literacy: As learners go through their projects, they develop research skills. Learners draw information from the textbooks and the various online resources available to them. Leadership: As learners sit in groups to brainstorm, they create and share tasks and responsibilities among themselves to achieve set goals for the group. Initiative: Learners are given the opportunity to initiate and control their own experiments leading them to the discovery of underlining scientific knowledge. Learners are given the opportunity to initiate and control their own research. Problem Solving Skills: Learners research and draw their own mind maps/charts of biomedical career fields related to clinical or research studies so they can make their own deductions and draw their own conclusions.",
+                "gesi": "As learners work in groups, they are made aware of their personal biases and stereotypes, embrace diversity and practice inclusion. Consciously ensuring that learners who make mistakes while talking are not laughed at or mocked but are corrected in a manner that will encourage them. Learners develop emotional intelligence as their submissions are critiqued by others. Form mixed-ability and mixed-gender groups where applicable.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Respect", "Discipline", "Unity"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.4.1.CS.1",
+                  "description": "Demonstrate understanding and application of a variety of biomedical experimental designs.",
+                  "sequence": 1,
+                  "source": { "page": 78, "pdfPageIndex": 80 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.4.1.LI.1",
+                      "description": "Critique and compare science data presented in popular media with data presented in scientific journals.",
+                      "sequence": 1,
+                      "source": { "page": 78, "pdfPageIndex": 80 },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: The teacher presents learners with two articles (one from public media and another from a scientific journal) on a similar or same topic (e.g., homeopathy, infection, etc.) and let the learners read. Working in groups, learners comment on the credibility, accuracy, and reliability based on the source (trustworthiness of the author or organization), truthfulness and correctness of the information backed by evidence, how current the information is).",
+                        "Activity-Based Learning: Teacher moderates a discussion on the review process of scientific articles. Learners then compare science data presented in popular media and in scientific journals in terms of credibility and substantiated or unsubstantiated claims using a checklist."
+                      ],
+                      "assessment": { "code": "2.4.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.4.1.LI.2",
+                      "description": "Apply knowledge of specified statistical analysis methods to analyse the results of experimental studies.",
+                      "sequence": 2,
+                      "source": { "page": 78, "pdfPageIndex": 80 },
+                      "pedagogicalExemplars": [
+                        "Structured Talk for Learning: Engage in a discussion on the explanation and identification of dependent and independent variables of a sample biomedical study. Discuss statistical measures and the effect of sample size on the representation of a population.",
+                        "Activity-Based Learning: Using data from the study, learners calculate measures of central tendency (mean, median, and mode) and measures of variability (range, variance and standard deviation). On scatter plots or histograms, learners are tasked to change scales on the y-axis (ordinate) for the plot of the same data and observe how changes in scale may exaggerate or diminish an outcome."
+                      ],
+                      "assessment": { "code": "2.4.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "RESEARCH AND DESIGN IN BIOMEDICAL SCIENCE",
+          "sequence": 1,
+          "classLevel": "SHS 3",
+          "source": { "page": 100, "pdfPageIndex": 102 },
+          "teachingLearningResources": ["Projector", "Internet", "Sample manual", "Textbook", "Regulatory documents"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 101, "pdfPageIndex": 103 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Learning Outcome 3.4.1.LO.1's entire 21st Century Skills/GESI/National Core Values guidance block (PDF page 102), and Content Standard 3.4.1.CS.1's Teaching and Learning Resources list (PDF page 103: 'Sample manual', 'Regulatory documents'), are verbatim duplicates of the preceding sub-strand's content (3.3.2 Therapeutic Device, PDF pages 100-101) and do not match 3.4.1's actual subject matter (statistics/experimental design vs. therapeutic-device manuals and medical-device regulation). Apparent copy-paste error in the source document; preserved verbatim, not corrected. The Assessment code for 3.4.1.LI.1 is also printed with a stray space as '3.4.1. AS.1' in the source, stored here without the space as '3.4.1.AS.1' would misrepresent it -- the exact printed form '3.4.1. AS.1' is preserved in the code field below.",
+          "learningOutcomes": [
+            {
+              "code": "3.4.1.LO.1",
+              "description": "Use scientific literature and statistics to design experiments and analyse results.",
+              "sequence": 1,
+              "source": { "page": 100, "pdfPageIndex": 102 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Digital Literacy: Learners get hands-on experience on the technology used for the therapeutic device as they practice the assembling and disassembling of the therapeutic devices. Collaboration: Learners work in groups using online resources and develop an operating manual for a medical device as each member shares his or her opinion. Leadership: As learners work in groups to research online and brainstorm to develop an operating manual for a medical device, they share tasks and responsibilities among themselves. Communication: Learners learn to articulate their opinions on the work performed by the regulatory agencies and comment on the suggestions made. Ethical Reasoning: Learns identify the ethical rule used by the regulatory agencies for checking the fraudulent adverts on the medical devices.",
+                "gesi": "Consciously ensuring that learners who make mistakes while talking are not laughed at or mocked but are corrected in a manner that will encourage them for trying. Encourage learners to attempt questions a couple of times while the teacher provide constructive criticism for improvement to boost learner confidence. Learners appreciate, value, and embrace diversity as they work with other group members. Learners embrace different opinions as they develop an operating manual for a medical device. All learners are given the opportunity to provide oral presentations confidently and effectively to other learners.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "nationalCoreValues": ["Humility", "Truthfulness", "Honesty"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "reviewNote": "This entire guidance block (twentyFirstCenturySkills, gesi, nationalCoreValues) is a verbatim duplicate of sub-strand 'Therapeutic Device' (SHS 3) Learning Outcome 3.3.2.LO.1's guidance, and does not correspond to 3.4.1.LO.1's actual description (statistics/experimental design). See sub-strand-level reviewNote."
+              },
+              "contentStandards": [
+                {
+                  "code": "3.4.1.CS.1",
+                  "description": "Demonstrate an understanding and application of a variety of biomedical experimental designs.",
+                  "sequence": 1,
+                  "source": { "page": 101, "pdfPageIndex": 103 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.4.1.LI.1",
+                      "description": "Apply knowledge of specified statistical analysis methods to analyse the result of experimental studies.",
+                      "sequence": 1,
+                      "source": { "page": 101, "pdfPageIndex": 103 },
+                      "pedagogicalExemplars": [
+                        "Structured Talk for Learning: Learners engage in a discussion on the explanation of dependent and independent variables of sample biomedical study. Discuss statistical measures and the effect of sample size on representation of a population.",
+                        "Activity-Based Learning: Using data from a study, learners calculate measures of central tendency (mean, mode and median) and measures of variability (range, variance and standard deviation). On scatter plots or histograms, learners are tasked to change scales on the y-axis(ordinate) for the plot of the same data and observe how changes in the scale may exaggerate or diminish an outcome"
+                      ],
+                      "assessment": { "code": "3.4.1. AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Assessment code is printed with a stray space as '3.4.1. AS.1' in the source; preserved verbatim exactly as printed."
+                    },
+                    {
+                      "code": "3.4.1.LI.2",
+                      "description": "Design and analyse an experimental study to answer a question relating to human health.",
+                      "sequence": 2,
+                      "source": { "page": 101, "pdfPageIndex": 103 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning: Learners work in groups, proposing a research topic (for example, BMI of learner population, the effect of skipping breakfast on mood, blood pressure profile of learners, etc), designing an experiment for the proposed research and collecting experimental data. Consult textbooks and online resources for secondary data for the study. Finally, document your findings in a report."
+                      ],
+                      "assessment": { "code": "3.4.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

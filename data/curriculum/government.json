@@ -1,0 +1,2723 @@
+{
+  "$comment": "Phase 9 full structured extraction. Every field is transcribed verbatim from curriculum-sources/Government-Curriculum.pdf (pages 21-75 printed / raw PDF pages 23-77) via `pdftotext -layout -enc UTF-8`. Nothing here is invented. Convention note: `nationalCoreValues` is stored as a single-element array containing the full verbatim 'National Core Values:' text block for each node, rather than split into individual words, because in this document that text is usually a flowing sentence (not a clean comma bullet list) and splitting it risked misjudging word boundaries / paraphrasing. `pedagogicalExemplars` likewise preserves each verbatim paragraph/sub-list as its own array element, in original order, without merging or rewording. Several genuine source data-quality issues were found (duplicated content block, code-prefix mismatches, Scope-and-Sequence-table vs. body-text indicator-count mismatches, a merged sub-strand heading) -- these are preserved as printed and flagged with reviewStatus NEEDS_REVIEW and a reviewNote at the affected node, per extraction instructions. One character-doubling rendering artefact on a page footer/label line ('GTeoavecrhnimngenatnd' = 'Teaching and'+'Government' interleaved) was cleaned up as a footer/label glitch only, not as body content.",
+  "subject": {
+    "name": "Government",
+    "code": null,
+    "sourceDocument": "curriculum-sources/Government-Curriculum.pdf"
+  },
+  "curriculumVersion": {
+    "name": "NaCCA SHS September 2023",
+    "year": 2023,
+    "issuingAuthority": "National Council for Curriculum and Assessment (NaCCA), Ministry of Education, Republic of Ghana (in association with Ghana Education Service)"
+  },
+  "classLevels": [
+    "SHS 1",
+    "SHS 2",
+    "SHS 3"
+  ],
+  "strands": [
+    {
+      "code": null,
+      "name": "GOVERNMENT AND DEVELOPMENT",
+      "sequence": 1,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": {
+        "page": 23,
+        "pdfPageIndex": 25
+      },
+      "subStrands": [
+        {
+          "name": "BASICS OF GOVERNMENT",
+          "sequence": 1,
+          "source": {
+            "page": 23,
+            "pdfPageIndex": 25
+          },
+          "teachingLearningResources": [
+            "Government Curriculum",
+            "e-library resources",
+            "NaCCA Approved textbooks on government"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.1.1.LO.1",
+              "description": "Evaluate the meanings, concepts, principles of government and importance of government.",
+              "sequence": 1,
+              "source": {
+                "page": 23,
+                "pdfPageIndex": 25
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21St Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical thinking skills: Learners brainstorm the meanings of government. Through further probing of responses during brainstorming sessions. Make simple modifications to known ideas and routine solutions to generate some different ideas and possibilities. Compare and contrast information and ideas in own and others' reasoning. Consider how reasons and examples are used to support a point of view and illustrate meaning. Consider ways to express and describe thinking activity, including the expression of feelings about learning, both to others and self. Generate ideas that are new and make choices after considering personal preferences. Communication skills: Learners engage in brainstorming session. Learners develop critical analytical and verbal skills. Creativity and Innovation: introduction of new ideas during role-play sessions.",
+                "gesiSelHeaderSeen": "GESI1, SEL2 and Shared National Values",
+                "gesi": "Having used problem-based and experiential learning, taking into consideration Gender Equality and Social Inclusion and working with each other in an inclusive way, the learners will acquire the following GESI competencies: Begin to appreciate individuals of different beliefs, political views and leanings, cultures, and religion. Question the value of democratic and inclusive society. Being to understand diversity and inclusion. Identify misconceptions/myths about gender and disabilities as they relate to governance and leadership. Become aware of their stereotypes and biases about gender roles in governance and political leadership. Begin to appreciate capacity building to be an effective leader.",
+                "sel": "SEL: learners having gone through the teaching method Helps them to build self-confidence and be assertive in decision making in the society. Tolerate other viewpoints to promote harmony.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Learner's full participation and understanding during class discussion will convey the values of tolerance, courage, and loyalty. Embrace diversity of ideas during the brainstorming session. Discussion and understanding of the basic concepts and principles of government will instil in learners the values of tolerance, confidence, and courage. Teamwork by respecting diverse views and gender inclusion while working in group sessions. The use of role-play the functions of government will convey the values of hard work, honesty, patriotism, and loyalty."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.1.CS.1",
+                  "description": "Demonstrate understanding of the meanings, basic concepts, principles, and importance of government.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 25,
+                    "pdfPageIndex": 27
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.1.LI.1",
+                      "description": "Analyse the meanings of government.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 25,
+                        "pdfPageIndex": 27
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Using questioning and answering technique, discuss the meanings of government and mindful of the values including tolerance, courage, and loyalty. Conscious efforts be made to include persons with special needs in the discourse of the subject matter.",
+                        "Government as: 1. Academic field of study 2. Institution of state 3. Arts/process"
+                      ],
+                      "assessment": {
+                        "code": "1.1.1.AS.1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.1.LI2",
+                      "description": "Analyse basic concepts and principles of government.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 25,
+                        "pdfPageIndex": 27
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Through question-and-answer session, discuss the basic concepts and principles of government while exhibiting values of confidence, courage, and tolerance.",
+                        "Concepts: State, power, authority, legitimacy, feminism, development, constitution and constitutionalism etc.",
+                        "Principles: Rule of law, participation, Inclusion, consensus building, equality, and equity etc."
+                      ],
+                      "assessment": {
+                        "code": "1.1.1AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.1.LI3",
+                      "description": "Explain the importance of the study of government.",
+                      "sequence": 3,
+                      "source": {
+                        "page": 25,
+                        "pdfPageIndex": 27
+                      },
+                      "pedagogicalExemplars": [
+                        "Experiential learning: In groups, role play various functions of government while highlighting the civic values of hard work, loyalty and patriotism. Also, underscore how all persons collectively make up the government."
+                      ],
+                      "assessment": {
+                        "code": "1.1.1AS3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "INDIGENOUS AND CONTEMPORARY GOVERNANCE IN GHANA",
+          "sequence": 2,
+          "source": {
+            "page": 27,
+            "pdfPageIndex": 29
+          },
+          "teachingLearningResources": [
+            "Video/Pictures/Audio and other resources",
+            "Government curriculum",
+            "NaCCA Approved textbooks on government",
+            "The Constitution of the Republic of Ghana",
+            "Pictures of the Chief/Queen mother"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.1.2.LO.1",
+              "description": "Examine the structure and relevance of traditional leaders using examples from the environment.",
+              "sequence": 1,
+              "source": {
+                "page": 27,
+                "pdfPageIndex": 29
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21St Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Digital literacy: Using videos and pictures. Communication skills: Through asking relevant questions during class discussion. Communication: Through questions and answers.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Learners having worked in mixed ability groups and brainstorming sessions that ensures Gender Equality and Social Inclusion and working with each other in an inclusive way, cross-sharing of knowledge and understanding among groups and individuals, will lead them to: Begin to appreciate traditional authority and its political antecedents, agent and representatives of different beliefs, cultures, and religion. Learning to identify diversity. Begin to understand misconceptions/ myths about gender and disabilities as they relate to traditional governance and leadership. Begin to identify stereotypes and biases about gender roles in traditional governance and political leadership.",
+                "sel": "SEL: Promote self-education and motivation to contribute to national discourse/problem at hand. It affords the opportunity for learners to explore in the quest for knowledge. It enables learners to become analytical in democratic society.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Respect for Ghanaian culture, identity, ethic, and belief systems. The audio-visual evaluation will convey the values of respect for others, cooperation, and respect for authority. Respect for Ghanaian culture, identity, ethnic, and belief systems. Interaction with resource person (s) will inculcate the values of respect for authority, commitment, and hard work."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.2.CS.1",
+                  "description": "Exhibit understanding and application of the Indigenous systems of government in Ghana",
+                  "sequence": 1,
+                  "source": {
+                    "page": 29,
+                    "pdfPageIndex": 31
+                  },
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Scope and Sequence table (printed page 21) states 3 Learning Indicators for 'Indigenous and Contemporary Governance in Ghana' in Year 1, but only 2 Learning Indicators (1.1.2.LI.1, 1.1.2.LI.2) are printed in the body text before the next Sub-Strand begins. No third LI text could be located on the surrounding pages.",
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.2.LI.1",
+                      "description": "Describe the structure of indigenous systems of government in Ghana.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 29,
+                        "pdfPageIndex": 31
+                      },
+                      "pedagogicalExemplars": [
+                        "Experiential learning: With the help of videos/pictorial evidence from different ethnic groups, describe the structure of traditional government system, while holding the values of respect and cooperation. Example, Mole-Dagbani, Ewe, Ga-Dangme, Akan etc. Discuss issues of ethnicity without offending the sensitivity of some learners or without promoting stereotypes such as ethnocentrism, jingoism, xenocentrism, etc."
+                      ],
+                      "assessment": {
+                        "code": "1.1.2.AS.1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.2.LI.2",
+                      "description": "Describe how traditional leaders contribute to the socio-economic development of Ghana.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 29,
+                        "pdfPageIndex": 31
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for learning: Interact with the resource person(s), while demonstrating the values of hard work, respect, and commitment (e.g., Queen mother). Identify and include female traditional leaders and their role/contribution in the discussion."
+                      ],
+                      "assessment": {
+                        "code": "1.1.2.AS.2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "GOVERNMENT AND DEVELOPMENT",
+      "sequence": 1,
+      "classLevel": "SHS 2",
+      "pathway": null,
+      "source": {
+        "page": 39,
+        "pdfPageIndex": 41
+      },
+      "subStrands": [
+        {
+          "name": "BASICS OF GOVERNMENT",
+          "sequence": 1,
+          "source": {
+            "page": 39,
+            "pdfPageIndex": 41
+          },
+          "teachingLearningResources": [
+            "Government curriculum",
+            "Internet: Website of the Government of Ghana",
+            "NaCCA approved textbooks on Government",
+            "1992 constitution of Ghana",
+            "e-library resources"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "2.1.1.LO1",
+              "description": "Evaluate the concept of citizenship in the context of Ghana.",
+              "sequence": 1,
+              "source": {
+                "page": 39,
+                "pdfPageIndex": 41
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical thinking: Through further probing of responses during brainstorming sessions. Communication skills: Interaction during the brainstorming session. Global citizenship: By distinguishing between a Ghanaian and other national. Communication: Through the discussion of ways of citizenship acquisition. Lifelong learning: Using the library resources.",
+                "gesiSelHeaderSeen": "GESI3, SEL4 and Shared National Values",
+                "gesi": "Through GESI-responsive pedagogy, several Gender Equality and Social Inclusion life skills would be acquired by learners, where they: Appreciate divergent views and opinions. Embrace inclusion and unity through group activities. Respect for religious diversity, cultures and political affiliation. Value and work in favour of a democratic and inclusive society. Identify social injustice and advocate for change. Beware of personal biases, stereotyping, other groups within the state.",
+                "sel": "SEL: Provide opportunity for sense of nationalism/patriotism. Provide sense of unity in diversity. Promote sense of identity and belonging.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "The research and discussion on the acquisition of citizenship will support the values of honesty, patriotism, integrity, and hard work."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.1.1CS1",
+                  "description": "Demonstrate understanding and application of citizenships, rights, and responsibilities to the state.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 41,
+                    "pdfPageIndex": 43
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "2.1.1.LI1",
+                      "description": "Explain the concept of citizenship",
+                      "sequence": 1,
+                      "source": {
+                        "page": 41,
+                        "pdfPageIndex": 43
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Brainstorm on the concept of citizenship and probe further to stimulate critical thinking. Attention must be given to all learners to unearth the values of responsibility, patriotism, commitment and obedience. Further examine how to accommodate minority interests."
+                      ],
+                      "assessment": {
+                        "code": "2.1.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.1.LI2",
+                      "description": "Discuss how citizenship is acquired in Ghana",
+                      "sequence": 2,
+                      "source": {
+                        "page": 41,
+                        "pdfPageIndex": 43
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Using information from the library research done earlier, discuss the various ways of acquiring citizenship in Ghana and pay greater attention to the values of honesty, patriotism, integrity, and hard work. further examine how to accommodate minority interests."
+                      ],
+                      "assessment": {
+                        "code": "2.1.1.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ],
+                  "extractionStatus": "NEEDS_REVIEW",
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Checkpoint 6 follow-up (2026-09-29), verified via description matching for Basics of Government, SHS2: LI1-2 (concept of citizenship, how acquired) match LO1 (\"Evaluate the concept of citizenship\"); LI3-6 (meaning/types of rights, rights protection, state-citizen responsibility, rights restriction) match LO2 (\"Analyse the relevance of rights and responsibilities\"). Represented as the SAME Content Standard (matched by code) attached as primary parent to each Learning Outcome, each with only its own matching Learning Indicator(s). Codes preserved exactly as printed (some lack periods between segments, e.g. \"LO1\" instead of \"LO.1\" - a pre-existing source/extraction formatting inconsistency, not corrected here)."
+                }
+              ]
+            },
+            {
+              "code": "2.1.1.LO2",
+              "description": "Analyse the relevance of rights and responsibilities towards the state",
+              "sequence": 2,
+              "source": {
+                "page": 39,
+                "pdfPageIndex": 41
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Communication skills: Through report writing and verbal presentation. Collaborative skills: Through group work with peers. Critical Thinking: Through discussion and imagination of situations that curtailing of rights can occur. Through discussions and further probing. Communication: Through the brainstorming and discussion sessions. Communication skills through discussion/interaction. Learners develop critical analytical and verbal skills through role-play. Creativity and Innovation: Through role play and script writing. Leadership: Assign responsibilities to both genders during the role-play and script writing.",
+                "gesiSelHeaderSeen": "GESI3, SEL4 and Shared National Values",
+                "gesi": "Through collaborative learning, learners gain GESI skills such as: Becoming sensitive to individual differences through their collaborative work. Respect for divergent views. Full participation and understanding will promote in. learners, values of equity, and shared responsibility. Inclusivity through giving attention to all learners.",
+                "sel": "SEL: Develop positive attitude towards nation building. Promote sense of selflessness to the national course. Build in one assertiveness and confidence in the political system.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Teamwork, obedience, respect for authority and equality, confidence, tolerance, patriotism, responsibility, obedience, and respect."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.1.1CS1",
+                  "description": "Demonstrate understanding and application of citizenships, rights, and responsibilities to the state.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 41,
+                    "pdfPageIndex": 43
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "2.1.1.LI3",
+                      "description": "Explain the meaning and types of rights",
+                      "sequence": 3,
+                      "source": {
+                        "page": 41,
+                        "pdfPageIndex": 43
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: In jigsaw groups discussions the meaning and the types of rights. NB: Emphasize that privileges are not necessarily rights and highlight the values of confidence, equality, tolerance and responsibility. Probe into minority rights issues in the society."
+                      ],
+                      "assessment": {
+                        "code": "2.1.1.AS3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.1.LI4",
+                      "description": "Examine how citizens' rights are protected.",
+                      "sequence": 4,
+                      "source": {
+                        "page": 42,
+                        "pdfPageIndex": 44
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for learning: Discuss how citizens' rights can be protected in a state. Probe for further responses. Attention must be given to all learners and values such as patriotism, responsibility, equality, equity, and confidence. Special emphasis should be placed on the rights of the minority and how it can be assessed."
+                      ],
+                      "assessment": {
+                        "code": "2.1.1.AS4",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.1.LI5",
+                      "description": "Establish the symbiotic relationship between the responsibility of the state towards citizens and vice versa in national development.",
+                      "sequence": 5,
+                      "source": {
+                        "page": 42,
+                        "pdfPageIndex": 44
+                      },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Role-play the duties and responsibilities of a good citizen and that of government; and focus on the values of patriotism, responsibility, obedience, and respect. Stress the need for reciprocity by citizen and government."
+                      ],
+                      "assessment": {
+                        "code": "2.1.1.AS5",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.1.LI6",
+                      "description": "Discuss how the rights of a citizen can be restricted.",
+                      "sequence": 6,
+                      "source": {
+                        "page": 42,
+                        "pdfPageIndex": 44
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In mixed-ability and gender groups, discuss how the rights of a citizen are being restricted in a state, while placing emphasis on the core values of teamwork, obedience, respect and equality. further examine how to accommodate minority rights."
+                      ],
+                      "assessment": {
+                        "code": "2.1.1.AS6",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ],
+                  "extractionStatus": "NEEDS_REVIEW",
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Checkpoint 6 follow-up (2026-09-29), verified via description matching for Basics of Government, SHS2: LI1-2 (concept of citizenship, how acquired) match LO1 (\"Evaluate the concept of citizenship\"); LI3-6 (meaning/types of rights, rights protection, state-citizen responsibility, rights restriction) match LO2 (\"Analyse the relevance of rights and responsibilities\"). Represented as the SAME Content Standard (matched by code) attached as primary parent to each Learning Outcome, each with only its own matching Learning Indicator(s). Codes preserved exactly as printed (some lack periods between segments, e.g. \"LO1\" instead of \"LO.1\" - a pre-existing source/extraction formatting inconsistency, not corrected here)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "INDIGENOUS AND CONTEMPORARY GOVERNANCE IN GHANA",
+          "sequence": 2,
+          "source": {
+            "page": 43,
+            "pdfPageIndex": 45
+          },
+          "teachingLearningResources": [
+            "Government curriculum",
+            "e-resources",
+            "Government approved textbooks"
+          ],
+          "teachingLearningResourcesHeaderSeen": "(no explicit header printed for this Sub-Strand block; bullets appear directly under the last Content Standard)",
+          "learningOutcomes": [
+            {
+              "code": "2.1.2.LO1",
+              "description": "Assess the features of democracy and good governance",
+              "sequence": 1,
+              "source": {
+                "page": 43,
+                "pdfPageIndex": 45
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Communication: Interaction during the brainstorming session. Collaboration: Through working in groups. Communication: Interaction during the group activity.",
+                "gesiSelHeaderSeen": "GESI3, SEL4 and Shared National Values",
+                "gesi": "Using collaborative pedagogy, that ensure Gender Equity and Social Inclusion and working with each other in an inclusive way leads learners to: Appreciate divergent views and opinions. Embrace inclusion through group activities. Become aware of the need for fairness and justice within the society. Acquire values of transparency, accountability and probity. Value and work in favour of a democratic and inclusive society.",
+                "sel": "SEL: Appreciate tenets of democracy and good governance. Develop skills of consensus building. Learn to summit to authority in a polity.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "tolerance, transparency, selflessness, dedication, and commitment, tolerance, transparency, accountability, and equality."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.1.2.CS1",
+                  "description": "Demonstrate knowledge and understanding of contemporary Governance System in Ghana.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 44,
+                    "pdfPageIndex": 46
+                  },
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "The Content Standard code is correctly printed as '2.1.2.CS1', and its first Learning Indicator is correctly '2.1.2.LI1', but the printed Assessment code for LI1 is '2.1.1.AS1' (wrong Sub-Strand prefix), and the second Learning Indicator and its Assessment are printed as '2.1.1.LI2' / '2.1.1.AS2' (should logically be 2.1.2.LI2/2.1.2.AS2 by the document's own numbering convention). Preserved exactly as printed.",
+                  "learningIndicators": [
+                    {
+                      "code": "2.1.2.LI1",
+                      "description": "Examine the features of democratic system of governance.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 44,
+                        "pdfPageIndex": 46
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Explore what learners Know, want to Know and Learn (KWL) about the features of democratic system of governance. Through questions discuss how these systems promote the rights of citizens, tolerance, transparency, selflessness, dedication, and commitment. Identify and include the contributions of different groups (female, youth, persons with special needs) in governance."
+                      ],
+                      "assessment": {
+                        "code": "2.1.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code is '2.1.1.AS1' though this Learning Indicator's own code is '2.1.2.LI1' -- a Sub-Strand-prefix mismatch preserved verbatim."
+                    },
+                    {
+                      "code": "2.1.1.LI2",
+                      "description": "Analyse the features of good governance.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 44,
+                        "pdfPageIndex": 46
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In mixed ability and gender groups, discuss the meaning and features of good governance in nation-building. Consider the values of tolerance, transparency, accountability and equality. Identify and include the contributions of different groups (female, youth, persons with special needs) in governance."
+                      ],
+                      "assessment": {
+                        "code": "2.1.1.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code is '2.1.1.LI2' though this is the second Learning Indicator of Sub-Strand 2.1.2's only Content Standard (2.1.2.CS1) -- expected '2.1.2.LI2' by the document's own convention. Preserved verbatim."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "GOVERNMENT AND DEVELOPMENT",
+      "sequence": 1,
+      "classLevel": "SHS 3",
+      "pathway": null,
+      "source": {
+        "page": 59,
+        "pdfPageIndex": 61
+      },
+      "subStrands": [
+        {
+          "name": "BASICS OF GOVERNMENT",
+          "sequence": 1,
+          "source": {
+            "page": 59,
+            "pdfPageIndex": 61
+          },
+          "teachingLearningResources": [
+            "Government curriculum.",
+            "Britannica Encyclopaedia on systems of government (https://www.britannica.com/browse/Politics-Political-Systems)",
+            "Library information on the systems of government.",
+            "The Constitutions of the Republic of Ghana."
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "3.1.1.LO1",
+              "description": "Examine the relationship between the systems of government and Ghana's adoption of the unitary system of government.",
+              "sequence": 1,
+              "source": {
+                "page": 59,
+                "pdfPageIndex": 61
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Collaboration and communication: As members interact and work together to accomplish multiple tasks. Leadership and Responsibility: As roles are assigned to group members. Communication skills: Through discussions in class. Digital Literacy: As learners use digital tools to search for information. Life-long learning: Through research.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Through GESI-responsive pedagogy, several Gender Equality and Social Inclusion life skills would be acquired by learners, where they: Appreciate divergent views and opinions. Embrace inclusion through group activities. Become aware of the need for fairness and justice within the society. Build the capacity to bridge the divergent gap. Value and work in favour of a democratic and inclusive society. Identify social injustice and advocate for change.",
+                "sel": "SEL: Less diversity in unitary system promotes development and learns can appreciate unity of purpose. Learn to build bridges for the sake of national unity. Imbibe the sense of equity and support for national development. Learn to share resources and build the capacity of others",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Respect for individual views. Learners acquire the values of patriotism, fairness and loyalty."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.1.1.CS1",
+                  "description": "Demonstrate knowledge and understanding and application of the systems of government.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 61,
+                    "pdfPageIndex": 63
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "3.1.1.LI1",
+                      "description": "Discuss the systems of government.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 61,
+                        "pdfPageIndex": 63
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In mixed-ability groups, learners brainstorm on the various systems of government. Emphasising authority, hard work, patriotism, loyalty, and fairness. Probe further the role and impact of women in the political arena (legislature, executives, judiciary and other institutions of state)."
+                      ],
+                      "assessment": {
+                        "code": "3.1.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.1.LI2",
+                      "description": "Provide reasons for Ghana's adoption of unitary system of government.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 61,
+                        "pdfPageIndex": 63
+                      },
+                      "pedagogicalExemplars": [
+                        "Structuring talk for learning: Based on your previous knowledge on the systems of government, discuss why Ghana adopted the unitary system of government. Pay attention to unity, selflessness, common identity and belongingness, underscoring the need to recognise minority groups in the unitary system of government."
+                      ],
+                      "assessment": {
+                        "code": "3.1.1.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "INDIGENOUS AND CONTEMPORARY GOVERNANCE IN GHANA",
+          "sequence": 2,
+          "source": {
+            "page": 62,
+            "pdfPageIndex": 64
+          },
+          "teachingLearningResources": [
+            "Government curriculum",
+            "NaCCA approved textbook on government",
+            "Resource person from a Traditional Council.",
+            "The 1992 Constitution of Ghana.",
+            "Libraries of various Regional House of Chiefs. Resource Person"
+          ],
+          "teachingLearningResourcesHeaderSeen": "(no explicit header printed; bullets appear directly under the Content Standard)",
+          "learningOutcomes": [
+            {
+              "code": "3.1.2.LO1",
+              "description": "Evaluate the relevance of the democratic features of indigenous governance system.",
+              "sequence": 1,
+              "source": {
+                "page": 62,
+                "pdfPageIndex": 64
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Communication skills: By expression of ideas. Critical thinking: responses to probing questions further develop the thinking ability of learners. Global Citizenship: Appreciate and respect the Ghanaian identity, culture, and heritage. Communication: Respectfully listen to the position of peers and communicate on issues that a different from their views.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Through collaborative learning approach, several Gender Equality, Equity and Social Inclusion life skills would be acquired by learners, where they: Appreciate divergent views and opinions on indigenous governance system. Embrace inclusion through group activities. Value and work in support of indigenous political system. Promote the blend of the indigenous political system with modern democracy.",
+                "sel": "SEL: Identify with and preserve the values of the indigenous political system. Appreciate the role traditional governance system play in the overall governance of the state. Submit to indigenous political authority.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Respect and value individual views and ideas. In the discussion session, values of tolerance, respect cooperation and respect for authority are promoted."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.1.2.CS2",
+                  "description": "Compare Indigenous and contemporary Governance in Ghana.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 63,
+                    "pdfPageIndex": 65
+                  },
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Content Standard is printed as '3.1.2.CS2' even though it is the only/first Content Standard under Sub-Strand 3.1.2 (Content Standard count for this Sub-Strand/Year per the Scope and Sequence table is 1). The '2' appears to continue a running Content-Standard count from the preceding Sub-Strand's CS1 rather than restart at 1. Preserved verbatim.",
+                  "learningIndicators": [
+                    {
+                      "code": "3.1.2.LI1",
+                      "description": "Assess the democratic features of the indigenous governance system.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 63,
+                        "pdfPageIndex": 65
+                      },
+                      "pedagogicalExemplars": [
+                        "Structuring Talk for Learning: Drawing on relevant previous Knowledge on the visit to a chief's palace, identify and discuss the democratic features of the indigenous Ghanaian governance system, upholding the values of tolerance, cooperation, patriotism, and respect for authority. Identify and include the contributions of women and persons with special needs in the traditional governance system and that of modern democracy."
+                      ],
+                      "assessment": {
+                        "code": "3.1.2.AS.1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.2.LI2",
+                      "description": "Examine the role of the chieftaincy institution in contemporary governance in Ghana",
+                      "sequence": 2,
+                      "source": {
+                        "page": 63,
+                        "pdfPageIndex": 65
+                      },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Engage a resource person from the Regional House of Chiefs or nearest paramountcy to have an interactive discussion with learners on how relevant chiefs are in contemporary governance. The values to promote are respect, unity and patriotism. Highlight the contributions of women and youth in the chieftaincy institution."
+                      ],
+                      "assessment": {
+                        "code": "3.1.2.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "CONSTITUTION, INSTITUTIONS AND ADMINISTRATION",
+      "sequence": 2,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": {
+        "page": 30,
+        "pdfPageIndex": 32
+      },
+      "subStrands": [
+        {
+          "name": "CONSTITUTION AND ORGANS OF GOVERNMENT",
+          "sequence": 1,
+          "source": {
+            "page": 30,
+            "pdfPageIndex": 32
+          },
+          "teachingLearningResources": [
+            "1992 Constitution of the Republic of Ghana.",
+            "Government Curriculum",
+            "Pictures of the President and Ministers of state.",
+            "Videos/Pictures/Audio depicting members of the legislature.",
+            "Internet: website of Parliament of Ghana",
+            "Internet: website of the Judicial Service of Ghana."
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.2.1.LO.1",
+              "description": "Evaluate the meaning and types of constitution.",
+              "sequence": 1,
+              "source": {
+                "page": 30,
+                "pdfPageIndex": 32
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical thinking: Through the brainstorming of the concepts of constitution and constitutionalism. Critical thinking and problem-solving by linking the types of constitution to states. Make simple modifications to known ideas and routine solutions to generate some different ideas and possibilities. Compare and contrast information and ideas in own and others reasoning about constitutions. Consider how reasons and examples are used to support a point of view and illustrate meaning in discussing the constitution. Use and give examples of different kinds of questions. Generate ideas that are new and make choices after considering personal preferences. Communication: As they discuss the various concepts. All learners will be given the opportunity to provide oral and/or written description of the types of constitution.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Using talk-for-learning method and ensure Gender Equality, Social Inclusion and working with each other in an inclusive way, cross-sharing of knowledge and understanding among groups and individuals will lead them to: Appreciate the existence of rules and regulation in a society. Begin to identify the value of a democratic and inclusive society. Beware of the misconceptions and the use of the constitution in relation to minority groups.",
+                "sel": "SEL: Demonstrate respect for cultural diversity for national cohesion integration and development. Recognise and empathize the different backgrounds of learners Promote and project cultural identity. Inculcate cultural and social values and means of socialization (transmission of cultural/social values).",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Respect for diversity, Value and recognise authority."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.2.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of the constitution and organs of government",
+                  "sequence": 1,
+                  "source": {
+                    "page": 32,
+                    "pdfPageIndex": 34
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "1.2.1.LI.1",
+                      "description": "Explain the meaning of constitution and constitutionalism",
+                      "sequence": 1,
+                      "source": {
+                        "page": 32,
+                        "pdfPageIndex": 34
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Based on your knowledge of your home regulations and school rules, brainstorm on the meaning of the constitution. Learners will uphold the values of justice, equality, and patriotism. Highlight how the document protects and constricts the actions of everyone in the country particularly the vulnerable; creating enabling environments for all to thrive."
+                      ],
+                      "assessment": {
+                        "code": "1.2.1.AS.1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.1.LI.2",
+                      "description": "Discuss the various types of constitution.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 32,
+                        "pdfPageIndex": 34
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Discuss the types of constitutions using relevant examples, while learners imbibe the values of patriotism, respect and tolerance."
+                      ],
+                      "assessment": {
+                        "code": "1.2.1.AS.2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ],
+                  "extractionStatus": "NEEDS_REVIEW",
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Checkpoint 6 follow-up (2026-09-29), verified via description matching for Constitution and Organs of Government, SHS1: LI.1-2 (meaning of constitution/constitutionalism, types of constitution) match LO.1 (\"Evaluate the meaning and types of constitution\"); LI.3-5 (executive, legislature, judiciary) match LO.2 (\"meaning, types and structure of the organs of government\"). Represented as the SAME Content Standard (matched by code) attached as primary parent to each Learning Outcome, each with only its own matching Learning Indicator(s). Codes preserved exactly as printed (some lack periods between segments, e.g. \"LO1\" instead of \"LO.1\" - a pre-existing source/extraction formatting inconsistency, not corrected here)."
+                }
+              ]
+            },
+            {
+              "code": "1.2.1.LO.2",
+              "description": "Examine the meaning, types and structure of the organs of government.",
+              "sequence": 2,
+              "source": {
+                "page": 30,
+                "pdfPageIndex": 32
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Personal Development by accepting one's true self and overcoming weakness through participatory feedback. Critical thinking: Through probing questions. Communication: Through brainstorming sessions. Digital literacy: Through watching videos and listening to audios. Communication: Through discussion sessions. Communication and collaboration: Through presentations. Digital literacy: Through online search for information.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Through GESI-responsive pedagogy, several gender equality and social inclusion life skills will be acquired by learners: Become aware of the sensitivity to the inter-relatedness of the various spheres of life, groups and individuals. Embrace diversity and inclusion. Full participation and understanding will help learners hold the values of equality and equity. Gain understanding of the political structure and its workings. Respect individuals of different beliefs and political views and leanings. Begin to appreciate democratic and inclusive society. Embrace the need for inclusion.",
+                "sel": "SEL: Appreciate role differentiation in the performance of task. Offer opportunity to leaners to have decision-making roles related to everyday activities",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Cooperation, integrity, patriotism and loyalty, transparency, respect for authority, justice, fairness, honesty, and integrity."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.2.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of the constitution and organs of government",
+                  "sequence": 1,
+                  "source": {
+                    "page": 32,
+                    "pdfPageIndex": 34
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "1.2.1.LI.3",
+                      "description": "Explain the meaning, composition and types of the executive",
+                      "sequence": 3,
+                      "source": {
+                        "page": 32,
+                        "pdfPageIndex": 34
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Learners think-pair and share the meaning, types and composition of the executive organ through probing questions, while demonstrating elements of equality, equity, transparency and respect. Discuss the gender dynamics in the governance structure."
+                      ],
+                      "assessment": {
+                        "code": "1.2.1.AS.3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.1.LI.4",
+                      "description": "Explain the meaning, types, and structure of the legislature.",
+                      "sequence": 4,
+                      "source": {
+                        "page": 33,
+                        "pdfPageIndex": 35
+                      },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Watch videos/documentary on Parliamentary proceedings and further discussion, instilling in learners' ideas of cooperation, integrity, patriotism, gender and loyalty. Explore the reasons for the underrepresentation of women in the legislature."
+                      ],
+                      "assessment": {
+                        "code": "1.2.1.AS.4",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.1.LI5",
+                      "description": "Explain the meaning and structure of the Judiciary.",
+                      "sequence": 5,
+                      "source": {
+                        "page": 33,
+                        "pdfPageIndex": 35
+                      },
+                      "pedagogicalExemplars": [
+                        "Project-based: In pairs, design the structure of the Judiciary and present it in class for discussion. Learners exhibit civic values of justice, fairness, honesty and integrity. Examine further, the role of women in justice delivery."
+                      ],
+                      "assessment": {
+                        "code": "1.2.1.AS5",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ],
+                  "extractionStatus": "NEEDS_REVIEW",
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Checkpoint 6 follow-up (2026-09-29), verified via description matching for Constitution and Organs of Government, SHS1: LI.1-2 (meaning of constitution/constitutionalism, types of constitution) match LO.1 (\"Evaluate the meaning and types of constitution\"); LI.3-5 (executive, legislature, judiciary) match LO.2 (\"meaning, types and structure of the organs of government\"). Represented as the SAME Content Standard (matched by code) attached as primary parent to each Learning Outcome, each with only its own matching Learning Indicator(s). Codes preserved exactly as printed (some lack periods between segments, e.g. \"LO1\" instead of \"LO.1\" - a pre-existing source/extraction formatting inconsistency, not corrected here)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "STATE AND NON-STATE ACTORS IN GHANA",
+          "sequence": 2,
+          "source": {
+            "page": 34,
+            "pdfPageIndex": 36
+          },
+          "teachingLearningResources": [
+            "Newspapers",
+            "Podcasts",
+            "Website of reputable media houses and civil society.",
+            "Party constitutions, manifestoes, logos, symbols/paraphernalia etc."
+          ],
+          "teachingLearningResourcesHeaderSeen": "(no explicit header printed; bullets appear directly under the Content Standard)",
+          "learningOutcomes": [
+            {
+              "code": "1.2.2.LO.1",
+              "description": "Use information in the environment to analyse how public opinion, the mass media and political parties shape national discourse.",
+              "sequence": 1,
+              "source": {
+                "page": 34,
+                "pdfPageIndex": 36
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Personal Development: A sense of feeling or belonging to a group. Collaboration and communication: Through interaction with each other. Leadership: Through division of tasks to group members. Digital literacy: Through listening to audios and watching of videos/pictures. Global citizenship: Make learners conscious of current global and national issues and relate well with people from different sociocultural backgrounds. Collaboration: Through working in groups. Communication: Through interaction within the groups.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Learners having worked in mixed-ability groups and brainstorming session that ensures Gender Equality and Social Inclusion and working cordially in the same environment will lead them to: Appreciate divergent views and opinions. Embrace inclusion through group activities. Become aware of the need for fairness and justice within the society. Respect for different political affiliations. Begin to appreciate the workings of democratic and inclusive society. Exposure to issues of gender equity and sensitivity.",
+                "sel": "SEL: Respect diversity and emotions of others in political discourse. Learn to process information to guide one's action and inaction.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "teamwork, cooperation, justice and promotion of civic responsibility, values of courage, fairness, balance, integrity and honesty, tolerance, respect, and freedom of the individual."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.2.2.CS1",
+                  "description": "Exhibit knowledge and understanding of State-Society Relations in Ghana",
+                  "sequence": 1,
+                  "source": {
+                    "page": 35,
+                    "pdfPageIndex": 37
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "1.2.2.LI1",
+                      "description": "Explain how public opinion influences public policy decisions.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 35,
+                        "pdfPageIndex": 37
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In gender based and mixed-ability groups, examine the influence of public opinion on public policy decision-making, while imparting the values of teamwork, justice, cooperation and responsibility. Further examine how groups (women, persons with special needs, youth, children etc.) have voice and can express their opinion and influence public policy."
+                      ],
+                      "assessment": {
+                        "code": "1.2.2.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.2.LI2",
+                      "description": "Discuss the principles of mass media.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 35,
+                        "pdfPageIndex": 37
+                      },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Listen to audio and watch video documentaries (Podcasting, Vodcasting, YouTube) on activities of the media and discuss the principles of the media. Learners' assessment of the principles of the media will instil the values of courage, fairness, balance, integrity and honesty. Focus on how people must be mindful of their utterances in democratic society.",
+                        "Principles: Accuracy, Balance, Fairness, Timeliness etc."
+                      ],
+                      "assessment": {
+                        "code": "1.2.2.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.2.LI3",
+                      "description": "Explain political party and its structure and Pressure Group",
+                      "sequence": 3,
+                      "source": {
+                        "page": 35,
+                        "pdfPageIndex": 37
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In mixed-ability and gender groups, discuss the political parties that learners are familiar with and their structures, and highlight the values of tolerance, fairness, respect and freedom as well as the contributions of women in the overall organisation and operation of political parties."
+                      ],
+                      "assessment": {
+                        "code": "1.2.2.AS3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "CONSTITUTION, INSTITUTIONS AND ADMINISTRATION",
+      "sequence": 2,
+      "classLevel": "SHS 2",
+      "pathway": null,
+      "source": {
+        "page": 45,
+        "pdfPageIndex": 47
+      },
+      "subStrands": [
+        {
+          "name": "CONSTITUTION AND ORGANS OF GOVERNMENT",
+          "sequence": 1,
+          "source": {
+            "page": 45,
+            "pdfPageIndex": 47
+          },
+          "teachingLearningResources": [
+            "Government curriculum.",
+            "Internet: Website of the Judicial Service of Ghana; Website of the Parliament of Ghana; Website of the government of Ghana.",
+            "Video clips/Audios/Pictures of the subject matter",
+            "e-library resources",
+            "NaCCA approved textbooks on Government"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Content Standard 2.2.1.CS1 with its full block of Learning Indicators 2.2.1.LI1-LI3 and Assessments 2.2.1.AS1-AS3 is printed IDENTICALLY, verbatim, on two consecutive printed pages (46 and 47 / raw PDF pages 48 and 49) -- a genuine copy-paste/pagination duplication in the source document, not an extraction artefact. The second occurrence (page 47) additionally shows the 'Teaching and'+'Government' heading merged into one corrupted string 'GTeoavecrhnimngenatnd' (a character-doubling rendering artefact on the column label, cleaned up per extraction rules since it is a label/heading glitch, not body content) and lists two extra Teaching and Learning Resources bullets ('e-library resources', 'NaCCA approved textbooks on Government') not present in the page-46 occurrence. Stored once below (page 46 as primary source, page-47 extra TLR bullets merged in) rather than duplicated.",
+          "learningOutcomes": [
+            {
+              "code": "2.2.1LO1",
+              "description": "Examine the functions of the organs of government",
+              "sequence": 1,
+              "source": {
+                "page": 45,
+                "pdfPageIndex": 47
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical thinking: Through further probing of responses during discussion. Consider personal reactions to situations or problems and how these reactions may influence thinking. Make simple modifications to known ideas and routine solutions to generate some different ideas and possibilities. Compare and contrast information and ideas in own and others reasoning. Consider how reasons and examples are used to support a point of view and illustrate meanings and functions of government. Communication Skills: Through sharing of ideas during class presentations. Interaction during the brainstorming session. Digital literacy: Through watching videos/pictures and listening to audios. Communication: Through discussion sessions. Lifelong learning: Using the library resources.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Through GESI-responsive pedagogy, several gender equality and social inclusion life skills would be acquired by learners, where they: Appreciate divergent views and opinions. Embrace inclusion through group activities. Become aware of the need for fairness and justice within the society. Respect for religious diversity, cultures and political affiliation. Value and work in favour of a democratic and inclusive society. Embrace and support gender equality. Identify social injustice and advocate for change.",
+                "sel": "SEL: Create political awareness of the mandates of political leaders. Appreciate the relationship between citizens and duty bearers. Apply oneself to a given mandate to achieve maximum results.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Value and work in favour of a democratic and inclusive society. The lessons learned from watching the audio-visuals will convey the values of cooperation, integrity, patriotism, and loyalty."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.1.CS1",
+                  "description": "Demonstrate knowledge, understanding and appreciation of the organs of government.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 46,
+                    "pdfPageIndex": 48
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.1.LI1",
+                      "description": "Examine the functions of the executive organ of government.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 46,
+                        "pdfPageIndex": 48
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In mixed ability and gender groups, brainstorm on the functions of the executive organ of government; while demonstrating the values of equality, equity, transparency and authority. Highlight issues of fair representation in the executive and discuss the gender dynamics."
+                      ],
+                      "assessment": {
+                        "code": "2.2.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.1.LI2",
+                      "description": "Discuss the significance of the legislature in a democratic state",
+                      "sequence": 2,
+                      "source": {
+                        "page": 46,
+                        "pdfPageIndex": 48
+                      },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Watch videos/pictures, listen to audios on Parliamentary proceedings and further discussion, with emphasis on cooperation, integrity, patriotism, and loyalty. Highlight issues of gender dynamics and creating enabling environment for fair representation in the polity."
+                      ],
+                      "assessment": {
+                        "code": "2.2.1.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.1.LI3",
+                      "description": "Discuss the role of the Judiciary in a democratic state.",
+                      "sequence": 3,
+                      "source": {
+                        "page": 46,
+                        "pdfPageIndex": 48
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Pair two learners to discuss and present the functions of the Judiciary in the preservation of fundamental human rights. Pay particular attention to civic values of justice, fairness, honesty, and integrity. Emphasis should be placed on the rationale for slowness in the justice delivery system; deal with issues of mistrust and misconceptions of the judiciary system. Point out how citizens can access legal services."
+                      ],
+                      "assessment": {
+                        "code": "2.2.1.AS3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "STATE AND NON-STATE ACTORS IN GHANA",
+          "sequence": 2,
+          "source": {
+            "page": 48,
+            "pdfPageIndex": 50
+          },
+          "teachingLearningResources": [
+            "Government curriculum.",
+            "e-library resources",
+            "Videos/audios/Pictures.",
+            "NaCCA approved textbooks on government",
+            "Publications on decentralisation and local governance concept in Ghana",
+            "Website of reputable media houses.",
+            "Internet: www.ghanagov.gh; Website of Local Government Service of Ghana.",
+            "Newspapers",
+            "Political Paraphernalia (Party logos and symbols).",
+            "1992 Republican Constitution of Ghana.",
+            "Internet: Website of the Electoral Commission of Ghana.",
+            "Government curriculum"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "2.2.2.LO1",
+              "description": "Assess how the mass media, Political parties and the Electoral Commission shape democratic consolidation.",
+              "sequence": 1,
+              "source": {
+                "page": 48,
+                "pdfPageIndex": 50
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Digital literacy: Share experiences of accessing online services at home, school and the general society. Communication Skills: All learners will be given opportunity to provide oral presentation. Learn to be measured in their speech as they work and collaborate with each other.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Learners having experienced experiential teaching method in Gender Equality and Social Inclusion fashion, leads to acquiring the skills of: Appreciating divergent views and opinions. Embracing inclusion through group activities. Becoming aware of the need for fairness and justice within the society. Respecting for diversity, cultures and political affiliation. Appreciating a democratic and inclusive local society. Identifying social injustice and advocate for change.",
+                "sel": "SEL: Have a mindset of promoting efficient and quick service delivery. Build a culture of prudent management of resources. Promote transparency in dealing with institutions and agencies of government to curb negative practices. It eases the cost of doing business with government in one's interest. Appreciate the application of technology in service delivery.",
+                "nationalCoreValuesHeaderSeen": "(none explicitly printed for this Learning Outcome; see Glocal Citizenship note below)",
+                "nationalCoreValues": [
+                  "(none printed for LO1 specifically -- a 'Glocal Citizenship' note and National Core Values statement appear attached to LO2 on the same page, covering both outcomes)"
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.2.CS2",
+                  "description": "Demonstrate understanding and application of State-Society Relations in Ghana.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 51,
+                    "pdfPageIndex": 53
+                  },
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Checkpoint 6 follow-up (2026-09-29), verified via description matching for State and Non-State Actors in Ghana, SHS2: LI1-3 (mass media, party systems, EC significance) match LO1 (\"mass media, Political parties and the Electoral Commission shape democratic consolidation\"); LI4-6 (decentralization/local government, Public Service, E-government) match LO2 (\"local government system, Public Service and E-government\"). Represented as the SAME Content Standard (matched by code) attached as primary parent to each Learning Outcome, each with only its own matching Learning Indicator(s). Codes preserved exactly as printed (some lack periods between segments, e.g. \"LO1\" instead of \"LO.1\" - a pre-existing source/extraction formatting inconsistency, not corrected here).",
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.1.LI1",
+                      "description": "Mass media and democratic state development.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 51,
+                        "pdfPageIndex": 53
+                      },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: Using recorded audios or videos depicting the activities of the media, discuss the role of the mass media in society. Consider the values of courage, fairness, balance, integrity, and honesty."
+                      ],
+                      "assessment": {
+                        "code": "2.2.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '2.2.1.LI1' though under Sub-Strand 2.2.2's Content Standard 2.2.2.CS2 -- expected '2.2.2.LI1'. Preserved verbatim."
+                    },
+                    {
+                      "code": "2.2.1.LI2",
+                      "description": "Discuss party systems.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 51,
+                        "pdfPageIndex": 53
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative learning: In mixed-ability and gender groups, brainstorm the concept of political parties, types and party systems, with emphasis on tolerance, respect, fairness, and freedom."
+                      ],
+                      "assessment": {
+                        "code": "2.2.1.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '2.2.1.LI2' though under Content Standard 2.2.2.CS2 -- expected '2.2.2.LI2'. Preserved verbatim."
+                    },
+                    {
+                      "code": "2.2.1.LI3",
+                      "description": "Assess the significance of the EC in Ghana's democratic practice.",
+                      "sequence": 3,
+                      "source": {
+                        "page": 51,
+                        "pdfPageIndex": 53
+                      },
+                      "pedagogicalExemplars": [
+                        "Building on what others say: Discuss the role of the EC in Ghana's democratic practice, focusing on the values of integrity, honesty, transparency, and accountability."
+                      ],
+                      "assessment": {
+                        "code": "2.2.1.AS3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '2.2.1.LI3' though under Content Standard 2.2.2.CS2 -- expected '2.2.2.LI3'. Preserved verbatim."
+                    }
+                  ],
+                  "extractionStatus": "NEEDS_REVIEW"
+                }
+              ]
+            },
+            {
+              "code": "2.2.2.LO2",
+              "description": "Evaluate local government system, Public Service and E-government in Ghana.",
+              "sequence": 2,
+              "source": {
+                "page": 49,
+                "pdfPageIndex": 51
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Digital literacy: Share experiences of accessing online services at home, school and the general society. Communication Skills: All learners will be given opportunity to provide oral presentation. Learn to be measured in their speech as they work and collaborate with each other.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Learners having experienced experiential teaching method in Gender Equality and Social Inclusion fashion, leads to acquiring skills of: Appreciating divergent views and opinions. Embracing inclusion through group activities. Becoming aware of the need for fairness and justice within the society. Respecting for diversity, cultures and political affiliation. Appreciating a democratic and inclusive local society. Identifying social injustice and advocate for change. Glocal Citizenship: Exposure to diversity in service delivery from other parts of the world. Experience from project-based assignments will help learners acquire the values of teamwork, transparency, truthfulness, and fairness.",
+                "sel": "SEL: Have a mindset of promoting efficient and quick service delivery. Build a culture of prudent management of resources. Promote transparency in dealing with institutions and agencies of government to curb negative practices. It eases the cost of doing business with government in one's interest. Appreciate the application of technology in service delivery.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Value and work in favor of a democratic and inclusive society. The lessons learned from watching the audio-visuals will convey the values of cooperation, integrity, patriotism, and loyalty."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.2.CS2",
+                  "description": "Demonstrate understanding and application of State-Society Relations in Ghana.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 51,
+                    "pdfPageIndex": 53
+                  },
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Checkpoint 6 follow-up (2026-09-29), verified via description matching for State and Non-State Actors in Ghana, SHS2: LI1-3 (mass media, party systems, EC significance) match LO1 (\"mass media, Political parties and the Electoral Commission shape democratic consolidation\"); LI4-6 (decentralization/local government, Public Service, E-government) match LO2 (\"local government system, Public Service and E-government\"). Represented as the SAME Content Standard (matched by code) attached as primary parent to each Learning Outcome, each with only its own matching Learning Indicator(s). Codes preserved exactly as printed (some lack periods between segments, e.g. \"LO1\" instead of \"LO.1\" - a pre-existing source/extraction formatting inconsistency, not corrected here).",
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.1.LI4",
+                      "description": "Describe Decentralization, types, and structure of Ghana's local government system.",
+                      "sequence": 4,
+                      "source": {
+                        "page": 52,
+                        "pdfPageIndex": 54
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Brainstorm on the meaning of decentralisation, types and local government. Pay particular attention to hard work, honesty, patriotism, commitment, and transparency."
+                      ],
+                      "assessment": {
+                        "code": "2.2.1.AS4",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '2.2.1.LI4' though under Content Standard 2.2.2.CS2 -- expected '2.2.2.LI4'. Preserved verbatim."
+                    },
+                    {
+                      "code": "2.2.1.LI5",
+                      "description": "Describe the Public Service",
+                      "sequence": 5,
+                      "source": {
+                        "page": 52,
+                        "pdfPageIndex": 54
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In a jig-saw activities, discuss the meaning, characteristics and composition of the public service. Pay attention to hard work, patriotism and commitment."
+                      ],
+                      "assessment": {
+                        "code": "2.2.1.AS5",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '2.2.1.LI5' though under Content Standard 2.2.2.CS2 -- expected '2.2.2.LI5'. Preserved verbatim."
+                    },
+                    {
+                      "code": "2.2.1.LI6",
+                      "description": "Distinguish between E-government and E-governance",
+                      "sequence": 6,
+                      "source": {
+                        "page": 52,
+                        "pdfPageIndex": 54
+                      },
+                      "pedagogicalExemplars": [
+                        "Experiential Learning: With your knowledge and understanding of online activities, research on how online services is acquired. Present findings for further discussion and highlight the values of teamwork, transparency, truthfulness, and fairness."
+                      ],
+                      "assessment": {
+                        "code": "2.2.1.AS6",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '2.2.1.LI6' though under Content Standard 2.2.2.CS2 -- expected '2.2.2.LI6'. Preserved verbatim."
+                    }
+                  ],
+                  "extractionStatus": "NEEDS_REVIEW"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "CONSTITUTION, INSTITUTIONS AND ADMINISTRATION",
+      "sequence": 2,
+      "classLevel": "SHS 3",
+      "pathway": null,
+      "source": {
+        "page": 64,
+        "pdfPageIndex": 66
+      },
+      "subStrands": [
+        {
+          "name": "CONSTITUTION AND ORGANS OF GOVERNMENT",
+          "sequence": 1,
+          "source": {
+            "page": 64,
+            "pdfPageIndex": 66
+          },
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "The printed 'Sub-Strand' heading line on page 64 reads '1. CONSTITUTION AND ORGANS OF GOVERNMENT/STATE AND NON-STATE ACTORS IN GHANA' -- merging both Sub-Strand names into a single heading label, even though a separate, correctly-labelled 'Sub-Strand 2. STATE AND NON-STATE ACTORS IN GHANA' heading appears later (printed page 67) for that Sub-Strand's actual content. The content following this merged heading (Learning Outcome 3.2.1.LO1 etc.) is Sub-Strand 1 content only. Preserved verbatim; Sub-Strand name below is taken from the code prefix (3.2.1) and the later correctly-labelled Year 1/2 instances of this Sub-Strand's name, not invented.",
+          "teachingLearningResources": [
+            "The 1992 Constitution of Ghana.",
+            "NaCCA approved textbook on government",
+            "Government Curriculum"
+          ],
+          "teachingLearningResourcesHeaderSeen": "(no explicit header printed; bullets appear directly under the Content Standard)",
+          "learningOutcomes": [
+            {
+              "code": "3.2.1.LO1",
+              "description": "Examine the significance of the Fourth Republican Constitution of Ghana and justify the existence of separation of power and checks and balances.",
+              "sequence": 1,
+              "source": {
+                "page": 64,
+                "pdfPageIndex": 66
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Collaboration: teamwork through assigned roles. Communication: As learners interact with each other; through discussion and presentation in class. Critical Thinking: Through further probing of responses during brainstorming sessions.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Having used project work approach ensuring gender and social inclusion in the learning of the Fourth Republican Constitution learners acquire practical hands-on knowledge and competencies, which include: Appreciation of divergent views and opinions. Embracing inclusion through group activities. Becoming aware of the need for fairness and justice within the society. Valuing and work in favour of a democratic and inclusive society. Identifying social injustice and advocate for change.",
+                "sel": "SEL: Guided by rules and principles that may lead to an individual accounting for their actions and inactions. Enable individual works within their mandate and check excesses. Recognise and respects others' authority in their field of work.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Value and work in favour of a democratic society. Lesson focuses on values of justice, fairness, balance, and equality. Confidence, tolerance, and respect for divergent views. Learners will acquire the values of equality, fairness, discipline and justice."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.2.1.CS1",
+                  "description": "Demonstrate understanding and appreciation of the 1992 Republican Constitution.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 66,
+                    "pdfPageIndex": 68
+                  },
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Both LI2 and LI3 under this Content Standard are printed with the same Assessment code '3.2.1.AS3' (LI2's assessment should logically be '3.2.1.AS2'). Preserved verbatim.",
+                  "learningIndicators": [
+                    {
+                      "code": "3.2.1.LI1",
+                      "description": "Examine the salient features of the 1992 Republican Constitution",
+                      "sequence": 1,
+                      "source": {
+                        "page": 66,
+                        "pdfPageIndex": 68
+                      },
+                      "pedagogicalExemplars": [
+                        "Project-based Learning: In groups, research on the features of the 1992 constitution and present findings for further discussion in class. Learners will hold the values of justice, equality, and patriotism. Allow the introverts and approaching proficiency to lead presentation."
+                      ],
+                      "assessment": {
+                        "code": "3.2.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.1.LI2",
+                      "description": "Describe separation of powers, checks and balances",
+                      "sequence": 2,
+                      "source": {
+                        "page": 66,
+                        "pdfPageIndex": 68
+                      },
+                      "pedagogicalExemplars": [
+                        "Problem-Based Learning: Brainstorm the concept of separation of powers, checks and balances, probe for further responses to stimulate critical thinking. At the same time demonstrate qualities of justice, fairness, balance, and equality."
+                      ],
+                      "assessment": {
+                        "code": "3.2.1.AS3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code is '3.2.1.AS3', duplicating LI3's assessment code below; expected '3.2.1.AS2'. Preserved verbatim."
+                    },
+                    {
+                      "code": "3.2.1.LI3",
+                      "description": "Discuss the relevance of the existence of separation of powers, checks and balances in Ghana.",
+                      "sequence": 3,
+                      "source": {
+                        "page": 66,
+                        "pdfPageIndex": 68
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: Working in mixed-ability groups, identify checks and balances in democratic governance of Ghana. Highlight values of equality, fairness discipline and justice."
+                      ],
+                      "assessment": {
+                        "code": "3.2.1.AS3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "STATE AND NON-STATE ACTORS IN GHANA",
+          "sequence": 2,
+          "source": {
+            "page": 67,
+            "pdfPageIndex": 69
+          },
+          "teachingLearningResources": [
+            "The 1992 constitution of Ghana.",
+            "Government curriculum.",
+            "NaCCA approved textbook on government",
+            "Political Parties manifestoes",
+            "Internet: www.ghanagov.gh; website of Local Government Service of Ghana."
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "3.2.2.LO1",
+              "description": "Examine the relevance of Political Parties and Elections in Democratic Society.",
+              "sequence": 1,
+              "source": {
+                "page": 67,
+                "pdfPageIndex": 69
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Communication: As learners interact with each other. Critical thinking: Through probing questions. Communication: Through discussion sessions.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Having used structuring talk approach and ensuring gender and social inclusion in the learning of political parties and elections, learners acquire practical hands-on knowledge and competencies, which include: Appreciation of divergent views and opinions. Embracing inclusion through group activities. Becoming aware of the need for fairness and justice within the society. Valuing and work in favour of a democratic and inclusive society. Identifying social injustice and advocate for change.",
+                "sel": "SEL: Enable individual works within their mandate and check excesses. Learn to build bridges for the sake of national unity. Imbibe the sense of equity and support for national development.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Value and work in favour of a democratic and inclusive society. Learners demonstrate values of patriotism, fairness, freedom and respect."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.2.2.CS2",
+                  "description": "Evaluate State-Society Relations and Administration",
+                  "sequence": 1,
+                  "source": {
+                    "page": 70,
+                    "pdfPageIndex": 72
+                  },
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Checkpoint 6 follow-up (2026-09-29), verified via description matching for State and Non-State Actors in Ghana, SHS3: LI1-2 (role of political parties, types/functions of elections) match LO1 (\"Political Parties and Elections in Democratic Society\"); LI3-5 (decentralization effects, Public Service functions/challenges, e-governance relevance) match LO2 (\"e-governance in service delivery\"), all relating to state service-delivery mechanisms. Represented as the SAME Content Standard (matched by code) attached as primary parent to each Learning Outcome, each with only its own matching Learning Indicator(s). Codes preserved exactly as printed (some lack periods between segments, e.g. \"LO1\" instead of \"LO.1\" - a pre-existing source/extraction formatting inconsistency, not corrected here).",
+                  "learningIndicators": [
+                    {
+                      "code": "3.2.2.LI1",
+                      "description": "Discuss the role of political parties in a democratic state",
+                      "sequence": 1,
+                      "source": {
+                        "page": 70,
+                        "pdfPageIndex": 72
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In small mixed ability groups learners discuss the role of political parties in a democratic state through probing for further responses. Highlight values of tolerance, cooperation, respect, fairness and freedom. Focus on women and minority roles in building electoral democracy and development."
+                      ],
+                      "assessment": {
+                        "code": "3.2.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.1LI2",
+                      "description": "Assess the types and functions of elections.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 70,
+                        "pdfPageIndex": 72
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In mixed ability groups, discuss the types and functions of elections. Focus on patriotism, fairness, freedom, and respect. Interrogate the significance of the inclusion of vulnerable and minority groups in elections and voting."
+                      ],
+                      "assessment": {
+                        "code": "3..2.1AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '3.2.1LI2' though under Content Standard 3.2.2.CS2 -- expected '3.2.2.LI2'. Assessment code also printed with a stray double-dot as '3..2.1AS2'. Preserved verbatim."
+                    }
+                  ],
+                  "extractionStatus": "NEEDS_REVIEW"
+                }
+              ]
+            },
+            {
+              "code": "3.2.2.LO2",
+              "description": "Evaluate e-governance in service delivery at the district and national levels.",
+              "sequence": 2,
+              "source": {
+                "page": 68,
+                "pdfPageIndex": 70
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Communication: All learners will be given the opportunity to make a presentation in class. Leadership and responsibility: As learners are assigned different roles, they learn the skill of leadership and responsibility. Digital literacy: As learners do online research on e-governance at the district and national levels. Collaboration and Communication: As learners work together, they acquire the skill of communication through interaction in the group and presentation of the work.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Having used project work approach ensuring gender and social inclusion in the learning of e-governance, learners acquire practical hands-on knowledge and competencies, which include: Appreciation of divergent views and opinions. Embracing inclusion through group activities. Becoming aware of the need for fairness and justice within the society. Valuing and work in favour of a democratic and inclusive society.",
+                "sel": "SEL: Build a culture of prudent management of resources. Promote transparency in dealing with institutions and agencies of government to curb negative practices. It eases the cost of doing business with government in one's interest. Appreciate the application of technology in service delivery.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Learners embrace diversity and practise inclusion. Learners imbibe qualities of honesty, probity and accountability. Teamwork by respecting divergent views and gender inclusion while working in group sessions. Learners demonstrate values of unity, cooperation, equity. Commitment, balance and fairness."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.2.2.CS2",
+                  "description": "Evaluate State-Society Relations and Administration",
+                  "sequence": 1,
+                  "source": {
+                    "page": 70,
+                    "pdfPageIndex": 72
+                  },
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "Checkpoint 6 follow-up (2026-09-29), verified via description matching for State and Non-State Actors in Ghana, SHS3: LI1-2 (role of political parties, types/functions of elections) match LO1 (\"Political Parties and Elections in Democratic Society\"); LI3-5 (decentralization effects, Public Service functions/challenges, e-governance relevance) match LO2 (\"e-governance in service delivery\"), all relating to state service-delivery mechanisms. Represented as the SAME Content Standard (matched by code) attached as primary parent to each Learning Outcome, each with only its own matching Learning Indicator(s). Codes preserved exactly as printed (some lack periods between segments, e.g. \"LO1\" instead of \"LO.1\" - a pre-existing source/extraction formatting inconsistency, not corrected here).",
+                  "learningIndicators": [
+                    {
+                      "code": "3.2.1LI3",
+                      "description": "Assess the effects of the concept of decentralization on development.",
+                      "sequence": 3,
+                      "source": {
+                        "page": 70,
+                        "pdfPageIndex": 72
+                      },
+                      "pedagogicalExemplars": [
+                        "Project-based: Identify developmental projects undertaken by District Assemblies in your locality. Present findings for class discussion. Highlight the value of unity, cooperation, equity. commitment, balance, and fairness."
+                      ],
+                      "assessment": {
+                        "code": "3.2.1AS3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '3.2.1LI3' though under Content Standard 3.2.2.CS2 -- expected '3.2.2.LI3'. Preserved verbatim."
+                    },
+                    {
+                      "code": "3.2.1L4",
+                      "description": "Examine the functions and challenges of the Public Service",
+                      "sequence": 4,
+                      "source": {
+                        "page": 71,
+                        "pdfPageIndex": 73
+                      },
+                      "pedagogicalExemplars": [
+                        "Problem-based Learning: Observe and talk to staff of public agency within the school environment and describe their range of responsibilities and challenges."
+                      ],
+                      "assessment": {
+                        "code": "3.2.1AS 4",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '3.2.1L4' (missing 'I') though under Content Standard 3.2.2.CS2 -- expected '3.2.2.LI4'. Preserved verbatim."
+                    },
+                    {
+                      "code": "3.2.1LI5",
+                      "description": "Examine the relevance of e-governance in the socio-economic development of Ghana.",
+                      "sequence": 5,
+                      "source": {
+                        "page": 71,
+                        "pdfPageIndex": 73
+                      },
+                      "pedagogicalExemplars": [
+                        "Problem-based learning: In mixed-ability and gender groups, investigate the use of e-governance in service delivery and do a presentation in class. The values to be promoted are honesty, probity and accountability."
+                      ],
+                      "assessment": {
+                        "code": "3.2.1AS5",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '3.2.1LI5' though under Content Standard 3.2.2.CS2 -- expected '3.2.2.LI5'. Preserved verbatim."
+                    }
+                  ],
+                  "extractionStatus": "NEEDS_REVIEW"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "GHANA IN THE GLOBAL SYSTEM",
+      "sequence": 3,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": {
+        "page": 36,
+        "pdfPageIndex": 38
+      },
+      "subStrands": [
+        {
+          "name": "Ghana in the Community of Nations",
+          "sequence": 1,
+          "source": {
+            "page": 36,
+            "pdfPageIndex": 38
+          },
+          "teachingLearningResources": [
+            "Government curriculum",
+            "Internet: Websites of local and international media houses (e.g., GBC, BBC, CNN).",
+            "Video clips/pictures/Audios"
+          ],
+          "teachingLearningResourcesHeaderSeen": "(no explicit header printed; bullets appear directly under the Content Standard)",
+          "learningOutcomes": [
+            {
+              "code": "1.3.1.LO1",
+              "description": "Examine the meaning of state and non-state actors and their role in the international system.",
+              "sequence": 1,
+              "source": {
+                "page": 36,
+                "pdfPageIndex": 38
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical thinking: Through probing questions and answers: Consider personal reactions to situations or problems and how these reactions may influence thinking. Examine words that show reasons and words that show conclusions. Consider ways to express and describe thinking activity, including the expression of feelings about learning, both to others and self. Use and give examples of different kinds of questions. Generate ideas that are new and make choices after considering personal preferences. Identify words that indicate components of a point of view. Use reasons and examples for different purposes. Express and describe thinking activity as well as practice some learning strategies. Demonstrate and articulate some problem-solving approaches. Communication: Interacting during the brainstorming session. Global citizenship: Conscious of current global issues.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Core Values",
+                "gesi": "Through collaborative pedagogy, several Gender Equality and Social Inclusion life skills would be acquired by learners, where they: Begin to appreciate divergent views and opinions. Become aware of the need for fairness and justice within the society. Begin to respect different nationality and racial differences. Begin to understand the need to support and promote gender equality. Identify social injustice.",
+                "sel": "SEL: Build knowledge of the world around you. Appreciate how things are done differently from one's environment. Create awareness of real-world problems and issues in geopolitics.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "The discussion technique will aid in conveying the value of hard work, responsibility, commitment and patriotism, confidence, patriotism, hard work, transparency."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.3.1.CS1",
+                  "description": "Demonstrate knowledge and understanding of Ghana's external relations.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 37,
+                    "pdfPageIndex": 39
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "1.3.1.LI1",
+                      "description": "Identify and explain state and non-state actors in the international system",
+                      "sequence": 1,
+                      "source": {
+                        "page": 37,
+                        "pdfPageIndex": 39
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Think pair and share meaning of state and non-state actors, while demonstrating the values of cooperation, patriotism, hard work and transparency. Focus more on minority interests in the international system"
+                      ],
+                      "assessment": {
+                        "code": "1.3.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.3.1.LI2",
+                      "description": "Discuss the role of state and non-state actors in the international system.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 37,
+                        "pdfPageIndex": 39
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: In mixed-ability and gender groups, discuss the role of state and non-state actors, while considering the core values of hard work, responsibility, commitment, and patriotism. Discuss further on gender dynamics in the international system."
+                      ],
+                      "assessment": {
+                        "code": "1.3.1.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "GHANA IN THE GLOBAL SYSTEM",
+      "sequence": 3,
+      "classLevel": "SHS 2",
+      "pathway": null,
+      "source": {
+        "page": 53,
+        "pdfPageIndex": 55
+      },
+      "subStrands": [
+        {
+          "name": "GHANA IN THE COMMUNITY OF NATION",
+          "sequence": 1,
+          "source": {
+            "page": 53,
+            "pdfPageIndex": 55
+          },
+          "teachingLearningResources": [
+            "www.ghanagov.gh",
+            "Internet: website of the Ministry of Foreign Affairs.",
+            "Government curriculum"
+          ],
+          "teachingLearningResourcesHeaderSeen": "(no explicit header printed; bullets appear directly under the Content Standard)",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Sub-Strand heading printed as 'GHANA IN THE COMMUNITY OF NATION' (singular 'NATION', not 'NATIONS' as in Year 1/Year 3 instances of this same Sub-Strand). Preserved verbatim.",
+          "learningOutcomes": [
+            {
+              "code": "2.3.1.LO1",
+              "description": "Evaluate the determinants and actors of Ghana's foreign policy.",
+              "sequence": 1,
+              "source": {
+                "page": 53,
+                "pdfPageIndex": 55
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Global citizenship: Learners bring comparative views and opinions from other part of the world during class discussion. Collaboration and Communication: As learners work together, they acquire the skill of communication through interaction in the group and presentation of the work.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Through GESI-responsive pedagogy, several a Gender Equality and Social Inclusion life skills would be acquired by learners, where they: Appreciate divergent views and opinions. Embrace inclusion through cooperation. Learn to work within the global scene. Become aware of the need for fairness, equity and justice within the global arena. Mutual respect for national interest. Value and work in favour of a democratic and inclusive society. Embrace and support gender equality.",
+                "sel": "SEL: Develop the culture to promote national interest. Exhibit good conduct and be a good ambassador of Ghana.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Understanding of the actors and institutions responsible for Ghana's foreign policy formulation and implementation will promote hard work, responsibility, commitment, and patriotism."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.3.1.CS1",
+                  "description": "Demonstrate knowledge and understanding of Ghana's external relations.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 54,
+                    "pdfPageIndex": 56
+                  },
+                  "reviewStatus": "NEEDS_REVIEW",
+                  "reviewNote": "First two Learning Indicators are printed as '2.3.1.L11' and '2.3.1.L12' (an 'LI'-to-'L1' digit/letter rendering that does not match the 'LIn' pattern used everywhere else in the document); their Assessment codes are also irregular ('2.3.1.AS1' has no explicit 'Level 1' word before 'Recall', and the second is printed '2.3.1AS2' with no dot). Additionally, the Scope and Sequence table (printed page 21) states 2 Learning Indicators for 'Ghana in the Community of Nations' in Year 2, but 3 are printed in the body text (LI1-LI3 below). All preserved verbatim.",
+                  "learningIndicators": [
+                    {
+                      "code": "2.3.1.L11",
+                      "description": "Discuss Diplomacy",
+                      "sequence": 1,
+                      "source": {
+                        "page": 54,
+                        "pdfPageIndex": 56
+                      },
+                      "pedagogicalExemplars": [
+                        "Talking for Learning: Using an interactive class technique, discuss the meaning and types of diplomacy and pay particular attention to patriotism, honesty, integrity and transparency."
+                      ],
+                      "assessment": {
+                        "code": "2.3.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '2.3.1.L11' (expected '2.3.1.LI1'); DoK Level 1 description printed as 'Level Recall' (missing '1'). Preserved verbatim."
+                    },
+                    {
+                      "code": "2.3.1.L12",
+                      "description": "Examine the determinants of Ghana's foreign policy",
+                      "sequence": 2,
+                      "source": {
+                        "page": 54,
+                        "pdfPageIndex": 56
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Discuss the determinants of Ghana's foreign policy decisions, while emphasizing patriotism, confidence, honesty, integrity, and transparency."
+                      ],
+                      "assessment": {
+                        "code": "2.3.1AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed code '2.3.1.L12' (expected '2.3.1.LI2'). Preserved verbatim."
+                    },
+                    {
+                      "code": "2.3.1.LI3",
+                      "description": "Discuss the actors and institutions involved in Ghana's foreign policy. (e.g., Executive, Parliament, Ministry of Foreign Affairs, Embassies/High Commissions etc)",
+                      "sequence": 3,
+                      "source": {
+                        "page": 54,
+                        "pdfPageIndex": 56
+                      },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: Work in mixed-ability and gender groups to identify the various actors and institutions responsible for Ghana's foreign policy. Consider hard work, responsibility, commitment and patriotism. Highlight different groups (women, persons with special needs, youth children etc.) positions in Ghana's foreign policy."
+                      ],
+                      "assessment": {
+                        "code": "2.3.1.AS3",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "GLOBALIZATION AND DEVELOPMENT",
+          "sequence": 2,
+          "source": {
+            "page": 55,
+            "pdfPageIndex": 57
+          },
+          "teachingLearningResources": [
+            "Government curriculum.",
+            "Internet: Britannica encyclopaedia (https://www.britannica.com/summary/cultural-globalization).",
+            "Government resource pack",
+            "NaCCA approved government textbooks"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "2.3.2.LO1",
+              "description": "Assess globalization, characteristics, and types.",
+              "sequence": 1,
+              "source": {
+                "page": 55,
+                "pdfPageIndex": 57
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Glocal Citizenship: Learners appreciate and respect their identities as Ghanaians and value power of global acculturation. Leadership and responsibility: As learners take-up responsibilities in the group. Digital literacy: As learners use online resources. Critical thinking: Brainstorming develops critical thinking skills of learners. Communication skills: Interacting with one another improves communication skills of learners.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Learners having experienced problem-based learning that ensures Gender Equity and Social Inclusion and working with each other in inclusive way lead to: Respecting individuals of different beliefs and culture. Valuing and work in favour of a democratic and inclusive society. Appreciating divergent views and opinions. Becoming aware of the need for fairness and justice within the society. Interrogating their stereotypes and biases about gender roles in global governance and political leadership. Identify social injustice and advocate change in the global system.",
+                "sel": "SEL: Demonstrate understanding and respect for diversity in the international community. Recognise external biases that may skew one's world view. Act and think as a Global citizen.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Respect and embrace diverse ideas of learners. Discussion and understanding of the nature and types of globalisation will support the values of hard work, patriotism, commitment, and transparency."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.3.2.CS1",
+                  "description": "Demonstrate knowledge and understanding of globalization and development of States.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 57,
+                    "pdfPageIndex": 59
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "2.3.2.LI.1",
+                      "description": "Explain the meaning and characteristics of globalisation",
+                      "sequence": 1,
+                      "source": {
+                        "page": 57,
+                        "pdfPageIndex": 59
+                      },
+                      "pedagogicalExemplars": [
+                        "Problem-based learning: In mixed-ability and gender groups, investigate the concept of globalisation and its characteristics and present it in class. Concentrate on the elements of patriotism, honesty and commitment. Discuss further issues of gender dynamics at the global level."
+                      ],
+                      "assessment": {
+                        "code": "2.3.2.AS.1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.3.2.LI.2",
+                      "description": "Discuss the types of globalisation",
+                      "sequence": 2,
+                      "source": {
+                        "page": 57,
+                        "pdfPageIndex": 59
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Through pyramid discussion learners discuss the nature and types of globalization (political, economic and social etc.). Probe for further responses to stimulate critical thinking. Concentrate on patriotism, honesty and commitment. Probe further into issues of women on the globe and discuss the gender dynamics at the global level."
+                      ],
+                      "assessment": {
+                        "code": "2.3.2.AS.2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "GHANA IN THE GLOBAL SYSTEM",
+      "sequence": 3,
+      "classLevel": "SHS 3",
+      "pathway": null,
+      "source": {
+        "page": 72,
+        "pdfPageIndex": 74
+      },
+      "subStrands": [
+        {
+          "name": "GHANA IN THE COMMUNITY OF NATIONS",
+          "sequence": 1,
+          "source": {
+            "page": 72,
+            "pdfPageIndex": 74
+          },
+          "teachingLearningResources": [
+            "Government curriculum",
+            "NaCCA approved textbooks on government",
+            "Internet: Website of the Ministry of Foreign Affairs; websites of ECOWAS, AU, EU, UNO"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "3.3.1.LO1",
+              "description": "Evaluate Ghana's foreign policy towards neighbouring states, continental Africa, and the United Nations.",
+              "sequence": 1,
+              "source": {
+                "page": 72,
+                "pdfPageIndex": 74
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical thinking: As learners brainstorm, they develop critical thinking skills. Communication skills: through discussions in class. Collaboration: As the leaners interact.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Through GESI-responsive pedagogy, Gender Equality, and Social Inclusion life skills would be acquired by learners, where they: Become aware of the need for fairness and justice at international level. Respect for nationalities, cultures and racial differences. Value and work in favour of a democratic and inclusive international society. Identify social injustice and advocate for change at the international level.",
+                "sel": "SEL: Learn to live and build cordial relationship around you. Attract favour and support in times of need. Learn to be each other's keeper.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Respect individual views. The values of cooperation, unity of purpose, mutual tolerance and respect are promoted."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.3.1.CS1",
+                  "description": "Demonstrate knowledge, understanding and appreciation of Ghana's external Relations",
+                  "sequence": 1,
+                  "source": {
+                    "page": 73,
+                    "pdfPageIndex": 75
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "3.3.1.LI1",
+                      "description": "Assess Ghana's foreign policy of good neighbourliness.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 73,
+                        "pdfPageIndex": 75
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Through question and answers Ghana's relations with its neighbouring states, while focusing on unity, tolerance, respect, cooperation and patriotism. Also interrogate gender roles and how to present and communicate Ghana's foreign policy of good neighbourliness."
+                      ],
+                      "assessment": {
+                        "code": "3.3.1.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.3.1.LI2",
+                      "description": "Analyse Ghana's foreign policy towards Economic Community of West African States (ECOWAS), Africa Union (AU), European Union (EU) and United Nations Organisation (UNO)",
+                      "sequence": 2,
+                      "source": {
+                        "page": 73,
+                        "pdfPageIndex": 75
+                      },
+                      "pedagogicalExemplars": [
+                        "Talk for Learning: Discuss Ghana's foreign policy towards ECOWAS, AU, EU, UNO, while focusing on unity, tolerance, respect, cooperation, and patriotism. Examine how the minority interest (women, the youth, persons with special needs etc.) are represented in Ghana's foreign policy towards the international organisations"
+                      ],
+                      "assessment": {
+                        "code": "3.3.1.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "GLOBALIZATION AND DEVELOPMENT",
+          "sequence": 2,
+          "source": {
+            "page": 74,
+            "pdfPageIndex": 76
+          },
+          "teachingLearningResources": [
+            "Government curriculum.",
+            "NaCCA approved textbooks on government",
+            "e-library resources"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "3.3.2.LO1",
+              "description": "Evaluate the effects of globalization",
+              "sequence": 1,
+              "source": {
+                "page": 74,
+                "pdfPageIndex": 76
+              },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Collaboration and communication: In mixed ability groups, members interact and work together to accomplish tasks. Leadership and responsibility: As roles are assigned to group members. Global Citizenship: Make learners conscious of how global issues affect national development and vice versa. Communication: Through interaction with each other. Leadership: Through division of tasks to group members.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Learners having experienced problem-based learning that ensures Gender Equity and Social Inclusion and working with each other in inclusive way lead to: Respecting individuals of different beliefs and culture. Valuing and work in favour of a democratic and inclusive society. Appreciating divergent views and opinions. Becoming aware of the need for fairness and justice within the society. Interrogating their stereotypes and biases about gender roles in global governance and political leadership. Identifying social injustice and advocate change in the global system.",
+                "sel": "SEL: Demonstrate understanding and respect for diversity in the international community. Recognise external biases that may skew one's world view. Act and think as a Global citizen.",
+                "nationalCoreValuesHeaderSeen": "National Core Values:",
+                "nationalCoreValues": [
+                  "Values to be attained are patriotism, honesty, and commitment."
+                ]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.3.2.CS1",
+                  "description": "Demonstrate knowledge and understanding of globalization and development of States.",
+                  "sequence": 1,
+                  "source": {
+                    "page": 75,
+                    "pdfPageIndex": 77
+                  },
+                  "learningIndicators": [
+                    {
+                      "code": "3.3.2LI1",
+                      "description": "Assess the effects of globalisation on the development of the Ghanaian economy.",
+                      "sequence": 1,
+                      "source": {
+                        "page": 75,
+                        "pdfPageIndex": 77
+                      },
+                      "pedagogicalExemplars": [
+                        "Problem-based: In mixed ability and gender groups, learners brainstorm on the political, economic, and social effects of globalisation on Ghana, whiles demonstrating element of self-identity, dignity, and cooperation."
+                      ],
+                      "assessment": {
+                        "code": "3.3.2.AS1",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning."
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.3.2.LI2",
+                      "description": "Discuss the measures aimed at mitigating the negative effects of globalization on Ghana's development.",
+                      "sequence": 2,
+                      "source": {
+                        "page": 75,
+                        "pdfPageIndex": 77
+                      },
+                      "pedagogicalExemplars": [
+                        "Problem-Based Learning: In mixed-ability and gender groups, learners research on the measures aimed at mitigating the negative effects of globalization with particular focus on patriotism, honesty, and commitment."
+                      ],
+                      "assessment": {
+                        "code": "3.3.2.AS2",
+                        "dokLevels": [
+                          1,
+                          2,
+                          3,
+                          4
+                        ],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

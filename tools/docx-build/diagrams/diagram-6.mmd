@@ -1,0 +1,7 @@
+flowchart TD
+    A[Teacher opens /planners/id/print] --> B[Full planner rendered as<br/>print-styled HTML]
+    B --> C{Action}
+    C -- Print --> D[Browser's native window.print]
+    C -- Export to PDF --> E[GET /api/planners/id/pdf]
+    E --> F[Server launches headless Chrome<br/>Puppeteer renders the same print page]
+    F --> G[PDF streamed back and<br/>downloaded via the browser]

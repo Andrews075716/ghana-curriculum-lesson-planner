@@ -1,0 +1,36 @@
+graph TB
+    subgraph Client["Browser"]
+        UI[React 19 UI<br/>Server + Client Components]
+    end
+
+    subgraph NextServer["Next.js 16 server process"]
+        Proxy[src/proxy.ts<br/>optimistic route protection]
+        Routes[Route Handlers<br/>src/app/api/**]
+        Pages[Server Components<br/>src/app/**]
+        Services[Service layer<br/>src/server/services]
+        Repos[Repository layer<br/>src/server/repositories]
+        Auth[Auth / session<br/>src/server/auth]
+        RateLimit[In-memory rate limiter<br/>src/server/api/rate-limit.ts]
+        AIProvider[AI provider abstraction<br/>src/server/ai]
+        PDF[Puppeteer PDF renderer<br/>src/server/pdf]
+    end
+
+    subgraph External["External systems"]
+        DB[(PostgreSQL<br/>via Prisma ORM)]
+        Anthropic[Anthropic API<br/>Claude models]
+        Chrome[Headless Chrome<br/>local or PUPPETEER_EXECUTABLE_PATH]
+    end
+
+    UI -->|HTTP| Proxy
+    Proxy -->|allowed| Routes
+    Proxy -->|allowed| Pages
+    Routes --> Services
+    Pages --> Services
+    Services --> Repos
+    Services --> Auth
+    Routes --> RateLimit
+    Services --> AIProvider
+    Repos -->|Prisma Client| DB
+    AIProvider -->|HTTPS, server key only| Anthropic
+    PDF -->|drives| Chrome
+    Routes --> PDF

@@ -1,0 +1,22 @@
+flowchart TD
+    Click[Teacher clicks Generate<br/>on a section's AI Assist panel] --> Loading[Loading state shown]
+    Loading --> Req[POST /api/planners/id/ai/action]
+    Req --> CtxCheck{Curriculum aligned<br/>+ duration set?}
+    CtxCheck -- No --> Err1[400 Validation Error]
+    CtxCheck -- Yes --> ProviderCheck{AI provider enabled?}
+    ProviderCheck -- No --> Err2[503 AI Unavailable<br/>with a specific reason]
+    ProviderCheck -- Yes --> Call[Call AI provider with<br/>curriculum context + prompt]
+    Call --> Validate{Response matches<br/>strict output schema?}
+    Validate -- No --> Err3[502 AI Invalid Output<br/>— never persisted]
+    Validate -- Yes --> Preview[Suggestion shown in<br/>local preview, NOT saved]
+    Preview --> Choice{Teacher action}
+    Choice -- Regenerate --> Req
+    Choice -- Discard --> Idle([Back to idle — nothing changed])
+    Choice -- Insert --> HasContent{Field already<br/>has content?}
+    HasContent -- No --> Write[Suggestion written into wizard state]
+    HasContent -- Yes --> AppendReplace{Append / Replace / Cancel}
+    AppendReplace -- Append --> WriteMerge[Merged under existing content]
+    AppendReplace -- Replace --> Write
+    AppendReplace -- Cancel --> Preview
+    Write --> Autosave[Autosave persists the change]
+    WriteMerge --> Autosave

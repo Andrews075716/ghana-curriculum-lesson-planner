@@ -1,0 +1,12 @@
+flowchart TD
+    A[Visitor opens /register] --> B[Fill name, email, password,<br/>school, optional profile fields]
+    B --> C{Email already registered?}
+    C -- Yes --> D[409 Conflict shown on form]
+    C -- No --> E[Account + TeacherProfile created<br/>Session cookie set]
+    E --> F[Redirect to /dashboard]
+
+    G[Visitor opens /login] --> H[Enter email + password]
+    H --> I{Valid credentials?}
+    I -- No --> J[Generic error shown<br/>— no hint which part was wrong]
+    I -- Yes --> K[Session cookie set]
+    K --> F

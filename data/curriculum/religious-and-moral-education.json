@@ -1,0 +1,783 @@
+{
+  "subject": {
+    "name": "Religious and Moral Education",
+    "code": null,
+    "sourceDocument": "curriculum-sources/RELIGIOUS-AND-MORAL-EDUCATION-Curriculum.pdf"
+  },
+  "curriculumVersion": {
+    "name": "NaCCA SHS September 2023",
+    "year": 2023,
+    "issuingAuthority": "National Council for Curriculum and Assessment (NaCCA), Ministry of Education, Republic of Ghana (in association with Ghana Education Service)"
+  },
+  "classLevels": ["SHS 1", "SHS 2", "SHS 3"],
+  "extractionNotes": [
+    "Strand 2's printed name is spelled 'STEWARDSHIP AND RESPONSIBILTY' (missing the 'I' in Responsibility) at its Year One and Year Two headings, but correctly 'STEWARDSHIP AND RESPONSIBILITY' at its Year Three heading. Both spellings preserved verbatim; see strands[1].namePrintedVariants and reviewNote.",
+    "Strand 1 / Sub-Strand 'LEISURE' (Year Three) is printed with curriculum codes prefixed '3.1.1' (LO/CS/LI/AS) instead of the '3.1.3' expected from this subject's own {Year}.{Strand}.{SubStrand} pattern (Leisure is chronologically Strand 1's 3rd sub-strand). Codes preserved exactly as printed; flagged NEEDS_REVIEW on that sub-strand.",
+    "Strand 3 / Sub-Strand 'CONCERN FOR ONE'S NATION' (Year Three): the Assessment code under Content Standard 3.3.3.CS.1 / Learning Indicator 3.3.3.LI.1 is printed as '3.3.1.AS.1' instead of the expected '3.3.3.AS.1'. Preserved verbatim; flagged NEEDS_REVIEW.",
+    "Strand 3 / Sub-Strand 'CONCERN FOR ONE'S NATION' (Year Three), Learning Outcome 3.3.3.LO.1: the source PDF's text layer is severely corrupted at this row — two overlapping/interleaved text blocks (this LO's own header/description/skills/GESI text mixed character-by-character with a duplicate 'Semester X' generic template header), the same defect the prior inventory pass noted on the cover page, here recurring inside the main content. The description, 21st Century Skills, GESI and SEL fields for this LO are stored as raw pdftotext output (garbled, verbatim, not reconstructed) and flagged NEEDS_REVIEW. The National Core Values bullet list for the same LO recovers to clean text and was extracted normally. The Content Standard/Learning Indicator/Assessment table for this same sub-strand (3.3.3.CS.1, 3.3.3.LI.1, 3.3.3.LI.2) is NOT corrupted and extracted cleanly.",
+    "Strand 1 / Sub-Strand 1 (Work, Ethics and Honesty, Year One) Teaching and Learning Resources cites 'Religious and Moral Education (RME) Textbook for Basic 7' — a Junior High School ('Basic') level textbook reference appearing inside an SHS curriculum document, apparent copy/paste residue from a different curriculum tier. Preserved verbatim; flagged NEEDS_REVIEW.",
+    "Strand 1 / Sub-Strand 'LEISURE' (Year Three) Teaching and Learning Resources table shows the text 'Enquiry Route: Proper use of leisure time' attached directly under the 'Teaching and Learning Resources' header (rather than under a Learning Indicator), apparently due to the TLR table being split across a page break in the raw extraction. Preserved verbatim; flagged NEEDS_REVIEW as a likely layout artifact rather than a genuine TLR item.",
+    "Front matter (PDF pages 1-24, printed pages i-22): shared SHS boilerplate covering the SHS Curriculum Overview, 21st Century Skills, GESI, SEL's Five Core Competencies, Learning and Teaching Approaches, UDL, and the Bloom's/Webb's DoK assessment framework, plus a Scope-and-Sequence summary table (Content Standards 9, Learning Outcomes 9, Learning Indicators 19) and a curriculum development panel list — not re-extracted per-node per the schema's Phase 5 design notes (document-level context, not curriculum-tree content)."
+  ],
+  "strands": [
+    {
+      "name": "WORK, TIME MANAGEMENT AND LEISURE",
+      "code": null,
+      "sequence": 1,
+      "pathway": null,
+      "subStrands": [
+        {
+          "name": "WORK, ETHICS AND HONESTY",
+          "sequence": 1,
+          "classLevel": "SHS 1",
+          "source": { "page": 23, "pdfPageIndex": 25 },
+          "teachingLearningResources": [
+            "Religious and Moral Education (RME) Textbook for Basic 7",
+            "Internet",
+            "Computer"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 26, "pdfPageIndex": 28 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "Teaching and Learning Resources list cites 'Religious and Moral Education (RME) Textbook for Basic 7' — a JHS/Basic-level textbook reference inside an SHS curriculum document, likely copy/paste residue from a different curriculum tier.",
+          "learningOutcomes": [
+            {
+              "code": "1.1.1.LO.1",
+              "description": "Justify the need for positive, ethical work attitudes for the development of society.",
+              "sequence": 1,
+              "source": { "page": 23, "pdfPageIndex": 25 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Teamwork: Through group discussions. Digital Literacy: Through the use of internet. Communication and Collaboration: Through think pair share and in groups",
+                "gesi": "Learners are expected to acquire the following GESI-responsive skills through the experience of working together with each other in groups, cross-sharing knowledge, gaining practical experience of some practices, conducting research, and supporting each other in the learning process: respect individuals of different backgrounds in society. Interrogate their stereotypes and biases about gender, disability, and religion in society. identify injustice in society and advocate for or champion change. ensure the formation of mixed ability groups to reflect the reality at the workplace, the school and at home. offer more time to slow learners for completion of tasks at school.",
+                "sel": "In teaching this sub-strand, the teacher should create opportunities for learners to build their Socio-Emotional Learning competencies by applying their strategies to ensure that learners are: aware of their abilities and limitations, personal emotions, and thoughts and how they influence their behaviour at the workplace, in school and at home to manage them to achieve their aspirations in life. able to recognise the need to relate with people from diverse backgrounds and external influences which can exert on them. Awareness of these will enable them to listen attentively and communicate clearly, co-operate with others, resist negative pressures and deal with conflict constructively. These may be done by the teacher through modelling emotional self-regulation and encouraging diversity presentations, and learners writing on the sequence of their activities.",
+                "nationalCoreValues": ["Tolerance", "Respect", "Hard work", "Honesty", "Selflessness", "Co-operation", "Perseverance", "Contentment", "Trustworthy", "Integrity"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.1.CS.1",
+                  "description": "Demonstrate appreciation for hard work and working ethically.",
+                  "sequence": 1,
+                  "source": { "page": 25, "pdfPageIndex": 27 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.1.LI.1",
+                      "description": "Identify key work ethics and indicate how they can be applied at home, school and in the world of work.",
+                      "sequence": 1,
+                      "source": { "page": 25, "pdfPageIndex": 27 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC should utilise case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Exploratory Learning: Prior to the lesson, research about key workplace ethics and attitudes from the internet, books, library, and other sources",
+                        "Talk for Learning: Through a whole group discussion, discuss each of the workplace ethics and how they can be applied in the world of work",
+                        "Activity-Based Learning: Work in mixed ability groups to role play the exhibition of various work ethics through short dramas",
+                        "Enquiry Route Learning: Relevance of work; Provisions for livelihood, development and use of talent, self-reliance, etc.; Work ethics: Due diligence, hard work, grit, punctuality, etc."
+                      ],
+                      "assessment": {
+                        "code": "1.1.1.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.1.LI.2",
+                      "description": "Explain the benefits of hard work.",
+                      "sequence": 2,
+                      "source": { "page": 25, "pdfPageIndex": 27 },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: Through think-pair-share, explain the benefits of hard work",
+                        "Activity-Based Learning: Work individually to create mind maps on the benefits of hard work",
+                        "Enquiry Route Learning: Benefits of hard work; Provision for livelihood, development, and use of talent, self-reliance Etc."
+                      ],
+                      "assessment": {
+                        "code": "1.1.1.AS.2",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "TIME MANAGEMENT",
+          "sequence": 2,
+          "classLevel": "SHS 2",
+          "source": { "page": 39, "pdfPageIndex": 41 },
+          "teachingLearningResources": [
+            "Clocks and watches",
+            "Materials for creating personal timetables (A4 Sheets)",
+            "Pictures and charts on how time is conceptualised in Ghana."
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 42, "pdfPageIndex": 44 },
+          "learningOutcomes": [
+            {
+              "code": "2.1.2.LO.1",
+              "description": "Develop skills in managing time profitably.",
+              "sequence": 1,
+              "source": { "page": 39, "pdfPageIndex": 41 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Critical Thinking and Problem Solving: Communication and Collaboration: Through think-pair-share. Teamwork: Through group discussion. Creativity and Innovation: Through drama. Teamwork: Through group discussion",
+                "gesi": "Teaching strategies that ensure social inclusion, social justice and gender equality have been experienced by the learners through working together, sharing ideas, and expressing themselves in groups and individually. Through GESI, learners are able to: accept diversity of opinions because time is conceived differently by different cultures. regard the equal opportunities given to them by making good use of time. recognise individual differences and accept that individual abilities affect the time needed to get a task done.",
+                "sel": "In teaching this sub-strand, the teacher should create opportunities for learners to build their Social Emotional Learning Competencies by applying their strategies to ensure that learners are: self-reflecting on their individual use of time and how to use it efficiently. self-aware of the relationship between their thoughts and emotions and time management. able to develop relational skills by using the knowledge that individual abilities which affect the time needed to complete a task may call for assistance from others and hence show empathy and cooperation with others. These may be done by the teacher through modelling emotional self-regulation and encouraging diversity presentations, and learners writing on the sequence of their activities.",
+                "nationalCoreValues": ["Patriotism", "Sacrifice", "Perseverance", "Tolerance", "Stewardship", "Respect for time", "Accuracy", "Open-mindedness", "Planning"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.1.2.CS.1",
+                  "description": "Demonstrate an understanding of the concept of time and indicate how it can be used profitably.",
+                  "sequence": 1,
+                  "source": { "page": 40, "pdfPageIndex": 42 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.1.2.LI.1",
+                      "description": "Explain the concept of time and how it is conceptualized in Ghanaian society.",
+                      "sequence": 1,
+                      "source": { "page": 40, "pdfPageIndex": 42 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC team should utilize case studies, watching videos (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Talk for Learning: Through a whole group discussion, explain the concept of time.",
+                        "Collaborative Learning: Using relevant pictures, work in groups to demonstrate the various ways time is measured in the Ghanaian culture.",
+                        "Enquiry Route Learning: Explain the concept of time. How time is measured in Ghanaian culture. e.g., Ghanaian concept of time is not linear but cyclical. i.e., It is measured with events. E.g., the death of a great chief, activities, and seasons within the year--farming season, harvesting period, festivals etc."
+                      ],
+                      "assessment": {
+                        "code": "2.1.2.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.2.LI.2",
+                      "description": "Identify the various ways learners misuse their time and the benefits of proper time management.",
+                      "sequence": 2,
+                      "source": { "page": 40, "pdfPageIndex": 42 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC team should utilize case studies, watching videos (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Talk for Learning Pedagogy: Through think-pair-share, identify the various ways learners misuse their time.",
+                        "Activity-Based Learning: Through dramatisation, demonstrate the various ways learners misuse their time.",
+                        "Collaborative Learning: Discuss the benefits of effective time management by making reference to various sources including books and the internet.",
+                        "Project-Based Learning: Work individually to design a personal timetable to help you manage your time effectively as a student.",
+                        "Enquiry Route: Ways learners misuse their time. e.g., watching unnecessary programmes, spending too much time on social media. Benefits of time management. e.g., one can accomplish more with less efforts, it helps one to make better choices."
+                      ],
+                      "assessment": {
+                        "code": "2.1.2.AS.2",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "LEISURE",
+          "sequence": 3,
+          "classLevel": "SHS 3",
+          "source": { "page": 51, "pdfPageIndex": 53 },
+          "teachingLearningResources": [
+            "Computers",
+            "Flip charts",
+            "Poster colours",
+            "Sticky notes"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 54, "pdfPageIndex": 56 },
+          "extractionStatus": "EXTRACTED",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "1) All curriculum codes in this sub-strand (LO/CS/LI/AS) are printed with prefix '3.1.1' instead of the '3.1.3' expected from this subject's {Year}.{Strand}.{SubStrand} numbering pattern (Leisure is chronologically the 3rd sub-strand under Strand 1). Preserved verbatim as printed. 2) The Teaching and Learning Resources table shows text 'Enquiry Route: Proper use of leisure time' attached under the TLR header, apparently a page-break layout artifact rather than a genuine resource item; preserved verbatim but likely misplaced in the source table.",
+          "learningOutcomes": [
+            {
+              "code": "3.1.1.LO.1",
+              "description": "Discuss the need for leisure and how to utilise leisure time profitably.",
+              "sequence": 1,
+              "source": { "page": 51, "pdfPageIndex": 53 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication and Collaboration: Through Think-Pair-Share. Digital Learning: Through the use of the Internet. Teamwork: Through group discussion. Through think-pair-share and drama. Creativity: The use of drama",
+                "gesi": "Teaching strategies that ensure social inclusion, social justice and gender equality have been experienced by the learners through working together, sharing ideas, and expressing themselves in groups and individually. Through GESI, learners are able to: appreciate religious and socio-economic differences in the use of leisure time. regard the equal opportunities given to them and others to create suitable time for leisure. recognise individual differences in the creation and use of leisure time and accept them as such.",
+                "sel": "In teaching this sub-strand, the teacher should create opportunities for learners to build their Socio-Emotional Learning competencies by applying their strategies to ensure that learners are: self-reflecting on the appropriate use of time to create enough leisure time. aware of those who share the same leisure with them to form strong and healthy association. conscious of different times and types of leisure and how to develop healthy and supportive relationships with those whose may be different from them. These may be done by the teacher through modelling emotional self-regulation and encouraging diversity presentations, and learners writing on the sequence of their activities.",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Hard work", "Humility", "Time consciousness", "Open-mindedness", "Respect for others"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "3.1.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of the importance of leisure in work ethics.",
+                  "sequence": 1,
+                  "source": { "page": 53, "pdfPageIndex": 55 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.1.1.LI.1",
+                      "description": "Explain the need for leisure time.",
+                      "sequence": 1,
+                      "source": { "page": 53, "pdfPageIndex": 55 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Activity-Based Learning: With the aid of flipcharts or sticky notes, undertake a gallery walk on the definitions of leisure time and what individual learners do during their leisure time.",
+                        "Digital Learning: Create group word clouds on leisure time based on the submissions made during the gallery walk.",
+                        "Collaborative Learning: In mixed-ability groups, discuss the importance of leisure time.",
+                        "Enquiry Route Learning: The meaning of leisure. The need for leisure. eg. to regain lost energy after a long period of hard work, for reflection, meditation, and the study of the scripture."
+                      ],
+                      "assessment": {
+                        "code": "3.1.1.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.1.LI.2",
+                      "description": "Discuss how to use leisure time profitably.",
+                      "sequence": 2,
+                      "source": { "page": 53, "pdfPageIndex": 55 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Activity-Based Learning: Through drama, demonstrate how leisure time is used profitably.",
+                        "Project-Based Learning: Create group charts on how to use leisure time effectively."
+                      ],
+                      "assessment": {
+                        "code": "3.1.1.AS.2",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "STEWARDSHIP AND RESPONSIBILITY",
+      "code": null,
+      "sequence": 2,
+      "pathway": null,
+      "namePrintedVariants": [
+        { "classLevel": "SHS 1", "text": "STEWARDSHIP AND RESPONSIBILTY" },
+        { "classLevel": "SHS 2", "text": "STEWARDSHIP AND RESPONSIBILTY" },
+        { "classLevel": "SHS 3", "text": "STEWARDSHIP AND RESPONSIBILITY" }
+      ],
+      "extractionStatus": "EXTRACTED",
+      "reviewStatus": "NEEDS_REVIEW",
+      "reviewNote": "Strand name is printed 'STEWARDSHIP AND RESPONSIBILTY' (missing the letter 'I' in Responsibility) at its Year One and Year Two section headings, but correctly spelled 'STEWARDSHIP AND RESPONSIBILITY' at its Year Three heading. Both spellings preserved verbatim in namePrintedVariants; canonical 'name' field uses the correctly-spelled form.",
+      "subStrands": [
+        {
+          "name": "THE ENVIRONMENT AND CLIMATE CHANGE",
+          "sequence": 1,
+          "classLevel": "SHS 1",
+          "source": { "page": 27, "pdfPageIndex": 29 },
+          "teachingLearningResources": [
+            "Computers and other electronic resources for screening videos",
+            "Poster colours, markers, flip charts etc",
+            "Pictures"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 32, "pdfPageIndex": 34 },
+          "learningOutcomes": [
+            {
+              "code": "1.2.1.LO.1",
+              "description": "Explain the positive and negative impact of our daily activities on the environment and how we can ensure sustainable environment.",
+              "sequence": 1,
+              "source": { "page": 27, "pdfPageIndex": 29 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Teamwork: Through group work. Through group discussion. Communication and Collaboration: Through group discussion. Through Think-Pair-Share. Critical Thinking and Problem Solving: Through Think-Pair-Share. Creativity and Innovation: The creation of placards for awareness creation.",
+                "gesi": "Learners are expected to acquire the following GESI-responsive skills through the experience of working together with each other in groups, cross-sharing knowledge, gaining practical experience of some practices, conducting research, and supporting each other in the learning process: gain respect for individuals of different beliefs, religions, and cultures on the environment. embrace diversity and practice inclusion through the formation of mixed ability and mixed gender groups. value and work in favour of an inclusive society by combining values of all spheres of life to solve environmental problems. unlearn bad practices which affect the environment. embrace gender equity and equality by learning how the activities of both males and females affect the environment.",
+                "sel": "In teaching this sub-strand, the teacher should create opportunities for learners to build their Social Emotional Learning competencies by applying their strategies to ensure that learners are: self-reflecting on their individual roles in the destruction and preservation of the environment. exhibiting motivation, and SMART goal setting on environmental preservation. showing empathy and cooperation with others to protect the environment. respecting the values in the teachings of other religions, cultures, and disciplines on the environment. These may be done by the teacher through modelling emotional self-regulation and encouraging diversity presentations, and learners writing on the sequence of their activities.",
+                "nationalCoreValues": ["Patriotism", "Sacrifice", "Perseverance", "Environmental Care", "Cleanliness", "Stewardship", "Respect"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.2.1.CS.1",
+                  "description": "Demonstrate an understanding of the impact of human activities on the environment, and the need to prevent destruction of the environment.",
+                  "sequence": 1,
+                  "source": { "page": 30, "pdfPageIndex": 32 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.2.1.LI.1",
+                      "description": "Explain human activities that impact on the environment.",
+                      "sequence": 1,
+                      "source": { "page": 30, "pdfPageIndex": 32 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC team should utilise case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Experiential Learning: In groups, make a field trip to places where human activities have destroyed the environment/observe the environment for bad practices that negatively affect the environment and present your findings for group discussion.",
+                        "Collaborative Learning: In groups, discuss the negative impact of human activities on climate.",
+                        "Enquiry Route Learning: Human activities that destroy the environment; Indiscriminate felling of trees, illegal mining, sand winning, and improper farming methods. etc. Among the negative impact of human activities on climate are changes in rainfall patterns, floods, windstorms, drought, and famine."
+                      ],
+                      "assessment": {
+                        "code": "1.2.1.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.2.1.LI.2",
+                      "description": "Explain ways of reversing and improving the negative impacts of human activities on the environment",
+                      "sequence": 2,
+                      "source": { "page": 30, "pdfPageIndex": 32 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC team should utilize case studies, videos watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Digital Learning: Watch a video or listen to a presentation by a resource person on how to rejuvenate the environment.",
+                        "Collaborative Learning: Through think-pair-share, identify the key points on how to repair the environment based on the video watched or the presentation by the resource person.",
+                        "Activity-Based Learning: In groups, create placards to raise awareness on how to take good care of the environment.",
+                        "Enquiry Route Learning: The need to care for the environment. e.g., It is a command from God, human life depends on the environment, for healthy living. How to care for the environment: Planting of trees, practising proper farming methods and practising proper legal mining methods."
+                      ],
+                      "assessment": {
+                        "code": "1.2.1.AS.2",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "RESPONSIBLE PARENTING AND PARENTHOOD",
+          "sequence": 2,
+          "classLevel": "SHS 2",
+          "source": { "page": 43, "pdfPageIndex": 45 },
+          "teachingLearningResources": [
+            "Materials for creating posters",
+            "Flip charts",
+            "Computers"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 46, "pdfPageIndex": 48 },
+          "learningOutcomes": [
+            {
+              "code": "2.2.2.LO.1",
+              "description": "Justify the need for responsible parenting.",
+              "sequence": 1,
+              "source": { "page": 43, "pdfPageIndex": 45 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Critical Thinking and Problem Solving: Communication and Collaboration: Through think-pair-share and drama. Digital Literacy: Using the internet. Teamwork: Through group activity and discussion",
+                "gesi": "Teaching strategies that ensure social inclusion, social justice and gender equality have been experienced by the learners through working together, shearing ideas, and expressing themselves in groups and individually. Through GESI, learners are able to: appreciate the role both sexes play in the home. accept that there are certain roles unique to males and females in parenting. appreciate equal opportunities given to males and females. eliminate biases against different gender and do away with gender stereotypes in parenting and in society in general.",
+                "sel": "In teaching this sub-strand, the teacher should create opportunities for learners to build their Social Emotional Learning Competencies by applying their strategies to ensure that learners are: self-reflecting on the role parents play in their life and challenges parents face to have empathy for their parents. self-aware of the relationship between good parenting, family peace and individual success and develop the skills for future use. conscious of different parental styles and their influences on family members. mindful of differentiation in society and how to develop healthy and supportive relationships. These may be done by the teacher through modelling emotional self-regulation and encouraging diversity presentations, and learners writing on the sequence of their activities.",
+                "nationalCoreValues": ["Tolerance", "Sacrifice", "Fairness", "Open-mindedness", "Respect for others"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.2.CS.1",
+                  "description": "Demonstrate knowledge and understanding of the concepts of parenting and parenthood, and the respective roles of parents and children.",
+                  "sequence": 1,
+                  "source": { "page": 44, "pdfPageIndex": 46 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.2.LI.1",
+                      "description": "Explain the concepts of parenting and parenthood.",
+                      "sequence": 1,
+                      "source": { "page": 44, "pdfPageIndex": 46 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC team should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Inquiry-Based Learning: Prior to the lesson, work in groups to find the meanings and differences between the concepts, parenting and parenthood from the internet and other sources.",
+                        "Digital Learning: Create word clouds with the concepts of parenting and parenthood.",
+                        "Collaborative Learning: In pairs, tabulate the differences and similarities between the two terms on flip charts for a gallery walk.",
+                        "Enquiry Routes: Parenting is the application of techniques, methods, and skills in raising a child. Parenthood is the state of being a parent."
+                      ],
+                      "assessment": {
+                        "code": "2.2.2.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.2.LI.2",
+                      "description": "Examine obligations of individuals to the family and the society.",
+                      "sequence": 2,
+                      "source": { "page": 44, "pdfPageIndex": 46 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC team should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Talk for Learning: Through Think-Pair-Share, discuss the roles of parents and children.",
+                        "Exploratory Learning: Work in mixed ability groups to create posters on the roles of parents.",
+                        "Activity-Based Learning: Create a concept map on the roles of parents and children and the effects of their refusal to perform their respective roles. Lead learners to realise that many of the roles played by parents can be done by both males and females.",
+                        "Enquiry Route Learning: Explain the roles of parents and children. Discuss the consequences of the failure of parents and children to perform their respective roles."
+                      ],
+                      "assessment": {
+                        "code": "2.2.2.AS.2",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "RESPONSIBILITIES OF YOUNG PERSONS",
+          "sequence": 3,
+          "classLevel": "SHS 3",
+          "source": { "page": 55, "pdfPageIndex": 57 },
+          "teachingLearningResources": [
+            "Projectors",
+            "Computers",
+            "Internet routers"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 58, "pdfPageIndex": 60 },
+          "learningOutcomes": [
+            {
+              "code": "3.2.3.LO.1",
+              "description": "Assess responsibilities of young persons as defined by religion and society.",
+              "sequence": 1,
+              "source": { "page": 55, "pdfPageIndex": 57 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Digital Learning: By the use of PowerPoint slides. Teamwork: Through group work and discussion. Through drama. Creativity: Through creative writing and performances",
+                "gesi": "Teaching strategies that ensure social inclusion, social justice and gender equality have been experienced by the learners through working together, sharing ideas, and expressing themselves in groups and individually. Through GESI, learners are able to: appreciate that people may belong to diverse religious, political, and socio-economic groups but individually and collectively have responsibilities promoting the well-being of all. recognise individual differences in responsibilities at all levels to appreciate the importance of all people in the collective development of society. erode biases against gender and gender stereotyping by acknowledging the complementary roles both females and males play in the family, the community, and the country for the development of all. unlearn bad practices with regards to the unequal importance given to some responsibilities to create equality and equity in society.",
+                "sel": "In teaching this sub-strand, the teacher should create opportunities for learners to build their Socio-Emotional Learning competencies by applying their strategies to ensure that learners are: self-reflecting to identify where they are falling short in the performance of their responsibilities and strategise on how to pick up. self aware that the performance or non-performance of their responsibilities can affect others for good or ill and take a responsible decision to do so at all times. conscious of different responsibilities of various segments of society, empathise with others in the performance of their responsibilities and cooperate with all. These may be done by the teacher through modelling emotional self-regulation and encouraging diversity presentations, and learners writing on the sequence of their activities.",
+                "nationalCoreValues": ["Tolerance", "Patriotism", "Responsibility", "Loyalty", "Hard work", "Sacrifice", "Fairness", "Open-mindedness", "Respect for others"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "3.2.3.CS.1",
+                  "description": "Demonstrate an appreciation for responsibilities of young persons to their family, society, and the country.",
+                  "sequence": 1,
+                  "source": { "page": 57, "pdfPageIndex": 59 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.2.3.LI.1",
+                      "description": "Examine responsibilities of young persons to their families and community.",
+                      "sequence": 1,
+                      "source": { "page": 57, "pdfPageIndex": 59 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Digital Learning: Do group PowerPoint presentations on responsibilities of young persons to their family and society.",
+                        "Experiential Learning: Watch documentaries showing young people doing extraordinary things for their families and society.",
+                        "Creative Writing: Learners should create poems/drawings/music to communicate their responsibilities for their family and society.",
+                        "Enquiry Route Learning: Identify your roles in the family and in your society."
+                      ],
+                      "assessment": {
+                        "code": "3.2.3.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.3.LI.2",
+                      "description": "Discuss responsibilities of young persons to the state as citizens of Ghana.",
+                      "sequence": 2,
+                      "source": { "page": 57, "pdfPageIndex": 59 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Digital Learning: In groups, use the internet to identify the responsibilities of the citizens of Ghana.",
+                        "Activity-Based Learning: Through drama, demonstrate how young Ghanaians should perform their duties and responsibilities to the state.",
+                        "Enquiry Route Learning: Identify your own responsibilities to the state as a citizen of Ghana."
+                      ],
+                      "assessment": {
+                        "code": "3.2.3.AS.2",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GHANAIAN VALUES",
+      "code": null,
+      "sequence": 3,
+      "pathway": null,
+      "subStrands": [
+        {
+          "name": "HONESTY AND NATION BUILDING",
+          "sequence": 1,
+          "classLevel": "SHS 1",
+          "source": { "page": 33, "pdfPageIndex": 35 },
+          "teachingLearningResources": [
+            "Internet connectivity and computers/mobile phones",
+            "Card boards and markers",
+            "Textbooks"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 37, "pdfPageIndex": 39 },
+          "learningOutcomes": [
+            {
+              "code": "1.3.1.LO.1",
+              "description": "Appraise how honesty and selflessness contribute to national development.",
+              "sequence": 1,
+              "source": { "page": 33, "pdfPageIndex": 35 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication and Collaboration: Through think-pair-share and group discussion. Critical Thinking and Problem Solving: Through think-pair-share. Teamwork: Through group discussion. Digital Literacy: by the use of the Internet to search for information on corruption.",
+                "gesi": "Teaching strategies that ensure social inclusion, social justice and gender equality have been experienced by the learners through working together, shearing ideas, and expressing themselves in groups and individually. Through GESI, learners are able to: appreciate selflessness as cherished value for both males and females. accept selflessness as a practice that will inure to the benefit of socially disadvantaged. regard honesty of all citizens as important for nation building. identify injustice meted out to them through corrupt practices and boldly speak against it. erode biases against gender by noting that both males and females can be dishonest.",
+                "sel": "In teaching this sub-strand, the teacher should create opportunities for learners to build their Social Emotional Learning Competencies by applying their strategies to ensure that learners are: self-reflecting on their individual and collective roles that either lead to corruption or facilitate others to be corrupt. exhibiting motivation to avoid peer influences which can cultivate dishonest living. manage their thoughts and behaviour to achieve goals and aspirations in an honest way. showing empathy and cooperation with others, especially, the law enforcing agencies in exposing corruption and other dishonest activities. respecting the values in the teachings of other religions and cultures that enable honest leaving. These may be done by the teacher through modelling emotional self-regulation and encouraging diversity presentations, and learners writing on the sequence of their activities.",
+                "nationalCoreValues": ["Patriotism", "Sacrifice", "Perseverance", "Honesty", "Hard work", "Stewardship", "Accountability", "Integrity"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.3.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of the causes and effects of corruption and defend honest ways of gaining wealth.",
+                  "sequence": 1,
+                  "source": { "page": 35, "pdfPageIndex": 37 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.3.1.LI.1",
+                      "description": "Discuss dishonesty as central to the causes and effects of corruption.",
+                      "sequence": 1,
+                      "source": { "page": 35, "pdfPageIndex": 37 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC team should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Digital Learning: Use internet sources to access stories and videos showing effects of corruption.",
+                        "Collaborative Learning: In small groups, discuss how the practice of corruption contradicts the Ghanaian value of honesty.",
+                        "Enquiry Route Learning: Explain honesty, bribery, and corruption. Causes of bribery and corruption e.g., get-rich-quick attitude, poor conditions of service, ineffective supervision."
+                      ],
+                      "assessment": {
+                        "code": "1.3.1.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.3.1.LI.2",
+                      "description": "Discuss the place of honesty at home, school, and society in general.",
+                      "sequence": 2,
+                      "source": { "page": 35, "pdfPageIndex": 37 },
+                      "pedagogicalExemplars": [
+                        "General Teaching and Learning Approach: In the context of schools with large sizes, the RMEC team should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Inquiry-Based Learning: In small mixed-ability/religious groups, learners should identify religious references (quotations) and sayings that support honesty and make a presentation in class.",
+                        "Collaborative Learning: In mixed-ability/religious groups, learners should create a chart that shows relationships among honesty and other Ghanaian values including: Integrity, Support for one another, Duty consciousness, Fair play, Truthfulness, Faithfulness and loyalty, Service, Sacrifice, Sustainability, Selflessness, Good character, Compassion.",
+                        "Activity-Based Learning: In large groups, create and act out a drama on the effects of bribery and corruption and how this can be prevented in Ghana."
+                      ],
+                      "assessment": {
+                        "code": "1.3.1.AS.2",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.3.1.LI.3",
+                      "description": "Analyse honest ways of gaining wealth.",
+                      "sequence": 3,
+                      "source": { "page": 36, "pdfPageIndex": 38 },
+                      "pedagogicalExemplars": [
+                        "General Teaching and Learning Approach: In the context of schools with large sizes, the RMEC team should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Digital Pedagogy: Watch a video or listen to a resource person on how to acquire wealth or make money honestly.",
+                        "Project-Based Learning: Work in groups to develop your own write-ups on how young people can make money or acquire wealth honestly.",
+                        "Project Work: In groups, identify community hero(ines) who have gained wealth honestly and create citations to be framed and presented to honour them.",
+                        "Enquiry Route Learning: Honest ways of earning wealth. E.g., Through hard work, dedication, discipline, faithfulness, good investments, and inheritance."
+                      ],
+                      "assessment": {
+                        "code": "1.3.1.AS.3",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CHARACTER VALUES",
+          "sequence": 2,
+          "classLevel": "SHS 2",
+          "source": { "page": 47, "pdfPageIndex": 49 },
+          "teachingLearningResources": [
+            "Computers",
+            "Textbooks",
+            "Internet connectivity"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 50, "pdfPageIndex": 52 },
+          "learningOutcomes": [
+            {
+              "code": "2.3.2.LO.1",
+              "description": "Analyse Ghanaian character values as identity marker and desirable ideals for global citizenship.",
+              "sequence": 1,
+              "source": { "page": 47, "pdfPageIndex": 49 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Critical Thinking and Problem Solving; Communication and Collaboration: Through think-pair-share. Teamwork: Through group discussion. Cultural Identity and Global Citizenship: Through students' analyses of Ghanaian and western character values. Digital Literacy: Learners online search for information.",
+                "gesi": "Teaching strategies that ensure social inclusion, social justice and gender equality have been experienced by the learners through working together, sharing ideas, and expressing themselves in groups and individually. Through GESI, learners are able to: appreciate respect for both genders as Ghanaian character value. recognise that caring for the vulnerable is a Ghanaian value. recognise individual differences in values and accept them as such. erode biases against gender and stereotypes on gender in the context of values.",
+                "sel": "In teaching this sub-strand, the teacher should create opportunities for learners to build their Social Emotional Learning competencies by applying the social emotional learning strategies to ensure that learners are: self-reflecting on their individual values as Ghanaians and how they affect their thoughts and conduct. identify and reflect on the values of their associates to make right choices on whom to associate with. able to develop relational skills by using the knowledge that individual abilities which affect the time needed to complete a task may call for assistance from others and hence show empathy and cooperation with others. These may be done by the teacher through modelling emotional self-regulation and encouraging diversity presentations, and learners writing on the sequence of their activities.",
+                "nationalCoreValues": ["Patriotism", "Sacrifice", "Perseverance", "Tolerance", "Stewardship", "Respect for time", "Accuracy", "Open-mindedness", "Planning", "Accountability", "Integrity", "Honesty", "Peace-loving"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "2.3.2.CS.1",
+                  "description": "Exhibit appreciation for Ghanaian character values as treasured part of our identity.",
+                  "sequence": 1,
+                  "source": { "page": 48, "pdfPageIndex": 50 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.3.2.LI.1",
+                      "description": "Explain Ghanaian character values as identity markers.",
+                      "sequence": 1,
+                      "source": { "page": 48, "pdfPageIndex": 50 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC should utilize case studies, video watching (movie scenes), drama/role-play that will offer opportunities for discussions afterwards.",
+                        "Story Telling: Narrate an indigenous story (ies)/folktales and analyse Ghanaian character values in them.",
+                        "Experiential Learning: Watch episodes in a Ghanaian movie and a western movie and assess differences in the values they exhibit.",
+                        "Resource Person: Invite Ghanaians who have returned from overseas to present on Ghanaian character values in contrast to western character values.",
+                        "Enquiry Route Learning: Ghanaian Character Values: Integrity, communalism, tolerance, respect for the elderly, support for one another, duty consciousness, honesty and hard work, fair play, truthfulness, faithfulness and loyalty, humility, service, courage, sacrifice, sustainability, selflessness, good character, love for others, compassion etc.,"
+                      ],
+                      "assessment": {
+                        "code": "2.3.2.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.3.2.LI.2",
+                      "description": "Analyse relationship among Ghanaian character values, western character values, and universal character values.",
+                      "sequence": 2,
+                      "source": { "page": 48, "pdfPageIndex": 50 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Digital Pedagogy: Learners search online for universal character values and assess them against Ghanaian Character values.",
+                        "Debate: In mixed-ability groupings, learners should debate the motion: Individualism has no place in Ghanaian value system.",
+                        "Resource Person: Invite a resource person to present on communalism as the philosophical basis for Ghanaian character values.",
+                        "Project Work: In mixed-ability groups, learners should make a chart showing relationship among Ghanaian character values, non-Ghanaian Character values and universal Character values.",
+                        "Enquiry Route Learning: Universal values: truth, honesty, loyalty, love, peace, non-violence, respect for human dignity"
+                      ],
+                      "assessment": {
+                        "code": "2.3.2.AS.2",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CONCERN FOR ONE'S NATION",
+          "sequence": 3,
+          "classLevel": "SHS 3",
+          "source": { "page": 59, "pdfPageIndex": 61 },
+          "teachingLearningResources": [
+            "Gyekye, K. 1996. African cultural values: An Introduction. Accra Sankofa",
+            "Epitacio, S. P. 2007. Introduction to values education. Manda: Rex Books.",
+            "Lovat, T., Toomey, R. et. al. (eds.). 2023. Second International Research Handbook on Values Education and Student Wellbeing, 2nd Ed. Springer",
+            "Materials for creating posters"
+          ],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "source_TLR": { "page": 63, "pdfPageIndex": 65 },
+          "learningOutcomes": [
+            {
+              "code": "3.3.3.LO.1",
+              "description": "E3x.3p.3la.iLnOth.1e values of the Ghanaian society and show how they can be exhibited. [RAW/VERBATIM pdftotext output — source text layer is corrupted at this row; see reviewNote]",
+              "sequence": 1,
+              "source": { "page": 60, "pdfPageIndex": 62 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Digital Literacy: Through the use of the internet to search for and watch documentaries. Communication and Collaboration: Through project work and group work. Creativity: By developing creative works in the form of poems, posters, and letters.",
+                "gesi": "jGusEtiScIe: aTnedacgheinndgesrtreaqtueagliietsy thhaavteebneseunreesxopceiraileinncceludsiboynt,hseocial ljeuastrincerasntdhrgoeungdherweoqrukainligtytohgaevtehbeer,esnheexaprienrgieindceeasd, bayndthe elexaprrneesrssintghrtohuegmhsewlvoerskiinnggtroogueptshearn,dshinedairviindguaidlleya. sT,harnodugh GexEpSrIelsesainrngetrhseamresealvbeles tino:groups and individually. Through GESaI pleparrenceiartsearreeliagbioleust,oe:ducational, cultural, workplace, faapmprileycaiantde sroecliigoio-eucso, neodmucicatdioifnfearl,ecnucletusraanl,dwtoherkvpallaucees, ifnamheilryenant dinstohceiom-.economic differences and the values rinehceorgennisteinintdhievmidu. al differences in terms of values and arecceopgnt itsheeimndaivsidsucahl .differences in terms of values and aecrcoedpet tbhiaesmesaasgsauincsht. gender and disabilities on patriotic deereoddseabnidastehseavgaaliunesst ginensduechr adnededdsi.sabilities on patriotic deeds and the values in such deeds. [RAW/VERBATIM pdftotext output — see reviewNote]",
+                "sel": "SEL: In teaching this sub-strand, the teacher should create oSpEpLo:rItnunteitaiecshifnogr tlheiasrnsuebrs-storabnudi,ldthteheteiracShoecriasl hEomuoldtiocrneaalte Loepapronritnugncitoiemspfeotrelnecairensebrys taoppblyuinldg tthheeiirr Ssotrcaiatel gEimesottoioennasl ure tLheaatrnleinargnceorms apreet:encies by applying their strategies to ensure thatslelaf-rrneefrlescatrineg: on their values and how they affect their stheolf-urgehfltescatnindg boenhathveioirurv.alues and how they affect their tahboleugtohtussaentdhbeeirhsaevlifo-ruerf.lection to cultivate good values athbalet wtoouslde htheelpirtsoelsfe-rteSflMecAtRioTn gtoaclsulatinvdatreeagloisoedtvhaelmue.s tchoantswciousldohfedlipffetoresnettvSaMluAesRhTegldoablys ainnddivriedaulaislse, tfahmemili.es, coorgnasncisoautsioonfsd, aifnfedrecnutltvuarleuse,sehmepldatbhyiseinadnivdidcuoaolsp,efarmatielies, woritghantihseatmiotnos,parnodmcoutletutrhees,ceomncpeartnhisfoeratnhdecnoaotpioenr.ate Thesweitmh atyhebme dtonperobmy othte tehaecchoenrctehrrnoufogrh tmheodnealtliongn. eTmheosteiomnaalysbeelf-dreognuelabtyiotnheantdeaecnhceorutrhargoinugghdimveordsietlyling emotional self-regulation and encouraging diversity presentations, and learners writing on the sequence of their activities. [RAW/VERBATIM pdftotext output — see reviewNote]",
+                "nationalCoreValues": ["Tolerance", "Patriotism", "Humility", "Hard work", "Communalism", "Accountability", "Responsibility", "Sacrifice", "Fairness", "Open-mindedness", "Respect for others", "Family", "Generosity", "Love", "Peace"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "extractionStatus": "EXTRACTED",
+              "reviewStatus": "NEEDS_REVIEW",
+              "reviewNote": "Source PDF text layer is severely corrupted at this Learning Outcome's own header row and the start of its 21st Century Skills / GESI / SEL guidance text: two overlapping text blocks are interleaved character-by-character in the source (this LO's own content mixed with a duplicate generic 'Semester X' template heading), the same class of defect the prior inventory pass documented on the cover page, recurring here in the main content. The 'description' and 'gesi'/'sel' fields above are stored exactly as pdftotext extracted them (verbatim, uncorrected, not reconstructed or paraphrased) per the no-fabrication rule. The '21st Century Skills' text and the National Core Values bullet list both recover to clean, legible text and were extracted normally with confidence. The Content Standard / Learning Indicator / Assessment table for this same sub-strand (3.3.3.CS.1, 3.3.3.LI.1, 3.3.3.LI.2) is NOT affected by this corruption and extracted cleanly below.",
+              "contentStandards": [
+                {
+                  "code": "3.3.3.CS.1",
+                  "description": "Demonstrate an appreciation of Ghanaian values relating to patriotism and justify the need to honour those who exhibit them.",
+                  "sequence": 1,
+                  "source": { "page": 61, "pdfPageIndex": 63 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.3.3.LI.1",
+                      "description": "Identify and explain Ghanaian values that promote concern for the nation.",
+                      "sequence": 1,
+                      "source": { "page": 61, "pdfPageIndex": 63 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Songs: Learners sing patriotic songs and analyse their lyrics for Ghanaian values inherent in them.",
+                        "Digital Pedagogy: In groups, use the internet to watch documentaries about the struggle for independence and analyse Ghanaian values exhibited in them.",
+                        "Resource Person: Invite a veteran(s) to share stories about Ghanaian values that motivated them during their work life. Intentionally, practice GESI in the selection of the resource persons by paying attention to gender and disability.",
+                        "Activity-Based Learning: Create posters on notable Ghanaians and the virtues they espoused for a gallery walk.",
+                        "Enquiry Route Learning: Ghanaian values related to patriotism include: tolerance, peace, dialogue, trust-building, integrity, selflessness."
+                      ],
+                      "assessment": {
+                        "code": "3.3.1.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Assessment code is printed as '3.3.1.AS.1' instead of the expected '3.3.3.AS.1' (should match this Learning Indicator's own Content Standard code 3.3.3.CS.1 / Learning Indicator code 3.3.3.LI.1). Preserved exactly as printed."
+                    },
+                    {
+                      "code": "3.3.3.LI.2",
+                      "description": "Justify the need to honour Ghanaians who exhibit and champion Ghanaian virtues.",
+                      "sequence": 2,
+                      "source": { "page": 61, "pdfPageIndex": 63 },
+                      "pedagogicalExemplars": [
+                        "General Learning Approach: In the context of schools with large sizes, the RMEC should utilize case studies, video watching (movie scenes), drama/role play that will offer opportunities for discussions afterwards.",
+                        "Project Work: Identify unsung hero(ine)s in the school community, assess their exhibition of Ghanaian values to create a citation, and honour them at a school gathering.",
+                        "Creative Writing: Learners draft poems/write letters/draw images to appreciate their parents for exhibiting commitment to the country. Note: Intentionally, encourage learners to practice GESI in the selection of the hero(in)es and writing of the poems by paying attention to gender, disability, and inclusive issues.",
+                        "Digital Pedagogy: Learners use digital tools to develop a documentary to show patriotic values exhibited by their teachers."
+                      ],
+                      "assessment": {
+                        "code": "3.3.3.AS.2",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

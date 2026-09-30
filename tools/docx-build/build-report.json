@@ -1,0 +1,18 @@
+{
+  "renderedDiagrams": [
+    "Ghana Curriculum Hierarchy",
+    "User Workflow — Registration and Login",
+    "User Workflow — Creating a Planner (7-Step Wizard)",
+    "User Workflow — Selecting Curriculum (Step 2 Detail)",
+    "User Workflow — Generating and Reviewing an AI Suggestion",
+    "User Workflow — Completing Reflection",
+    "User Workflow — Printing and Exporting",
+    "User Workflow — Administering Curriculum",
+    "System Architecture",
+    "Database Entity Relationship Diagram",
+    "AI Generation Workflow",
+    "Authentication Sequence",
+    "Proposed Deployment Architecture"
+  ],
+  "failedDiagrams": []
+}

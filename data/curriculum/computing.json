@@ -1,0 +1,1205 @@
+{
+  "$comment": "Phase 9 full structured extraction, NOW COMPLETE for both Strand 1 (Computer Architecture and Organisation) and Strand 2 (Computational Thinking / Programming Logic) across all 3 years. Every field transcribed verbatim from curriculum-sources/Computing-Curriculum.pdf (pages 22-101 printed footer / raw PDF pages 24-103, offset = printed+2, verified against front-matter pages 18-32 and against the Contents/TOC on printed pages 4-5 where 'NN | COMPUTING' / 'COMPUTING | NN' footers alternate by page parity) via `pdftotext -layout`. Nothing here is invented; line-wrapped text has been rejoined into flowing sentences without altering wording. Final totals: 18 Content Standards / 18 Learning Outcomes / 44 Learning Indicators (Strand 1 = 9 CS / 9 LO / 25 LI; Strand 2 = 9 CS / 9 LO / 19 LI, split Year1=6, Year2=7, Year3=6). Genuine source data-quality issues found and preserved verbatim with reviewStatus NEEDS_REVIEW + reviewNote at the affected node: (1) the printed Assessment codes under Sub-Strand 'Algorithm and Data Structure' Year 1 (1.2.1.LI.1/LI.2) read '1.1.1.AS.1'/'1.1.1.AS.2' instead of 1.2.1.AS.x; under 'App Development' Year 1 (1.2.2.LI.1/LI.2) the codes read '1.2.1.AS.1'/'1.2.1.AS.2' instead of 1.2.2.AS.x; under 'Web Technologies' Year 1 (1.2.3.LI.1/LI.2) and 'Algorithm and Data Structure' Year 2 (2.2.1.LI.1/LI.2) the codes are missing the dot before AS ('1.2.3AS.1', '2.2.1AS.2', etc.) -- all preserved exactly as printed and flagged NEEDS_REVIEW on the affected Learning Indicator; all other Strand 2 Assessment codes (Year1 had none further; Year2 2.2.2.*/2.2.3.*; Year3 3.2.1.*/3.2.2.*/3.2.3.*) print correctly and are left PENDING. (2) The Strand 2 heading is printed as 'PROCEDURAL PROGRAMMING (COMPUTATIONAL THINKING)' for the Year One 'Web Technologies' sub-strand only, vs 'COMPUTATIONAL THINKING (PROGRAMMING LOGIC)' used everywhere else (17 other occurrences) -- preserved as printed per Design Note 4 of the schema (Strand name stored as printed per occurrence, not normalised); flagged NEEDS_REVIEW on that Sub-Strand object itself (via a non-schema-standard 'strandHeadingAsPrintedHere' field) since the parent Strand object's own canonical 'name' field necessarily uses the predominant form. (3) Strand 1's own name is printed 'COMPUTER ARCHITECTURE AND ORGANISATION' in Year 1 but 'COMPUTER ARCHITECTURE & ORGANISATION' (ampersand) in Years 2-3 -- preserved verbatim per year. (4) The Sub-Strand 3 name under Strand 2 is printed as the short form 'WEB TECHNOLOGIES' in Years 1 and 3 but the full 'WEB TECHNOLOGIES AND DATABASES' in Year 2 -- preserved verbatim per year (no flag needed; this is simply stored as printed per year, per Design Note 4). (5) CONFIRMED (was previously only hypothesised): the 'SCOPE AND SEQUENCE' summary table (printed page 21) is badly garbled by the PDF's column layout and could not be reliably reconstructed; it states Overall Totals of 18 Content Standards / 18 Learning Outcomes / 46 Learning Indicators for SHS 1-3. CS/LO counts match the body (18/18) but the actual body-text Learning Indicator count, now that Strand 2 is fully extracted, is 44 (Year1=15, Year2=15, Year3=14), not 46 -- a shortfall of 2. Both figures are reported here rather than silently reconciled; see reviewNote on Learning Indicator 3.2.1.LI.1 (the sole Learning Indicator under Strand 2 / Sub-Strand 1 (Algorithm and Data Structure) Year 3's only Content Standard -- every other Content Standard in the document has 2-3 Learning Indicators, so this single-LI Content Standard is the most likely site of the 2-indicator shortfall, though this cannot be confirmed without an independent source). (6) A short run of corrupted/private-use-area glyphs (\"'^Z/Z / ^ZZZZ>\") appeared in the raw text dump at page transitions within Strand 1 (around printed pages 47/48 and 75/76) -- a font-encoding artifact on a decorative rule/icon; it has been omitted from extracted body text as noise, not as a content edit, consistent with the same artifact already logged in docs/inventory-parts/computing.md. (7) A duplicated long-form SEL block (headed 'Self-awareness:' / 'Self-management:' / 'Social awareness:' / 'Relationship skills:' / 'Responsible decision-making:') recurs verbatim inside most (not all) Sub-Strands' Content-Standards/Learning-Indicators table cell, in addition to the shorter SEL paragraph already captured under the Learning Outcome's guidance.sel field; where present it has been captured as its own pedagogicalExemplars array element on the (first) Learning Indicator it is printed against, exactly as laid out on the page, not merged or deduplicated with the LO-level SEL text. National Core Values header is printed lower-case 'National core values:' throughout this document (confirmed, not normalised to Title Case). (8) Additional minor verbatim variances found while extracting Strand 2, flagged inline where the affected node allows a reviewStatus field, otherwise noted only here: the National core values list under Learning Outcome 2.2.2.LO.1 (Year 2, App Development) prints 'Integrity' twice (flagged NEEDS_REVIEW on that guidance block); Content Standard 3.2.3.CS.1 prints 'Demonstrate knowledge and understanding of Web development' with a lower-case 'd' in 'development', vs Title Case 'Web Development'/'Web Development and Databases' used for the equivalent Content Standards elsewhere in Strand 2 (preserved verbatim, not flagged -- a case variance, not a factual error); several Sub-Strand Teaching-and-Learning-Resources lists print 'Instructional laboratories' with a lower-case 'l' vs 'Instructional Laboratories' capitalised elsewhere (preserved verbatim, not flagged); the Sub-Strand 2 (App Development) Year 2 Teaching and Learning Resources list is printed without a 'Maintenance and repair workshops' item present in its sibling lists (flagged NEEDS_REVIEW on that Sub-Strand); the Sub-Strand 1 (Algorithm and Data Structure) Teaching and Learning Resources lists for Year 2 and Year 3 include extra cyber-/network-security-themed bullet items appended in a badly garbled multi-column layout (flagged NEEDS_REVIEW on the Year 3 instance, reconstructed best-effort left-to-right/top-to-bottom).",
+  "subject": {
+    "name": "Computing",
+    "code": null,
+    "sourceDocument": "curriculum-sources/Computing-Curriculum.pdf"
+  },
+  "curriculumVersion": {
+    "name": "NaCCA SHS September 2023",
+    "year": 2023,
+    "issuingAuthority": "National Council for Curriculum and Assessment (NaCCA), Ministry of Education, Republic of Ghana (in association with Ghana Education Service)"
+  },
+  "classLevels": ["SHS 1", "SHS 2", "SHS 3"],
+  "strands": [
+    {
+      "code": null,
+      "name": "COMPUTER ARCHITECTURE AND ORGANISATION",
+      "sequence": 1,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": { "page": 23, "pdfPageIndex": 25 },
+      "subStrands": [
+        {
+          "name": "DATA STORAGE AND MANIPULATION",
+          "sequence": 1,
+          "source": { "page": 23, "pdfPageIndex": 25 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional Laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.1.1.LO.1",
+              "description": "Apply Computer Architecture concepts related to the design of modern processors, memories, Input and Output to manipulate data.",
+              "sequence": 1,
+              "source": { "page": 23, "pdfPageIndex": 25 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in the Application of Computer Architecture concepts. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals.",
+                "gesiSelHeaderSeen": "GESI1, SEL2 and Shared National Values",
+                "gesi": "As all learners are supported in an inclusive environment and given equal opportunities they will; appreciate, value, and embrace diversity as they work in groups. learn to amicably resolve conflicts and embrace different opinions. develop emotional intelligence as their submissions are critiqued by others.",
+                "sel": "Learners strive to attain and utilise knowledge, skills, and attitudes that enable them to: cultivate a positive sense of self and foster healthy relationships with different identities while applying Computer Architecture concepts. effectively navigate and regulate their emotions. set and accomplish personal and collaborative objectives. demonstrate understanding and compassion towards others, exhibiting empathy. create and sustain supportive connections with peers and individuals around them. exercise thoughtful judgement and act responsibly and compassionately in decision-making processes. By integrating these SEL features into the teaching of Computer Architecture concepts, teachers can create a supportive and inclusive learning environment. This approach promotes learners' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in applying Computer Architecture concepts related to the design of modern processors, memories, Input and Output to manipulate data.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Integrity", "Accountability", "Humility", "Assertiveness", "Patriotism"]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of data representation and Data Manipulation",
+                  "sequence": 1,
+                  "source": { "page": 25, "pdfPageIndex": 27 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.1.LI.1",
+                      "description": "Describe Information as Bit Patterns",
+                      "sequence": 1,
+                      "source": { "page": 25, "pdfPageIndex": 27 },
+                      "pedagogicalExemplars": ["Group Work/Collaborative Learning: Interactive presentations, video analysis and debate. e.g., Divide the class into two mixed-ability groups and task them to Describe Information as Bit Patterns. The groups must respond to inclusivity and equity. For example, learners with visual impairment, dyslexia, and dysgraphia should be considered."],
+                      "assessment": { "code": "1.1.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.1.LI.2",
+                      "description": "Apply knowledge of Cache Memory to solve runtime issues. (e.g., opening browsers).",
+                      "sequence": 2,
+                      "source": { "page": 25, "pdfPageIndex": 27 },
+                      "pedagogicalExemplars": ["Group Activity: In groups, let learners brainstorm on the purpose and functioning of cache (temporal local storage) in modern processors. Have learners apply their understanding by analysing and discussing real-world scenarios where cache utilisation can enhance system performance. Provide opportunities for individual or group practice to identify and troubleshoot runtime errors caused by cache-related issues."],
+                      "assessment": { "code": "1.1.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.1.LI.3",
+                      "description": "Discuss at least four major functions and the parts of the CPU; Arithmetic and Logic Unit (ALU), Control Unit (CU) and registers",
+                      "sequence": 3,
+                      "source": { "page": 25, "pdfPageIndex": 27 },
+                      "pedagogicalExemplars": ["Using Talk for Learning approaches (TfL) or snowballing: Task each learner to state a specific function or method in programming, and then randomly call on another learner to explain the purpose, input, and expected output of the stated function. Assess learners based on the accuracy and clarity of their explanations, as well as their ability to demonstrate comprehension of functions and their application in data manipulation."],
+                      "assessment": { "code": "1.1.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.1.LI.4",
+                      "description": "Understand and explain the control bus, address bus, data bus and the internal clock, Machine Cycle, Von Neumann architecture (Fetch-Decode-Execute-Store Cycle), instruction set for a CPU, Harvard architecture and embedded systems",
+                      "sequence": 4,
+                      "source": { "page": 26, "pdfPageIndex": 28 },
+                      "pedagogicalExemplars": ["Group Activity: In groups, let learners collaborate and brainstorm on the following components and concepts of Computer Architecture: Control Bus, Address Bus, Data Bus, Internal Clock, Machine Cycle, Von Neumann architecture (Fetch-Decode-Execute-Store Cycle), and Instruction set for CPU. Guide the group discussions by providing prompts and questions that encourage in-depth exploration of each component or concept. Assess learners based on their ability to articulate the purpose, functioning, and interconnections among these components and concepts, as well as their ability to relate them to data manipulation."],
+                      "assessment": { "code": "1.1.1.AS.4", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "COMPUTER HARDWARE AND SOFTWARE",
+          "sequence": 2,
+          "source": { "page": 27, "pdfPageIndex": 29 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional Laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.1.2.LO.1",
+              "description": "Explain the relationships between the components of a computer and how data are transferred among the components. Explain types of Software and their functions",
+              "sequence": 1,
+              "source": { "page": 27, "pdfPageIndex": 29 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in components of a computer and how data are transferred among the components. Communication: The skill to effectively express ideas and information through various mediums and engage in active listening and sharing information by peer-to-peer, presentation etc. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "As all learners are supported in an inclusive environment and given equal opportunities they will; embrace tolerance and empathy among each other. learn to resolve conflicts and embrace differing opinions amicably. develop emotional intelligence as others critique their submissions.",
+                "sel": "Learners acquire and use knowledge, skills, and attitudes to: reflect on their own understanding of computer components, data transfer and software functions. effectively navigate and regulate their emotions and self-confidence. set and accomplish personal and collaborative objectives. create and sustain supportive connections with peers and individuals around them. set and pursue both personal and shared goals. inform decisions when selecting appropriate processors, memories, and input/output devices to optimise data manipulation. By integrating these SEL features into teaching of the components of a computer, teachers can create a supportive and inclusive learning environment. This approach promotes learners' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in explaining the relationships between the components of a computer and how data are transferred among the components.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Hard work", "Integrity", "Accountability", "Humility", "Assertiveness", "Patriotism"]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.2.CS.1",
+                  "description": "Demonstrate knowledge and understanding of components of Computer Hardware and types of Software",
+                  "sequence": 1,
+                  "source": { "page": 29, "pdfPageIndex": 31 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.2.LI.1",
+                      "description": "Explain the features of the hardware components of a computer (input hardware, processing hardware, output hardware, storage hardware and communication hardware).",
+                      "sequence": 1,
+                      "source": { "page": 29, "pdfPageIndex": 31 },
+                      "pedagogicalExemplars": [
+                        "Group Work/Talk for Learning: Use think-pair-share to discuss the features of the hardware components of a computer. In groups, brainstorm on the features of the hardware components of a computer (input hardware, processing hardware, output hardware, storage hardware and communication hardware). Give all learners equal opportunity and use webbing to organise the views of the learners.",
+                        "SEL: When teaching about the hardware components of a computer teachers can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "1.1.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.2.LI.2",
+                      "description": "Describe the categories of Computer Hardware",
+                      "sequence": 2,
+                      "source": { "page": 30, "pdfPageIndex": 32 },
+                      "pedagogicalExemplars": ["Problem-Based Learning Approach: In different task groups, Task learners to identify and explain the categories of Computer Hardware: input devices, processing devices, output devices, storage devices, communication devices. Groups working on different tasks present their tasks for comments. Groups should be tolerant of others' views."],
+                      "assessment": { "code": "1.1.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DATA COMMUNICATION AND NETWORK SYSTEMS",
+          "sequence": 3,
+          "source": { "page": 31, "pdfPageIndex": 33 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional Laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.1.3.LO.1",
+              "description": "Use skills and knowledge to identify and differentiate between the different types of Network Systems",
+              "sequence": 1,
+              "source": { "page": 31, "pdfPageIndex": 33 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in identifying and differentiate between the different types of Network Systems. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Providing the opportunity for diverse learners to actively participate in all lessons in an inclusive manner and using GESI responsive language as pedagogy ensures; awareness of personal biases and stereotypes in the area of analysing the scope of common methods in computing. respect and tolerance for an individual's uniqueness and peculiarities. sensitivity to the interrelatedness of the various spheres of life, groups, and individuals.",
+                "sel": "Learners gain and utilise knowledge, abilities, and mindsets to: cultivate a robust and optimistic self-perception, fostering the growth of healthy identities. skillfully handle their emotions, fostering emotional well-being. establish and achieve personal and collaborative objectives, nurturing progress and accomplishment. nurture empathy towards others, exhibiting understanding and compassion. build and maintain supportive connections, fostering a sense of belonging. exercise responsible and compassionate judgment, considering the well-being of themselves and others. By integrating these SEL features into the teaching of Network Systems, teachers can create a supportive and inclusive learning environment. This approach promotes learners' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in using skills and knowledge to identify and differentiate between the different types of Network Systems.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Patriotism", "Faithfulness", "Honesty", "Loyalty", "Discipline", "Respect", "Humility", "Assertiveness", "Good citizenship"]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.3.CS.1",
+                  "description": "Demonstrate knowledge and understanding of network design",
+                  "sequence": 1,
+                  "source": { "page": 33, "pdfPageIndex": 35 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.3.LI.1",
+                      "description": "Explain Computer Networks and how they work",
+                      "sequence": 1,
+                      "source": { "page": 33, "pdfPageIndex": 35 },
+                      "pedagogicalExemplars": [
+                        "Using the Collaborative Learning Approach: Demonstrate the process of designing a network topology based on specific requirements and explain the rationale behind the chosen design.",
+                        "Using the Problem-Based Learning Approach: Explore and discuss the concepts of control bus, address bus, data bus, cache, internal clock, machine cycle, and the fetch-decode-execute cycle to deepen understanding.",
+                        "SEL: When teaching students about Computer Networking, you can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection"
+                      ],
+                      "assessment": { "code": "1.1.3.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.3.LI.2",
+                      "description": "Identify at least 3 Types of Network Systems",
+                      "sequence": 2,
+                      "source": { "page": 34, "pdfPageIndex": 36 },
+                      "pedagogicalExemplars": ["Problem-Based Learning: Analyse and present the features and functions of hardware components commonly found in network systems, such as routers, switches, network interface cards (NICs), and modems."],
+                      "assessment": { "code": "1.1.3.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.3.LI.3",
+                      "description": "Differentiate among the 3 Types of Network Systems",
+                      "sequence": 3,
+                      "source": { "page": 34, "pdfPageIndex": 36 },
+                      "pedagogicalExemplars": ["Using the Collaborative Learning Approach: engage in a group brainstorming session to identify and classify various types of network systems. provide examples for each type to support your classification and explain the characteristics that distinguish them."],
+                      "assessment": { "code": "1.1.3.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "COMPUTER ARCHITECTURE & ORGANISATION",
+      "sequence": 1,
+      "classLevel": "SHS 2",
+      "pathway": null,
+      "source": { "page": 49, "pdfPageIndex": 51 },
+      "subStrands": [
+        {
+          "name": "DATA STORAGE AND MANIPULATION",
+          "sequence": 1,
+          "source": { "page": 49, "pdfPageIndex": 51 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional Laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "2.1.1.LO.1",
+              "description": "Develop knowledge and skills in implementing and applying programme execution and logic instructions effectively.",
+              "sequence": 1,
+              "source": { "page": 49, "pdfPageIndex": 51 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in the application of programme execution and logic instructions. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI3, SEL4 and Shared National Values",
+                "gesi": "Ensuring all learners in class irrespective of the diversity in ability, socio-cultural backgrounds, and gender and soliciting contributions from all learners ensures; respect for individuals of varying beliefs, religions, backgrounds, and cultures. knowledge of themselves and others' peculiarities, strengths, and weaknesses. tolerance for diversity and respect for all.",
+                "sel": "Learners adopt and utilise knowledge, skills, and attitudes to: cultivate a resilient and positive sense of self, fostering the growth of healthy identities. skillfully manage their emotions, promoting overall emotional well-being and harmony. set and achieve personal and collective goals, fostering continuous growth and accomplishment. develop empathy for others, actively demonstrating understanding and compassion. establish and maintain supportive relationships, nurturing a sense of belonging and connectedness. exercise conscientious and compassionate decision-making, considering the well-being of themselves and others in their choices. By integrating these SEL features into the teaching of programme execution and logic instructions, teachers can create a supportive and inclusive learning environment. This approach promotes learners' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in using knowledge and skills in implementations and applications of programme execution and logic instructions.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Open-mindedness", "Patience", "Commitment", "Hard work"]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.1.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Programme Execution and Logic Instructions",
+                  "sequence": 1,
+                  "source": { "page": 50, "pdfPageIndex": 52 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.1.1.LI.1",
+                      "description": "Determine critical points of Logic Operations and apply them to solve problems efficiently.",
+                      "sequence": 1,
+                      "source": { "page": 50, "pdfPageIndex": 52 },
+                      "pedagogicalExemplars": [
+                        "Group Work/Collaborative Learning: Identifying and discussing Mass Storage Media: Engage in interactive presentations, video analysis, and debates by dividing the class into mixed-ability groups. Task the groups with identifying, classifying, and discussing three different Mass Storage Media. Ensure the group promotes inclusivity and equity, considering the needs of individuals with visual impairment, dyslexia, dysgraphia, and other diverse learning needs.",
+                        "SEL: When teaching students about Logic Operations, you can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection"
+                      ],
+                      "assessment": { "code": "2.1.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.1.LI.2",
+                      "description": "Apply the Concepts of Boolean Expressions to simplify complex circuits",
+                      "sequence": 2,
+                      "source": { "page": 51, "pdfPageIndex": 53 },
+                      "pedagogicalExemplars": ["Group Work/Collaborative Learning: Utilise interactive presentations, video analysis, and debates by dividing the class into mixed-ability groups. Task the groups with applying the Concepts of Boolean Expressions to simplify complex circuits. Ensure the groupings foster inclusivity and equity by considering the needs of individuals with visual impairment, dyslexia, dysgraphia, and other diverse learning needs."],
+                      "assessment": { "code": "2.1.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.1.LI.3",
+                      "description": "Discuss 3 major Arithmetic Operations and apply them taking into consideration their various functions",
+                      "sequence": 3,
+                      "source": { "page": 51, "pdfPageIndex": 53 },
+                      "pedagogicalExemplars": ["Group Work/Collaborative Learning: Engage in interactive presentations, video analysis, and debates by dividing the class into mixed-ability groups. Task the groups with discussing the three major Arithmetic Operations and applying them, considering their various functions. Similar to previous indicators, ensure the group division promotes inclusivity and equity, considering the needs of individuals with visual impairment, dyslexia, dysgraphia, and other diverse learning needs."],
+                      "assessment": { "code": "2.1.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "COMPUTER HARDWARE AND SOFTWARE",
+          "sequence": 2,
+          "source": { "page": 53, "pdfPageIndex": 55 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional Laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "2.1.2.LO.1",
+              "description": "Apply acquired skills and knowledge to explain the functioning of input and output devices in relation to barcodes and QR codes, as well as the functionality of an Operating System.",
+              "sequence": 1,
+              "source": { "page": 53, "pdfPageIndex": 55 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in explaining how input and output devices function with respect to bar-codes and QR codes and the functionality of an Operating System. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture. Communication: The skill to effectively express ideas and information through various mediums and engage in active listening by peer-to-peer, presentation etc. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly. Flexibility and Adaptability: The willingness to embrace change, be open to new ideas, and adjust to evolving circumstances.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Giving equal opportunities to all learners irrespective of their background and soliciting views from all learners ensures; respect for individuals of varying beliefs, religions, backgrounds and cultures. sensitivity to the inter-relatedness of the various spheres of life, groups and individuals. awareness of personal biases, peculiarities and stereotypes. tolerance for diversity",
+                "sel": "Learners acquire and apply knowledge, skills, and attitudes to: cultivate a robust and positive self-concept, nurturing the development of healthy identities. effectively regulate and navigate their emotions, promoting emotional well-being and stability. set and attain personal and collective objectives, fostering growth and fulfillment. foster empathy for others, demonstrating understanding and compassion in their interactions. establish and sustain supportive connections, fostering a sense of belonging and inclusion. make responsible and empathetic decisions, considering the welfare and needs of both themselves and others. By integrating these SEL features into teaching on input and output devices, teachers can create a supportive and inclusive learning environment. This approach promotes students' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in using the knowledge acquired to explain how input and output devices function with respect to bar-codes and QR codes and the functionality of an Operating System.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Open-mindedness", "Patience", "Commitment", "Hard work", "Honesty", "Truthfulness"]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.1.2.CS.1",
+                  "description": "Demonstrate knowledge and understanding of components of Computer Hardware and types of Software",
+                  "sequence": 1,
+                  "source": { "page": 55, "pdfPageIndex": 57 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.1.2.LI.1",
+                      "description": "Demonstrate the creation and utilisation of barcodes and QR codes using various input and output devices, such as monitors, system unit, processors, motherboards, hard disks, clock, power unit, network interface cards, scanners, digital cameras, keyboards, microphones, mice, touchscreen sensors for control and monitoring.",
+                      "sequence": 1,
+                      "source": { "page": 55, "pdfPageIndex": 57 },
+                      "pedagogicalExemplars": [
+                        "Problem-Based Learning Approach: Organise learners into mixed-ability groups and task them with brainstorming on the creation and use of barcodes and QR codes, using the listed devices in the learning indicator. Allow them to share their thoughts with the whole class while fostering an environment that tolerates different viewpoints.",
+                        "SEL: When teaching students about components of Computer Hardware and types of Software, you can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "2.1.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.2.LI.2",
+                      "description": "Explain the types of Software and their functions.",
+                      "sequence": 2,
+                      "source": { "page": 56, "pdfPageIndex": 58 },
+                      "pedagogicalExemplars": ["Using Problem-Based Learning Approach: Task learners to identify and explain the types of software and state their functions.", "Using the Problem-Based Learning Approach: Group learners according to their mixed abilities and task them with downloading and installing simple everyday software, such as antivirus programs, games, media players, etc."],
+                      "assessment": { "code": "2.1.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DATA COMMUNICATION AND NETWORK SYSTEMS",
+          "sequence": 3,
+          "source": { "page": 57, "pdfPageIndex": 59 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs-Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional Laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "2.1.3.LO.1",
+              "description": "Apply skills and knowledge to design and demonstrate simple Network Topologies.",
+              "sequence": 1,
+              "source": { "page": 57, "pdfPageIndex": 59 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in designing simple Network Topology. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly. Flexibility and Adaptability: The willingness to embrace change, be open to new ideas, and adjust to evolving circumstances.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Giving equal opportunities to all learners irrespective of their background and soliciting views from all learners ensures; respect for individuals of varying beliefs, religions, backgrounds and cultures. sensitivity to the inter-relatedness of the various spheres of life, groups and individuals. awareness of personal biases, peculiarities and stereotypes. tolerance for diversity",
+                "sel": "Learners acquire and employ knowledge, skills, and attitudes to: foster a strong and confident self-image, nurturing the cultivation of healthy identities. skilfully manage their emotions, promoting emotional well-being and resilience. set and achieve personal and collective goals, fostering growth and accomplishment. cultivate empathy for others, exemplifying understanding and compassion in their interactions. establish and maintain supportive relationships, fostering a sense of belonging and camaraderie. make conscientious and compassionate decisions, considering the well-being and welfare of themselves and others.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Open-mindedness", "Patience", "Commitment", "Hard work", "Honesty", "Truthfulness"]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.1.3.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Components of a Network",
+                  "sequence": 1,
+                  "source": { "page": 59, "pdfPageIndex": 61 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.1.3.LI.1",
+                      "description": "Design and explain 2 Network Systems",
+                      "sequence": 1,
+                      "source": { "page": 59, "pdfPageIndex": 61 },
+                      "pedagogicalExemplars": [
+                        "Interactive student-centred teaching and learning: Explaining network topologies: Utilise interactive teaching methods to engage students in explaining various network topologies such as Star, Ring, Bus, and Mesh. Foster student participation and facilitate group discussions to differentiate the concepts of LAN, MAN, WAN, and CAN.",
+                        "SEL: When teaching about the Components of a Network, teachers can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection"
+                      ],
+                      "assessment": { "code": "2.1.3.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.3.LI.2",
+                      "description": "Demonstrate how the system can connect to the Internet.",
+                      "sequence": 2,
+                      "source": { "page": 60, "pdfPageIndex": 62 },
+                      "pedagogicalExemplars": ["Talk for Learning Approach: Connecting systems to the Internet: Divide learners into small groups to discuss and demonstrate how systems can be connected to the Internet. Encourage other groups to observe and provide objective feedback."],
+                      "assessment": { "code": "2.1.3.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.1.3.LI.3",
+                      "description": "Discuss and compare at least three network topologies.",
+                      "sequence": 3,
+                      "source": { "page": 60, "pdfPageIndex": 62 },
+                      "pedagogicalExemplars": ["Talk for Learning Approach: Contrasting Network Topologies: Use question-and-answer sessions to facilitate discussions among learners on the characteristics of three network topologies. Invite individual learners to demonstrate how to connect devices like hubs, routers, bridges, and switches, while others provide comments and feedback."],
+                      "assessment": { "code": "2.1.3.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "COMPUTER ARCHITECTURE & ORGANISATION",
+      "sequence": 1,
+      "classLevel": "SHS 3",
+      "pathway": null,
+      "source": { "page": 75, "pdfPageIndex": 77 },
+      "subStrands": [
+        {
+          "name": "DATA STORAGE AND MANIPULATION",
+          "sequence": 1,
+          "source": { "page": 75, "pdfPageIndex": 77 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Flash Drive", "Desktop computers", "Tablets", "TV and Radio", "Projector", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "3.1.1.LO.1",
+              "description": "Apply acquired knowledge and skills of programme execution, logic instructions, and arithmetic operations in the CPU to solve real-life problems.",
+              "sequence": 1,
+              "source": { "page": 75, "pdfPageIndex": 77 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in designing implementations and applications of programme execution and logic instructions. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI5, SEL6 and Shared National Values",
+                "gesi": "Ensuring all learners in class irrespective of the diversity in ability, socio-cultural backgrounds, and gender and soliciting contributions from all learners ensures; respect for individuals of varying beliefs, religions, backgrounds and cultures. knowledge of themselves and others' peculiarities, strengths and weaknesses. tolerance for diversity and respect for all.",
+                "sel": "Learners acquire and apply knowledge, skills, and attitudes to: develop a strong and authentic sense of self, nurturing the cultivation of healthy identities. effectively navigate and regulate their emotions, promoting emotional well-being and self-awareness. set and attain personal and collective goals, fostering growth and accomplishment. cultivate empathy and compassion for others, demonstrating understanding and kindness. establish and foster supportive relationships, promoting a sense of belonging and connectedness. make conscientious and considerate decisions, taking into account the well-being of themselves and others. By integrating these SEL features into the teaching programme execution and logic instructions, teachers can create a supportive and inclusive learning environment. This approach promotes students' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in developing knowledge and skills in designing implementations and applications of program execution and logic instructions.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance,", "Friendliness,", "Open-mindedness", "Patience", "Commitment", "Hard work"]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.1.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Programme Execution and Logic Instruction",
+                  "sequence": 1,
+                  "source": { "page": 77, "pdfPageIndex": 79 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.1.1.LI.1",
+                      "description": "Determine and apply critical points of Logic Operations to solve a problem",
+                      "sequence": 1,
+                      "source": { "page": 77, "pdfPageIndex": 79 },
+                      "pedagogicalExemplars": [
+                        "Group Work/Collaborative Learning: Organise interactive presentations, video analysis, and debates. Divide the class into mixed-ability groups and task them with designing and applying programme execution and logic instructions to solve an identified problem. Ensure the group division promotes inclusivity and equity, considering the needs of learners with visual impairment, dyslexia, dysgraphia, etc.",
+                        "SEL: When teaching students about Programme Execution and Logic Instruction, you can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback, Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "3.1.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.1.LI.2",
+                      "description": "Describe the arithmetic operations in the CPU, specifically Rotation and Shift Operations, and explain their real-life applications.",
+                      "sequence": 2,
+                      "source": { "page": 78, "pdfPageIndex": 80 },
+                      "pedagogicalExemplars": ["Group Work/Collaborative Learning Approach: Conduct interactive presentations, video analysis, and debates. Divide the class into mixed-ability groups and ask them to describe Rotation and Shift Operations in their own words. Foster inclusivity and equity in the group division, accommodating learners with different needs."],
+                      "assessment": { "code": "3.1.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.1.LI.3",
+                      "description": "Discuss 3 major Arithmetic Operations and apply them taking into consideration their various functions.",
+                      "sequence": 3,
+                      "source": { "page": 78, "pdfPageIndex": 80 },
+                      "pedagogicalExemplars": ["Group Work/Collaborative Learning: Engage in interactive presentations, video analysis, and debates. Divide the class into mixed-ability groups and assign them the task of identifying the major problems that Arithmetic Operations can solve and determining how to carry out those operations. Ensure inclusivity and equity in the groups, considering the needs of learners with visual impairment, dyslexia, dysgraphia, etc."],
+                      "assessment": { "code": "3.1.1.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "COMPUTER HARDWARE AND SOFTWARE",
+          "sequence": 2,
+          "source": { "page": 80, "pdfPageIndex": 82 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "3.1.2.LO.1",
+              "description": "Explain the roles of Operating Systems and Utility Software as components of System Software, demonstrating an understanding of their functions. Perform the installation and management of an operating system, showcasing proficiency in the process.",
+              "sequence": 1,
+              "source": { "page": 80, "pdfPageIndex": 82 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in describing the roles of Operating Systems and Utility Software. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Promoting inclusivity through the use of various group activities and supporting individual learners to take initiative ensures; being gender responsive and having the ability to tackle injustice, being aware of personal biases and stereotypes, embracing diversity and practise inclusion. being sensitive to the inter-relatedness of the various spheres of life, groups, and individuals, being aware of personal biases and stereotypes.",
+                "sel": "Learners acquire and utilise knowledge, skills, and attitudes to: cultivate a resilient and positive self-perception, nurturing the development of healthy identities. skillfully manage and respond to their emotions, promoting emotional well-being and self-care. set and achieve personal and collective objectives, fostering growth and success. cultivate empathy and compassion for others, demonstrating understanding and kindness. establish and maintain supportive connections, fostering a sense of belonging and community. make responsible and ethical decisions, considering the well-being and welfare of themselves and others. By integrating these SEL features into the teaching of the roles of Operating Systems and Utility Software, teachers create a supportive and inclusive learning environment. This approach promotes learners' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in using skills and knowledge acquired to describe the roles of Operating Systems and Utility Software as components of System Software",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Resourcefulness", "Self-discipline", "Leadership", "Truth", "Diversity", "Equity", "Adaptability", "Responsible citizenship", "Honesty", "Law-abiding", "Patriotism", "Faithfulness", "Loyalty"]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.1.2.CS.1",
+                  "description": "Demonstrate knowledge and understanding of components of Computer Hardware and types of Software",
+                  "sequence": 1,
+                  "source": { "page": 81, "pdfPageIndex": 83 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.1.2.LI.1",
+                      "description": "Demonstrate the roles of Operating Systems and Utility Software as components of System Software.",
+                      "sequence": 1,
+                      "source": { "page": 81, "pdfPageIndex": 83 },
+                      "pedagogicalExemplars": [
+                        "Problem-Based Learning: Ask learners to provide clear and concise explanations of the roles and functions of Operating Systems and Utility Software as a System Software, demonstrating comprehension through examples and illustrations.",
+                        "SEL: When teaching students about the components of Computer Hardware and types of Software, teachers can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "3.1.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.2.LI.2",
+                      "description": "Demonstrate the process of installing and managing an operating system:",
+                      "sequence": 2,
+                      "source": { "page": 82, "pdfPageIndex": 84 },
+                      "pedagogicalExemplars": ["In mixed-ability groups, let learners brainstorm on the procedures of downloading, installing and managing an operating system."],
+                      "assessment": { "code": "3.1.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "DATA COMMUNICATION AND NETWORK SYSTEMS",
+          "sequence": 3,
+          "source": { "page": 84, "pdfPageIndex": 86 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Productivity tools ix. Subject-based application software", "Desktop computers", "Tablets", "TV and radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Instructional laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "3.1.3.LO.1",
+              "description": "Utilise knowledge of networking topologies to design and configure network systems to meet specific requirements.",
+              "sequence": 1,
+              "source": { "page": 84, "pdfPageIndex": 86 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in designing simple network topology. Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly. Self-Direction and Self-Regulation: The capability to set goals, manage time effectively, and take ownership of one's learning and behaviour. Critical Evaluation of Information: The skill to assess the credibility, accuracy, and relevance of information in a variety of contexts.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Involving all learners in class irrespective of their varying abilities, gender and backgrounds, supporting them to share their views and thoughts ensures; respect for individuals of varying beliefs, religions, backgrounds and cultures. sensitivity to the inter-relatedness of the various spheres of life, groups and individuals. awareness of personal biases, peculiarities and stereotypes. tolerance for diversity.",
+                "sel": "Learners acquire and apply knowledge, skills, and attitudes to: foster a confident and empowered self-image, nurturing the development of healthy identities. effectively navigate and regulate their emotions, promoting emotional well-being and self-awareness. set and attain personal and collective goals, fostering growth and achievement. cultivate empathy and understanding for others, demonstrating compassion and respect. establish and sustain supportive relationships, promoting a sense of belonging and collaboration. make thoughtful and ethical decisions, considering the well-being and welfare of themselves and others. By integrating these SEL features into the teaching of Network Topology, teachers can create a supportive and inclusive learning environment. This approach promotes students' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in using skills and knowledge to demonstrate and design simple Network Topology.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Open-mindedness", "Patience", "Commitment", "Integrity"]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.1.3.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Components of a Network",
+                  "sequence": 1,
+                  "source": { "page": 86, "pdfPageIndex": 88 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.1.3.LI.1",
+                      "description": "Design and explain two network systems, considering factors such as topology, scalability, and security (password, internet safety, malware awareness, data backups, securing personal devices and good security practices), transmission media and bandwidth.",
+                      "sequence": 1,
+                      "source": { "page": 86, "pdfPageIndex": 88 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning Approach: Engage in whole-class discussions to explore network systems. Conduct practical sessions in individual and mixed-ability/gender-sensitive group work. Employ interactive multimedia presentations and video analysis to facilitate discussions and demonstrate techniques to consider factors such as topology, scalability and security.",
+                        "SEL: When teaching students about the Components of a Network, its usage, and the function of Internet Service Providers (ISPs), teachers can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection"
+                      ],
+                      "assessment": { "code": "3.1.3.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.3.LI.2",
+                      "description": "Demonstrate how the system can connect to the Internet.",
+                      "sequence": 2,
+                      "source": { "page": 87, "pdfPageIndex": 89 },
+                      "pedagogicalExemplars": ["Demonstrate the configuration of network devices (e.g., hub, router, switch) to establish connectivity within a network. Explain the steps involved in connecting a network system to the internet, including considerations for network addressing and security measures.", "Project-Based Learning Approach: Engage in whole-class discussions to explore network devices. Conduct practical sessions with individuals and in mixed-ability/gender-sensitive groups. Employ interactive multimedia presentations and video analysis to facilitate discussions and demonstrate techniques to discuss network devices."],
+                      "assessment": { "code": "3.1.3.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.1.3.LI.3",
+                      "description": "Discuss and compare the characteristics and advantages of at least three network topologies.",
+                      "sequence": 3,
+                      "source": { "page": 87, "pdfPageIndex": 89 },
+                      "pedagogicalExemplars": ["Project-Based Learning Approach: Engage in whole-class discussions to explore network topologies. Conduct practical sessions with individuals and in mixed-ability/gender-sensitive group work. Employ interactive multimedia presentations and video analysis to facilitate discussions and demonstrate techniques for network topologies."],
+                      "assessment": { "code": "3.1.3.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "COMPUTATIONAL THINKING (PROGRAMMING LOGIC)",
+      "sequence": 2,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": { "page": 35, "pdfPageIndex": 37 },
+      "subStrands": [
+        {
+          "name": "ALGORITHM AND DATA STRUCTURE",
+          "sequence": 1,
+          "source": { "page": 35, "pdfPageIndex": 37 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional Laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.2.1.LO.1",
+              "description": "Apply knowledge of data structures to explain their real-life applications effectively.",
+              "sequence": 1,
+              "source": { "page": 35, "pdfPageIndex": 37 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Communication: The skill to effectively express ideas and information through various mediums and engage in active listening by peer-to-peer method, presentation etc. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals while explaining data structures. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "As facilitators steer discussions, they are mindful to stay off biases, stereotypes, and prejudices and place efforts to provide well-balanced examples. This will make learners; aware of their personal biases and stereotypes, embrace diversity, and practise inclusion. embrace tolerance and empathy among each other. develop emotional intelligence as others critique their submissions. learn to listen to others of different genders and abilities, thus developing tolerance and listening skills.",
+                "sel": "Learners acquire and apply knowledge, skills, and attitudes in order to: foster a strong and positive sense of self, nurturing the development of healthy identities. effectively manage their emotions, promoting overall emotional well-being. set and achieve personal and collective goals, fostering growth and accomplishment. cultivate empathy for others, demonstrating understanding and compassion. establish and sustain supportive relationships, promoting a sense of belonging. make responsible and compassionate decisions, taking into consideration the well-being of themselves and others. By integrating these SEL features into the teaching of data structures, teachers can create a supportive and inclusive learning environment. This approach promotes learners' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in using knowledge of data structures to explain the applications in real life.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Open-mindedness", "Patience", "Commitment", "Hard work"]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.2.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Data Structures",
+                  "sequence": 1,
+                  "source": { "page": 37, "pdfPageIndex": 39 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.2.1.LI.1",
+                      "description": "Explain in detail the concepts of Data Structures and their importance in organising and manipulating data efficiently.",
+                      "sequence": 1,
+                      "source": { "page": 37, "pdfPageIndex": 39 },
+                      "pedagogicalExemplars": [
+                        "Problem-Based Learning: Brainstorm and discuss the importance and practical applications of data structures, providing examples to illustrate their relevance in different scenarios.",
+                        "Group Work/Talk for Learning: Engage in collaborative activities such as think-pair-share or small group discussions to define data structures in their own words, promoting a deeper understanding through shared perspectives.",
+                        "SEL: When teaching students about Data Structures and their importance, you can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, and support their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "1.1.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code reads '1.1.1.AS.1' instead of the expected '1.2.1.AS.1' pattern for this Sub-Strand/Content Standard. Preserved verbatim as printed."
+                    },
+                    {
+                      "code": "1.2.1.LI.2",
+                      "description": "Differentiate between the types of Data Structures",
+                      "sequence": 2,
+                      "source": { "page": 38, "pdfPageIndex": 40 },
+                      "pedagogicalExemplars": ["Problem-Based Learning: Engage in brainstorming activities to explore and discuss the different types of data structures, highlighting their characteristics and advantages in managing and processing data effectively."],
+                      "assessment": { "code": "1.1.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code reads '1.1.1.AS.2' instead of the expected '1.2.1.AS.2' pattern for this Sub-Strand/Content Standard. Preserved verbatim as printed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "APP DEVELOPMENT",
+          "sequence": 2,
+          "source": { "page": 39, "pdfPageIndex": 41 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs-Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional Laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.2.2.LO.1",
+              "description": "Apply Algorithms in various real-life and programming situations or problems",
+              "sequence": 1,
+              "source": { "page": 39, "pdfPageIndex": 41 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in applying Algorithms in various real-life and programming situations or problems. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Promoting inclusivity in the classroom by encouraging every learner to actively participate in lessons, cross-sharing of ideas and thoughts between and among groups and individuals ensures; respecting individuals of varying beliefs, religions and cultures. being sensitive to the inter-relatedness of the various spheres of life, groups and individuals. being aware of personal biases and stereotypes. embracing diversity and practise inclusion.",
+                "sel": "Learners acquire and employ knowledge, skills, and attitudes in order to: foster the development of a resilient and optimistic self-perception, nurturing the cultivation of healthy identities. skillfully navigate and regulate their emotions, thereby promoting overall emotional well-being. establish and achieve personal and collaborative goals, fostering personal growth and collective accomplishments. cultivate empathy for others, actively demonstrating understanding and compassion. foster the establishment and maintenance of supportive relationships, promoting a profound sense of belonging. exercise conscientious and compassionate decision-making, taking into account the well-being of both themselves and others. By integrating these SEL features into the teaching of Algorithms, teachers can create a supportive and inclusive learning environment. This approach promotes learners' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in applying Algorithms in various real-life and programming situations or problems.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Open-mindedness", "Patience", "Commitment", "Hard work", "Integrity"]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.2.2.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Computational Thinking (Algorithms and Programs)",
+                  "sequence": 1,
+                  "source": { "page": 41, "pdfPageIndex": 43 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.2.2.LI.1",
+                      "description": "Explain and use Algorithms to solve a real-life problem. Identify the stages in the programme development cycle: Analysis, design, coding, testing",
+                      "sequence": 1,
+                      "source": { "page": 41, "pdfPageIndex": 43 },
+                      "pedagogicalExemplars": [
+                        "Collaborative Learning: Group discussion on the understanding of Algorithms and relate it to real-time problems. Project-based learning within a practical session (individual and mixed ability/gender sensitive groups work with no stereotyping) to use algorithms to solve real-time problems using the programme development cycle.",
+                        "SEL: When teaching about Algorithms, integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "1.2.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code reads '1.2.1.AS.1' instead of the expected '1.2.2.AS.1' pattern for this Sub-Strand/Content Standard. Preserved verbatim as printed."
+                    },
+                    {
+                      "code": "1.2.2.LI.2",
+                      "description": "Implement Algorithms into programmes with the use of flowcharts, pseudocode and programming languages such as Python, HTML, etc. Explain the steps in planning a programme putting actions in the right order",
+                      "sequence": 2,
+                      "source": { "page": 42, "pdfPageIndex": 44 },
+                      "pedagogicalExemplars": ["Collaborative Learning: Use an algorithm to plan a programme (finding the sum of two numbers, the sum of an area of a rectangle, circle, triangle etc.) Use variables, data types (integers, strings...etc.)"],
+                      "assessment": { "code": "1.2.1.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code reads '1.2.1.AS.2' instead of the expected '1.2.2.AS.2' pattern for this Sub-Strand/Content Standard. Preserved verbatim as printed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "WEB TECHNOLOGIES",
+          "sequence": 3,
+          "source": { "page": 43, "pdfPageIndex": 45 },
+          "strandHeadingAsPrintedHere": "PROCEDURAL PROGRAMMING (COMPUTATIONAL THINKING)",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "This Sub-Strand's own 'Strand' heading line (immediately above 'Sub-Strand 3. WEB TECHNOLOGIES') is printed as 'PROCEDURAL PROGRAMMING (COMPUTATIONAL THINKING)', unlike the 'COMPUTATIONAL THINKING (PROGRAMMING LOGIC)' heading used for the other two Sub-Strands of this same Strand/Year (and for this Strand in every other Year). Preserved verbatim; the parent Strand object's canonical 'name' field uses the predominant form.",
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.2.3.LO.1",
+              "description": "Explain the basic principles of web design and identify the modern technologies used in web design.",
+              "sequence": 1,
+              "source": { "page": 43, "pdfPageIndex": 45 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Communication: The skill to effectively express ideas and information through various mediums and engage in active listening by peer-to-peer presentations, etc., in explaining the basic principles of web design. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "As all learners are supported in an inclusive environment and given equal opportunities they will; appreciate, value, and embrace diversity as they are made to work in groups. learn to amicably resolve conflicts and embrace differing opinions. develop emotional intelligence as their submissions are critiqued by others. embrace tolerance and empathy among each other. learn to resolve conflicts and embrace differing opinions amicably. develop emotional intelligence as others critique their submissions.",
+                "sel": "Learners acquire and apply knowledge, skills, and attitudes to: foster the development of a strong and positive self-image, nurturing the cultivation of healthy identities. effectively manage their emotions, promoting emotional well-being and balance. set and accomplish personal and collective goals, fostering growth and success. cultivate empathy for others, exemplifying understanding and compassion. establish and sustain supportive relationships, nurturing a sense of belonging and community. make responsible and compassionate decisions, prioritising the welfare of themselves and others. By integrating these SEL features into teaching the basic principles of web design, teachers can create a supportive and inclusive learning environment. This approach promotes learners' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in explaining the basic principles of web design and describes the modern technologies used in web design principles.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Integrity", "Accountability", "Humility", "Assertiveness", "Patriotism"]
+              },
+              "contentStandards": [
+                {
+                  "code": "1.2.3.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Web Development",
+                  "sequence": 1,
+                  "source": { "page": 45, "pdfPageIndex": 47 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.2.3.LI.1",
+                      "description": "Identify and describe the key components of a Web page, including headings, menus, links, text, images, and other relevant elements.",
+                      "sequence": 1,
+                      "source": { "page": 45, "pdfPageIndex": 47 },
+                      "pedagogicalExemplars": [
+                        "Group Work/Talk for Learning: Identifying components of a web page. Utilise think-pair-share or similar collaborative approaches to facilitate discussions among learners and identify the various components found in a web page. Encourage learners to list and describe the components they identify.",
+                        "SEL: When teaching about Web Development, you can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "1.2.3AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code reads '1.2.3AS.1' (missing the dot before 'AS') instead of '1.2.3.AS.1'. Preserved verbatim as printed."
+                    },
+                    {
+                      "code": "1.2.3.LI.2",
+                      "description": "Draw and explain 2 Web Outline plans showing the wireframes",
+                      "sequence": 2,
+                      "source": { "page": 46, "pdfPageIndex": 48 },
+                      "pedagogicalExemplars": ["Brainstorming on what is a website map, and web outline plan using the wireframes. Engage learners in a brainstorming session to explore the concept of website mapping and the creation of web outline plans using wireframes. Encourage learners to draw and explain two web outline plans, demonstrating their understanding of wireframes as a visual representation of a website's structure."],
+                      "assessment": { "code": "1.2.3AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code reads '1.2.3AS.2' (missing the dot before 'AS') instead of '1.2.3.AS.2'. Preserved verbatim as printed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "COMPUTATIONAL THINKING (PROGRAMMING LOGIC)",
+      "sequence": 2,
+      "classLevel": "SHS 2",
+      "pathway": null,
+      "source": { "page": 61, "pdfPageIndex": 63 },
+      "subStrands": [
+        {
+          "name": "ALGORITHM AND DATA STRUCTURE",
+          "sequence": 1,
+          "source": { "page": 61, "pdfPageIndex": 63 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops", "Presentation and demonstration", "Enquiry on critical infrastructure security", "Application security", "Network security.", "Cloud security, Internet of Things (IoT) security"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "2.2.1.LO.1",
+              "description": "Apply skills in data storage processes to effectively manage and utilise data.",
+              "sequence": 1,
+              "source": { "page": 61, "pdfPageIndex": 63 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in data storage processes. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly. Flexibility and Adaptability: The willingness to embrace change, be open to new ideas, and adjust to evolving circumstances.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Giving equal opportunities to all learners irrespective of their background and soliciting views from all learners ensures; respect for individuals of varying beliefs, religions, backgrounds and cultures. sensitivity to the inter-relatedness of the various spheres of life, groups and individuals. awareness of personal biases, peculiarities and stereotypes. tolerance for diversity",
+                "sel": "Learners acquire and utilise knowledge, skills, and attitudes to: develop a positive and authentic sense of self, nurturing the cultivation of healthy identities. effectively regulate and navigate their emotions, promoting emotional well-being and self-awareness. set and accomplish personal and collective goals, fostering growth and success. cultivate empathy for others, demonstrating understanding and compassion in their interactions. establish and sustain meaningful relationships, fostering a sense of connection and belonging. make thoughtful and ethical decisions, considering the well-being and welfare of themselves and others. By integrating these SEL features into the teaching on data storage processes, teachers can create a supportive and inclusive learning environment. This approach promotes students' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in developing and using skills in data storage processes.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Open-mindedness", "Patience", "Commitment", "Hard work", "Honesty", "Truthfulness"]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Data Storage",
+                  "sequence": 1,
+                  "source": { "page": 63, "pdfPageIndex": 65 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.1.LI.1",
+                      "description": "State and describe the functions of the Main Memory.",
+                      "sequence": 1,
+                      "source": { "page": 63, "pdfPageIndex": 65 },
+                      "pedagogicalExemplars": [
+                        "Problem-Based Learning: In mixed-ability groups, learners must state and describe the steps to resolve a slow computer caused by Main Memory overload. They must also collaboratively brainstorm and discuss strategies for managing Main Memory to improve computer performance.",
+                        "SEL: When teaching about Data Storage, usage, and the function of Internet Service Providers (ISPs), you can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "2.2.1AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code reads '2.2.1AS.1' (missing the dot before 'AS') instead of '2.2.1.AS.1'. Preserved verbatim as printed."
+                    },
+                    {
+                      "code": "2.2.1.LI.2",
+                      "description": "Explain real-life applications of Data Structures",
+                      "sequence": 2,
+                      "source": { "page": 64, "pdfPageIndex": 66 },
+                      "pedagogicalExemplars": ["Problem-Based Learning: In mixed-ability groups, learners must engage in discussions about Data Structures and their practical applications in solving specific problems. They must also explore and analyse how different data structures can be utilised to address specific challenges in various fields."],
+                      "assessment": { "code": "2.2.1AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Printed Assessment code reads '2.2.1AS.2' (missing the dot before 'AS') instead of '2.2.1.AS.2'. Preserved verbatim as printed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "APP DEVELOPMENT",
+          "sequence": 2,
+          "source": { "page": 65, "pdfPageIndex": 67 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Productivity tools ix. Subject-based application software", "Desktop computers", "Tablets", "TV and radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Instructional laboratories (with multimedia equipment and smartboards)"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "This Sub-Strand's Teaching and Learning Resources list, as printed, does not include a 'Maintenance and repair workshops' bullet (present in the equivalent lists for the other two Sub-Strands of this Strand/Year). Preserved verbatim as printed; no item has been added to normalise it against the other lists.",
+          "learningOutcomes": [
+            {
+              "code": "2.2.2.LO.1",
+              "description": "Demonstrate an understanding of fundamental concepts in text-based programming and the programming process, and apply acquired skills to create new functions.",
+              "sequence": 1,
+              "source": { "page": 65, "pdfPageIndex": 67 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in text-based programming, programming process. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of computer Architecture concepts. Communication: The skill to effectively express ideas and information through various mediums and engage in active listening by peer-to-peer, presentation etc. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly. Flexibility and Adaptability: The willingness to embrace change, be open to new ideas, and adjust to evolving circumstances.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Using mixed-ability and mixed-gender pairings, special attention given to the catch-up, regular, gifted and talented learners leads to; respecting individuals of varying abilities, beliefs, religions and cultures. being sensitive to the inter-relatedness of the various spheres of life, groups and individuals. being aware of personal biases and stereotypes. Embracing diversity and practising inclusion",
+                "sel": "Learners acquire and apply knowledge, skills, and attitudes to: foster a resilient and empowered self-perception, nurturing the development of healthy identities. skilfully manage and navigate their emotions, promoting emotional well-being and self-care. set and achieve personal and collective aspirations, fostering growth and attainment. cultivate empathy and understanding for others, exemplifying compassion and kindness. establish and nurture supportive connections, fostering a sense of community and inclusivity. make responsible and conscientious decisions, prioritising the well-being of themselves and others in their choices. By integrating these SEL features into the teaching of text-based programming, teachers can create a supportive and inclusive learning environment. This approach promotes students' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in explaining the necessary concepts of text-based programming, the programming process and using the skills acquired to write new functions.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Integrity", "Tolerance", "Open-mindedness", "Patience", "Integrity", "Hard work"],
+                "nationalCoreValuesReviewStatus": "NEEDS_REVIEW",
+                "nationalCoreValuesReviewNote": "The printed National core values bullet list repeats 'Integrity' twice (1st and 5th items). Preserved verbatim, duplicate included, not deduplicated."
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.2.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Computational Thinking (Programming)",
+                  "sequence": 1,
+                  "source": { "page": 67, "pdfPageIndex": 69 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.2.LI.1",
+                      "description": "Utilise a programming language to develop a program, such as a simple calculator.",
+                      "sequence": 1,
+                      "source": { "page": 67, "pdfPageIndex": 69 },
+                      "pedagogicalExemplars": [
+                        "Problem-Based Learning Approach: Explain the concept of an expert system and its applications. Identify and describe the essential steps involved in planning a programme. Explain the concept of algorithms by drawing parallels to procedural instructions, including the selection of necessary actions and arranging them in the correct sequence.",
+                        "SEL: When teaching about Computational Thinking, teachers can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "2.2.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.2.LI.2",
+                      "description": "Utilise simulation tools in Machine Learning to train a computer to perform specific actions or sets of actions.",
+                      "sequence": 2,
+                      "source": { "page": 68, "pdfPageIndex": 70 },
+                      "pedagogicalExemplars": ["Problem-Based Learning Approach: Apply algorithms to design programmes for various tasks, such as calculating the sum of two numbers or computing the area of geometric shapes (rectangle, circle, triangle, etc.). Demonstrate the use of variables and different data types (integers, strings, etc.) in programming."],
+                      "assessment": { "code": "2.2.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "WEB TECHNOLOGIES AND DATABASES",
+          "sequence": 3,
+          "source": { "page": 69, "pdfPageIndex": 71 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and Radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional Laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "2.2.3.LO.1",
+              "description": "Apply acquired skills and knowledge to design and develop simple web pages",
+              "sequence": 1,
+              "source": { "page": 69, "pdfPageIndex": 71 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in designing simple web pages. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly. Flexibility and Adaptability: The willingness to embrace change, be open to new ideas, and adjust to evolving circumstances.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "As all learners are supported in an inclusive environment and given equal opportunities they will; appreciate, value, and embrace diversity as they are made to work in groups. learn to amicably resolve conflicts and embrace differing opinions. embrace tolerance and empathy among each other. learn to resolve conflicts and embrace differing opinions amicably.",
+                "sel": "Learners acquire and employ knowledge, skills, and attitudes to: cultivate a confident and positive self-image, nurturing the growth of healthy identities. effectively regulate and manage their emotions, promoting emotional well-being and resilience. set and accomplish personal and collective goals, fostering continuous growth and achievement. foster empathy and understanding for others, demonstrating compassion and consideration. establish and sustain supportive relationships, fostering a sense of belonging and connection. make informed and compassionate decisions, considering the well-being and welfare of themselves and others. By integrating these SEL features into teaching designing web pages, teachers can create a supportive and inclusive learning environment. This approach promotes students' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in using knowledge acquired to design simple web pages.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Integrity", "Accountability", "Humility", "Assertiveness", "Patriotism"]
+              },
+              "contentStandards": [
+                {
+                  "code": "2.2.3.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Web Development and Databases",
+                  "sequence": 1,
+                  "source": { "page": 71, "pdfPageIndex": 73 },
+                  "learningIndicators": [
+                    {
+                      "code": "2.2.3.LI.1",
+                      "description": "Demonstrate the use of web page editors and design elements, including sections, text, images, GUI/UI/UX, and multimedia integration.",
+                      "sequence": 1,
+                      "source": { "page": 71, "pdfPageIndex": 73 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning Approach: Engage in whole-class discussions to explore different web page editors and their features, such as Notepad, Atom, Visual Studio Code, Notepad++, etc. Conduct practical sessions with individuals and in mixed-ability/gender-sensitive groups, utilising text editors' features. Employ interactive multimedia presentations and video analysis to facilitate discussions and demonstrate techniques for creating web pages using various editors. Ensure inclusivity and equity by considering different learners' abilities and providing appropriate input devices for data analysis.",
+                        "SEL: When teaching about Web development and databases, usage, and the function of Internet Service Providers (ISPs), teachers can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "2.2.3.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.3.LI.2",
+                      "description": "Design an e-commerce web page for a selected company or organisation.",
+                      "sequence": 2,
+                      "source": { "page": 72, "pdfPageIndex": 74 },
+                      "pedagogicalExemplars": ["Project-Based learning: Participate in practical sessions, both individually and in mixed-ability/gender-sensitive group work, to create web pages using available tools. Utilise interactive multimedia presentations and video analysis to explore concepts and techniques specific to e-commerce web page design."],
+                      "assessment": { "code": "2.2.3.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "2.2.3.LI.3",
+                      "description": "Create a relational database model of a database.",
+                      "sequence": 3,
+                      "source": { "page": 72, "pdfPageIndex": 74 },
+                      "pedagogicalExemplars": ["Project-Based Learning Approach: Engage in whole-class discussions to explore databases. Conduct practical sessions in individual and mixed-ability/gender-sensitive group work. Employ interactive multimedia presentations and video analysis to facilitate discussions and demonstrate techniques for creating a relational database model."],
+                      "assessment": { "code": "2.2.3.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": null,
+      "name": "COMPUTATIONAL THINKING (PROGRAMMING LOGIC)",
+      "sequence": 2,
+      "classLevel": "SHS 3",
+      "pathway": null,
+      "source": { "page": 89, "pdfPageIndex": 91 },
+      "subStrands": [
+        {
+          "name": "ALGORITHM AND DATA STRUCTURE",
+          "sequence": 1,
+          "source": { "page": 89, "pdfPageIndex": 91 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops", "Presentation and demonstration", "Enquiry on Critical infrastructure security", "Application security", "Network security.", "Cloud security", "Internet of Things (IoT) security"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "reviewStatus": "NEEDS_REVIEW",
+          "reviewNote": "This Teaching and Learning Resources block is printed in a badly garbled multi-column layout (matching the Scope and Sequence table garbling already logged at the document level); the item list above was reconstructed in left-to-right, top-to-bottom reading order and could not be independently verified against a second source.",
+          "learningOutcomes": [
+            {
+              "code": "3.2.1.LO.1",
+              "description": "Develop knowledge and skills in data storage technologies and their applications.",
+              "sequence": 1,
+              "source": { "page": 89, "pdfPageIndex": 91 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in the implementation and applications of data storage. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Communication: The skill to effectively express ideas and information through various mediums and engage in active listening by peer-to-peer presentations, etc. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly. Flexibility and Adaptability: The willingness to embrace change, be open to new ideas, and adjust to evolving circumstances.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Using inclusive strategies and pedagogies that promote all learners' wellbeing and develop their potential and promote; respect for others and alternative views, as well as the awareness of own biases. protect the weak, work for the betterment of society and make learners advocate for peace and justice. exhibit empathy towards people with special needs,",
+                "sel": "Learners acquire and employ knowledge, skills, and attitudes to: cultivate a positive and resilient self-perception, nurturing the development of healthy identities. skillfully manage and navigate their emotions, promoting emotional well-being and self-awareness. set and achieve personal and collective goals, fostering growth and fulfillment. cultivate empathy and compassion for others, demonstrating understanding and kindness. establish and nurture supportive relationships, promoting a sense of belonging and community. make responsible and ethical decisions, considering the well-being and welfare of themselves and others. By integrating these SEL features into teaching about data storage, teachers can create a supportive and inclusive learning environment. This approach promotes students' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in implementations and applications of data storage.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Sacrifice", "Selflessness", "Compassion", "Fairness", "Justice", "Generosity", "Cooperation", "Commitment", "Collaboration", "Excellence", "Resourcefulness", "Self-discipline"]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.2.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Data Storage",
+                  "sequence": 1,
+                  "source": { "page": 91, "pdfPageIndex": 93 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.2.1.LI.1",
+                      "description": "Identify, classify and discuss 3 Mass Storage media.",
+                      "sequence": 1,
+                      "source": { "page": 91, "pdfPageIndex": 93 },
+                      "pedagogicalExemplars": [
+                        "Group work/collaborative learning: Divide the class into two groups mixed ability groups and task them to: Identify, classify, and discuss three types of mass storage media commonly used in computing systems. Apply knowledge of data storage technologies to solve a given problem, considering factors such as capacity, performance, and reliability. Engage in group discussions and collaborative activities to explore and analyse real-world scenarios related to data storage solutions, ensuring inclusivity and equity for all learners.",
+                        "SEL: When teaching students about Data Storage, teachers can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "3.2.1.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Content Standard 3.2.1.CS.1 has only this one Learning Indicator (3.2.1.LI.1), unlike most other Content Standards in this document (typically 2-3 Learning Indicators). This is the block nearest the Scope-and-Sequence summary table's stated Overall Total of 46 Learning Indicators for SHS1-3; this extraction's actual body-text count across all Strands/Years is 44 (Year1=15, Year2=15, Year3=14), 2 short of the printed summary. Preserved verbatim; no Learning Indicator has been invented to reconcile the counts."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "APP DEVELOPMENT",
+          "sequence": 2,
+          "source": { "page": 93, "pdfPageIndex": 95 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "3.2.2.LO.1",
+              "description": "Explain the concept of Artificial Intelligence and its applications and use the knowledge acquired to distinguish between conventional systems and intelligent systems.",
+              "sequence": 1,
+              "source": { "page": 93, "pdfPageIndex": 95 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Communication: The skill to effectively express ideas and information through various mediums and engage in active listening by peer-to-peer presentations, etc. Collaboration and Teamwork: The ability to work effectively in diverse groups, value different perspectives, and contribute collectively towards shared goals. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Creating equal opportunities for all learners to participate in class, through gender-balanced groups leads to; tolerance and respect for each other. confidence and efficacy in their ability to perform. awareness of themselves and others taking into consideration their biases and stereotypes.",
+                "sel": "Learners acquire and apply knowledge, skills, and attitudes to: effectively manage and regulate their emotions, promoting emotional well-being and self-awareness. develop strategies for evaluating and validating information obtained from AI systems. set and attain personal and collective goals, fostering growth and accomplishment. cultivate empathy and compassion for others, demonstrating understanding and kindness. establish and sustain supportive relationships, promoting a sense of belonging and collaboration. think critically about AI concepts and their application. Make informed and responsible decisions, considering the well-being and welfare of themselves and others. encourage the creation of a safe supportive classroom environment for learning. By integrating these SEL features into teaching about the concept of Artificial Intelligence, teachers can create a supportive and inclusive learning environment. This approach promotes learners' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in explaining Artificial Intelligence and its applications. With the knowledge acquired, students can distinguish between conventional systems and intelligent systems.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Open-mindedness", "Patience", "Commitment", "Integrity"]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.2.2.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Computational Thinking (Artificial Intelligence)",
+                  "sequence": 1,
+                  "source": { "page": 95, "pdfPageIndex": 97 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.2.2.LI.1",
+                      "description": "Describe the fundamental principles and components of Artificial Intelligence, such as machine learning, neural networks, and natural language processing. Discuss real-world applications of Artificial Intelligence, such as image recognition, language translation, and virtual assistants.",
+                      "sequence": 1,
+                      "source": { "page": 95, "pdfPageIndex": 97 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning Approach: Engage in whole-class discussions to explore principles and components of Artificial Intelligence. Conduct practical sessions with individuals and in mixed-ability/gender-sensitive groups. Employ interactive multimedia presentations and video analysis to facilitate discussions and demonstrate techniques for principles and components of Artificial Intelligence",
+                        "SEL: When teaching about Computational Thinking, teachers can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "3.2.2.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.2.LI.2",
+                      "description": "Analyse and compare the advantages and limitations of conventional systems and intelligent systems, considering factors such as problem-solving capabilities, adaptability, and learning capacity.",
+                      "sequence": 2,
+                      "source": { "page": 96, "pdfPageIndex": 98 },
+                      "pedagogicalExemplars": ["Project-Based Learning Approach: Engage in whole-class discussions to explore conventional systems and intelligent systems. Conduct practical sessions with individuals and in mixed-ability/gender-sensitive groups. Employ interactive multimedia presentations and video analysis to facilitate discussions and demonstrate techniques for conventional systems and intelligent systems."],
+                      "assessment": { "code": "3.2.2.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "WEB TECHNOLOGIES",
+          "sequence": 3,
+          "source": { "page": 97, "pdfPageIndex": 99 },
+          "teachingLearningResources": ["Notepad or exercise book", "Pen", "Smartphones", "Laptops", "Desktop computers", "Tablets", "TV and radio", "Open Educational Resources (including YouTube, MOOCs - Udemy/Coursera, Khan Academy, and TESSA)", "The iBox/iCampus (CENDLOS)", "Productivity tools ix. Subject-based application software", "Instructional laboratories (with multimedia equipment and smartboards)", "Maintenance and repair workshops"],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "3.2.3.LO.1",
+              "description": "Use skills and knowledge acquired to design simple web pages",
+              "sequence": 1,
+              "source": { "page": 97, "pdfPageIndex": 99 },
+              "guidance": {
+                "twentyFirstCenturySkillsHeaderSeen": "21st Century Skills and Competencies",
+                "twentyFirstCenturySkills": "Critical Thinking and Problem-Solving: Learners exhibit the ability to analyse, evaluate, and solve complex problems using logical and creative thinking in designing simple web pages. Creativity and Innovation: Learners exhibit the capacity to generate original ideas, think outside the box, and approach tasks with a fresh perspective with respect to the Application of Computer Architecture concepts. Digital Literacy: The competence to use digital technologies, navigate online information, and apply digital tools effectively and responsibly.",
+                "gesiSelHeaderSeen": "GESI, SEL and Shared National Values",
+                "gesi": "Creating equal opportunities for all learners to participate in class, through gender-balanced groups leads to; tolerance and respect for each other. confidence and efficacy in their ability to perform. awareness of themselves and others taking into consideration their biases and stereotypes",
+                "sel": "Learners acquire and utilise knowledge, skills, and attitudes to: cultivate a positive and resilient self-perception, nurturing the development of healthy identities. skillfully navigate and regulate their emotions, promoting emotional well-being and self-awareness. set and achieve personal and collective goals, fostering growth and fulfillment. cultivate empathy and understanding for others, demonstrating compassion and kindness. establish and maintain supportive relationships, fostering a sense of belonging and collaboration. make thoughtful and ethical decisions, considering the well-being and welfare of themselves and others. By integrating these SEL features into the teaching of designing web pages, teachers can create a supportive and inclusive learning environment. This approach promotes students' emotional well-being, enhances their collaborative and communication skills, and fosters responsible decision-making in using skills and knowledge acquired to design simple web pages.",
+                "nationalCoreValuesHeaderSeen": "National core values:",
+                "nationalCoreValues": ["Tolerance", "Friendliness", "Open-mindedness", "Patience", "Commitment", "Integrity"]
+              },
+              "contentStandards": [
+                {
+                  "code": "3.2.3.CS.1",
+                  "description": "Demonstrate knowledge and understanding of Web development",
+                  "sequence": 1,
+                  "source": { "page": 99, "pdfPageIndex": 101 },
+                  "learningIndicators": [
+                    {
+                      "code": "3.2.3.LI.1",
+                      "description": "Utilise web page editors and design principles to create visually appealing and user-friendly web pages, incorporating sections, text, images, and Graphical User Interface (GUI) elements. Integrate multimedia elements such as videos, audio, and interactive features into web pages to enhance user engagement. Evaluate and compare different web page editors (e.g., Notepad, Atom, VS Code) and discuss their features and suitability for specific web development tasks. Engage in project-based learning activities, individually or in mixed-ability and gender-sensitive groups, to explore and apply web development tools and techniques.",
+                      "sequence": 1,
+                      "source": { "page": 99, "pdfPageIndex": 101 },
+                      "pedagogicalExemplars": [
+                        "Project-Based Learning Approach: Engage in whole-class discussions to explore and integrate multimedia elements. Conduct practical sessions with individuals and in mixed-ability/gender-sensitive groups. Employ interactive multimedia presentations and video analysis to facilitate discussions to integrate multimedia elements.",
+                        "SEL: When teaching students about Web development teachers can integrate Social Emotional Learning (SEL) principles to create an engaging and supportive learning experience. Here are some SEL features you can incorporate into this specific topic: Self-awareness: provides opportunities for self-assessment of their skills and progress in applying these concepts to manipulate data. helps students to recognise their emotions and attitudes towards the topic, supporting their self-confidence and self-efficacy. Self-management: guides students in setting goals and planning their work. fosters resilience and perseverance by supporting students in managing challenges and setbacks they may encounter during the learning process. Social awareness: promotes collaborative learning by assigning group projects or activities to learners. encourages students to share their knowledge and expertise with their peers, creating a supportive learning community. Relationship skills: promotes teamwork and collaboration by encouraging students to work together to solve complex problems and share their insights and solutions. emphasises the value of giving and receiving constructive feedback. Responsible decision-making: encourages learners to make informed decisions. encourages critical thinking and reflection."
+                      ],
+                      "assessment": { "code": "3.2.3.AS.1", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.3.LI.2",
+                      "description": "Design an e-commerce web page for a selected company or organisation.",
+                      "sequence": 2,
+                      "source": { "page": 100, "pdfPageIndex": 102 },
+                      "pedagogicalExemplars": ["Project-Based Learning: Analyse and discuss the concepts and techniques relevant to creating an e-commerce website, including product catalogue, shopping cart functionality, secure payment integration, and user account management. Utilise interactive multimedia presentations and video analysis to deepen understanding and proficiency in web development practices, while ensuring inclusive strategies for learners with diverse abilities."],
+                      "assessment": { "code": "3.2.3.AS.2", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "3.2.3.LI.3",
+                      "description": "Understand and Apply Basic Cyber Security Best Practices.",
+                      "sequence": 3,
+                      "source": { "page": 101, "pdfPageIndex": 103 },
+                      "pedagogicalExemplars": [
+                        "Define cyber security and discuss its goals (Confidentiality, Integrity, Availability, Authentication, Authorization, Auditing). Emphasise its importance and the common cyber threats (e.g., malware, phishing, social engineering).",
+                        "Demonstrate how to protect personal information (data protection) and set and manage privacy settings on social media and other online platforms.",
+                        "Explain the best security practices, including using security protocols (e.g., HTTPS, etc.), password security, software and systems updates and patches, two-factor authentication (2FA), VPNs, and anti-malware software such as antivirus and antispyware.",
+                        "Explain online safety practices (e.g., recognising and avoiding phishing and other social engineering attacks on email, mobile, etc.)",
+                        "Project-Based Learning Approach: Engage in whole-class discussions to explore best cyber security practices. Conduct practical sessions with learners in mixed-ability/gender-sensitive groups. Employ interactive multimedia presentations and video analysis to facilitate discussions and demonstrate techniques to discuss cyber threats."
+                      ],
+                      "assessment": { "code": "3.2.3.AS.3", "dokLevels": [1, 2, 3, 4], "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"] },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

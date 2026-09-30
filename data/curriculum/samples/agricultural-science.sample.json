@@ -1,0 +1,121 @@
+{
+  "$comment": "Phase 7 representative extraction sample. Chosen to exercise the NON-UNIQUE-CODE finding: Learning Indicator/Assessment numbering restarts at .1 for EACH Content Standard within the same Sub-Strand, so the printed code alone is not a safe global uniqueness key. Data taken verbatim from docs/inventory-parts/agricultural-science.md.",
+  "subject": {
+    "name": "Agricultural Science",
+    "code": null,
+    "sourceDocument": "curriculum-sources/Agricultural-Science-Curriculum.pdf"
+  },
+  "curriculumVersion": {
+    "name": "NaCCA SHS September 2023",
+    "year": 2023,
+    "issuingAuthority": "National Council for Curriculum and Assessment (NaCCA), Ministry of Education, Republic of Ghana"
+  },
+  "classLevels": ["SHS 1", "SHS 2", "SHS 3"],
+  "strands": [
+    {
+      "name": "NEW DAWN IN AGRICULTURE",
+      "sequence": 1,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": { "page": 23, "pdfPageIndex": null },
+      "subStrands": [
+        {
+          "name": "MISCONCEPTIONS AND PROSPECTS IN AGRICULTURE AND FARMING",
+          "sequence": 1,
+          "source": { "page": 23, "pdfPageIndex": null },
+          "teachingLearningResources": [],
+          "learningOutcomes": [
+            {
+              "code": "1.1.1.LO.1",
+              "description": "Explain the importance of agriculture and address misconceptions about the sector",
+              "sequence": 1,
+              "source": { "page": 23, "pdfPageIndex": null },
+              "guidance": {
+                "twentyFirstCenturySkills": "Digital Literacy, Communication and Collaborative Skills: Acquired and or enhanced as they watch videos and communicate. Critical Thinking: Learners compare evidence on successful farming enterprises and reflect on their misconceptions.",
+                "gesi": "Embrace diversity in agriculture, and encourage inclusion and allow learners to question their stereotypes and biases to clear the misconceptions.",
+                "sel": null,
+                "nationalCoreValues": ["Respect", "Tolerance", "Resourcefulness"],
+                "nationalCoreValuesHeaderSeen": "National core values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of the meaning and importance of Agriculture",
+                  "sequence": 1,
+                  "source": { "page": 23, "pdfPageIndex": null },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.1.LI.1",
+                      "description": "Meaning and Importance of Agriculture",
+                      "sequence": 1,
+                      "source": { "page": 23, "pdfPageIndex": null },
+                      "pedagogicalExemplars": [
+                        "Initiating Talk for Learning: Learners review the meaning of Agriculture in mixed ability groups.",
+                        "Think Pair and Share: In mixed ability groups, learners discuss the importance of Agriculture to society.",
+                        "Structuring Talk for Learning: In gender-based groups, learners make a presentation on the importance of Agriculture in a plenary session."
+                      ],
+                      "assessment": {
+                        "code": "1.1.1.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    },
+                    {
+                      "code": "1.1.1.LI.2",
+                      "description": "Identify and address misconceptions about agriculture and farming at the community and national levels",
+                      "sequence": 2,
+                      "source": { "page": 23, "pdfPageIndex": null },
+                      "pedagogicalExemplars": [
+                        "Talk for learning: In various mixed-ability groups, learners brainstorm to identify misconceptions about agriculture and farming.",
+                        "Digital Learning: Watch documentaries on successful farmers and agribusiness enterprises locally and internationally.",
+                        "Collaborative Learning: In pairs, learners discuss remedies to misconceptions in agriculture. Learners work in groups to reflect and make presentations on evidence that challenges their misconceptions about agriculture and farming."
+                      ],
+                      "assessment": null,
+                      "assessmentNote": "Not printed as a separate AS code for this specific LI in the sampled table - the visible teaching/learning resources block ('Pictures', 'Computer', 'Projector', 'Smartphones') for this Content Standard is captured on the parent Content Standard, see teachingLearningResources below.",
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ],
+                  "teachingLearningResources": ["Pictures", "Computer", "Projector", "Smartphones."],
+                  "teachingLearningResourcesNote": "IMPORTANT STRUCTURAL DIFFERENCE from Physics: in this document, 'Teaching and Learning Resources' is attached per-Content-Standard, not once per Sub-Strand."
+                },
+                {
+                  "code": "1.1.1.CS.2",
+                  "codeDuplicationNote": "CONFIRMED NON-UNIQUE CODE PATTERN: this Content Standard is immediately followed by its OWN Learning Indicator numbered '1.1.1.LI.1' again (not '.LI.3' continuing from the previous Content Standard) - the printed code 1.1.1.LI.1 is therefore NOT globally unique within this Sub-Strand; the natural key requires (Year=1, Strand=1, SubStrand=1, ContentStandard=2, Seq=1), not the printed code string alone.",
+                  "description": "Demonstrate knowledge and understanding of the meaning and importance of Agriculture.",
+                  "sequence": 2,
+                  "source": { "page": 24, "pdfPageIndex": null },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.1.LI.1",
+                      "codeCollisionWith": "The 1.1.1.LI.1 under Content Standard 1.1.1.CS.1 above - same printed string, different real record.",
+                      "description": "Identify characteristics of successful startup packages of vegetable crop and ornamental plant enterprises.",
+                      "sequence": 1,
+                      "source": { "page": 24, "pdfPageIndex": null },
+                      "pedagogicalExemplars": [
+                        "Digital Learning: In mixed-ability groups learners watch videos, documentaries and pictures of successful start-up patterns of male and female farmers.",
+                        "Collaborative Learning: Learners discuss or talk about their observations in class",
+                        "Experiential Learning: In groups embark on educational visits to successful vegetable crop farms and ornamental plant enterprises for learners to observe, ask questions and take field notes on start-up patterns."
+                      ],
+                      "assessment": {
+                        "code": "1.1.1.AS.1",
+                        "codeCollisionWith": "The 1.1.1.AS.1 under Content Standard 1.1.1.CS.1 above - same printed string, different real record.",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": ["Level 1 Recall", "Level 2 Skills of conceptual understanding", "Level 3 Strategic reasoning", "Level 4 Extended critical thinking and reasoning"]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "NEEDS_REVIEW",
+                      "reviewNote": "Flagged NEEDS_REVIEW specifically because of the code-collision issue above, not a content-quality issue - the extractor must confirm the correct disambiguated storage key before this can be safely imported without violating a global-uniqueness constraint."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

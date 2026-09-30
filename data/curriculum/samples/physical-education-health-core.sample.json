@@ -1,0 +1,49 @@
+{
+  "$comment": "Phase 7 representative extraction sample. Chosen to exercise a subject with only a SINGLE Strand for the entire three-year curriculum. Data taken verbatim from docs/inventory-parts/physical-education-health-core.md.",
+  "subject": {
+    "name": "Physical Education & Health (Core)",
+    "code": null,
+    "sourceDocument": "curriculum-sources/PHYSICAL-EDUCATION-HEALTH-CORE-Curriculum.pdf"
+  },
+  "curriculumVersion": {
+    "name": "NaCCA SHS September 2023",
+    "year": 2023,
+    "issuingAuthority": "National Council for Curriculum and Assessment (NaCCA), Ministry of Education, Republic of Ghana"
+  },
+  "classLevels": ["SHS 1", "SHS 2", "SHS 3"],
+  "structuralNote": "Unlike every other subject sampled, this document has exactly ONE Strand ('Physical Activity and Health') for the whole subject; Sub-Strands vary substantially by year instead of Strands varying.",
+  "strands": [
+    {
+      "name": "Physical Activity and Health",
+      "sequence": 1,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": { "page": 22, "pdfPageIndex": null },
+      "subStrands": [
+        {
+          "name": "Career Pathways in Physical Activity and Sports",
+          "sequence": 1,
+          "source": { "page": 22, "pdfPageIndex": null },
+          "teachingLearningResources": [],
+          "learningOutcomes": [
+            {
+              "code": "1.1.1.LO.1",
+              "description": "Explain various career pathways in the physical education and health enterprise.",
+              "sequence": 1,
+              "source": { "page": 22, "pdfPageIndex": null },
+              "guidance": {
+                "twentyFirstCenturySkills": "Digital literacy: Equipping learners with ICT tools for learning. Collaboration: The ability to learn from others to understand and respect their needs. Communication: Learners should communicate confidently, ethically, and effectively in different social contexts. Learning for life: Identify interesting career pathways in PE and strive toward becoming a professional in them.",
+                "gesi": "Learners having experienced a teaching method that ensures gender equality and social inclusion and working with each other in an inclusive way, cross-sharing knowledge and understanding among groups and individuals lead them to: Be gender-neutral in choosing career pathways. Accept and believe in every member of a group they may be working with. Respect individuals of different beliefs or culture. Be gender responsive and have the ability to tackle injustice. Be open to each other and embrace diversity and practice inclusion. Be sensitive to the inter-relatedness of the various spheres of life, groups. Ensure the formation of mixed ability and mixed gender groups where applicable and examples when answering question and making contribution. Be gender-neutral in their responses and examples when answering question and making contribution.",
+                "sel": null,
+                "selNote": "Not present/not sampled for this specific Learning Outcome block.",
+                "nationalCoreValues": []
+              },
+              "contentStandards": [],
+              "contentStandardsNote": "Content Standard/Learning Indicator/Assessment table for this Sub-Strand was not in the sampled pages - not fabricated here."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

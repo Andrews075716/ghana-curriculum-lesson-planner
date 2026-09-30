@@ -1,0 +1,8 @@
+flowchart TD
+    A[Teacher opens a lesson's reflection page] --> B{Reflection exists?}
+    B -- No --> C[All 7 fields shown empty — not an error]
+    B -- Yes --> D[Existing values loaded]
+    C --> E[Teacher types into any field]
+    D --> E
+    E -->|autosave, 1.5s debounce| F[PATCH .../reflection]
+    F --> G([Saved — never affects the lesson plan itself])

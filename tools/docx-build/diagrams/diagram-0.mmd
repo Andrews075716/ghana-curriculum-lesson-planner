@@ -1,0 +1,10 @@
+graph TD
+    Subject["Subject<br/>e.g. Computing"] --> ClassLevel["Class / Form<br/>e.g. Form 1"]
+    ClassLevel --> Strand["Strand<br/>e.g. Computer Architecture<br/>and Organisation"]
+    Strand --> SubStrand["Sub-Strand<br/>e.g. Data Storage<br/>and Manipulation"]
+    SubStrand --> ContentStandard["Content Standard<br/>e.g. Demonstrate knowledge and<br/>understanding of data<br/>representation..."]
+    ContentStandard --> LearningOutcome["Learning Outcome<br/>e.g. Apply computer architecture<br/>concepts..."]
+    LearningOutcome --> LearningIndicator["Learning Indicator<br/>e.g. Describe data<br/>as bit patterns."]
+    LearningIndicator -.referenced by.-> LessonPlanner["Lesson Planner<br/>(teacher-authored)"]
+
+    CurriculumVersion["Curriculum Version<br/>e.g. DRAFT / ACTIVE / ARCHIVED"] -.applies to.-> Strand

@@ -1,0 +1,734 @@
+// Prisma schema for the Ghana Curriculum Lesson Planner.
+//
+// Two clearly separated regions:
+//   1. Curriculum master data (Subject -> ClassLevel -> Strand -> SubStrand ->
+//      ContentStandard -> LearningOutcome -> LearningIndicator), admin-managed,
+//      versioned, and only ever REFERENCED by lesson planners, never duplicated.
+//   2. Teacher-authored planning data (LessonPlanner, Lesson, and their child
+//      content), which is fully owned/editable per teacher and independent of
+//      the curriculum master data it references.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------------------------------------------------
+// Enums
+// -----------------------------------------------------------------------
+
+enum Role {
+  TEACHER
+  CURRICULUM_ADMIN
+}
+
+enum CurriculumVersionStatus {
+  DRAFT
+  ACTIVE
+  ARCHIVED
+}
+
+enum Term {
+  TERM_1
+  TERM_2
+  TERM_3
+}
+
+enum PlannerStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum LessonActivityStage {
+  STARTER
+  INTRODUCTORY
+  ACTIVITY
+  ASSESSMENT
+  CLOSURE
+}
+
+enum DokLevel {
+  LEVEL_1
+  LEVEL_2
+  LEVEL_3
+  LEVEL_4
+}
+
+enum ResourceType {
+  LINK
+  DOCUMENT
+  TEXTBOOK
+  VIDEO
+  OTHER
+}
+
+/// Machine-extraction confidence for a curriculum-master-data node, distinct
+/// from `ReviewStatus` (human sign-off). Set by the importer, never by a
+/// teacher/admin editing curriculum data by hand (those rows are EXTRACTED
+/// by definition, since there's nothing to "extract").
+enum ExtractionStatus {
+  EXTRACTED
+  NEEDS_REVIEW
+  REJECTED
+}
+
+/// Human sign-off status for a curriculum-master-data node. Importing a node
+/// NEVER sets this to APPROVED on its own — see Checkpoint 6 execution rules.
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// -----------------------------------------------------------------------
+// Identity
+// -----------------------------------------------------------------------
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         Role     @default(TEACHER)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  teacherProfile      TeacherProfile?
+  passwordResetTokens PasswordResetToken[]
+
+  @@map("users")
+}
+
+/// A single-use, time-limited token for the forgot/reset-password flow.
+/// Only a SHA-256 hash of the token is stored — never the raw token — so a
+/// database read alone can never be used to reset a password.
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String    @map("user_id")
+  tokenHash String    @unique @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("password_reset_tokens")
+}
+
+model School {
+  id        String   @id @default(cuid())
+  name      String
+  district  String?
+  region    String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  teachers TeacherProfile[]
+
+  @@map("schools")
+}
+
+model TeacherProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique @map("user_id")
+  schoolId  String?  @map("school_id")
+  /// "Teacher ID" — an optional staff/employee identifier, distinct from the internal row id.
+  staffId   String?  @map("staff_id")
+  /// Optional; a teacher's profile region is independent of (and may differ from) their school's region.
+  region    String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user        User                       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  school      School?                    @relation(fields: [schoolId], references: [id], onDelete: SetNull)
+  planners    LessonPlanner[]
+  subjects    TeacherProfileSubject[]
+  classLevels TeacherProfileClassLevel[]
+  classes     Class[]
+  resources   Resource[]
+
+  @@index([schoolId])
+  @@map("teacher_profiles")
+}
+
+/// Subjects a teacher teaches — referenced from curriculum master data, never duplicated.
+model TeacherProfileSubject {
+  teacherProfileId String @map("teacher_profile_id")
+  subjectId        String @map("subject_id")
+
+  teacherProfile TeacherProfile @relation(fields: [teacherProfileId], references: [id], onDelete: Cascade)
+  subject        Subject        @relation(fields: [subjectId], references: [id], onDelete: Restrict)
+
+  @@id([teacherProfileId, subjectId])
+  @@map("teacher_profile_subjects")
+}
+
+/// Class levels (Form 1, Form 2, ...) a teacher teaches — same reuse principle as subjects.
+model TeacherProfileClassLevel {
+  teacherProfileId String @map("teacher_profile_id")
+  classLevelId     String @map("class_level_id")
+
+  teacherProfile TeacherProfile @relation(fields: [teacherProfileId], references: [id], onDelete: Cascade)
+  classLevel     ClassLevel     @relation(fields: [classLevelId], references: [id], onDelete: Restrict)
+
+  @@id([teacherProfileId, classLevelId])
+  @@map("teacher_profile_class_levels")
+}
+
+// -----------------------------------------------------------------------
+// Curriculum hierarchy (master data)
+// -----------------------------------------------------------------------
+
+model CurriculumVersion {
+  id               String                  @id @default(cuid())
+  name             String                  @unique
+  year             Int?
+  status           CurriculumVersionStatus @default(DRAFT)
+  /// e.g. "National Council for Curriculum and Assessment (NaCCA), Ministry
+  /// of Education, Republic of Ghana" — free text, not a controlled list.
+  issuingAuthority String?                 @map("issuing_authority")
+  createdAt        DateTime                @default(now()) @map("created_at")
+
+  strands Strand[]
+
+  @@map("curriculum_versions")
+}
+
+model Subject {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  code      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+
+  strands  Strand[]
+  teachers TeacherProfileSubject[]
+  classes  Class[]
+
+  @@map("subjects")
+}
+
+model ClassLevel {
+  id       String @id @default(cuid())
+  name     String @unique
+  sequence Int    @unique
+
+  strands  Strand[]
+  teachers TeacherProfileClassLevel[]
+  classes  Class[]
+
+  @@map("class_levels")
+}
+
+model Strand {
+  id                  String            @id @default(cuid())
+  subjectId           String            @map("subject_id")
+  classLevelId        String            @map("class_level_id")
+  curriculumVersionId String            @map("curriculum_version_id")
+  name                String
+  code                String?
+  sequence            Int
+  /// Named branch/option a Strand belongs to in subjects that split into
+  /// mutually-exclusive tracks in later years (e.g. Applied Technology's
+  /// "Option One — Automobile and Metal Technology"). `null` for the
+  /// overwhelming majority of subjects, which don't branch.
+  pathway             String?
+  sourceDocument      String?           @map("source_document")
+  sourcePage          Int?              @map("source_page")
+  sourcePdfPageIndex  Int?              @map("source_pdf_page_index")
+  extractionStatus    ExtractionStatus? @map("extraction_status")
+  reviewStatus        ReviewStatus?     @default(PENDING) @map("review_status")
+  reviewNote          String?           @map("review_note") @db.Text
+  createdAt           DateTime          @default(now()) @map("created_at")
+  updatedAt           DateTime          @updatedAt @map("updated_at")
+
+  subject           Subject           @relation(fields: [subjectId], references: [id], onDelete: Restrict)
+  classLevel        ClassLevel        @relation(fields: [classLevelId], references: [id], onDelete: Restrict)
+  curriculumVersion CurriculumVersion @relation(fields: [curriculumVersionId], references: [id], onDelete: Restrict)
+  subStrands        SubStrand[]
+
+  @@unique([subjectId, classLevelId, curriculumVersionId, pathway, code])
+  @@index([subjectId, classLevelId, curriculumVersionId])
+  @@map("strands")
+}
+
+model SubStrand {
+  id                        String            @id @default(cuid())
+  strandId                  String            @map("strand_id")
+  name                      String
+  code                      String?
+  sequence                  Int
+  /// Sub-Strand-level Teaching and Learning Resources, printed once per
+  /// Sub-Strand in most source documents (a minority of subjects also/
+  /// instead print TLR per Content Standard — see `ContentStandard.
+  /// teachingLearningResources`).
+  teachingLearningResources String[]          @map("teaching_learning_resources")
+  sourceDocument            String?           @map("source_document")
+  sourcePage                Int?              @map("source_page")
+  sourcePdfPageIndex        Int?              @map("source_pdf_page_index")
+  extractionStatus          ExtractionStatus? @map("extraction_status")
+  reviewStatus              ReviewStatus?     @default(PENDING) @map("review_status")
+  reviewNote                String?           @map("review_note") @db.Text
+  createdAt                 DateTime          @default(now()) @map("created_at")
+  updatedAt                 DateTime          @updatedAt @map("updated_at")
+
+  strand           Strand            @relation(fields: [strandId], references: [id], onDelete: Cascade)
+  contentStandards ContentStandard[]
+
+  @@unique([strandId, code])
+  @@index([strandId])
+  @@map("sub_strands")
+}
+
+model ContentStandard {
+  id                        String            @id @default(cuid())
+  subStrandId               String            @map("sub_strand_id")
+  code                      String?
+  description               String
+  sequence                  Int
+  /// A minority of source documents print Teaching and Learning Resources
+  /// per Content Standard rather than once per Sub-Strand — see
+  /// `SubStrand.teachingLearningResources`.
+  teachingLearningResources String[]          @map("teaching_learning_resources")
+  sourceDocument            String?           @map("source_document")
+  sourcePage                Int?              @map("source_page")
+  sourcePdfPageIndex        Int?              @map("source_pdf_page_index")
+  extractionStatus          ExtractionStatus? @map("extraction_status")
+  reviewStatus              ReviewStatus?     @default(PENDING) @map("review_status")
+  reviewNote                String?           @map("review_note") @db.Text
+  createdAt                 DateTime          @default(now()) @map("created_at")
+  updatedAt                 DateTime          @updatedAt @map("updated_at")
+
+  subStrand        SubStrand         @relation(fields: [subStrandId], references: [id], onDelete: Cascade)
+  learningOutcomes LearningOutcome[]
+
+  /// Learning Outcomes ADDITIONALLY linked to this Content Standard beyond
+  /// whichever Learning Outcome(s) already reference it as their primary
+  /// parent above — see `LearningOutcomeContentStandardLink`.
+  additionalLearningOutcomeLinks LearningOutcomeContentStandardLink[]
+
+  @@unique([subStrandId, code])
+  @@index([subStrandId])
+  @@map("content_standards")
+}
+
+model LearningOutcome {
+  id                 String            @id @default(cuid())
+  contentStandardId  String            @map("content_standard_id")
+  /// The source's own printed code (e.g. "1.1.1.LO.1") — previously had no
+  /// home in this schema even though every other level of the hierarchy
+  /// stores its official code; see docs/curriculum-db-mapping.md.
+  code               String?
+  description        String
+  sequence           Int
+  sourceDocument     String?           @map("source_document")
+  sourcePage         Int?              @map("source_page")
+  sourcePdfPageIndex Int?              @map("source_pdf_page_index")
+  extractionStatus   ExtractionStatus? @map("extraction_status")
+  reviewStatus       ReviewStatus?     @default(PENDING) @map("review_status")
+  reviewNote         String?           @map("review_note") @db.Text
+  createdAt          DateTime          @default(now()) @map("created_at")
+  updatedAt          DateTime          @updatedAt @map("updated_at")
+
+  contentStandard    ContentStandard          @relation(fields: [contentStandardId], references: [id], onDelete: Cascade)
+  learningIndicators LearningIndicator[]
+  guidance           LearningOutcomeGuidance?
+
+  /// Genuine ADDITIONAL Content Standard relationships the official curriculum
+  /// supports beyond the primary one above — see `LearningOutcomeContentStandardLink`.
+  additionalContentStandardLinks LearningOutcomeContentStandardLink[]
+
+  @@unique([contentStandardId, code])
+  @@index([contentStandardId])
+  @@map("learning_outcomes")
+}
+
+/// An ADDITIONAL, non-primary relationship between a Learning Outcome and a
+/// Content Standard, for the confirmed minority of cases where the official
+/// curriculum genuinely relates one Content Standard to more than one Learning
+/// Outcome (or vice versa) and the primary `ContentStandard.learningOutcomes` /
+/// `LearningOutcome.contentStandardId` relationship — which every Learning
+/// Outcome still has exactly one of, chosen by the same evidence-based review
+/// used for every other correction in this pipeline — can't express the rest.
+/// See docs/curriculum-relationship-analysis.md for the evidence this is
+/// based on. Never populated by guessing; only for a relationship the source
+/// document itself supports.
+model LearningOutcomeContentStandardLink {
+  id                String   @id @default(cuid())
+  learningOutcomeId String   @map("learning_outcome_id")
+  contentStandardId String   @map("content_standard_id")
+  /// Evidence/justification for why this additional link exists, e.g. "this
+  /// Content Standard's own wording spans both this and its sibling Learning
+  /// Outcome; see extraction-progress.json's chemistry.2.1.1 note."
+  note              String?  @db.Text
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  learningOutcome LearningOutcome @relation(fields: [learningOutcomeId], references: [id], onDelete: Cascade)
+  contentStandard ContentStandard @relation(fields: [contentStandardId], references: [id], onDelete: Cascade)
+
+  @@unique([learningOutcomeId, contentStandardId])
+  @@index([learningOutcomeId])
+  @@index([contentStandardId])
+  @@map("learning_outcome_content_standard_links")
+}
+
+/// Official Category B guidance text NaCCA attaches to a Learning Outcome —
+/// curriculum-sourced and admin-owned, distinct from the teacher/AI-authored
+/// `PedagogicalStrategy` etc. tables under `LessonPlanner`. 1:1 so it can be
+/// added/edited independently of the outcome row itself.
+model LearningOutcomeGuidance {
+  learningOutcomeId        String   @id @map("learning_outcome_id")
+  twentyFirstCenturySkills String?  @map("twenty_first_century_skills") @db.Text
+  gesi                     String?  @db.Text
+  sel                      String?  @db.Text
+  nationalCoreValues       String[] @map("national_core_values")
+
+  learningOutcome LearningOutcome @relation(fields: [learningOutcomeId], references: [id], onDelete: Cascade)
+
+  @@map("learning_outcome_guidance")
+}
+
+model LearningIndicator {
+  id                 String            @id @default(cuid())
+  learningOutcomeId  String            @map("learning_outcome_id")
+  code               String?
+  description        String
+  sequence           Int
+  sourceDocument     String?           @map("source_document")
+  sourcePage         Int?              @map("source_page")
+  sourcePdfPageIndex Int?              @map("source_pdf_page_index")
+  extractionStatus   ExtractionStatus? @map("extraction_status")
+  reviewStatus       ReviewStatus?     @default(PENDING) @map("review_status")
+  reviewNote         String?           @map("review_note") @db.Text
+  createdAt          DateTime          @default(now()) @map("created_at")
+  updatedAt          DateTime          @updatedAt @map("updated_at")
+
+  learningOutcome LearningOutcome            @relation(fields: [learningOutcomeId], references: [id], onDelete: Cascade)
+  planners        LessonPlanner[]
+  guidance        LearningIndicatorGuidance?
+
+  @@unique([learningOutcomeId, code])
+  @@index([learningOutcomeId])
+  @@map("learning_indicators")
+}
+
+/// Official Category B guidance NaCCA attaches to a Learning Indicator —
+/// Pedagogical Exemplars and DoK/Assessment guidance. Curriculum-sourced and
+/// admin-owned; do not confuse with `PedagogicalExemplar`/`Assessment` under
+/// `LessonPlanner`, which are teacher/AI-authored planning content.
+model LearningIndicatorGuidance {
+  learningIndicatorId  String   @id @map("learning_indicator_id")
+  pedagogicalExemplars String[] @map("pedagogical_exemplars")
+  assessmentCode       String?  @map("assessment_code")
+  dokLevels            Int[]    @map("dok_levels")
+  dokDescriptions      String[] @map("dok_descriptions")
+
+  learningIndicator LearningIndicator @relation(fields: [learningIndicatorId], references: [id], onDelete: Cascade)
+
+  @@map("learning_indicator_guidance")
+}
+
+// -----------------------------------------------------------------------
+// Controlled vocabulary
+// -----------------------------------------------------------------------
+
+model CrossCuttingTheme {
+  id          String  @id @default(cuid())
+  name        String  @unique
+  description String?
+
+  planners LessonPlannerCrossCuttingTheme[]
+
+  @@map("cross_cutting_themes")
+}
+
+// -----------------------------------------------------------------------
+// Lesson planner (teacher-authored, references curriculum, never duplicates it)
+// -----------------------------------------------------------------------
+
+/// Most business fields are nullable to support incremental draft autosave
+/// (a draft can exist before curriculum selection or basic info is complete).
+/// Full completeness is enforced by the service layer at publish time, not
+/// by the database schema.
+model LessonPlanner {
+  id                  String        @id @default(cuid())
+  teacherId           String        @map("teacher_id")
+  learningIndicatorId String?       @map("learning_indicator_id")
+  academicYear        String        @map("academic_year")
+  term                Term?
+  weekNumber          Int?          @map("week_number")
+  durationMinutes     Int?          @map("duration_minutes")
+  classSection        String?       @map("class_section")
+  status              PlannerStatus @default(DRAFT)
+  createdAt           DateTime      @default(now()) @map("created_at")
+  updatedAt           DateTime      @updatedAt @map("updated_at")
+
+  teacher           TeacherProfile     @relation(fields: [teacherId], references: [id], onDelete: Restrict)
+  learningIndicator LearningIndicator? @relation(fields: [learningIndicatorId], references: [id], onDelete: Restrict)
+
+  essentialQuestions        EssentialQuestion[]
+  pedagogicalStrategies     PedagogicalStrategy[]
+  teachingLearningResources TeachingLearningResource[]
+  differentiationPlan       DifferentiationPlan?
+  learningTasks             LearningTask[]
+  pedagogicalExemplars      PedagogicalExemplar[]
+  keywords                  Keyword[]
+  assessments               Assessment[]
+  crossCuttingThemes        LessonPlannerCrossCuttingTheme[]
+  lessons                   Lesson[]
+  libraryResources          LessonPlannerResource[]
+
+  @@index([teacherId])
+  @@index([learningIndicatorId])
+  @@map("lesson_planners")
+}
+
+model LessonPlannerCrossCuttingTheme {
+  plannerId   String  @map("planner_id")
+  themeId     String  @map("theme_id")
+  /// How this theme will be incorporated into this specific lesson — required
+  /// content, not just a selection checkbox.
+  explanation String? @db.Text
+
+  planner LessonPlanner     @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+  theme   CrossCuttingTheme @relation(fields: [themeId], references: [id], onDelete: Restrict)
+
+  @@id([plannerId, themeId])
+  @@map("lesson_planner_cross_cutting_themes")
+}
+
+model EssentialQuestion {
+  id        String @id @default(cuid())
+  plannerId String @map("planner_id")
+  text      String
+  sequence  Int
+
+  planner LessonPlanner @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+
+  @@index([plannerId])
+  @@map("essential_questions")
+}
+
+model PedagogicalStrategy {
+  id        String @id @default(cuid())
+  plannerId String @map("planner_id")
+  text      String
+  sequence  Int
+
+  planner LessonPlanner @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+
+  @@index([plannerId])
+  @@map("pedagogical_strategies")
+}
+
+model TeachingLearningResource {
+  id        String @id @default(cuid())
+  plannerId String @map("planner_id")
+  text      String
+  sequence  Int
+
+  planner LessonPlanner @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+
+  @@index([plannerId])
+  @@map("teaching_learning_resources")
+}
+
+/// One structured differentiation plan per planner — deliberately NOT a
+/// single free-text note or checkbox. Each column is its own dimension of
+/// differentiation a teacher must think through separately.
+model DifferentiationPlan {
+  plannerId                   String  @id @map("planner_id")
+  mixedAbilityGrouping        String? @map("mixed_ability_grouping") @db.Text
+  scaffoldSupport             String? @map("scaffold_support") @db.Text
+  extensionChallenge          String? @map("extension_challenge") @db.Text
+  resourceAdaptation          String? @map("resource_adaptation") @db.Text
+  learningTaskDifferentiation String? @map("learning_task_differentiation") @db.Text
+  teacherPeerSupport          String? @map("teacher_peer_support") @db.Text
+  additionalNotes             String? @map("additional_notes") @db.Text
+
+  planner LessonPlanner @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+
+  @@map("differentiation_plans")
+}
+
+model LearningTask {
+  id        String @id @default(cuid())
+  plannerId String @map("planner_id")
+  text      String
+  sequence  Int
+
+  planner LessonPlanner @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+
+  @@index([plannerId])
+  @@map("learning_tasks")
+}
+
+model PedagogicalExemplar {
+  id        String @id @default(cuid())
+  plannerId String @map("planner_id")
+  text      String
+  sequence  Int
+
+  planner LessonPlanner @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+
+  @@index([plannerId])
+  @@map("pedagogical_exemplars")
+}
+
+model Keyword {
+  id        String @id @default(cuid())
+  plannerId String @map("planner_id")
+  text      String
+  sequence  Int
+
+  planner LessonPlanner @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+
+  @@index([plannerId])
+  @@map("keywords")
+}
+
+/// Supports both the week-level "Key Assessments (DoK)" summary
+/// (lessonId is null) and a specific per-lesson assessment (lessonId set).
+model Assessment {
+  id          String   @id @default(cuid())
+  plannerId   String   @map("planner_id")
+  lessonId    String?  @map("lesson_id")
+  dokLevel    DokLevel @map("dok_level")
+  description String
+  sequence    Int
+
+  planner LessonPlanner @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+  lesson  Lesson?       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@index([plannerId])
+  @@index([lessonId])
+  @@map("assessments")
+}
+
+// -----------------------------------------------------------------------
+// Lessons (children of a planner)
+// -----------------------------------------------------------------------
+
+model Lesson {
+  id        String    @id @default(cuid())
+  plannerId String    @map("planner_id")
+  name      String
+  sequence  Int
+  date      DateTime?
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  planner     LessonPlanner    @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+  activities  LessonActivity[]
+  assessments Assessment[]
+  reflection  Reflection?
+
+  @@index([plannerId])
+  @@map("lessons")
+}
+
+model LessonActivity {
+  id              String              @id @default(cuid())
+  lessonId        String              @map("lesson_id")
+  stage           LessonActivityStage
+  label           String
+  sequence        Int
+  durationMinutes Int                 @map("duration_minutes")
+  teacherActivity String              @map("teacher_activity")
+  learnerActivity String              @map("learner_activity")
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@index([lessonId])
+  @@map("lesson_activities")
+}
+
+/// Post-lesson reflection — filled in by the teacher AFTER teaching, never
+/// by AI and never automatically. One per lesson. Entirely optional/
+/// progressive: every field is nullable so a teacher can save partial
+/// notes and come back later, the same autosave pattern as the planner
+/// wizard.
+model Reflection {
+  id                 String   @id @default(cuid())
+  lessonId           String   @unique @map("lesson_id")
+  whatWentWell       String?  @map("what_went_well") @db.Text
+  subgroupsCatered   String?  @map("subgroups_catered") @db.Text
+  difficulties       String?  @db.Text
+  indicatorsAchieved String?  @map("indicators_achieved") @db.Text
+  reteachingNeeded   String?  @map("reteaching_needed") @db.Text
+  nextLessonChanges  String?  @map("next_lesson_changes") @db.Text
+  remarks            String?  @db.Text
+  createdAt          DateTime @default(now()) @map("created_at")
+  updatedAt          DateTime @updatedAt @map("updated_at")
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@map("reflections")
+}
+
+// -----------------------------------------------------------------------
+// Classes (teacher-defined groups a planner is taught to — no pupil data)
+// -----------------------------------------------------------------------
+
+/// A teacher's own record of a class/section they teach. Deliberately holds
+/// no pupil-identifying information. `name` is free text (e.g. "Form 1
+/// Gold") — the same kind of label a planner's `classSection` field
+/// already stores, so the planner count for a class is computed by
+/// matching planner.classSection to this name rather than a hard FK,
+/// since LessonPlanner predates this model and has no classId column.
+model Class {
+  id           String   @id @default(cuid())
+  teacherId    String   @map("teacher_id")
+  name         String
+  classLevelId String   @map("class_level_id")
+  subjectId    String   @map("subject_id")
+  academicYear String   @map("academic_year")
+  notes        String?  @db.Text
+  archived     Boolean  @default(false)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  teacher    TeacherProfile @relation(fields: [teacherId], references: [id], onDelete: Restrict)
+  classLevel ClassLevel     @relation(fields: [classLevelId], references: [id], onDelete: Restrict)
+  subject    Subject        @relation(fields: [subjectId], references: [id], onDelete: Restrict)
+
+  @@index([teacherId])
+  @@map("classes")
+}
+
+// -----------------------------------------------------------------------
+// Teaching & Learning Resources library (metadata only — no file storage;
+// see AGENTS.md task notes for why uploads are out of scope)
+// -----------------------------------------------------------------------
+
+model Resource {
+  id          String       @id @default(cuid())
+  teacherId   String       @map("teacher_id")
+  title       String
+  type        ResourceType
+  url         String?
+  description String?      @db.Text
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  teacher  TeacherProfile          @relation(fields: [teacherId], references: [id], onDelete: Restrict)
+  planners LessonPlannerResource[]
+
+  @@index([teacherId])
+  @@map("resources")
+}
+
+/// Join table associating a resource with a planner it's used in.
+model LessonPlannerResource {
+  plannerId  String @map("planner_id")
+  resourceId String @map("resource_id")
+
+  planner  LessonPlanner @relation(fields: [plannerId], references: [id], onDelete: Cascade)
+  resource Resource      @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+
+  @@id([plannerId, resourceId])
+  @@map("lesson_planner_resources")
+}

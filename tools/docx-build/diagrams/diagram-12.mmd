@@ -1,0 +1,28 @@
+graph TB
+    subgraph Internet
+        Teacher[Teacher's browser]
+        Admin[Admin's browser]
+    end
+
+    subgraph AppTier["Application tier (proposed)"]
+        LB[HTTPS / reverse proxy]
+        App1[Next.js server process<br/>npm run start]
+        Chrome[Headless Chrome<br/>for PDF export]
+    end
+
+    subgraph DataTier["Data tier (proposed)"]
+        PG[(PostgreSQL 14+<br/>managed or self-hosted)]
+        Backup[Automated backups /<br/>point-in-time recovery]
+    end
+
+    subgraph ExternalTier["External services"]
+        Anthropic[Anthropic API<br/>optional — AI_PROVIDER=anthropic]
+    end
+
+    Teacher -->|HTTPS| LB
+    Admin -->|HTTPS| LB
+    LB --> App1
+    App1 --> Chrome
+    App1 -->|Prisma| PG
+    PG --> Backup
+    App1 -->|server-side only,<br/>API key never exposed| Anthropic

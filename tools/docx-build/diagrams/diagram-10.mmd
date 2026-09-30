@@ -1,0 +1,10 @@
+flowchart LR
+    A[Curriculum data<br/>PostgreSQL, read-only] --> B[AI Context Builder<br/>ai-context.service.ts]
+    B --> C[AI Provider<br/>AIProvider interface]
+    C --> D[Structured Response<br/>tool-call JSON]
+    D --> E[Schema Validation<br/>Zod .strict schemas,<br/>validated twice]
+    E --> F[Teacher Review<br/>AIAssistPanel preview]
+    F --> G{Accept / Reject / Edit}
+    G -- Insert --> H[Lesson Planner<br/>wizard state, then autosaved]
+    G -- Discard --> I([Nothing changes])
+    G -- Regenerate --> C

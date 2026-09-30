@@ -1,0 +1,80 @@
+{
+  "$comment": "Phase 7 representative extraction sample. Reference subject - standard SHS science pattern. Every field below is taken verbatim from docs/inventory-parts/physics.md's 'Representative verbatim sample' section, which was itself read directly from curriculum-sources/Physics-Curriculum.pdf. Nothing here is invented.",
+  "subject": {
+    "name": "Physics",
+    "code": null,
+    "sourceDocument": "curriculum-sources/Physics-Curriculum.pdf"
+  },
+  "curriculumVersion": {
+    "name": "NaCCA SHS September 2023",
+    "year": 2023,
+    "issuingAuthority": "National Council for Curriculum and Assessment (NaCCA), Ministry of Education, Republic of Ghana (in association with Ghana Education Service)"
+  },
+  "classLevels": ["SHS 1", "SHS 2", "SHS 3"],
+  "strands": [
+    {
+      "name": "MECHANICS AND MATTER",
+      "sequence": 1,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": { "page": 23, "pdfPageIndex": 25 },
+      "subStrands": [
+        {
+          "name": "INTRODUCTION TO PHYSICS",
+          "sequence": 1,
+          "source": { "page": 23, "pdfPageIndex": 25 },
+          "teachingLearningResources": [],
+          "teachingLearningResourcesHeaderSeen": "Teaching and Learning Resources",
+          "learningOutcomes": [
+            {
+              "code": "1.1.1.LO.1",
+              "description": "Explain how physics is applied in some sectors of the glocal economy",
+              "sequence": 1,
+              "source": { "page": 23, "pdfPageIndex": 25 },
+              "guidance": {
+                "twentyFirstCenturySkills": "Digital Learning: By employing the use of ICT devices to watch video learners acquire and develop their digital literacy. Collaborating and communication: In mixed-ability groups learners learn to be team players as they share ideas to relate physics to various industrial sectors",
+                "gesi": "Learners having experienced various teaching methods that ensure gender equality and inclusively working with each other collaboratively, cross-sharing knowledge and understanding among groups and individuals lead them to: Appreciate the skills and abilities of everyone in the global environment. Examine and dispel misconceptions/myths about gender and disabilities related to Physics. Interrogate their stereotypes and biases about how both genders have contributed to the development of Physics and career and academic prospects.",
+                "sel": "Learners, through their interactions with colleagues and the support provided by teachers as they learn the application of Physics in the various sectors of the economy, helps them to: Develop strategies for completing a task [continues on next page, not fully sampled]",
+                "nationalCoreValues": ["Honesty", "Teamwork", "Resilience", "Integrity", "Responsibility", "Respect"],
+                "nationalCoreValuesHeaderSeen": "National Core Values:"
+              },
+              "contentStandards": [
+                {
+                  "code": "1.1.1.CS.1",
+                  "description": "Demonstrate knowledge and understanding of the characteristics of physics as exhibited in everyday life.",
+                  "sequence": 1,
+                  "source": { "page": 26, "pdfPageIndex": 28 },
+                  "learningIndicators": [
+                    {
+                      "code": "1.1.1.LI.1",
+                      "description": "Identify careers that are related to physics in various sectors of the economy.",
+                      "sequence": 1,
+                      "source": { "page": 26, "pdfPageIndex": 28 },
+                      "pedagogicalExemplars": [
+                        "Collaborative learning: Let learners watch a documentary showing how physics through collaboration and critical thinking plays a vital role in the world. Learners through talk for learning discuss how careers in plumbing, carpentry, welding, vulcanising, masonry is physics oriented careers. Learners discuss physics-oriented careers such as engineering (mechanical, civil, geomatic, electrical), medicine and new areas such as geophysics, materials science, metallurgy, laser physics, radiology, astrophysics, meteorology and climate science and others play vital role in the world. Learners appreciate that success in physics-oriented careers like all others require hard work and resilience. For a physicist, it is important to report observations as seen without personal biases and requires focus.",
+                        "Grouping be mindful of gender, where applicable. Learners who are not adept in Mathematics and/or in using some digital equipment should be catered. Learners should appreciate that Physics oriented careers are open to everyone.",
+                        "Provide students with exposure to diverse perspectives and opportunities to engage with professionals who challenge stereotypes and promote inclusive practices in physics."
+                      ],
+                      "assessment": {
+                        "code": "1.1.1.AS.1",
+                        "dokLevels": [1, 2, 3, 4],
+                        "dokDescriptions": [
+                          "Level 1 Recall",
+                          "Level 2 Skills of conceptual understanding",
+                          "Level 3 Strategic reasoning",
+                          "Level 4 Extended critical thinking and reasoning"
+                        ]
+                      },
+                      "extractionStatus": "EXTRACTED",
+                      "reviewStatus": "PENDING"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

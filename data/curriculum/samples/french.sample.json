@@ -1,0 +1,50 @@
+{
+  "$comment": "Phase 7 representative extraction sample. Chosen to exercise non-English content storage - all substantive text is French, scaffolding labels stay English. Confirms UTF-8 round-trips correctly through JSON. Data taken verbatim from docs/inventory-parts/french.md.",
+  "subject": {
+    "name": "French",
+    "code": null,
+    "sourceDocument": "curriculum-sources/French-Curriculum.pdf"
+  },
+  "curriculumVersion": {
+    "name": "NaCCA SHS September 2023",
+    "year": 2023,
+    "issuingAuthority": "National Council for Curriculum and Assessment (NaCCA), Ministry of Education, Republic of Ghana"
+  },
+  "classLevels": ["SHS 1", "SHS 2", "SHS 3"],
+  "structuralNote": "All Strand/Sub-Strand names and Learning Outcome/guidance text are in French. Extracted here using UTF-8-explicit text extraction (pdftotext -enc UTF-8) - a default-encoding extraction of the same pages corrupted every accented character into replacement glyphs, confirmed directly by comparing both extraction runs.",
+  "strands": [
+    {
+      "name": "Faire Connaissance",
+      "nameTranslationForReadability": "Getting acquainted (not stored - for this report only)",
+      "sequence": 1,
+      "classLevel": "SHS 1",
+      "pathway": null,
+      "source": { "page": 23, "pdfPageIndex": null },
+      "subStrands": [
+        {
+          "name": "Se présenter et présenter quelqu'un",
+          "sequence": 1,
+          "source": { "page": 23, "pdfPageIndex": null },
+          "teachingLearningResources": [],
+          "learningOutcomes": [
+            {
+              "code": "1.1.1.LO.1",
+              "description": "S'engager dans un acte de se présenter et présenter quelqu'un.",
+              "sequence": 1,
+              "source": { "page": 24, "pdfPageIndex": null },
+              "guidance": {
+                "twentyFirstCenturySkills": "Communication et coopération: Les apprenants apprennent à écouter afin de bien comprendre leurs interlocuteurs et de réagir de manière appropriée pour une bonne collaboration. Littératie numérique: Les apprenants apprennent à utiliser les Smartphones et les enceintes Bluetooth dans l'apprentissage. Pour devenir un citoyen global, il est nécessaire de connaitre d'autres personnes.",
+                "gesi": "Égalité des sexes et inclusion sociale: Les apprenants se respectent et s'entendent. Ils sont tolérants les uns envers les autres. Ils comprennent leurs capacités par rapport aux autres. Ils apprécient les différentes compétences des individus. Ils respectent l'égalité des sexes. Ils adoptent et pratiquent l'inclusion.",
+                "sel": "Les apprenants ayant fait l'expérience d'une approche pédagogique garantissant l'égalité des sexes et l'inclusion sociale, où ils travaillent les uns avec les autres de manière inclusive; partagent leurs connaissances et leur compréhension dans les groupes et avec les individus. En ce faisant, ils apprennent donc à: respecter les individus d'origines différentes. embrasser la diversité et pratiquer l'inclusion. examiner et dissiper les idées fausses et les mythes sur le genre",
+                "nationalCoreValues": [],
+                "nationalCoreValuesNote": "Not present/not sampled for this specific Learning Outcome block."
+              },
+              "contentStandards": [],
+              "contentStandardsNote": "Content Standard/Learning Indicator/Assessment table for this Sub-Strand was not in the sampled pages - not fabricated here."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+erDiagram
+    User ||--o| TeacherProfile : has
+    User ||--o{ PasswordResetToken : has
+    School ||--o{ TeacherProfile : employs
+    TeacherProfile ||--o{ TeacherProfileSubject : teaches
+    TeacherProfile ||--o{ TeacherProfileClassLevel : teaches
+    TeacherProfile ||--o{ LessonPlanner : owns
+
+    Subject ||--o{ TeacherProfileSubject : "taught by"
+    ClassLevel ||--o{ TeacherProfileClassLevel : "taught by"
+    Subject ||--o{ Strand : "has"
+    ClassLevel ||--o{ Strand : "has"
+    CurriculumVersion ||--o{ Strand : "has"
+    Strand ||--o{ SubStrand : "has"
+    SubStrand ||--o{ ContentStandard : "has"
+    ContentStandard ||--o{ LearningOutcome : "has"
+    LearningOutcome ||--o{ LearningIndicator : "has"
+    LearningIndicator ||--o{ LessonPlanner : "referenced by"
+
+    LessonPlanner ||--o{ EssentialQuestion : has
+    LessonPlanner ||--o{ PedagogicalStrategy : has
+    LessonPlanner ||--o{ TeachingLearningResource : has
+    LessonPlanner ||--o| DifferentiationPlan : has
+    LessonPlanner ||--o{ LearningTask : has
+    LessonPlanner ||--o{ PedagogicalExemplar : has
+    LessonPlanner ||--o{ Keyword : has
+    LessonPlanner ||--o{ Assessment : has
+    LessonPlanner ||--o{ LessonPlannerCrossCuttingTheme : has
+    CrossCuttingTheme ||--o{ LessonPlannerCrossCuttingTheme : "used in"
+    LessonPlanner ||--o{ Lesson : has
+
+    Lesson ||--o{ LessonActivity : has
+    Lesson ||--o{ Assessment : "per-lesson"
+    Lesson ||--o| Reflection : has

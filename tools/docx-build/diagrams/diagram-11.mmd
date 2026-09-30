@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant Browser
+    participant API as API Routes
+    participant DB as PostgreSQL
+
+    Browser->>API: POST /register {name, email, password, ...}
+    API->>DB: email already used?
+    alt duplicate
+        API-->>Browser: 409 Conflict
+    else new
+        API->>DB: create User + TeacherProfile
+        API-->>Browser: 201 + Set-Cookie (session JWT)
+    end
+
+    Browser->>API: POST /login {email, password}
+    API->>DB: find user by email
+    Note over API: dummy bcrypt compare runs even<br/>if no user found (timing-safe)
+    alt invalid
+        API-->>Browser: 400, identical message either way
+    else valid
+        API-->>Browser: 200 + Set-Cookie (session JWT)
+    end
+
+    Browser->>API: any request with Cookie
+    API->>API: verify JWT signature + expiry
+    alt invalid/missing
+        API-->>Browser: 403 Forbidden (API) or redirect to /login (page)
+    else valid
+        API->>DB: re-resolve user/role fresh (not just trusting the JWT payload)
+        API-->>Browser: 200 + requested data, scoped to that identity
+    end
