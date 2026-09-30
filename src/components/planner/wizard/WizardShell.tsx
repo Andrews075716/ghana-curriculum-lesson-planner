@@ -267,7 +267,9 @@ export function WizardShell({ plannerId, initialState, alreadyPublished }: Wizar
         ) : null}
         {currentStep === 2 ? (
           <Step2CurriculumAlignment
+            plannerId={plannerId}
             state={state}
+            updateField={updateField}
             onStrandChange={handleStrandChange}
             onSubStrandChange={handleSubStrandChange}
             onContentStandardChange={handleContentStandardChange}

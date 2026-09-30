@@ -18,23 +18,6 @@ export interface LearningIndicatorPath {
   learningIndicatorId: string;
 }
 
-/**
- * The human-readable curriculum chain for one learning indicator — text,
- * not ids. This is the shape handed to AI providers as read-only context
- * (see server/ai): AI reads curriculum text, it never writes curriculum
- * ids, and none of these fields are ever sourced from anywhere but this
- * query.
- */
-export interface LearningIndicatorTextPath {
-  subject: string;
-  classLevel: string;
-  strand: string;
-  subStrand: string;
-  contentStandard: string;
-  learningOutcome: string;
-  learningIndicator: string;
-}
-
 // --- Reads -----------------------------------------------------------
 
 export async function listSubjects(): Promise<CurriculumOption[]> {
@@ -286,56 +269,6 @@ export async function getLearningIndicatorPath(
     contentStandardId: standard.id,
     learningOutcomeId: outcome.id,
     learningIndicatorId: indicator.id,
-  };
-}
-
-export async function getLearningIndicatorTextPath(
-  learningIndicatorId: string,
-): Promise<LearningIndicatorTextPath | null> {
-  const indicator = await prisma.learningIndicator.findUnique({
-    where: { id: learningIndicatorId },
-    select: {
-      description: true,
-      learningOutcome: {
-        select: {
-          description: true,
-          contentStandard: {
-            select: {
-              description: true,
-              subStrand: {
-                select: {
-                  name: true,
-                  strand: {
-                    select: {
-                      name: true,
-                      subject: { select: { name: true } },
-                      classLevel: { select: { name: true } },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  });
-
-  if (!indicator) return null;
-
-  const outcome = indicator.learningOutcome;
-  const standard = outcome.contentStandard;
-  const subStrand = standard.subStrand;
-  const strand = subStrand.strand;
-
-  return {
-    subject: strand.subject.name,
-    classLevel: strand.classLevel.name,
-    strand: strand.name,
-    subStrand: subStrand.name,
-    contentStandard: standard.description,
-    learningOutcome: outcome.description,
-    learningIndicator: indicator.description,
   };
 }
 

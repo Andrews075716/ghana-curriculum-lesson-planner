@@ -3,12 +3,27 @@ import { loginAsDemoTeacher, AuthedSession } from "./_lib/authed-session";
 
 /**
  * Verifies the wizard-facing AI action route
- * (`POST /api/planners/[id]/ai/[action]`) for all 8 sections, end to end
- * against the live dev server: each action resolves curriculum context
- * correctly and — since AI_PROVIDER=none in this environment — fails
- * safely with AIUnavailableError (503), never a crash or an unhandled
- * exception. Also checks the route rejects an unknown action and a
- * planner missing curriculum alignment.
+ * (`POST /api/planners/[id]/ai/[action]`) for all 8 sections plus
+ * full-lesson-draft, end to end against the live dev server: every action
+ * fails safely, never a crash or an unhandled exception. Also checks the
+ * route rejects an unknown action and a planner missing curriculum
+ * alignment.
+ *
+ * Deliberately uses a curriculum fixture that is AI-INELIGIBLE (the
+ * pre-Checkpoint-6 legacy Computing/Form-1 seed data — predates
+ * `extractionStatus` entirely; see curriculum-eligibility.service.ts) so
+ * this test is safe to run in ANY environment regardless of whether a real
+ * AI_PROVIDER is configured: if no provider is configured, the request
+ * fails at the provider-availability check (503 AI_UNAVAILABLE) before
+ * curriculum is even resolved; if a real provider IS configured (e.g. via
+ * a local .env.local), it instead fails at the curriculum-eligibility
+ * check (422 AI_CURRICULUM_INELIGIBLE) — in BOTH cases the request returns
+ * before `AIProvider.generate*()` is ever called, so this test can never
+ * trigger a real, billed API call no matter what's configured. A live
+ * end-to-end smoke test against a real provider and an ELIGIBLE fixture is
+ * a separate, deliberate, manually-run thing — never part of this
+ * automated suite (see docs/checkpoint-8-ai-integration.md's "Known
+ * limitations").
  *
  *   npx tsx scripts/test-ai-wizard-actions.ts
  */
@@ -64,20 +79,23 @@ async function main() {
     learningIndicatorId: indicator.id,
   });
 
-  console.log("3) Every one of the 8 wizard sections' AI action fails safely (AI_PROVIDER=none)");
+  console.log("3) Every one of the 8 wizard sections' AI action fails safely, and never reaches the real provider");
+  const SAFE_FAILURE_CODES = new Set(["AI_UNAVAILABLE", "AI_CURRICULUM_INELIGIBLE"]);
   for (const action of ACTIONS) {
     const result = await postJson(`/api/planners/${plannerId}/ai/${action}`, { count: 3 });
+    const code = result.body?.error?.code;
     assert(
-      result.status === 503 && result.body.error?.code === "AI_UNAVAILABLE",
-      `${action} -> 503 AI_UNAVAILABLE (got ${result.status} ${result.body?.error?.code})`,
+      (result.status === 503 || result.status === 422) && SAFE_FAILURE_CODES.has(code),
+      `${action} -> safe failure, 503 AI_UNAVAILABLE or 422 AI_CURRICULUM_INELIGIBLE (got ${result.status} ${code})`,
     );
   }
 
   console.log("3b) full-lesson-draft (not a wizard-step action, but wired the same way) also fails safely");
   const fullDraftResult = await postJson(`/api/planners/${plannerId}/ai/full-lesson-draft`);
+  const fullDraftCode = fullDraftResult.body?.error?.code;
   assert(
-    fullDraftResult.status === 503 && fullDraftResult.body.error?.code === "AI_UNAVAILABLE",
-    `full-lesson-draft -> 503 AI_UNAVAILABLE (got ${fullDraftResult.status} ${fullDraftResult.body?.error?.code})`,
+    (fullDraftResult.status === 503 || fullDraftResult.status === 422) && SAFE_FAILURE_CODES.has(fullDraftCode),
+    `full-lesson-draft -> safe failure, 503 AI_UNAVAILABLE or 422 AI_CURRICULUM_INELIGIBLE (got ${fullDraftResult.status} ${fullDraftCode})`,
   );
 
   console.log("4) An unknown action is rejected cleanly");

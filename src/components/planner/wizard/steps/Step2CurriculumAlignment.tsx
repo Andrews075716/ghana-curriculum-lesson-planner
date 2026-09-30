@@ -2,10 +2,13 @@
 
 import { CurriculumSelectField } from "@/components/curriculum/CurriculumSelectField";
 import type { UseCurriculumOptionsResult } from "@/hooks/useCurriculumOptions";
+import { FullLessonDraftAssist } from "../ai/FullLessonDraftAssist";
 import type { WizardState } from "../types";
 
 export interface Step2CurriculumAlignmentProps {
+  plannerId: string;
   state: WizardState;
+  updateField: <K extends keyof WizardState>(key: K, value: WizardState[K]) => void;
   onStrandChange: (id: string) => void;
   onSubStrandChange: (id: string) => void;
   onContentStandardChange: (id: string) => void;
@@ -20,7 +23,9 @@ export interface Step2CurriculumAlignmentProps {
 }
 
 export function Step2CurriculumAlignment({
+  plannerId,
   state,
+  updateField,
   onStrandChange,
   onSubStrandChange,
   onContentStandardChange,
@@ -105,6 +110,9 @@ export function Step2CurriculumAlignment({
         emptyMessage="No learning indicators are available for this outcome."
         validationError={fieldErrors.learningIndicatorId}
       />
+      {state.learningIndicatorId ? (
+        <FullLessonDraftAssist plannerId={plannerId} state={state} updateField={updateField} />
+      ) : null}
     </div>
   );
 }

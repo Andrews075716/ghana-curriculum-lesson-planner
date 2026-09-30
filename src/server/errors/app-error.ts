@@ -103,3 +103,23 @@ export class AIRequestError extends AppError {
     super(ErrorCode.AI_REQUEST_FAILED, message, 502, { category: "AI_PROVIDER_ERROR", ...options });
   }
 }
+
+/**
+ * The selected curriculum context exists but failed the curriculum
+ * eligibility policy (see curriculum-eligibility.service.ts /
+ * docs/curriculum-status-policy.md) — e.g. it's REJECTED, or an unresolved
+ * NEEDS_REVIEW node without a recorded source page. Distinct from
+ * AIUnavailableError (which is about the PROVIDER, not the curriculum
+ * selection) so a route/UI can tell "AI isn't configured" apart from "this
+ * curriculum selection specifically can't be used for AI" and message each
+ * one appropriately. 422: the request is well-formed, the resource just
+ * isn't in a state AI generation can use.
+ */
+export class AICurriculumIneligibleError extends AppError {
+  constructor(message = "AI assistance isn't available for this curriculum selection yet.", options?: AIErrorOptions) {
+    super(ErrorCode.AI_CURRICULUM_INELIGIBLE, message, 422, {
+      category: "AI_CURRICULUM_INELIGIBLE",
+      ...options,
+    });
+  }
+}

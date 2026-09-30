@@ -56,18 +56,31 @@ export function isVisibleToAdmin(_fields: CurriculumStatusFields): boolean {
  * May this record be included in curriculum context handed to an AI
  * provider? Fails closed: a record is eligible only if it is NOT rejected
  * (by either field), AND is either a clean extraction (`EXTRACTED`) or has
- * been explicitly human-approved (`reviewStatus === "APPROVED"`), AND has a
- * recorded source page. `NEEDS_REVIEW` records are deliberately excluded —
- * the database has no per-record field distinguishing a resolved structural
+ * been explicitly human-approved (`reviewStatus === "APPROVED"`), AND —
+ * unless `requireProvenance` is explicitly turned off — has a recorded
+ * source page. `NEEDS_REVIEW` records are deliberately excluded — the
+ * database has no per-record field distinguishing a resolved structural
  * correction from a still-ambiguous extraction-time flag (only free-text
  * `reviewNote` prose), so this can't be decided per-record without
  * guessing; excluding the whole status is the only safe reading available
  * today. See docs/curriculum-status-policy.md for the full reasoning.
+ *
+ * `requireProvenance` defaults to `true`. Pass `false` only for a node type
+ * where `sourcePage` is verifiably not part of this data model's real
+ * provenance signal for that level — confirmed empirically (not assumed)
+ * for `Strand`: `sourcePage` is `null` on 100% of all 352 strand rows, so
+ * requiring it there would make every context ineligible. `SubStrand` is
+ * 99.5% populated and does NOT get this exemption. See
+ * `getAiEligibleCurriculumContext` in curriculum.service.ts for exactly
+ * which node types pass `false`.
  */
-export function isEligibleForAiContext(record: CurriculumEligibilityRecord): boolean {
+export function isEligibleForAiContext(
+  record: CurriculumEligibilityRecord,
+  options?: { requireProvenance?: boolean },
+): boolean {
   if (isRejected(record)) return false;
   const structurallyClean = record.extractionStatus === "EXTRACTED" || record.reviewStatus === "APPROVED";
-  const hasProvenance = record.sourcePage !== null;
+  const hasProvenance = options?.requireProvenance === false || record.sourcePage !== null;
   return structurallyClean && hasProvenance;
 }
 

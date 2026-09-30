@@ -149,18 +149,21 @@ function eligibilityLabel(label: string, node: CurriculumEligibilityNode): strin
 /**
  * THE sanctioned entry point for handing curriculum data to an AI provider
  * — see docs/curriculum-status-policy.md's "AI context boundary" section.
- * A future AI layer must call this instead of querying curriculum tables
- * (or `getCurriculumContext`) directly. Checks `isEligibleForAiContext`
- * against every REQUIRED node in the chain (Strand, Sub-Strand, primary
- * Content Standard, Learning Outcome, Learning Indicator) and fails closed
- * with a specific reason if any one of them isn't eligible; additional
- * linked Content Standards are filtered individually rather than failing
- * the whole context, since they're supplementary, not load-bearing.
+ * `ai-context.service.ts`'s `buildAICurriculumContext` (Checkpoint 8) calls
+ * this exclusively; nothing in the AI layer queries curriculum tables (or
+ * `getCurriculumContext`) directly. Checks `isEligibleForAiContext` against
+ * every REQUIRED node in the chain (Strand, Sub-Strand, primary Content
+ * Standard, Learning Outcome, Learning Indicator) and fails closed with a
+ * specific reason if any one of them isn't eligible; additional linked
+ * Content Standards are filtered individually rather than failing the
+ * whole context, since they're supplementary, not load-bearing.
  *
- * Deliberately NOT wired into the existing `ai-context.service.ts` /
- * AI-assist feature yet — that would be modifying AI generation behaviour,
- * which is explicitly out of scope for this change. It's on Checkpoint 8 to
- * adopt this as the boundary in front of whatever calls the AI provider.
+ * `Strand` is checked with `requireProvenance: false` — confirmed
+ * empirically that `sourcePage` is `null` on 100% of strand rows in this
+ * data model (a Strand's own heading isn't given a single page number by
+ * the extraction pipeline the way its descendants are), so requiring it
+ * there would make every context ineligible. `SubStrand` gets no such
+ * exemption (99.5% populated) — see curriculum-eligibility.service.ts.
  */
 export async function getAiEligibleCurriculumContext(
   learningIndicatorId: string,
@@ -170,16 +173,16 @@ export async function getAiEligibleCurriculumContext(
     throw new NotFoundError(`Learning indicator "${learningIndicatorId}" was not found.`);
   }
 
-  const requiredNodes: Array<[string, CurriculumEligibilityNode]> = [
-    ["Strand", chain.strand],
+  const requiredNodes: Array<[string, CurriculumEligibilityNode, { requireProvenance?: boolean }?]> = [
+    ["Strand", chain.strand, { requireProvenance: false }],
     ["Sub-Strand", chain.subStrand],
     ["Content Standard (primary)", chain.contentStandard.primary],
     ["Learning Outcome", chain.learningOutcome],
     ["Learning Indicator", chain.learningIndicator],
   ];
 
-  for (const [label, node] of requiredNodes) {
-    if (!isEligibleForAiContext(node)) {
+  for (const [label, node, options] of requiredNodes) {
+    if (!isEligibleForAiContext(node, options)) {
       return {
         eligible: false,
         ineligibleReason: `${eligibilityLabel(label, node)} is not AI-eligible.`,
@@ -188,7 +191,7 @@ export async function getAiEligibleCurriculumContext(
   }
 
   const eligibleAdditionalIds = new Set(
-    chain.contentStandard.additional.filter(isEligibleForAiContext).map((n) => n.id),
+    chain.contentStandard.additional.filter((n) => isEligibleForAiContext(n)).map((n) => n.id),
   );
 
   const context = await getCurriculumContext(learningIndicatorId);

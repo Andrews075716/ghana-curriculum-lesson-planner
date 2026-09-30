@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { AppError } from "@/server/errors/app-error";
+import { AppError, AICurriculumIneligibleError } from "@/server/errors/app-error";
 import { buildAICurriculumContext } from "@/server/services/ai-context.service";
 import * as aiService from "@/server/services/ai.service";
 import {
@@ -65,13 +65,17 @@ async function main() {
   const teacher = await prisma.teacherProfile.findFirstOrThrow({
     where: { user: { email: "demo.teacher@example.edu.gh" } },
   });
+  // A real Checkpoint-6-imported indicator (extractionStatus=EXTRACTED, has a
+  // sourcePage) — AI-eligible per curriculum-eligibility.service.ts. NOT the
+  // original pre-Checkpoint-6 Computing/Form-1 seed data (see test 2b below),
+  // which predates extractionStatus entirely and is therefore ineligible.
   const indicator = await prisma.learningIndicator.findFirstOrThrow({
-    where: { code: "COMP-F1-STR-01-SS-01-CS-01-LI-01" },
+    where: { code: "1.1.1.LI.1", learningOutcome: { contentStandard: { subStrand: { strand: { subject: { name: "Mathematics" } } } } } },
   });
 
-  console.log("1) buildAICurriculumContext resolves real curriculum text, not ids");
+  console.log("1) buildAICurriculumContext resolves real curriculum text through the eligibility boundary, not ids");
   const context = await buildAICurriculumContext(indicator.id, 45, teacher.id);
-  assert(context.subject === "Computing", "context.subject resolves to the real subject name");
+  assert(context.subject === "Mathematics", "context.subject resolves to the real subject name");
   assert(context.classLevel === "SHS 1", "context.classLevel resolves to the real class level name");
   assert(context.strand.length > 0, "context.strand is populated");
   assert(context.subStrand.length > 0, "context.subStrand is populated");
@@ -87,6 +91,14 @@ async function main() {
     !("learningIndicatorId" in context) && !("contentStandardId" in context),
     "context carries curriculum TEXT only — no curriculum ids the AI could reference/edit",
   );
+  assert(
+    context.curriculumCodes?.learningIndicator === "1.1.1.LI.1",
+    "context.curriculumCodes carries the official printed code as text, not an id",
+  );
+  assert(
+    typeof context.curriculumVersion === "string" && context.curriculumVersion.length > 0,
+    "context.curriculumVersion carries source/version metadata",
+  );
 
   console.log("2) buildAICurriculumContext rejects an unknown learning indicator");
   try {
@@ -95,6 +107,33 @@ async function main() {
     console.error("  FAIL - should have thrown NotFoundError");
   } catch (error) {
     assert(error instanceof AppError && error.code === "NOT_FOUND", "unknown indicator -> NotFoundError");
+  }
+
+  console.log("2b) buildAICurriculumContext fails safely, not silently, for AI-ineligible curriculum");
+  const legacyIndicator = await prisma.learningIndicator.findFirstOrThrow({
+    where: { code: "COMP-F1-STR-01-SS-01-CS-01-LI-01" },
+  });
+  assert(
+    (await prisma.learningIndicator.findUniqueOrThrow({ where: { id: legacyIndicator.id } })).extractionStatus === null,
+    "fixture: this indicator predates extractionStatus (the case this test exists to cover)",
+  );
+  try {
+    await buildAICurriculumContext(legacyIndicator.id, 45, teacher.id);
+    failed++;
+    console.error("  FAIL - should have thrown AICurriculumIneligibleError");
+  } catch (error) {
+    assert(
+      error instanceof AICurriculumIneligibleError,
+      "AI-ineligible curriculum -> AICurriculumIneligibleError, not a silent substitution or a generic crash",
+    );
+    assert(
+      error instanceof AppError && error.httpStatus === 422,
+      "AICurriculumIneligibleError maps to HTTP 422",
+    );
+    assert(
+      !String((error as AppError).message).includes(legacyIndicator.id),
+      "the teacher-facing message does not leak the internal database id",
+    );
   }
 
   console.log("3) Every generate* method fails safely while no provider is configured (AI_PROVIDER=none)");

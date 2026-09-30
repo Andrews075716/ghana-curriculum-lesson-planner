@@ -39,6 +39,8 @@ const FRIENDLY_AI_ERROR: Partial<Record<string, string>> = {
   AI_TIMEOUT: "The AI took too long to respond. Please try again.",
   AI_REQUEST_FAILED: "Couldn't reach the AI service right now. Please try again shortly.",
   AI_INVALID_OUTPUT: "The AI's suggestion couldn't be used. Please try regenerating.",
+  AI_CURRICULUM_INELIGIBLE:
+    "AI Assist isn't available for this curriculum selection yet — it's still awaiting curriculum review. You can continue filling in this section yourself.",
   FORBIDDEN: "You need to be signed in to use AI Assist.",
   NOT_FOUND: "This planner couldn't be found.",
 };

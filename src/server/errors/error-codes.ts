@@ -10,6 +10,7 @@ export const ErrorCode = {
   AI_RATE_LIMITED: "AI_RATE_LIMITED",
   AI_TIMEOUT: "AI_TIMEOUT",
   AI_REQUEST_FAILED: "AI_REQUEST_FAILED",
+  AI_CURRICULUM_INELIGIBLE: "AI_CURRICULUM_INELIGIBLE",
 } as const;
 
 export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];

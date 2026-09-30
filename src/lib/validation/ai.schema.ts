@@ -31,6 +31,32 @@ const nonEmptyTrimmed = z.string().trim().min(1);
 
 // --- Input: curriculum context -------------------------------------------
 
+/**
+ * Official Category B guidance NaCCA attaches to the Learning Outcome/
+ * Learning Indicator (see `LearningOutcomeGuidance`/`LearningIndicatorGuidance`
+ * in schema.prisma) — included when present so AI grounds GESI/SEL/21st
+ * Century/National Values content and DoK-aligned assessment in what the
+ * official curriculum actually says, rather than generating generic
+ * versions of those from scratch. Every field optional/omittable: a
+ * subject's guidance may not cover all of these.
+ */
+// Length limits below are based on actual measured content, not guesses:
+// as of 2026-09-30 the longest real value for each field (across all 33
+// imported subjects) is twentyFirstCenturySkills 4315, gesi 1518, sel 1363,
+// a single nationalCoreValue 555, a single pedagogicalExemplar 2156, a
+// single dokDescription 686 chars. Limits below add headroom above that
+// measured maximum rather than an arbitrary round number.
+const OfficialGuidanceSchema = z
+  .object({
+    twentyFirstCenturySkills: nonEmptyTrimmed.max(6000).optional(),
+    gesi: nonEmptyTrimmed.max(2500).optional(),
+    sel: nonEmptyTrimmed.max(2500).optional(),
+    nationalCoreValues: z.array(nonEmptyTrimmed.max(1000)).max(20).optional(),
+    pedagogicalExemplars: z.array(nonEmptyTrimmed.max(3000)).max(20).optional(),
+    dokDescriptions: z.array(nonEmptyTrimmed.max(1000)).max(20).optional(),
+  })
+  .strict();
+
 export const AICurriculumContextSchema = z
   .object({
     subject: nonEmptyTrimmed,
@@ -41,6 +67,25 @@ export const AICurriculumContextSchema = z
     learningOutcome: nonEmptyTrimmed,
     learningIndicator: nonEmptyTrimmed,
     durationMinutes: z.number().int().min(1).max(600),
+    /**
+     * Text of any Content Standards ADDITIONALLY linked to this Learning
+     * Outcome beyond the primary one above (see
+     * `LearningOutcomeContentStandardLink`) — omitted entirely when there
+     * are none, which is the common case.
+     */
+    additionalContentStandards: z.array(nonEmptyTrimmed.max(1000)).max(10).optional(),
+    /** Official printed codes, text only — never a database id. */
+    curriculumCodes: z
+      .object({
+        contentStandard: nonEmptyTrimmed.max(100).optional(),
+        learningOutcome: nonEmptyTrimmed.max(100).optional(),
+        learningIndicator: nonEmptyTrimmed.max(100).optional(),
+      })
+      .strict()
+      .optional(),
+    officialGuidance: OfficialGuidanceSchema.optional(),
+    /** e.g. "NaCCA SHS September 2023" — source/version metadata, text only. */
+    curriculumVersion: nonEmptyTrimmed.max(200).optional(),
     /**
      * Optional, teacher-opted-in text from a PREVIOUS lesson's post-lesson
      * reflection (see lesson.repository.ts), included only when the
