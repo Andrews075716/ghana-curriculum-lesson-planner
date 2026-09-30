@@ -2,11 +2,13 @@ import { NotFoundError } from "@/server/errors/app-error";
 import * as curriculumRepository from "@/server/repositories/curriculum.repository";
 import type {
   CurriculumContext,
+  CurriculumEligibilityNode,
   CurriculumOption,
   CurriculumSearchResult,
   LearningIndicatorPath,
   LearningOutcomeReverseRelationships,
 } from "@/server/repositories/curriculum.repository";
+import { isEligibleForAiContext } from "@/server/services/curriculum-eligibility.service";
 
 export type {
   CurriculumContext,
@@ -134,4 +136,70 @@ export async function getCurriculumContext(learningIndicatorId: string): Promise
     throw new NotFoundError(`Learning indicator "${learningIndicatorId}" was not found.`);
   }
   return context;
+}
+
+export type AiCurriculumEligibilityResult =
+  | { eligible: true; context: CurriculumContext }
+  | { eligible: false; ineligibleReason: string };
+
+function eligibilityLabel(label: string, node: CurriculumEligibilityNode): string {
+  return `${label} (id=${node.id}, extractionStatus=${node.extractionStatus ?? "null"}, reviewStatus=${node.reviewStatus ?? "null"}, sourcePage=${node.sourcePage ?? "null"})`;
+}
+
+/**
+ * THE sanctioned entry point for handing curriculum data to an AI provider
+ * — see docs/curriculum-status-policy.md's "AI context boundary" section.
+ * A future AI layer must call this instead of querying curriculum tables
+ * (or `getCurriculumContext`) directly. Checks `isEligibleForAiContext`
+ * against every REQUIRED node in the chain (Strand, Sub-Strand, primary
+ * Content Standard, Learning Outcome, Learning Indicator) and fails closed
+ * with a specific reason if any one of them isn't eligible; additional
+ * linked Content Standards are filtered individually rather than failing
+ * the whole context, since they're supplementary, not load-bearing.
+ *
+ * Deliberately NOT wired into the existing `ai-context.service.ts` /
+ * AI-assist feature yet — that would be modifying AI generation behaviour,
+ * which is explicitly out of scope for this change. It's on Checkpoint 8 to
+ * adopt this as the boundary in front of whatever calls the AI provider.
+ */
+export async function getAiEligibleCurriculumContext(
+  learningIndicatorId: string,
+): Promise<AiCurriculumEligibilityResult> {
+  const chain = await curriculumRepository.getCurriculumEligibilityChain(learningIndicatorId);
+  if (!chain) {
+    throw new NotFoundError(`Learning indicator "${learningIndicatorId}" was not found.`);
+  }
+
+  const requiredNodes: Array<[string, CurriculumEligibilityNode]> = [
+    ["Strand", chain.strand],
+    ["Sub-Strand", chain.subStrand],
+    ["Content Standard (primary)", chain.contentStandard.primary],
+    ["Learning Outcome", chain.learningOutcome],
+    ["Learning Indicator", chain.learningIndicator],
+  ];
+
+  for (const [label, node] of requiredNodes) {
+    if (!isEligibleForAiContext(node)) {
+      return {
+        eligible: false,
+        ineligibleReason: `${eligibilityLabel(label, node)} is not AI-eligible.`,
+      };
+    }
+  }
+
+  const eligibleAdditionalIds = new Set(
+    chain.contentStandard.additional.filter(isEligibleForAiContext).map((n) => n.id),
+  );
+
+  const context = await getCurriculumContext(learningIndicatorId);
+  return {
+    eligible: true,
+    context: {
+      ...context,
+      contentStandard: {
+        ...context.contentStandard,
+        additional: context.contentStandard.additional.filter((cs) => eligibleAdditionalIds.has(cs.id)),
+      },
+    },
+  };
 }

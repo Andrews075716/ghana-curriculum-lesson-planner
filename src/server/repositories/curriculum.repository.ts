@@ -1,4 +1,6 @@
+import type { ExtractionStatus, Prisma, ReviewStatus } from "@prisma/client";
 import { prisma } from "@/server/db/prisma";
+import { teacherVisibleStatusWhere } from "@/server/services/curriculum-eligibility.service";
 
 /** Generic shape consumed by the curriculum selector for every level. */
 export interface CurriculumOption {
@@ -67,7 +69,7 @@ export async function listStrands(
   classLevelId: string,
 ): Promise<CurriculumOption[]> {
   const rows = await prisma.strand.findMany({
-    where: { subjectId, classLevelId },
+    where: { subjectId, classLevelId, ...teacherVisibleStatusWhere<Prisma.StrandWhereInput>() },
     orderBy: { sequence: "asc" },
     select: { id: true, name: true },
   });
@@ -76,7 +78,7 @@ export async function listStrands(
 
 export async function listSubStrands(strandId: string): Promise<CurriculumOption[]> {
   const rows = await prisma.subStrand.findMany({
-    where: { strandId },
+    where: { strandId, ...teacherVisibleStatusWhere<Prisma.SubStrandWhereInput>() },
     orderBy: { sequence: "asc" },
     select: { id: true, name: true },
   });
@@ -92,7 +94,7 @@ export async function listContentStandards(
   subStrandId: string,
 ): Promise<CurriculumOption[]> {
   const rows = await prisma.contentStandard.findMany({
-    where: { subStrandId },
+    where: { subStrandId, ...teacherVisibleStatusWhere<Prisma.ContentStandardWhereInput>() },
     orderBy: { sequence: "asc" },
     select: { id: true, code: true, description: true },
   });
@@ -116,9 +118,14 @@ export async function listLearningOutcomes(
 ): Promise<CurriculumOption[]> {
   const rows = await prisma.learningOutcome.findMany({
     where: {
-      OR: [
-        { contentStandardId },
-        { additionalContentStandardLinks: { some: { contentStandardId } } },
+      AND: [
+        {
+          OR: [
+            { contentStandardId },
+            { additionalContentStandardLinks: { some: { contentStandardId } } },
+          ],
+        },
+        teacherVisibleStatusWhere<Prisma.LearningOutcomeWhereInput>(),
       ],
     },
     orderBy: [{ sequence: "asc" }, { id: "asc" }],
@@ -131,7 +138,7 @@ export async function listLearningIndicators(
   learningOutcomeId: string,
 ): Promise<CurriculumOption[]> {
   const rows = await prisma.learningIndicator.findMany({
-    where: { learningOutcomeId },
+    where: { learningOutcomeId, ...teacherVisibleStatusWhere<Prisma.LearningIndicatorWhereInput>() },
     orderBy: { sequence: "asc" },
     select: { id: true, code: true, description: true },
   });
@@ -165,29 +172,34 @@ export async function searchLearningIndicators(
 ): Promise<CurriculumSearchResult[]> {
   const rows = await prisma.learningIndicator.findMany({
     where: {
-      learningOutcome: {
-        contentStandard: { subStrand: { strand: { subjectId, classLevelId } } },
-      },
-      OR: [
-        { description: { contains: query, mode: "insensitive" } },
-        { learningOutcome: { description: { contains: query, mode: "insensitive" } } },
+      AND: [
         {
           learningOutcome: {
-            contentStandard: { description: { contains: query, mode: "insensitive" } },
+            contentStandard: { subStrand: { strand: { subjectId, classLevelId } } },
           },
-        },
-        {
-          learningOutcome: {
-            contentStandard: { subStrand: { name: { contains: query, mode: "insensitive" } } },
-          },
-        },
-        {
-          learningOutcome: {
-            contentStandard: {
-              subStrand: { strand: { name: { contains: query, mode: "insensitive" } } },
+          OR: [
+            { description: { contains: query, mode: "insensitive" } },
+            { learningOutcome: { description: { contains: query, mode: "insensitive" } } },
+            {
+              learningOutcome: {
+                contentStandard: { description: { contains: query, mode: "insensitive" } },
+              },
             },
-          },
+            {
+              learningOutcome: {
+                contentStandard: { subStrand: { name: { contains: query, mode: "insensitive" } } },
+              },
+            },
+            {
+              learningOutcome: {
+                contentStandard: {
+                  subStrand: { strand: { name: { contains: query, mode: "insensitive" } } },
+                },
+              },
+            },
+          ],
         },
+        teacherVisibleStatusWhere<Prisma.LearningIndicatorWhereInput>(),
       ],
     },
     orderBy: { sequence: "asc" },
@@ -516,6 +528,91 @@ export async function getCurriculumContext(
       description: indicator.description,
       guidance: indicator.guidance,
     },
+  };
+}
+
+/** A curriculum node's identity plus exactly the fields `curriculum-eligibility.service.ts` needs — never official wording, so this can be passed around freely without risking it being mistaken for displayable curriculum text. */
+export interface CurriculumEligibilityNode {
+  id: string;
+  extractionStatus: ExtractionStatus | null;
+  reviewStatus: ReviewStatus | null;
+  sourcePage: number | null;
+}
+
+export interface CurriculumEligibilityChain {
+  strand: CurriculumEligibilityNode;
+  subStrand: CurriculumEligibilityNode;
+  contentStandard: {
+    primary: CurriculumEligibilityNode;
+    additional: CurriculumEligibilityNode[];
+  };
+  learningOutcome: CurriculumEligibilityNode;
+  learningIndicator: CurriculumEligibilityNode;
+}
+
+/**
+ * The `extractionStatus`/`reviewStatus`/`sourcePage` for every node in a
+ * Learning Indicator's full chain (including additional linked Content
+ * Standards) — mirrors `getCurriculumContext`'s traversal exactly, but
+ * fetches only the fields the AI-eligibility policy needs, never official
+ * wording. Used exclusively by `getAiEligibleCurriculumContext()` in
+ * curriculum.service.ts; nothing else should need this.
+ */
+export async function getCurriculumEligibilityChain(
+  learningIndicatorId: string,
+): Promise<CurriculumEligibilityChain | null> {
+  const statusFields = {
+    extractionStatus: true,
+    reviewStatus: true,
+    sourcePage: true,
+  } as const;
+
+  const indicator = await prisma.learningIndicator.findUnique({
+    where: { id: learningIndicatorId },
+    select: {
+      id: true,
+      ...statusFields,
+      learningOutcome: {
+        select: {
+          id: true,
+          ...statusFields,
+          contentStandard: {
+            select: {
+              id: true,
+              ...statusFields,
+              subStrand: {
+                select: {
+                  id: true,
+                  ...statusFields,
+                  strand: { select: { id: true, ...statusFields } },
+                },
+              },
+            },
+          },
+          additionalContentStandardLinks: {
+            select: { contentStandard: { select: { id: true, ...statusFields } } },
+          },
+        },
+      },
+    },
+  });
+
+  if (!indicator) return null;
+
+  const outcome = indicator.learningOutcome;
+  const standard = outcome.contentStandard;
+  const subStrand = standard.subStrand;
+  const strand = subStrand.strand;
+
+  return {
+    strand,
+    subStrand,
+    contentStandard: {
+      primary: standard,
+      additional: outcome.additionalContentStandardLinks.map((l) => l.contentStandard),
+    },
+    learningOutcome: outcome,
+    learningIndicator: indicator,
   };
 }
 
