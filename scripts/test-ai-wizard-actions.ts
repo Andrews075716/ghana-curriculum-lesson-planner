@@ -88,6 +88,21 @@ async function main() {
       (result.status === 503 || result.status === 422) && SAFE_FAILURE_CODES.has(code),
       `${action} -> safe failure, 503 AI_UNAVAILABLE or 422 AI_CURRICULUM_INELIGIBLE (got ${result.status} ${code})`,
     );
+
+    // Regression test for the manual-browser-acceptance "AI Suggestion isn't
+    // working" report: reproduced to be this exact scenario (Computing/Form-1,
+    // the original demo curriculum, correctly rejected as AI-ineligible with a
+    // clean 422) rather than a bug. Locks in that the response a teacher's
+    // browser actually receives is safe and legible, not just that *some*
+    // error code came back.
+    if (code === "AI_CURRICULUM_INELIGIBLE") {
+      const message: string = result.body?.error?.message ?? "";
+      assert(message.length > 0, `${action}: AI_CURRICULUM_INELIGIBLE response includes a message`);
+      assert(
+        !/extractionStatus|reviewStatus|sourcePage|prisma|id=c[a-z0-9]{20,}/i.test(message),
+        `${action}: message exposes no internal field names or database ids`,
+      );
+    }
   }
 
   console.log("3b) full-lesson-draft (not a wizard-step action, but wired the same way) also fails safely");

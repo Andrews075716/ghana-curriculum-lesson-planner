@@ -68,7 +68,7 @@ not guessed at.
 | Form accessibility | **MANUAL USER VERIFICATION REQUIRED** (code-level `Label`/`aria-invalid`/`aria-describedby`/`role="alert"` confirmed present in Checkpoint 7's source reading — not re-verified live) | Static code reading only |
 | Wizard step-awareness | **MANUAL USER VERIFICATION REQUIRED** | `WizardStepper.tsx` exists and is used; not visually inspected |
 | Dialogs/modals | **MANUAL USER VERIFICATION REQUIRED** (built on `@base-ui/react/alert-dialog`, which is accessibility-focused by design) | Source confirms the library; behavior not exercised |
-| AI Assist UX (browser) | **MANUAL USER VERIFICATION REQUIRED** — the underlying flow is proven via 549 passing HTTP/service-level assertions across Checkpoints 8-9, but the actual rendered Generate→Preview→Insert interaction was not clicked through | `AIAssistPanel.tsx` code reading + extensive non-browser test coverage |
+| AI Assist UX (browser) | **FAIL → diagnosed, see "AI Suggestion browser defect report" below** | Reported by manual browser testing: "AI Suggestion is not working." Root-caused to correct, by-design behavior (Computing/Form-1 — the subject used — is genuinely AI-ineligible) rather than a bug; see full report for evidence and the new regression test. **AWAITING MANUAL RETEST** with an AI-eligible subject (e.g. Mathematics) to confirm the working case in the browser. |
 | Save/Reopen/Edit (browser) | **MANUAL USER VERIFICATION REQUIRED** — proven at the database/service level (`test-checkpoint9-e2e.ts` §5, by exact id, not label) but not clicked through in a browser | same |
 | `/curriculum` browser — data/API correctness | **PASS** | Live HTTP smoke test: 33 subjects, real class levels, full strand→indicator drill-down, search with results and with no results, all 200s with correct data |
 | `/curriculum` browser — actual rendering/interaction | **MANUAL USER VERIFICATION REQUIRED** | Tree-expand clicks, debounce timing, and visual layout were not observed |
@@ -198,7 +198,82 @@ ideally with a screenshot), or **N/A**. A screenshot is most useful for
 anything in the Desktop/Tablet/Mobile/Dialogs sections — a visual defect is
 hard to describe precisely in words.
 
-## No code defects found or fixed this session
+## AI Suggestion browser defect report
+
+**Reported:** "AI Suggestion is not working" in the real browser, overriding
+the earlier automated-test-based assumption that AI Assist was ready.
+
+**Investigation (0 live Anthropic calls):**
+
+1. Checked `.env.local` without exposing its value: `AI_PROVIDER=anthropic`,
+   `ANTHROPIC_API_KEY` configured (non-empty), no `ANTHROPIC_MODEL`
+   override (uses the code default, `claude-sonnet-5`).
+2. Restarted the dev server cleanly to guarantee these env values were
+   actually loaded (Next.js does not hot-reload `.env.local` changes into
+   an already-running process — this matters in case the key had been
+   rotated since the server was last started).
+3. Reproduced the **exact** request sequence the browser's AI Assist button
+   sends (`ai-client.ts`'s `requestAISuggestion`) via HTTP against the
+   freshly-restarted server: login → `POST /api/planners` → `PATCH` the
+   planner with curriculum + duration → `POST /api/planners/:id/ai/essential-questions`.
+4. Asked which subject had been used in the browser: **Computing (Form 1 /
+   SHS 1)** — confirmed to match the reproduction exactly.
+
+**Result:** `HTTP 422`, `AI_CURRICULUM_INELIGIBLE`, with a complete, safe,
+already-teacher-facing message — no internals leaked.
+
+**Root cause: this is correct, by-design behavior, not a bug.** Computing/
+Form 1 is the original pre-Checkpoint-6 seed curriculum
+(`COMP-F1-STR-01-SS-01-CS-01-LI-01` and siblings) — it predates the
+`extractionStatus` field entirely and has been confirmed AI-ineligible since
+Checkpoint 8 (`curriculum-eligibility.service.ts`'s documented policy: a
+record needs either a clean `EXTRACTED` status or explicit human
+`APPROVED` review to be AI-eligible; this legacy data has neither). Per this
+task's own instruction ("if generation is rejected because the record is
+AI-ineligible... the safety boundary may be working correctly... do not
+weaken the eligibility policy"), **no weakening was made**.
+
+This single reproduction also positively confirmed several layers that
+could otherwise have been suspected:
+- Client request shape, session auth, route dispatch, rate limiting — all correct
+- `AI_PROVIDER` resolves to `anthropic`, not stuck on `none`/`mock` (a `none`
+  config would have produced `503 AI_UNAVAILABLE`, not `422`)
+- `ANTHROPIC_API_KEY` is loaded and non-empty in the current server process
+  (same reasoning — reaching the curriculum-eligibility check at all requires
+  `provider.isEnabled()` to have returned `true` first)
+- `getAiEligibleCurriculumContext()` runs and evaluates correctly
+- The client-side friendly-message mapping (`ai-client.ts`'s
+  `FRIENDLY_AI_ERROR["AI_CURRICULUM_INELIGIBLE"]`) is present and intact
+
+**What remains genuinely unverified:** whether selecting an AI-**eligible**
+subject (e.g. Mathematics, Chemistry — any of the 33-subject Checkpoint 6
+import) and clicking AI Assist actually completes successfully end to end
+in the browser, including the real Anthropic call. This was **not** tested
+live, per the cost-control instruction — Checkpoint 8's one authorized live
+smoke test already proved the Anthropic integration itself works with this
+exact configuration, but that was before this session and doesn't rule out
+an intervening key rotation or other change. **This needs your retest**: repeat
+the same action using Mathematics (or any subject other than Computing)
+instead, and report what happens. If that also fails, tell me the exact
+error shown and I'll diagnose further — a live call might be genuinely
+necessary at that point, and I'll ask before making one.
+
+**Regression test added** (`scripts/test-ai-wizard-actions.ts`): every one of
+the 8 wizard AI actions, when they return `AI_CURRICULUM_INELIGIBLE`, is now
+asserted to include a non-empty message that exposes no internal field names
+(`extractionStatus`, `reviewStatus`, `sourcePage`) or database ids — locking
+in that a teacher's browser always receives a safe, legible explanation for
+this exact scenario, not just *some* error code. 31/31 assertions pass
+(was 15, now 31 after this addition — the increase is new assertions, not
+previously-failing ones fixed).
+
+**No code was changed** — the AI pipeline, eligibility boundary, and error
+messaging were all already correct. The fix that mattered here was
+diagnostic (restarting the dev server to guarantee current env vars) and
+informational (this report, and the regression test that locks the correct
+behavior in).
+
+## No other code defects found or fixed this session
 
 The one failure encountered (`/curriculum` returning 500) was root-caused
 to dev-server/Turbopack cache corruption from a long-lived process — the
