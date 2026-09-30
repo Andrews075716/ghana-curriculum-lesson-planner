@@ -30,6 +30,7 @@ import { getPlannerDraft } from "@/server/repositories/planner.repository";
 import { getAIProvider } from "@/server/ai/ai-provider.factory";
 import type { AIProvider } from "@/server/ai/ai-provider.interface";
 import { buildAICurriculumContext } from "./ai-context.service";
+import { assertActivityDurationsFit } from "./lesson-duration-validation.service";
 
 /**
  * The business-facing AI API — `generateEssentialQuestions`,
@@ -61,6 +62,15 @@ import { buildAICurriculumContext } from "./ai-context.service";
  *     though the concrete `AnthropicAIProvider` already validates its own
  *     output too; defense in depth, not redundancy, since this layer is
  *     what protects the app against *any* current or future provider.
+ *  4b. For the three methods whose output carries timed activities
+ *     (`generateLessonActivities`, `generateClosure`,
+ *     `generateFullLessonDraft`): semantic validation AFTER schema
+ *     validation, via `assertActivityDurationsFit` — schema validation
+ *     confirms each activity's shape is sane in isolation, this confirms
+ *     their SUM fits the lesson's own `durationMinutes` (a cross-object
+ *     check schema validation can't express). See
+ *     `lesson-duration-validation.service.ts` for the rule and its
+ *     evidence.
  *  5. Returns an `AISuggestionResult<T>` — the data is always labeled as
  *     a suggestion with its provenance, never handed back looking like
  *     confirmed planner content.
@@ -192,10 +202,9 @@ export async function generateLessonActivities(
 ): Promise<AISuggestionResult<LessonActivitiesSuggestion>> {
   const { provider, context } = await resolveContextForPlanner(plannerId, teacherId, options);
   const raw = await provider.generateLessonActivities(context, options);
-  return wrap(
-    provider,
-    validateOrThrow(LessonActivitiesSuggestionSchema, raw, "lesson-activities"),
-  );
+  const suggestion = validateOrThrow(LessonActivitiesSuggestionSchema, raw, "lesson-activities");
+  assertActivityDurationsFit(suggestion.lessonActivities, context.durationMinutes, "lesson activities");
+  return wrap(provider, suggestion);
 }
 
 export async function generateAssessments(
@@ -215,7 +224,9 @@ export async function generateClosure(
 ): Promise<AISuggestionResult<ClosureSuggestion>> {
   const { provider, context } = await resolveContextForPlanner(plannerId, teacherId, options);
   const raw = await provider.generateClosure(context);
-  return wrap(provider, validateOrThrow(ClosureSuggestionSchema, raw, "closure"));
+  const suggestion = validateOrThrow(ClosureSuggestionSchema, raw, "closure");
+  assertActivityDurationsFit([suggestion.closure], context.durationMinutes, "lesson closure");
+  return wrap(provider, suggestion);
 }
 
 export async function generateFullLessonDraft(
@@ -225,8 +236,7 @@ export async function generateFullLessonDraft(
 ): Promise<AISuggestionResult<FullLessonDraftSuggestion>> {
   const { provider, context } = await resolveContextForPlanner(plannerId, teacherId, options);
   const raw = await provider.generateFullLessonDraft(context);
-  return wrap(
-    provider,
-    validateOrThrow(FullLessonDraftSuggestionSchema, raw, "full-lesson-draft"),
-  );
+  const suggestion = validateOrThrow(FullLessonDraftSuggestionSchema, raw, "full-lesson-draft");
+  assertActivityDurationsFit(suggestion.lessonActivities, context.durationMinutes, "full lesson draft's activities");
+  return wrap(provider, suggestion);
 }

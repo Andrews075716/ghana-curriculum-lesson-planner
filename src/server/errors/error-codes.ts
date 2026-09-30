@@ -11,6 +11,7 @@ export const ErrorCode = {
   AI_TIMEOUT: "AI_TIMEOUT",
   AI_REQUEST_FAILED: "AI_REQUEST_FAILED",
   AI_CURRICULUM_INELIGIBLE: "AI_CURRICULUM_INELIGIBLE",
+  AI_ACTIVITY_DURATION_EXCEEDED: "AI_ACTIVITY_DURATION_EXCEEDED",
 } as const;
 
 export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];

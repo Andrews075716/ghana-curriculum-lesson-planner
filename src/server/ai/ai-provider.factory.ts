@@ -18,6 +18,14 @@ import type { AIProvider } from "./ai-provider.interface";
  * Adding another vendor later means adding a `providers/<name>-ai-provider.ts`
  * that implements `AIProvider` and a case below — nothing in
  * `ai.service.ts` or above it needs to change.
+ *
+ * "mock" is a third, TEST-ONLY option (see `providers/mock-ai-provider.ts`)
+ * — deterministic, zero-cost, no network call — for tests that need to
+ * exercise the real `ai.service.ts` pipeline (schema + semantic
+ * validation) without a live Anthropic call. Refused outright when
+ * `NODE_ENV=production`, falling back to the noop provider instead, so a
+ * stray `AI_PROVIDER=mock` in a real deployment's environment can never
+ * silently serve canned fake lesson content to a teacher.
  */
 export async function getAIProvider(): Promise<AIProvider> {
   const configured = process.env.AI_PROVIDER?.trim().toLowerCase() || "none";
@@ -26,6 +34,14 @@ export async function getAIProvider(): Promise<AIProvider> {
     case "anthropic": {
       const { AnthropicAIProvider } = await import("./providers/anthropic-ai-provider");
       return new AnthropicAIProvider();
+    }
+    case "mock": {
+      if (process.env.NODE_ENV === "production") {
+        const { NoopAIProvider } = await import("./providers/noop-ai-provider");
+        return new NoopAIProvider();
+      }
+      const { MockAIProvider } = await import("./providers/mock-ai-provider");
+      return new MockAIProvider();
     }
     case "none":
     default: {

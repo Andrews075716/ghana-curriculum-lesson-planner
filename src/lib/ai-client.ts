@@ -28,10 +28,9 @@ export interface AISuggestionResponse<T> {
  * configured" and "the provider rejected the API key" — a teacher can't
  * fix either, so there's no value in surfacing which one) — never the raw
  * `error.message`, which can contain configuration detail like an env var
- * name (see NoopAIProvider.getStatusMessage()). VALIDATION_ERROR is the
- * one exception: those messages ("Select a Learning Indicator before
- * requesting AI suggestions") are already written for a teacher, not a
- * developer, so they pass through as-is.
+ * name (see NoopAIProvider.getStatusMessage()). VALIDATION_ERROR and
+ * AI_ACTIVITY_DURATION_EXCEEDED are the exceptions: those messages are
+ * already written for a teacher, not a developer, so they pass through as-is.
  */
 const FRIENDLY_AI_ERROR: Partial<Record<string, string>> = {
   AI_UNAVAILABLE: "AI Assist isn't available right now. You can still fill in this section yourself.",
@@ -45,13 +44,22 @@ const FRIENDLY_AI_ERROR: Partial<Record<string, string>> = {
   NOT_FOUND: "This planner couldn't be found.",
 };
 
+const PASSTHROUGH_MESSAGE_CODES = new Set(["VALIDATION_ERROR", "AI_ACTIVITY_DURATION_EXCEEDED"]);
+
 /** Thrown by `requestAISuggestion` — carries the server's error `code` alongside a teacher-friendly message. */
 export class AIAssistError extends Error {
   readonly code: string;
-  constructor(code: string, message: string) {
+  /** Present only for AI_ACTIVITY_DURATION_EXCEEDED — see handle-route-error.ts. */
+  readonly details?: { expectedDuration: number; generatedDuration: number; difference: number };
+  constructor(
+    code: string,
+    message: string,
+    details?: { expectedDuration: number; generatedDuration: number; difference: number },
+  ) {
     super(message);
     this.name = "AIAssistError";
     this.code = code;
+    this.details = details;
   }
 }
 
@@ -75,11 +83,10 @@ export async function requestAISuggestion<T>(
   if (!res.ok) {
     const code: string = responseBody?.error?.code ?? "UNKNOWN";
     const rawMessage: string | undefined = responseBody?.error?.message;
-    const message =
-      code === "VALIDATION_ERROR"
-        ? (rawMessage ?? "Please complete the required fields before requesting a suggestion.")
-        : (FRIENDLY_AI_ERROR[code] ?? "Something went wrong generating a suggestion. Please try again.");
-    throw new AIAssistError(code, message);
+    const message = PASSTHROUGH_MESSAGE_CODES.has(code)
+      ? (rawMessage ?? "Please complete the required fields before requesting a suggestion.")
+      : (FRIENDLY_AI_ERROR[code] ?? "Something went wrong generating a suggestion. Please try again.");
+    throw new AIAssistError(code, message, responseBody?.error?.details);
   }
   return responseBody.data as AISuggestionResponse<T>;
 }

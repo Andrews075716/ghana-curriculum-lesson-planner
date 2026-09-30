@@ -171,7 +171,8 @@ step-validation machinery then treats exactly like teacher-typed content.
 | Request timed out | `AITimeoutError` | 504 | "The AI took too long to respond. Please try again." |
 | Network / other provider HTTP error | `AIRequestError` | 502 | "Couldn't reach the AI service right now. Please try again shortly." |
 | Malformed/schema-invalid provider response | `AIInvalidOutputError` | 502 | "The AI's suggestion couldn't be used. Please try regenerating." |
-| **Curriculum selection is AI-ineligible** | **`AICurriculumIneligibleError`** (new) | **422** | "AI Assist isn't available for this curriculum selection yet — it's still awaiting curriculum review. You can continue filling in this section yourself." |
+| **Curriculum selection is AI-ineligible** | **`AICurriculumIneligibleError`** | **422** | "AI Assist isn't available for this curriculum selection yet — it's still awaiting curriculum review. You can continue filling in this section yourself." |
+| **AI-generated activity durations exceed the planned lesson duration** | **`AIActivityDurationExceededError`** | **422** | the message itself (already teacher-facing, states expected/generated/difference in minutes) — see "Duration validation" |
 | Missing planner context (no Learning Indicator / duration set yet) | `ValidationError` | 400 | the validation message itself (already teacher-facing) |
 | Planner not found / not owned by caller | `NotFoundError` | 404 | "This planner couldn't be found." |
 
@@ -215,29 +216,77 @@ this codebase added.
   even consulted, and the `.strict()` output schemas rejecting anything
   shaped like a curriculum edit.
 - `scripts/test-ai-wizard-actions.ts`: the live HTTP route, all 9 actions,
-  re-confirmed unaffected by the rewire.
-- No live-Anthropic-API test — `AI_PROVIDER=none` in this environment (no key
-  configured); all AI tests are deterministic against the `NoopAIProvider`
-  fail-safe path, per "do not create expensive repetitive live API tests."
+  re-confirmed unaffected by the rewire. Redesigned to use a curriculum
+  fixture that's deliberately AI-ineligible, so it's safe to run against ANY
+  environment (real provider configured or not) without ever reaching a
+  live call — see that file's own doc comment.
+- `scripts/test-ai-duration-validation.ts` (27 assertions, added post-Checkpoint-8):
+  see "Duration validation" below.
+- No live-Anthropic-API test is part of the automated suite — see "Duration
+  validation"'s note on the one deliberate, manually-run live smoke test
+  performed once during development (not committed as a repeatable test);
+  all committed AI tests are deterministic, using either `NoopAIProvider`
+  (`AI_PROVIDER` unset) or `MockAIProvider` (`AI_PROVIDER=mock`, test-only,
+  refused in production), per "do not create expensive repetitive live API
+  tests."
+
+## Duration validation
+
+Added post-Checkpoint-8, closing the limitation originally noted here.
+
+**Where it happens**: `lesson-duration-validation.service.ts`'s
+`assertActivityDurationsFit`, called from `ai.service.ts` immediately after
+schema validation and before the suggestion is returned to the caller — i.e.
+before a teacher ever sees it, for the three methods whose output carries
+timed activities: `generateLessonActivities`, `generateClosure`,
+`generateFullLessonDraft`. (`generateAssessments` and the other methods have
+no `durationMinutes` field on their output at all — not applicable.)
+
+**What constitutes valid timing**: the SUM of a response's activity
+durations must not exceed the planner's own `durationMinutes`. This is
+evidenced by, not invented alongside, an already-shipped product decision —
+`LessonActivityListEditor.tsx` (the teacher-facing editor for this exact
+data) already computes `overPlanned = total > planned` and warns only in
+that direction; there is no corresponding "under-allocated" warning
+anywhere in the app. `generateLessonActivities`'s own prompt explicitly asks
+for a total "noticeably less" than the full duration (Closure is generated
+separately), confirming under-allocation is that method's intended normal
+output, not a defect.
+
+- **Over-allocation**: rejected. Throws `AIActivityDurationExceededError`
+  (HTTP 422, code `AI_ACTIVITY_DURATION_EXCEEDED`) carrying
+  `expectedDuration`/`generatedDuration`/`difference` in the response body
+  (safe, teacher-meaningful numbers — never provider internals). The
+  suggestion is never returned to the client, so it can't be inserted,
+  appended, or persisted.
+- **Under-allocation**: accepted, unchanged from before. No numeric
+  tolerance is enforced or invented — none exists anywhere else in this
+  codebase to justify one, and inventing one would contradict
+  `generateLessonActivities`'s own documented intentional-partial-output
+  design.
+- **Multiple lessons**: not a live code path to get wrong. Verified (not
+  assumed) that every place a `Lesson` row is created —
+  `createDraftPlanner` and the planner-duplication logic in
+  `planner.repository.ts` — creates exactly one, and a test
+  (`test-ai-duration-validation.ts` §8) confirms this structurally against
+  the real database. Each `generate*` call's `durationMinutes` already
+  refers to that one lesson.
+- Teacher-authored content already saved to the database is never touched
+  by a rejection — verified directly: a pre-seeded `LessonActivity` row is
+  read before and after a rejected `generateLessonActivities` call and
+  found byte-for-byte identical (`test-ai-duration-validation.ts` §9-10).
+
+**One live smoke test, not repeated**: during development, with explicit
+one-time authorization and a real key present in `.env.local`, exactly one
+live call (`generateEssentialQuestions` against a real, AI-eligible
+Mathematics fixture) was made to confirm the end-to-end Anthropic
+integration actually works — HTTP 200, well-formed, curriculum-grounded
+output. That was a manual, one-off verification, never committed as part of
+the automated suite; every AI test that runs as part of regular validation
+uses `NoopAIProvider` or `MockAIProvider` and makes zero real API calls.
 
 ## Known limitations
 
-- **No live end-to-end smoke test against the real Anthropic API** was run or
-  added, because no `ANTHROPIC_API_KEY` is configured in this environment.
-  Everything above is verified at the architecture/contract level (schemas,
-  error handling, the eligibility boundary, prompt content), not against a
-  live model response. If/when a key is available, a single manual
-  `AI_PROVIDER=anthropic` smoke test per action is recommended before
-  considering the Anthropic integration itself (as opposed to its
-  surrounding architecture) production-verified.
-- **No server-side mathematical validation** that generated activity
-  durations sum to the planned lesson duration — the prompt asks for this
-  explicitly (leave room for closure, sum to noticeably less than the full
-  duration) and the UI tracks planned vs. entered duration, but nothing
-  rejects a provider response whose durations don't add up. Given every
-  response is a teacher-reviewed suggestion before it's ever saved, this was
-  judged acceptable rather than added speculatively — worth a follow-up if
-  drift is observed in practice.
 - **Keywords and Cross-Cutting Theme explanations remain teacher-only** (see
   above) — a deliberate, pre-existing scope boundary, not revisited here.
 - The `Strand.sourcePage` gap (see "Curriculum safety boundary" above) is a

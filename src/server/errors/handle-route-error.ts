@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { AppError, RateLimitedError } from "./app-error";
+import { AIActivityDurationExceededError, AppError, RateLimitedError } from "./app-error";
 
 /** Maps a thrown error to the API's consistent `{ error: { code, message } }` shape. */
 export function handleRouteError(error: unknown): NextResponse {
@@ -7,6 +7,27 @@ export function handleRouteError(error: unknown): NextResponse {
     return NextResponse.json(
       { error: { code: error.code, message: error.message } },
       { status: error.httpStatus, headers: { "Retry-After": String(error.retryAfterSeconds) } },
+    );
+  }
+
+  if (error instanceof AIActivityDurationExceededError) {
+    // expectedDuration/generatedDuration/difference are safe, teacher-meaningful
+    // numbers (the planner's own configured duration and what the AI proposed)
+    // — never provider internals — so unlike other 5xx AppErrors they're
+    // included directly in the response body, not just server logs.
+    return NextResponse.json(
+      {
+        error: {
+          code: error.code,
+          message: error.message,
+          details: {
+            expectedDuration: error.expectedDuration,
+            generatedDuration: error.generatedDuration,
+            difference: error.difference,
+          },
+        },
+      },
+      { status: error.httpStatus },
     );
   }
 

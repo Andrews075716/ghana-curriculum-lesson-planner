@@ -123,3 +123,39 @@ export class AICurriculumIneligibleError extends AppError {
     });
   }
 }
+
+/**
+ * An AI-generated set of timed lesson activities (from `generateLessonActivities`,
+ * `generateClosure`, or `generateFullLessonDraft`) totals MORE minutes than
+ * the planner's own configured `durationMinutes` — see
+ * `lesson-duration-validation.service.ts` for the rule and the evidence
+ * it's based on (the existing `LessonActivityListEditor` UI already flags
+ * over-allocation as a warning; this is the same rule enforced as a hard
+ * gate on AI output specifically, before a teacher ever sees the
+ * suggestion). Under-allocation is deliberately NOT an error — see that
+ * service's doc comment.
+ *
+ * 422, matching AICurriculumIneligibleError: the request was well-formed,
+ * the AI's response just isn't usable as-is. `expectedDuration` /
+ * `generatedDuration` / `difference` are safe, teacher-meaningful numbers
+ * (never provider internals) surfaced in the response body — see
+ * `handle-route-error.ts`.
+ */
+export class AIActivityDurationExceededError extends AppError {
+  readonly expectedDuration: number;
+  readonly generatedDuration: number;
+  readonly difference: number;
+
+  constructor(sectionLabel: string, expectedDuration: number, generatedDuration: number) {
+    const difference = generatedDuration - expectedDuration;
+    super(
+      ErrorCode.AI_ACTIVITY_DURATION_EXCEEDED,
+      `The AI-suggested ${sectionLabel} total${generatedDuration === 1 ? "s" : ""} ${generatedDuration} minute${generatedDuration === 1 ? "" : "s"}, which is ${difference} minute${difference === 1 ? "" : "s"} more than the lesson's planned ${expectedDuration} minute${expectedDuration === 1 ? "" : "s"}. Try regenerating, or insert it and adjust the durations yourself.`,
+      422,
+      { category: "AI_ACTIVITY_DURATION_EXCEEDED" },
+    );
+    this.expectedDuration = expectedDuration;
+    this.generatedDuration = generatedDuration;
+    this.difference = difference;
+  }
+}
