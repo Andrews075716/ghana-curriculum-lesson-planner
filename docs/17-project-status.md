@@ -26,6 +26,20 @@
 > subjects) is now substantially stale — all of those except the standalone
 > `/curriculum` browser are confirmed COMPLETE with passing test coverage as
 > of Checkpoint 9.
+>
+> **Further update (2026-10-01):** manual browser acceptance testing after
+> Checkpoint 9 found and fixed two more issues, both documented but not
+> reflected below: a dev-server stability issue causing intermittent
+> "Failed to save." / generic AI errors (root-caused to Turbopack worker-pool
+> instability under memory pressure — fixed by defaulting `npm run dev` to
+> Webpack, see
+> [dev-server-stability-investigation.md](dev-server-stability-investigation.md)),
+> and a curriculum AI-eligibility policy revision so human review status no
+> longer blocks AI generation on its own (see
+> [curriculum-status-policy.md](curriculum-status-policy.md)'s "Policy
+> revision (2026-10-01)" section — 33/33 subjects now have at least one
+> AI-usable curriculum path, confirmed by
+> `scripts/test-ai-eligibility-all-subjects.ts`).
 
 This document is the single most important one for anyone picking up this project: it states plainly what works, what's half-built, and what's next, based strictly on repository evidence gathered while writing this documentation set (see the inspection method in [README.md](README.md)).
 

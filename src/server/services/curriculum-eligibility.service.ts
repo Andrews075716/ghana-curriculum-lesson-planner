@@ -54,16 +54,21 @@ export function isVisibleToAdmin(_fields: CurriculumStatusFields): boolean {
 
 /**
  * May this record be included in curriculum context handed to an AI
- * provider? Fails closed: a record is eligible only if it is NOT rejected
- * (by either field), AND is either a clean extraction (`EXTRACTED`) or has
- * been explicitly human-approved (`reviewStatus === "APPROVED"`), AND —
- * unless `requireProvenance` is explicitly turned off — has a recorded
- * source page. `NEEDS_REVIEW` records are deliberately excluded — the
- * database has no per-record field distinguishing a resolved structural
- * correction from a still-ambiguous extraction-time flag (only free-text
- * `reviewNote` prose), so this can't be decided per-record without
- * guessing; excluding the whole status is the only safe reading available
- * today. See docs/curriculum-status-policy.md for the full reasoning.
+ * provider? Fails closed on the two things this data model can actually
+ * verify per record: a record is eligible only if it is NOT rejected (by
+ * either field), AND — unless `requireProvenance` is explicitly turned off
+ * — has a recorded source page. See docs/curriculum-status-policy.md
+ * ("Policy revision: human review status is independent of AI usability")
+ * for the full reasoning and the product decision behind it.
+ *
+ * `extractionStatus`/`reviewStatus` being `NEEDS_REVIEW`/`PENDING`, or
+ * `extractionStatus` being the legacy `null`, no longer block AI eligibility
+ * on their own: human review status tracks curriculum QA (OCR anomalies,
+ * code collisions, editorial correctness), not whether the official text
+ * itself is safe to hand to an AI provider as context — those are
+ * independent axes. A record that genuinely lacks the structural/provenance
+ * requirements below stays ineligible, but for that concrete reason, not
+ * because review hasn't happened yet.
  *
  * `requireProvenance` defaults to `true`. Pass `false` only for a node type
  * where `sourcePage` is verifiably not part of this data model's real
@@ -79,9 +84,7 @@ export function isEligibleForAiContext(
   options?: { requireProvenance?: boolean },
 ): boolean {
   if (isRejected(record)) return false;
-  const structurallyClean = record.extractionStatus === "EXTRACTED" || record.reviewStatus === "APPROVED";
-  const hasProvenance = options?.requireProvenance === false || record.sourcePage !== null;
-  return structurallyClean && hasProvenance;
+  return options?.requireProvenance === false || record.sourcePage !== null;
 }
 
 /**

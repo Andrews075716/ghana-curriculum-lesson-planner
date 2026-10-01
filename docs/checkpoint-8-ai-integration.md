@@ -50,12 +50,17 @@ exclusively — there is no other code path from a Learning Indicator id to
 curriculum text in the AI layer. See
 [curriculum-status-policy.md](curriculum-status-policy.md) for the full
 eligibility policy; in short: a `REJECTED` node (either status dimension) or
-an unresolved `NEEDS_REVIEW` node anywhere in the chain (Strand through
-Learning Indicator, and any additional linked Content Standard) makes that
-node ineligible, and the whole request fails closed with
+a node missing required source-page provenance anywhere in the chain (Strand
+through Learning Indicator, and any additional linked Content Standard)
+makes that node ineligible, and the whole request fails closed with
 `AICurriculumIneligibleError` (HTTP 422) rather than silently substituting a
 different curriculum node or proceeding with partial/unsafe data. The error
 message is teacher-facing and does not leak internal database ids.
+
+**Revised 2026-10-01:** `NEEDS_REVIEW`/`PENDING` human-review status, and the
+legacy `extractionStatus = null` rows, no longer make a node ineligible on
+their own — see curriculum-status-policy.md's "Policy revision" section for
+why. Rejection and provenance remain the only two real eligibility gates.
 
 One refinement made *during* this checkpoint, based on evidence found while
 wiring the boundary in: `Strand.sourcePage` is `null` on 100% of strand rows
@@ -171,7 +176,7 @@ step-validation machinery then treats exactly like teacher-typed content.
 | Request timed out | `AITimeoutError` | 504 | "The AI took too long to respond. Please try again." |
 | Network / other provider HTTP error | `AIRequestError` | 502 | "Couldn't reach the AI service right now. Please try again shortly." |
 | Malformed/schema-invalid provider response | `AIInvalidOutputError` | 502 | "The AI's suggestion couldn't be used. Please try regenerating." |
-| **Curriculum selection is AI-ineligible** | **`AICurriculumIneligibleError`** | **422** | "AI Assist isn't available for this curriculum selection yet — it's still awaiting curriculum review. You can continue filling in this section yourself." |
+| **Curriculum selection is AI-ineligible** | **`AICurriculumIneligibleError`** | **422** | "AI assistance isn't available for this curriculum selection: the selected curriculum data is missing information AI generation needs (such as source-page traceability), or has been marked unusable during curriculum review. You can continue planning this lesson manually." (revised 2026-10-01 — no longer mentions "awaiting review," since review status alone no longer blocks AI) |
 | **AI-generated activity durations exceed the planned lesson duration** | **`AIActivityDurationExceededError`** | **422** | the message itself (already teacher-facing, states expected/generated/difference in minutes) — see "Duration validation" |
 | Missing planner context (no Learning Indicator / duration set yet) | `ValidationError` | 400 | the validation message itself (already teacher-facing) |
 | Planner not found / not owned by caller | `NotFoundError` | 404 | "This planner couldn't be found." |

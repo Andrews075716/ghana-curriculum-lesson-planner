@@ -90,19 +90,23 @@ async function section1_aiEligibilityNeedsReviewApproved() {
 }
 
 async function section2_aiIneligibleButTeacherVisibleUX() {
-  console.log("2) AI-ineligible curriculum UX: teacher CAN see/select it, AI generation IS refused, no silent substitution");
+  console.log(
+    "2) AI-ineligible curriculum UX: teacher CAN see/select it; AI generation is refused only for a " +
+      "genuine blocking reason (REJECTED or missing provenance), never merely for NEEDS_REVIEW/PENDING",
+  );
 
   const subject = await prisma.subject.create({ data: { name: `${TAG} UX Subject`, code: `${TAG}-UX` } });
   const classLevel = await prisma.classLevel.create({ data: { name: `${TAG} UX Class`, sequence: 9102 } });
   const version = await prisma.curriculumVersion.create({ data: { name: `${TAG} UX Version` } });
-  // Unresolved NEEDS_REVIEW: teacher-visible, but AI-ineligible per policy.
+  // Unresolved NEEDS_REVIEW, but structurally valid and provenance-complete: teacher-visible
+  // AND AI-eligible under the current policy (see docs/curriculum-status-policy.md).
   const needsReview = { extractionStatus: "NEEDS_REVIEW" as const, reviewStatus: "PENDING" as const, sourcePage: 20 };
 
   const strand = await prisma.strand.create({
     data: { subjectId: subject.id, classLevelId: classLevel.id, curriculumVersionId: version.id, name: `${TAG} UX Strand`, sequence: 1, extractionStatus: "EXTRACTED", reviewStatus: "PENDING" },
   });
   const subStrand = await prisma.subStrand.create({
-    data: { strandId: strand.id, name: `${TAG} UX Sub-Strand`, sequence: 1, extractionStatus: "EXTRACTED", reviewStatus: "PENDING" },
+    data: { strandId: strand.id, name: `${TAG} UX Sub-Strand`, sequence: 1, extractionStatus: "EXTRACTED", reviewStatus: "PENDING", sourcePage: 19 },
   });
   const contentStandard = await prisma.contentStandard.create({
     data: { subStrandId: subStrand.id, description: `${TAG} UX CS`, sequence: 1, ...needsReview },
@@ -121,23 +125,27 @@ async function section2_aiIneligibleButTeacherVisibleUX() {
   const csLabels: string[] = (csRes.body.data ?? []).map((o: { label: string }) => o.label);
   assert(csLabels.some((l) => l.includes(`${TAG} UX CS`)), "the NEEDS_REVIEW content standard IS visible/selectable to the teacher");
 
-  // AI generation is refused for this selection, not silently substituted.
+  // AI generation now SUCCEEDS (reaches the mock provider) for this NEEDS_REVIEW/PENDING,
+  // structurally-valid, provenance-complete selection — the product change under test.
   const teacher = await prisma.teacherProfile.findFirstOrThrow({ where: { user: { email: "demo.teacher@example.edu.gh" } } });
   const plannerId = await createDraftPlanner(teacher.id, "2025/2026");
   await updatePlannerDraft(plannerId, teacher.id, { learningIndicatorId: learningIndicator.id, durationMinutes: 40 });
 
+  const eqResult = await aiService.generateEssentialQuestions(plannerId, teacher.id);
+  assert(
+    eqResult.suggestion.essentialQuestions.length > 0,
+    "AI generation SUCCEEDS for a NEEDS_REVIEW/PENDING, structurally valid, provenance-complete selection",
+  );
+
+  // Now make that same Content Standard genuinely ineligible (REJECTED) and confirm AI
+  // generation is still correctly refused for an actual blocking reason, not substituted.
+  await prisma.contentStandard.update({ where: { id: contentStandard.id }, data: { extractionStatus: "REJECTED" } });
   try {
     await aiService.generateEssentialQuestions(plannerId, teacher.id);
-    assert(false, "should have refused AI generation for this NEEDS_REVIEW/PENDING selection");
+    assert(false, "should have refused AI generation for a REJECTED Content Standard");
   } catch (error) {
-    // Depending on whether a real provider is configured, this fails at the
-    // provider-availability check OR the curriculum-eligibility check — both
-    // are "refused", not a crash and not a silent substitution.
     const code = (error as { code?: string }).code;
-    assert(
-      code === "AI_CURRICULUM_INELIGIBLE" || code === "AI_UNAVAILABLE",
-      `AI generation is refused, not substituted (got code=${code})`,
-    );
+    assert(code === "AI_CURRICULUM_INELIGIBLE", `REJECTED Content Standard -> AI_CURRICULUM_INELIGIBLE (got code=${code})`);
     assert(
       !JSON.stringify((error as Error).message).includes(learningIndicator.id),
       "the refusal message does not leak the internal database id",

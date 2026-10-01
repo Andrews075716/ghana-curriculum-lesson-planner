@@ -32,10 +32,9 @@ export async function buildAICurriculumContext(
   const result = await getAiEligibleCurriculumContext(learningIndicatorId);
   if (!result.eligible) {
     throw new AICurriculumIneligibleError(
-      "AI assistance isn't available for this curriculum selection: the selected curriculum data " +
-        "hasn't been confirmed ready for AI use yet (it may still be flagged for review, or missing " +
-        "source-page information). You can continue planning this lesson manually, or try again once " +
-        "curriculum review is complete.",
+      "AI assistance isn't available for this curriculum selection: the selected curriculum data is " +
+        "missing information AI generation needs (such as source-page traceability), or has been marked " +
+        "unusable during curriculum review. You can continue planning this lesson manually.",
       { cause: result.ineligibleReason },
     );
   }

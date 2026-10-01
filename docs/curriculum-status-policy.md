@@ -7,6 +7,117 @@ when it may be handed to an AI provider. It was written to close the one
 open policy question left by [checkpoint-7-audit.md](checkpoint-7-audit.md)
 (row 18), before Checkpoint 8 (AI integration) begins.
 
+## Policy revision (2026-10-01): human review status is independent of AI usability
+
+Manual browser acceptance testing demonstrated that the original policy
+(below, kept for history) unnecessarily blocked AI lesson generation for
+valid curriculum selections in subjects such as Computing — specifically,
+every `NEEDS_REVIEW`/`PENDING` record and every legacy `extractionStatus =
+null` record was excluded from AI context, purely because of its status,
+even when the record was otherwise a structurally valid, non-rejected,
+fully traceable piece of official curriculum text.
+
+The policy now separates four previously-conflated concepts explicitly:
+
+| Concept | Governed by |
+|---|---|
+| Teacher visibility | `isVisibleToTeacher` — unaffected by this revision |
+| AI usability | `isEligibleForAiContext` — **revised**: no longer reads `extractionStatus`/`reviewStatus` at all |
+| Human review status | `reviewStatus`, set only by a `CURRICULUM_ADMIN` — unaffected; still exists for curriculum QA |
+| Rejection | `extractionStatus === "REJECTED"` or `reviewStatus === "REJECTED"` — unaffected, still fail-closed |
+
+**`isEligibleForAiContext` now has exactly two gates, both of which were
+already real, data-backed signals (not status labels):**
+1. Not rejected, by either field — unchanged, still fail-closed.
+2. Has a recorded source page (`sourcePage !== null`), unless the node type
+   is explicitly provenance-exempt (`Strand` only — see below) — unchanged,
+   still required.
+
+`NEEDS_REVIEW`+`PENDING` alone, and legacy `extractionStatus = null` alone,
+no longer appear in this check at all. `reviewStatus = APPROVED` is no
+longer a *requirement* for AI eligibility either — it was never actually
+needed once `EXTRACTED`-or-`APPROVED` stopped being the gate; the two
+remaining gates (rejection, provenance) are status-independent.
+
+**Why this is safe:** `NEEDS_REVIEW` means "flagged for a human to look at"
+— typically a printed code collision, OCR garbling, or a structural
+re-parenting correction — not "the wording is wrong" (see the original
+"extractionStatus's meaning is easy to misread" section below, unchanged).
+The legacy `extractionStatus = null` rows predate the status system
+entirely but are real seed data, already teacher-visible, already used in
+planners today. Neither status says anything about whether the record is
+traceable to an official source page or whether it's been rejected — the
+two things that actually matter for AI safety. Human review remains
+meaningful for its own purpose (curriculum QA, OCR anomalies, editorial
+correctness, future administrative review) — it just no longer doubles as
+an AI gate it was never a precise proxy for.
+
+**What this does NOT change:** rejection remains fail-closed exactly as
+before. Provenance (`sourcePage`) remains required exactly as before, with
+the same `Strand`-only exemption. No curriculum record's `extractionStatus`,
+`reviewStatus`, or `reviewNote` was modified by this change — this is a
+filtering-policy change in application code, not a data migration. The
+official-curriculum-is-never-AI-written boundary (see "Official vs.
+AI-generated data" below) is completely unaffected.
+
+**A concrete, honest consequence of this revision:** the exact Computing
+Learning Indicator used in the original manual-browser-acceptance report
+(`COMP-F1-STR-01-SS-01-CS-01-LI-01`) is **still AI-ineligible** after this
+change — not because of its status anymore, but because its Sub-Strand,
+Content Standard, Learning Outcome, and Learning Indicator all have
+`sourcePage = null` (it's part of the 29-row legacy pre-Checkpoint-6 seed
+slice, which predates the extraction pipeline that populates `sourcePage`
+entirely — see "Legacy null-extractionStatus audit" below). Computing as a
+*subject* has an AI-usable path (confirmed by the 33-subject test — see
+`scripts/test-ai-eligibility-all-subjects.ts`), just not through this one
+specific legacy fixture. This was deliberately not special-cased or
+weakened to make that one fixture pass — see "Why provenance was not
+relaxed for the legacy slice" below.
+
+### Legacy null-extractionStatus audit
+
+All 29 `extractionStatus = null` rows (2 Strand, 4 SubStrand, 4
+ContentStandard, 6 LearningOutcome, 13 LearningIndicator — all under
+Computing/Form-1's two original seed Strands) also have `sourcePage = null`.
+This was confirmed by direct query before writing this revision, not
+assumed. These rows remain AI-ineligible under the revised policy, for the
+concrete, correct reason (no recorded source page), not because of their
+null status.
+
+### Why provenance was not relaxed for the legacy slice
+
+It was considered whether `sourcePage` should also be waived for this
+legacy slice, the same way `sourceDocument` is already waived everywhere
+(it's `null` on every curriculum row — the import pipeline never populates
+it). The two cases are not the same: `sourceDocument` is null everywhere
+because the field is simply unused by the current pipeline, while
+`sourcePage` is the real, populated provenance signal for 99%+ of the
+database — its absence specifically on this 29-row legacy slice may mean
+this seed data was hand-authored before the PDF-extraction pipeline existed
+and was never traced back to an official document page at all, rather than
+merely missing a metadata field. Waiving it would be guessing at
+traceability the system cannot actually confirm, which is exactly the kind
+of heuristic this document's original policy refused to introduce (see
+"The distinction the data model genuinely cannot make" below). This is left
+as an open question for a human curriculum admin to resolve, not decided
+here.
+
+### Full-hierarchy coverage, after this revision (2026-10-01)
+
+Computed by `scripts/test-ai-eligibility-all-subjects.ts` across every one
+of the 3,070 Learning Indicators in the database:
+
+| | Count |
+|---|---|
+| Total Learning Indicators | 3,070 |
+| Teacher-visible (not rejected) | 3,070 |
+| AI-usable | 3,057 |
+| Blocked — `REJECTED` | 0 |
+| Blocked — structural (broken chain) | 0 |
+| Blocked — missing provenance | 13 (exactly the legacy Computing/Form-1 slice) |
+
+33/33 subjects have at least one AI-usable curriculum path.
+
 ## The schema has two independent status fields, not one
 
 Every node in the curriculum hierarchy (`Strand`, `SubStrand`,
@@ -54,7 +165,7 @@ make Create Planner show nothing at all today.
 `reviewStatus`: `PENDING` for every row above; 0 `APPROVED`, 0 `REJECTED`, at
 every level.
 
-## Policy
+## Policy (original, 2026-09-30 — superseded by the 2026-10-01 revision above; kept for history)
 
 | Status combination | Teacher planner | AI curriculum context | Admin |
 |---|---|---|---|
@@ -65,9 +176,12 @@ every level.
 | `extractionStatus = null` (legacy pre-status-system rows) | Visible (preserves existing behaviour) | **Not eligible** (can't confirm it's a clean extraction) | Visible |
 | `extractionStatus = REJECTED` **or** `reviewStatus = REJECTED` | **Hidden** | **Never eligible** | Visible |
 
-Rule of thumb: **teacher visibility is "not rejected"; AI eligibility is
-"not rejected, AND (clean extraction or human-approved), AND has a recorded
-source page."**
+Rule of thumb (original, superseded): **teacher visibility is "not
+rejected"; AI eligibility is "not rejected, AND (clean extraction or
+human-approved), AND has a recorded source page."** As of the 2026-10-01
+revision above, the "(clean extraction or human-approved)" clause was
+removed — AI eligibility is now "not rejected, AND has a recorded source
+page," full stop.
 
 ### Why this differs from the most literal reading of "hide EXTRACTED"
 
@@ -96,11 +210,16 @@ effectively resolved (a garbled code that's obviously correctable) versus
 one that's genuinely still ambiguous, without parsing natural language —
 which this policy deliberately does not do**, per the "do not create a
 heuristic that guesses" instruction that prompted this document. This is why
-`isEligibleForAiContext()` excludes *all* `NEEDS_REVIEW` records with
-`reviewStatus: PENDING`, with no exceptions: it's not that every such record
-is actually unsafe, it's that the system cannot currently tell which ones
-are. The only way out of this bucket for a specific record is a human
-setting `reviewStatus: APPROVED` on it.
+the *original* `isEligibleForAiContext()` excluded *all* `NEEDS_REVIEW`
+records with `reviewStatus: PENDING`, with no exceptions: it's not that
+every such record was actually unsafe, it's that the system couldn't tell
+which ones were, from status alone. **This reasoning is still correct — it
+just turned out review status was never actually standing in for AI safety
+in the first place.** The 2026-10-01 revision above didn't resolve this
+per-record ambiguity by inspecting `reviewNote`; it recognized that AI
+safety was never really about resolving it — rejection and provenance are
+the two things that are actually, concretely verifiable per record, and
+those remain fail-closed exactly as before.
 
 ### Source provenance
 
@@ -119,7 +238,9 @@ live. Exports:
 - `isVisibleToTeacher(fields)` — pure predicate, `true` unless rejected by
   either field.
 - `isEligibleForAiContext(record)` — pure predicate implementing the fail-closed
-  rule above; requires `sourcePage`.
+  rule: not rejected, and (unless exempt) has a recorded `sourcePage`. See
+  the "Policy revision (2026-10-01)" section above — `extractionStatus`/
+  `reviewStatus` are no longer read by this function at all.
 - `isVisibleToAdmin(fields)` — always `true`; kept as an explicit named
   function (not "just don't filter") so every visibility decision has one
   obvious place to look.
@@ -197,9 +318,13 @@ table, so it can never be mistaken for official curriculum text later.
 
 ## Tests
 
-`scripts/test-curriculum-status-policy.ts` — 30 assertions:
-- Every status combination in the table above, against the pure policy
-  functions directly.
+`scripts/test-curriculum-status-policy.ts` — 38 assertions (updated
+2026-10-01 for the policy revision):
+- Every status combination against the pure policy functions directly,
+  including the revised matrix: `NEEDS_REVIEW`/`PENDING` and legacy
+  null-`extractionStatus` are now AI-eligible when structurally valid and
+  provenance-complete; the same two combinations without a recorded
+  `sourcePage` remain AI-ineligible, for that concrete reason.
 - A live end-to-end check (real tagged fixtures, real HTTP calls) that a
   `REJECTED` `Strand` (by either field) is excluded from
   `/api/curriculum/strands` while `EXTRACTED` and `NEEDS_REVIEW` strands
@@ -207,12 +332,25 @@ table, so it can never be mistaken for official curriculum text later.
   just the pure functions.
 - `getAiEligibleCurriculumContext` failing closed when a Content Standard in
   the chain is `REJECTED`, naming the failing level; succeeding for a fully
-  clean chain; and filtering out (not failing on) an ineligible *additional*
-  linked Content Standard.
+  clean chain; filtering out (not failing on) an ineligible *additional*
+  linked Content Standard; and three new end-to-end cases confirming a
+  `NEEDS_REVIEW`/`PENDING` primary Content Standard, and a legacy-null one,
+  both now succeed, while one missing `sourcePage` still fails closed.
+
+`scripts/test-ai-eligibility-all-subjects.ts` (new, 2026-10-01) — validates
+the revision against the complete real database, not fixtures: per-subject
+smoke test (33/33 subjects have at least one AI-usable path), a
+full-hierarchy coverage count (see "Full-hierarchy coverage" above), the
+exact Computing regression fixture, and the Agriculture regression fixture.
+Zero Anthropic calls — context construction only.
+
+`scripts/test-checkpoint9-e2e.ts` section 2 — updated 2026-10-01: previously
+asserted an unresolved `NEEDS_REVIEW` selection was refused; now asserts it
+SUCCEEDS (reaches the mock provider) when structurally valid and
+provenance-complete, and separately confirms a genuinely `REJECTED` Content
+Standard is still correctly refused.
 
 Re-ran the full pre-existing Checkpoint 7 suite afterward with no changes
 needed: 58 + 72 + 20 + 42 + 27 + 55 + 33 = 307 assertions, 0 failures — the
-new status filtering does not change any currently-visible teacher-facing
-result (see the status counts table: 0 `REJECTED` rows exist today, so the
-new filter is a no-op against the real database until a record is actually
-rejected).
+teacher-visibility filter (`isVisibleToTeacher`/`teacherVisibleStatusWhere`)
+is completely unaffected by this revision; only AI eligibility changed.

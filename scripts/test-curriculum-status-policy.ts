@@ -50,12 +50,16 @@ function unitTests() {
   assert(isVisibleToAdmin(approved), "APPROVED: admin visible");
 
   const eligibleNeedsReview = record("NEEDS_REVIEW", "APPROVED");
-  assert(isVisibleToTeacher(eligibleNeedsReview), "eligible NEEDS_REVIEW (human-approved override): teacher visible");
-  assert(isEligibleForAiContext(eligibleNeedsReview), "eligible NEEDS_REVIEW (human-approved override): AI eligible");
+  assert(isVisibleToTeacher(eligibleNeedsReview), "NEEDS_REVIEW + APPROVED: teacher visible");
+  assert(isEligibleForAiContext(eligibleNeedsReview), "NEEDS_REVIEW + APPROVED: AI eligible");
 
   const unresolvedNeedsReview = record("NEEDS_REVIEW", "PENDING");
   assert(isVisibleToTeacher(unresolvedNeedsReview), "unresolved NEEDS_REVIEW: teacher visible (current-development-use policy)");
-  assert(!isEligibleForAiContext(unresolvedNeedsReview), "unresolved NEEDS_REVIEW: AI ineligible (can't distinguish resolved-vs-ambiguous per record)");
+  assert(
+    isEligibleForAiContext(unresolvedNeedsReview),
+    "unresolved NEEDS_REVIEW + structurally valid + provenance present: AI eligible " +
+      "(human review status no longer gates AI usability on its own)",
+  );
   assert(isVisibleToAdmin(unresolvedNeedsReview), "unresolved NEEDS_REVIEW: admin visible and (structurally) flaggable via extractionStatus");
 
   const extracted = record("EXTRACTED", "PENDING");
@@ -75,9 +79,32 @@ function unitTests() {
   assert(!isVisibleToTeacher(rejectedReview), "REJECTED (reviewStatus, a human rejected an otherwise-clean extraction): teacher hidden");
   assert(!isEligibleForAiContext(rejectedReview), "REJECTED (reviewStatus): AI ineligible");
 
+  const needsReviewReviewRejected = record("NEEDS_REVIEW", "REJECTED");
+  assert(!isVisibleToTeacher(needsReviewReviewRejected), "NEEDS_REVIEW + reviewStatus=REJECTED: teacher hidden");
+  assert(!isEligibleForAiContext(needsReviewReviewRejected), "NEEDS_REVIEW + reviewStatus=REJECTED: AI ineligible (rejection still fail-closed)");
+
   const legacyNull = record(null, "PENDING");
   assert(isVisibleToTeacher(legacyNull), "legacy null-extractionStatus (pre-Checkpoint-6 seed): teacher visible (preserve current behaviour)");
-  assert(!isEligibleForAiContext(legacyNull), "legacy null-extractionStatus: AI ineligible (can't confirm it's a clean extraction)");
+  assert(
+    isEligibleForAiContext(legacyNull),
+    "legacy null-extractionStatus + structurally valid + provenance present: AI eligible " +
+      "(a null status, on its own, no longer blocks AI usage)",
+  );
+
+  const legacyNullApproved = record(null, "APPROVED");
+  assert(isEligibleForAiContext(legacyNullApproved), "legacy null-extractionStatus + APPROVED: AI eligible");
+
+  const needsReviewNoProvenance = record("NEEDS_REVIEW", "PENDING", null);
+  assert(
+    !isEligibleForAiContext(needsReviewNoProvenance),
+    "NEEDS_REVIEW without sourcePage: AI ineligible for the concrete missing-provenance reason, not the status",
+  );
+
+  const legacyNullNoProvenance = record(null, "PENDING", null);
+  assert(
+    !isEligibleForAiContext(legacyNullNoProvenance),
+    "legacy null-extractionStatus without sourcePage: AI ineligible for the concrete missing-provenance reason, not the null status",
+  );
 }
 
 async function apiVisibilityTest() {
@@ -185,9 +212,11 @@ async function aiContextBoundaryTest() {
   await prisma.contentStandard.update({ where: { id: contentStandard.id }, data: { extractionStatus: "EXTRACTED" } });
 
   // An ADDITIONAL linked Content Standard that's ineligible should be dropped from the
-  // context, not fail the whole chain (it's supplementary, not load-bearing).
+  // context, not fail the whole chain (it's supplementary, not load-bearing). Ineligible
+  // here specifically because it's missing sourcePage — NEEDS_REVIEW/PENDING alone no
+  // longer makes a record ineligible under the current policy.
   const contentStandard2 = await prisma.contentStandard.create({
-    data: { subStrandId: subStrand.id, description: `${TAG} AI CS 2 (additional, ineligible)`, sequence: 2, extractionStatus: "NEEDS_REVIEW", reviewStatus: "PENDING", sourcePage: 43 },
+    data: { subStrandId: subStrand.id, description: `${TAG} AI CS 2 (additional, missing provenance)`, sequence: 2, extractionStatus: "NEEDS_REVIEW", reviewStatus: "PENDING", sourcePage: null },
   });
   await prisma.learningOutcomeContentStandardLink.create({
     data: { learningOutcomeId: learningOutcome.id, contentStandardId: contentStandard2.id },
@@ -200,6 +229,43 @@ async function aiContextBoundaryTest() {
       "the ineligible additional Content Standard is filtered out of the returned context",
     );
   }
+
+  // Flip the PRIMARY Content Standard to unresolved NEEDS_REVIEW (still provenance-complete,
+  // not rejected) and confirm the real service now treats it as AI-eligible end to end — this
+  // is the actual product change: human review status alone no longer blocks AI usability.
+  await prisma.contentStandard.update({
+    where: { id: contentStandard.id },
+    data: { extractionStatus: "NEEDS_REVIEW", reviewStatus: "PENDING" },
+  });
+  const withNeedsReviewPrimary = await getAiEligibleCurriculumContext(learningIndicator.id);
+  assert(
+    withNeedsReviewPrimary.eligible === true,
+    "a primary Content Standard that is NEEDS_REVIEW + PENDING, but structurally valid and " +
+      "provenance-complete, IS now AI-eligible end to end",
+  );
+  await prisma.contentStandard.update({ where: { id: contentStandard.id }, data: { extractionStatus: "EXTRACTED" } });
+
+  // Flip it again to the legacy null extractionStatus (same provenance-complete fixture) and
+  // confirm that's also AI-eligible — a null status alone no longer blocks AI usage either.
+  await prisma.contentStandard.update({ where: { id: contentStandard.id }, data: { extractionStatus: null } });
+  const withLegacyNullPrimary = await getAiEligibleCurriculumContext(learningIndicator.id);
+  assert(
+    withLegacyNullPrimary.eligible === true,
+    "a primary Content Standard with legacy null extractionStatus, but structurally valid and " +
+      "provenance-complete, IS now AI-eligible end to end",
+  );
+  await prisma.contentStandard.update({ where: { id: contentStandard.id }, data: { extractionStatus: "EXTRACTED" } });
+
+  // Now remove provenance (sourcePage) from that same primary Content Standard, with status
+  // reset to the "cleanest" value — confirms missing provenance still blocks regardless of
+  // status, i.e. rejection/provenance remain real, structural gates, not status.
+  await prisma.contentStandard.update({ where: { id: contentStandard.id }, data: { sourcePage: null } });
+  const withMissingProvenance = await getAiEligibleCurriculumContext(learningIndicator.id);
+  assert(
+    withMissingProvenance.eligible === false,
+    "a primary Content Standard missing sourcePage is AI-ineligible regardless of status (the real, structural gate)",
+  );
+  await prisma.contentStandard.update({ where: { id: contentStandard.id }, data: { sourcePage: 42 } });
 
   return { subject, classLevel, version };
 }

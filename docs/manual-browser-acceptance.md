@@ -274,6 +274,25 @@ diagnostic (restarting the dev server to guarantee current env vars) and
 informational (this report, and the regression test that locks the correct
 behavior in).
 
+**Addendum (2026-10-01) — this specific diagnosis prompted a real product
+change.** After the Agriculture retest below succeeded live, you asked
+whether the eligibility policy itself was too strict — it was. The original
+diagnosis above was factually correct at the time (this legacy data had
+neither `EXTRACTED` nor `APPROVED`, and that *was* the active rule), but the
+rule itself was revised: human review status (`NEEDS_REVIEW`/`PENDING`) no
+longer blocks AI eligibility on its own — see
+[curriculum-status-policy.md](curriculum-status-policy.md)'s "Policy
+revision (2026-10-01)" section for the full change and its 33-subject
+validation. One honest wrinkle: the *exact* Computing fixture used in this
+report (`COMP-F1-STR-01-SS-01-CS-01-LI-01`) remains AI-ineligible even after
+the revision — not for its status anymore, but because it (and its whole
+legacy seed chain) has no recorded source page at all, which the revision
+deliberately did not waive. Computing as a subject does have other,
+AI-usable curriculum paths. **Manual retest of AI Assist on Computing (a
+different Learning Indicator than this exact legacy fixture) is still
+needed** to confirm this live in the browser — see the change's own final
+report for exact retest steps.
+
 ## Save + AI defect report (Agriculture curriculum)
 
 **Reported:** two confirmed manual-browser defects using a real curriculum
