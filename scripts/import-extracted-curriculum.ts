@@ -39,7 +39,7 @@ async function importOne(slug: string) {
   try {
     const result = await prisma.$transaction(
       async (tx) => importExtractionFile(tx, file, subjectCode),
-      { timeout: 120_000 },
+      { timeout: 600_000, maxWait: 30_000 },
     );
 
     if (result.skipped) {
