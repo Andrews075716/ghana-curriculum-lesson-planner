@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AUTH_CARD_CLASSNAME, AUTH_INPUT_CLASSNAME } from "./auth-theme";
 
 export function ResetPasswordForm({ token }: { token: string | null }) {
   const router = useRouter();
@@ -51,9 +52,9 @@ export function ResetPasswordForm({ token }: { token: string | null }) {
 
   if (!token) {
     return (
-      <Card>
+      <Card className={`w-full max-w-md ${AUTH_CARD_CLASSNAME}`}>
         <CardHeader>
-          <CardTitle>Invalid link</CardTitle>
+          <CardTitle className="text-xl">Invalid link</CardTitle>
           <CardDescription>
             This password reset link is missing its token. Request a new one below.
           </CardDescription>
@@ -68,9 +69,9 @@ export function ResetPasswordForm({ token }: { token: string | null }) {
   }
 
   return (
-    <Card>
+    <Card className={`w-full max-w-md ${AUTH_CARD_CLASSNAME}`}>
       <CardHeader>
-        <CardTitle>Set a new password</CardTitle>
+        <CardTitle className="text-xl">Set a new password</CardTitle>
         <CardDescription>Choose a new password for your account.</CardDescription>
       </CardHeader>
       <CardContent>
@@ -90,6 +91,7 @@ export function ResetPasswordForm({ token }: { token: string | null }) {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className={AUTH_INPUT_CLASSNAME}
               />
               <p className="text-xs text-muted-foreground">
                 At least 8 characters, with a letter, a number, and a symbol.
@@ -104,6 +106,7 @@ export function ResetPasswordForm({ token }: { token: string | null }) {
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                className={AUTH_INPUT_CLASSNAME}
               />
               {confirmPasswordError ? (
                 <p className="text-xs text-destructive">{confirmPasswordError}</p>

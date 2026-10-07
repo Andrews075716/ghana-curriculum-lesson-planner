@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AUTH_CARD_CLASSNAME, AUTH_INPUT_CLASSNAME } from "./auth-theme";
 
 export function ForgotPasswordForm() {
   const [email, setEmail] = useState("");
@@ -38,9 +39,9 @@ export function ForgotPasswordForm() {
   }
 
   return (
-    <Card>
+    <Card className={`w-full max-w-md ${AUTH_CARD_CLASSNAME}`}>
       <CardHeader>
-        <CardTitle>Forgot your password?</CardTitle>
+        <CardTitle className="text-xl">Forgot your password?</CardTitle>
         <CardDescription>
           Enter your email and we&apos;ll send you a link to reset it.
         </CardDescription>
@@ -62,6 +63,7 @@ export function ForgotPasswordForm() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className={AUTH_INPUT_CLASSNAME}
               />
             </div>
 

@@ -11,9 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { MultiSelectField } from "./MultiSelectField";
 import { useCurriculumOptions } from "@/hooks/useCurriculumOptions";
-
-// Matches the landing page's Ghana green (src/app/(marketing)/page.tsx).
-const GHANA_GREEN = "#006B3F";
+import { AUTH_CARD_CLASSNAME, AUTH_INPUT_CLASSNAME, GHANA_GREEN } from "./auth-theme";
 
 export function RegisterForm() {
   const router = useRouter();
@@ -74,9 +72,9 @@ export function RegisterForm() {
   }
 
   return (
-    <Card>
+    <Card className={`w-full max-w-xl ${AUTH_CARD_CLASSNAME}`}>
       <CardHeader>
-        <CardTitle>Create your account</CardTitle>
+        <CardTitle className="text-xl">Create your account</CardTitle>
         <CardDescription>
           Set up your teaching profile and start planning with the curriculum you teach.
         </CardDescription>
@@ -85,7 +83,13 @@ export function RegisterForm() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1.5">
             <Label htmlFor="register-name">Full Name</Label>
-            <Input id="register-name" required value={name} onChange={(e) => setName(e.target.value)} />
+            <Input
+              id="register-name"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={AUTH_INPUT_CLASSNAME}
+            />
           </div>
 
           <div className="flex flex-col gap-1.5">
@@ -97,6 +101,7 @@ export function RegisterForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className={AUTH_INPUT_CLASSNAME}
             />
           </div>
 
@@ -110,6 +115,7 @@ export function RegisterForm() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className={AUTH_INPUT_CLASSNAME}
               />
               <p className="text-xs text-muted-foreground">
                 At least 8 characters, with a letter, a number, and a symbol.
@@ -124,6 +130,7 @@ export function RegisterForm() {
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                className={AUTH_INPUT_CLASSNAME}
               />
               {confirmPasswordError ? (
                 <p className="text-xs text-destructive">{confirmPasswordError}</p>
@@ -139,6 +146,7 @@ export function RegisterForm() {
               value={schoolName}
               onChange={(e) => setSchoolName(e.target.value)}
               placeholder="e.g. Achimota Basic School"
+              className={AUTH_INPUT_CLASSNAME}
             />
           </div>
 
@@ -163,11 +171,21 @@ export function RegisterForm() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="flex flex-col gap-1.5">
               <Label htmlFor="register-region">Region (optional)</Label>
-              <Input id="register-region" value={region} onChange={(e) => setRegion(e.target.value)} />
+              <Input
+                id="register-region"
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+                className={AUTH_INPUT_CLASSNAME}
+              />
             </div>
             <div className="flex flex-col gap-1.5">
               <Label htmlFor="register-staff-id">Teacher ID (optional)</Label>
-              <Input id="register-staff-id" value={staffId} onChange={(e) => setStaffId(e.target.value)} />
+              <Input
+                id="register-staff-id"
+                value={staffId}
+                onChange={(e) => setStaffId(e.target.value)}
+                className={AUTH_INPUT_CLASSNAME}
+              />
             </div>
           </div>
 

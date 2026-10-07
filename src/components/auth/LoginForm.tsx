@@ -9,9 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-
-// Matches the landing page's Ghana green (src/app/(marketing)/page.tsx).
-const GHANA_GREEN = "#006B3F";
+import { AUTH_CARD_CLASSNAME, AUTH_INPUT_CLASSNAME, GHANA_GREEN } from "./auth-theme";
 
 export function LoginForm() {
   const router = useRouter();
@@ -46,9 +44,9 @@ export function LoginForm() {
   }
 
   return (
-    <Card>
+    <Card className={`w-full max-w-md ${AUTH_CARD_CLASSNAME}`}>
       <CardHeader>
-        <CardTitle>Welcome back</CardTitle>
+        <CardTitle className="text-xl">Welcome back</CardTitle>
         <CardDescription>Sign in to continue planning your lessons.</CardDescription>
       </CardHeader>
       <CardContent>
@@ -62,6 +60,7 @@ export function LoginForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className={AUTH_INPUT_CLASSNAME}
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -78,6 +77,7 @@ export function LoginForm() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className={AUTH_INPUT_CLASSNAME}
             />
           </div>
 
