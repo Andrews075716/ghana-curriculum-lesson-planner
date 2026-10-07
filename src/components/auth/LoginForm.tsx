@@ -10,6 +10,9 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
+// Matches the landing page's Ghana green (src/app/(marketing)/page.tsx).
+const GHANA_GREEN = "#006B3F";
+
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -45,8 +48,8 @@ export function LoginForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Sign in</CardTitle>
-        <CardDescription>Welcome back — sign in to your teacher account.</CardDescription>
+        <CardTitle>Welcome back</CardTitle>
+        <CardDescription>Sign in to continue planning your lessons.</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -85,16 +88,21 @@ export function LoginForm() {
             </Alert>
           ) : null}
 
-          <Button type="submit" disabled={isSubmitting} className="mt-1 justify-center">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="mt-1 justify-center text-white hover:opacity-90"
+            style={{ backgroundColor: GHANA_GREEN }}
+          >
             {isSubmitting ? <Loader2 className="size-4 animate-spin" /> : null}
             Sign in
           </Button>
         </form>
 
         <p className="mt-4 text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{" "}
-          <Link href="/register" className="text-primary hover:underline">
-            Register
+          New to Ghana Curriculum Lesson Planner?{" "}
+          <Link href="/register" className="font-medium text-primary hover:underline">
+            Create account
           </Link>
         </p>
       </CardContent>

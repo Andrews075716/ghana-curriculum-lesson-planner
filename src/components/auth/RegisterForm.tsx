@@ -12,6 +12,9 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { MultiSelectField } from "./MultiSelectField";
 import { useCurriculumOptions } from "@/hooks/useCurriculumOptions";
 
+// Matches the landing page's Ghana green (src/app/(marketing)/page.tsx).
+const GHANA_GREEN = "#006B3F";
+
 export function RegisterForm() {
   const router = useRouter();
   const subjects = useCurriculumOptions("/api/curriculum/subjects");
@@ -74,7 +77,9 @@ export function RegisterForm() {
     <Card>
       <CardHeader>
         <CardTitle>Create your account</CardTitle>
-        <CardDescription>Register as a teacher to start planning lessons.</CardDescription>
+        <CardDescription>
+          Set up your teaching profile and start planning with the curriculum you teach.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -138,7 +143,8 @@ export function RegisterForm() {
           </div>
 
           <MultiSelectField
-            label="Subject(s)"
+            label="Subjects you teach"
+            helpText="Select one or more subjects."
             options={subjects.options}
             value={subjectIds}
             onChange={setSubjectIds}
@@ -146,7 +152,8 @@ export function RegisterForm() {
           />
 
           <MultiSelectField
-            label="Class(es)"
+            label="SHS levels you teach"
+            helpText="Select one or more class levels."
             options={classLevels.options}
             value={classLevelIds}
             onChange={setClassLevelIds}
@@ -171,7 +178,12 @@ export function RegisterForm() {
             </Alert>
           ) : null}
 
-          <Button type="submit" disabled={isSubmitting} className="mt-1 justify-center">
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="mt-1 justify-center text-white hover:opacity-90"
+            style={{ backgroundColor: GHANA_GREEN }}
+          >
             {isSubmitting ? <Loader2 className="size-4 animate-spin" /> : null}
             Create account
           </Button>

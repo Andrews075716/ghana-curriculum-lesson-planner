@@ -43,11 +43,17 @@ export function MultiSelectField({
             const checked = value.includes(option.id);
             const fieldId = `multiselect-${option.id}`;
             return (
-              <div key={option.id} className="flex items-center gap-2">
+              <div
+                key={option.id}
+                className={`flex items-center gap-2 rounded-lg border px-2.5 py-1.5 transition-colors ${
+                  checked ? "border-[#006B3F] bg-[#006B3F]/5" : "border-input"
+                }`}
+              >
                 <Checkbox
                   id={fieldId}
                   checked={checked}
                   onCheckedChange={(next) => toggle(option.id, next === true)}
+                  className="data-checked:border-[#006B3F] data-checked:bg-[#006B3F]"
                 />
                 <Label htmlFor={fieldId} className="font-normal">
                   {option.label}
