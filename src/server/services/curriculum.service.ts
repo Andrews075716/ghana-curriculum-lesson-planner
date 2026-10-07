@@ -18,6 +18,26 @@ export type {
   LearningOutcomeReverseRelationships,
 };
 
+export interface TeacherCurriculumDocumentView {
+  subjectId: string;
+  subjectName: string;
+  /** Public path under /curriculum-sources, e.g. "/curriculum-sources/Computing-Curriculum.pdf" — null if no document could be resolved for this subject. */
+  documentUrl: string | null;
+  curriculumVersionName: string | null;
+  curriculumVersionYear: number | null;
+}
+
+export interface TeacherCurriculumDocumentsView {
+  classLevelLabels: string[];
+  documents: TeacherCurriculumDocumentView[];
+}
+
+/** Turns a stored `sourceDocument` value (e.g. "curriculum-sources/Computing-Curriculum.pdf") into the public URL for the now-relocated `public/curriculum-sources/` asset, percent-encoding each path segment so unusual filenames (spaces, etc.) resolve correctly. */
+function toPublicDocumentUrl(sourceDocument: string | null): string | null {
+  if (!sourceDocument) return null;
+  return "/" + sourceDocument.split("/").map(encodeURIComponent).join("/");
+}
+
 export async function getSubjects(): Promise<CurriculumOption[]> {
   return curriculumRepository.listSubjects();
 }
@@ -31,6 +51,31 @@ export async function getClassLevels(subjectId: string): Promise<CurriculumOptio
 
 export async function getAllClassLevels(): Promise<CurriculumOption[]> {
   return curriculumRepository.listAllClassLevels();
+}
+
+/**
+ * The curriculum document(s) relevant to a teacher's own profile — one per
+ * subject they've selected, since each subject's official document already
+ * covers SHS 1-3 (see `curriculumRepository.listTeacherCurriculumDocuments`).
+ * `teacherProfileId` must come from the authenticated session
+ * (`getCurrentTeacherId()`), never from a client-supplied value.
+ */
+export async function getTeacherCurriculumDocuments(
+  teacherProfileId: string,
+): Promise<TeacherCurriculumDocumentsView> {
+  const { classLevelLabels, documents } =
+    await curriculumRepository.listTeacherCurriculumDocuments(teacherProfileId);
+
+  return {
+    classLevelLabels,
+    documents: documents.map((d) => ({
+      subjectId: d.subjectId,
+      subjectName: d.subjectName,
+      documentUrl: toPublicDocumentUrl(d.sourceDocument),
+      curriculumVersionName: d.curriculumVersionName,
+      curriculumVersionYear: d.curriculumVersionYear,
+    })),
+  };
 }
 
 export async function getStrands(

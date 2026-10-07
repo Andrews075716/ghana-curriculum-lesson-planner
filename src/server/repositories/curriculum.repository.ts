@@ -18,6 +18,21 @@ export interface LearningIndicatorPath {
   learningIndicatorId: string;
 }
 
+export interface TeacherCurriculumDocument {
+  subjectId: string;
+  subjectName: string;
+  /** e.g. "curriculum-sources/Computing-Curriculum.pdf" — null if this subject has no strands yet (nothing imported). */
+  sourceDocument: string | null;
+  curriculumVersionName: string | null;
+  curriculumVersionYear: number | null;
+}
+
+export interface TeacherCurriculumDocuments {
+  /** The teacher's own selected class/form levels (not subject-specific — each subject's one PDF already covers SHS 1-3). */
+  classLevelLabels: string[];
+  documents: TeacherCurriculumDocument[];
+}
+
 // --- Reads -----------------------------------------------------------
 
 export async function listSubjects(): Promise<CurriculumOption[]> {
@@ -45,6 +60,62 @@ export async function listAllClassLevels(): Promise<CurriculumOption[]> {
     select: { id: true, name: true },
   });
   return rows.map((r) => ({ id: r.id, label: r.name }));
+}
+
+/**
+ * The curriculum document (one per subject, covering SHS 1-3) for each
+ * subject on a teacher's profile, plus the teacher's own selected class
+ * levels. Reuses the existing `Strand.sourceDocument` / `CurriculumVersion`
+ * data already populated by the import pipeline — no new model, no static
+ * filename mapping. `distinct: ["subjectId"]` is safe here because every
+ * strand under a given subject shares the same `sourceDocument` (confirmed
+ * against all 33 subjects' extraction source data).
+ */
+export async function listTeacherCurriculumDocuments(
+  teacherProfileId: string,
+): Promise<TeacherCurriculumDocuments> {
+  const [teacherSubjects, teacherClassLevels] = await Promise.all([
+    prisma.teacherProfileSubject.findMany({
+      where: { teacherProfileId },
+      select: { subject: { select: { id: true, name: true } } },
+      orderBy: { subject: { name: "asc" } },
+    }),
+    prisma.teacherProfileClassLevel.findMany({
+      where: { teacherProfileId },
+      select: { classLevel: { select: { name: true, sequence: true } } },
+      orderBy: { classLevel: { sequence: "asc" } },
+    }),
+  ]);
+
+  const subjectIds = teacherSubjects.map((t) => t.subject.id);
+  const strandRows = subjectIds.length
+    ? await prisma.strand.findMany({
+        where: { subjectId: { in: subjectIds }, ...teacherVisibleStatusWhere<Prisma.StrandWhereInput>() },
+        distinct: ["subjectId"],
+        select: {
+          subjectId: true,
+          sourceDocument: true,
+          curriculumVersion: { select: { name: true, year: true } },
+        },
+      })
+    : [];
+  const strandBySubjectId = new Map(strandRows.map((r) => [r.subjectId, r]));
+
+  const documents: TeacherCurriculumDocument[] = teacherSubjects.map(({ subject }) => {
+    const strand = strandBySubjectId.get(subject.id);
+    return {
+      subjectId: subject.id,
+      subjectName: subject.name,
+      sourceDocument: strand?.sourceDocument ?? null,
+      curriculumVersionName: strand?.curriculumVersion.name ?? null,
+      curriculumVersionYear: strand?.curriculumVersion.year ?? null,
+    };
+  });
+
+  return {
+    classLevelLabels: teacherClassLevels.map((t) => t.classLevel.name),
+    documents,
+  };
 }
 
 export async function listStrands(

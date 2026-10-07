@@ -218,7 +218,7 @@ export function CurriculumTreeBrowser({
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <Button variant="ghost" size="sm" render={<Link href="/curriculum" />} nativeButton={false}>
+        <Button variant="ghost" size="sm" render={<Link href="/curriculum/browse" />} nativeButton={false}>
           <ArrowLeft className="size-4" />
           All subjects
         </Button>
