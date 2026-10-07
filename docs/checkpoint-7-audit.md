@@ -15,6 +15,17 @@ All row-level assertions were re-run against the live database on 2026-09-30
 1157 Learning Outcomes / 3070 Learning Indicators / 35 additional CS↔LO
 links; 0 duplicates; 0 orphans).
 
+> **Note (2026-10-02, pre-deployment reconciliation):** the above figures are
+> this audit's historical local-database snapshot, preserved as originally
+> recorded. They included an obsolete seed fixture and a pre-correction
+> Learning Outcome placement for 102 Learning Indicators, since reconciled
+> with 0 curriculum content loss found. The verified production baseline is
+> 1079 Content Standards / 1151 Learning Outcomes / 2955 Learning Indicators
+> / 35 additional CS↔LO links — see
+> `data/curriculum/extraction-progress.json`'s `productionBaselineReconciliation`
+> entry. The per-row COMPLETE/PARTIAL findings below are unaffected by this
+> count correction.
+
 ## Gap matrix
 
 | # | Requirement | Status | Evidence | Files | Tests | Action Required |

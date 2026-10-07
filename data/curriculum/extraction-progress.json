@@ -232,6 +232,7 @@
       "remainingWork": "As of 2026-09-29, all 33 subjects have been processed through the evidence-based JSON review and import pipeline. Remaining Checkpoint 6 work per the most recent continuation instructions: (1) audit the NEEDS_REVIEW semantics of all flagged records across the whole database, breaking down WHY each is flagged (uncertain content vs inherited from a structural correction vs whole-subject-awaiting-approval vs other reasons) - not yet done; (2) audit the LearningOutcomeContentStandardLink junction table for full source justification per row - not yet done; (3) run the full final validation suite (Prisma validate, typecheck, lint, tests, curriculum API tests, DB integrity, idempotency re-check across all 33 subjects, production build) - not yet done; (4) produce the FINAL REPORT in the exact format specified in the continuation instructions. Do NOT start Checkpoint 7 until all of the above is complete.",
       "finalValidation": {
         "date": "2026-09-29",
+        "dbTotalsNote": "HISTORICAL LOCAL DEVELOPMENT SNAPSHOT, not the current production baseline. These totals were read from the local development database at the end of this Checkpoint-6 session and include: (a) the local-only 'Reference Sample - Computing' seed fixture (prisma/seed-data/computing-form1.ts, 2 strands/4 sub-strands/4 Content Standards/6 Learning Outcomes/13 Learning Indicators, never part of this extraction pipeline), and (b) a pre-correction placement of 102 Learning Indicators across 6 subjects (Additional Mathematics, Arabic, English Language, Spanish, Government, Economics) that a later Learning-Outcome re-attribution fix moved to their correct Learning Outcome under the same Content Standard, which the local database was never re-imported to reflect. See 'productionBaselineReconciliation' below (added after deployment reconciliation, 2026-10-02) for the verified current baseline and full reconciliation evidence. No curriculum content loss was identified in that reconciliation.",
         "dbTotals": {
           "subjects": 33,
           "strands": 352,
@@ -300,6 +301,25 @@
       "status": "NOT_STARTED",
       "description": "Spot-check several subjects end-to-end: select -> generate -> save -> reopen -> preview, against original PDFs (Phase 17)."
     }
+  },
+  "productionBaselineReconciliation": {
+    "date": "2026-10-02",
+    "context": "Before deploying to the hosted Prisma Postgres database, a read-only reconciliation compared the local development database's historical totals (1083 CS / 1157 LO / 3070 LI, see checkpoint6_database_import.finalValidation.dbTotals above) against what the current 33 committed data/curriculum/*.json files plus the current importer (src/server/services/curriculum-import/extraction-importer.ts) deterministically produce, and against the freshly-imported remote database.",
+    "verifiedProductionBaseline": {
+      "curriculumVersions": 1,
+      "subjects": 33,
+      "classLevels": 3,
+      "strands": 350,
+      "subStrands": 783,
+      "contentStandards": 1079,
+      "learningOutcomes": 1151,
+      "learningIndicators": 2955,
+      "additionalContentStandardLearningOutcomeLinks": 35
+    },
+    "evidence": "The current JSON + current importer and the remote database match each other exactly on every figure above, independently confirmed by deterministic replay of the importer's grouping/exclusion/dedup logic against the committed source files. Referential integrity on remote: 0 orphan Content Standards, 0 orphan Learning Outcomes, 0 orphan Learning Indicators, 0 duplicate Content Standard codes, 0 duplicate Learning Outcome codes, 0 duplicate CS-LO junction pairs.",
+    "historicalDifferenceExplained": "The local database's extra 1 Curriculum Version / 2 Strands / 4 Sub-Strands / 4 Content Standards / 6 Learning Outcomes / 13 Learning Indicators belong entirely to the local-only 'Reference Sample - Computing' seed fixture (prisma/seed-data/computing-form1.ts), never part of the 33-subject extraction pipeline. Of the remaining 102 extra local Learning Indicators (across Additional Mathematics, Arabic, English Language, Spanish, Government, Economics), an exhaustive exact-text search found all 102/102 present verbatim in the current JSON, each relocated to the Learning Outcome its own original extraction reviewNote already said it belonged under (e.g. 'this Learning Indicator's topic belongs to Learning Outcome 2.1.1.LO.4, not 2.1.1.LO.3'), reusing the same Content Standard code across the corrected Learning Outcomes. 0 of the 102 were absent from current JSON; 0 remained uncertain. The local database was simply never re-imported after this correction was made to the committed source.",
+    "conclusion": "No curriculum content loss was identified. 1079/1151/2955/35 (plus 350 Strands / 783 Sub-Strands / 3 Class Levels / 1 Curriculum Version / 33 Subjects) is the verified current production baseline, matching both the current committed source and the deployed remote database.",
+    "supersedes": "The 1083/1157/3070 figures recorded in checkpoint6_database_import.finalValidation.dbTotals, and anywhere else in this repository's documentation that cites them as a current/production baseline rather than as a historical local-development snapshot."
   },
   "subjects": [
     {

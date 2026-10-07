@@ -212,6 +212,18 @@ for full detail:
 | Duplicate junction pairs | 0 | 0 |
 
 No record was reset, reseeded, re-imported, or had its status changed.
+
+> **Note (2026-10-02, pre-deployment reconciliation):** this table's Before/After
+> figures are preserved as originally recorded — they confirm this checkpoint's
+> tests did not mutate the local database, which is still true. They are not the
+> current production baseline: the local database separately included an
+> obsolete seed fixture and a pre-correction Learning Outcome placement for 102
+> Learning Indicators, since reconciled with 0 curriculum content loss found.
+> The verified production baseline is 1079 Content Standards / 1151 Learning
+> Outcomes / 2955 Learning Indicators / 35 additional CS↔LO links — see
+> `data/curriculum/extraction-progress.json`'s `productionBaselineReconciliation`
+> entry.
+
 User count went from 3 to 2 during this checkpoint — investigated
 immediately: the "3rd" row was a `test-teacher-a-*` fixture stranded since
 the *previous day's* session (defect #2 above), correctly removed by the
