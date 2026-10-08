@@ -28,6 +28,10 @@ import {
   type UpcomingLessonRow,
 } from "@/server/repositories/planner.repository";
 import { countActiveClassesByTeacher } from "@/server/repositories/class.repository";
+import {
+  assertLearningIndicatorAuthorized,
+  assertProfileReadyForPlanning,
+} from "@/server/services/planner-authorization.service";
 
 export interface DashboardStats {
   totalPlanners: number;
@@ -85,8 +89,16 @@ export async function getDashboardOverview(
 
 // --- Create Planner wizard (draft CRUD) -----------------------------------
 
-/** Starts a new draft planner, immediately persisted so autosave has something to save against. */
+/**
+ * Starts a new draft planner, immediately persisted so autosave has
+ * something to save against. Requires a complete teaching profile (at
+ * least one registered subject AND one registered class level) — a
+ * teacher with no declared scope has nothing authorised to plan against
+ * yet. Does not restrict which authorised subject/class level the draft
+ * ends up using; that's enforced per-selection in `saveDraftStep`.
+ */
 export async function startPlannerDraft(teacherId: string): Promise<string> {
+  await assertProfileReadyForPlanning(teacherId);
   const { academicYear } = getCurrentAcademicPeriod();
   return createDraftPlanner(teacherId, academicYear);
 }
@@ -124,6 +136,24 @@ export async function saveDraftStep(
   const parsed = PlannerDraftUpdateSchema.safeParse(rawData);
   if (!parsed.success) {
     throw new ValidationError("Invalid draft data.", { cause: parsed.error });
+  }
+
+  // Autosave resends the full wizard state on every call, including an
+  // unchanged `learningIndicatorId` — so only a genuine change of curriculum
+  // assignment is checked against the teacher's authorised subjects/class
+  // levels. This is what lets a teacher keep editing a draft's other content
+  // (and publish it) even if their profile's subjects/class levels change
+  // later, without re-litigating an assignment that was already authorised
+  // when it was made. Clearing the assignment (new value `null`) is also
+  // never blocked — only acquiring a new, different, non-null assignment is.
+  const incomingLearningIndicatorId = parsed.data.learningIndicatorId;
+  const isNewCurriculumAssignment =
+    incomingLearningIndicatorId !== undefined &&
+    incomingLearningIndicatorId !== null &&
+    incomingLearningIndicatorId !== existing.learningIndicatorId;
+
+  if (isNewCurriculumAssignment) {
+    await assertLearningIndicatorAuthorized(teacherId, incomingLearningIndicatorId);
   }
 
   await updatePlannerDraft(id, teacherId, parsed.data as PlannerDraftUpdate);
@@ -193,8 +223,21 @@ export async function deletePlannerForTeacher(id: string, teacherId: string): Pr
   }
 }
 
-/** Returns the id of the newly created copy. */
+/**
+ * Returns the id of the newly created copy. Duplicating into a new planner
+ * requires current authorisation for the source's curriculum assignment
+ * (not just historical authorisation at the time the source was created) —
+ * this creates a brand-new planner, not an edit of existing content.
+ */
 export async function duplicatePlannerForTeacher(id: string, teacherId: string): Promise<string> {
+  const source = await getPlannerDraft(id, teacherId);
+  if (!source) {
+    throw new NotFoundError("Planner not found.");
+  }
+  if (source.learningIndicatorId) {
+    await assertLearningIndicatorAuthorized(teacherId, source.learningIndicatorId);
+  }
+
   const newId = await duplicatePlanner(id, teacherId);
   if (!newId) {
     throw new NotFoundError("Planner not found.");

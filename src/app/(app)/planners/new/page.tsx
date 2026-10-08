@@ -1,6 +1,8 @@
+import Link from "next/link";
 import { getCurrentTeacherId } from "@/server/auth/session";
 import { getPlannerDraftForTeacher, startPlannerDraft } from "@/server/services/planner.service";
 import { getLearningIndicatorPath } from "@/server/services/curriculum.service";
+import { getAuthorizedCurriculumIds } from "@/server/services/planner-authorization.service";
 import { WizardShell } from "@/components/planner/wizard/WizardShell";
 import { createInitialWizardState, type WizardState } from "@/components/planner/wizard/types";
 
@@ -39,6 +41,7 @@ export default async function NewPlannerPage({
     );
   }
 
+  const authorizedIds = await getAuthorizedCurriculumIds(teacherId);
   const state = createInitialWizardState();
   let plannerId: string | null = null;
   let alreadyPublished = false;
@@ -90,6 +93,18 @@ export default async function NewPlannerPage({
   }
 
   if (!plannerId) {
+    if (authorizedIds.subjectIds.length === 0 || authorizedIds.classLevelIds.length === 0) {
+      return (
+        <div className="rounded-xl border bg-card p-6 text-sm text-muted-foreground">
+          Complete your teaching profile to start preparing lesson plans. Select the subjects and
+          SHS levels you teach.{" "}
+          <Link href="/settings/profile" className="font-medium text-primary hover:underline">
+            Go to Profile Settings
+          </Link>
+          .
+        </div>
+      );
+    }
     plannerId = await startPlannerDraft(teacherId);
     if (indicatorId) {
       await applyCurriculumPath(state, indicatorId);
@@ -108,6 +123,8 @@ export default async function NewPlannerPage({
         plannerId={plannerId}
         initialState={state}
         alreadyPublished={alreadyPublished}
+        authorizedSubjectIds={authorizedIds.subjectIds}
+        authorizedClassLevelIds={authorizedIds.classLevelIds}
       />
     </div>
   );

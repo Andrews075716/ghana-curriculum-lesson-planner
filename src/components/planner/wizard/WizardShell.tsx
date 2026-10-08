@@ -25,6 +25,9 @@ export interface WizardShellProps {
   plannerId: string;
   initialState: WizardState;
   alreadyPublished: boolean;
+  /** The authenticated teacher's registered subjects/class levels (TeacherProfileSubject/TeacherProfileClassLevel) — the only ones selectable for a new or changed curriculum assignment. */
+  authorizedSubjectIds: string[];
+  authorizedClassLevelIds: string[];
 }
 
 async function saveDraft(plannerId: string, data: PlannerDraftUpdate): Promise<void> {
@@ -39,7 +42,13 @@ async function saveDraft(plannerId: string, data: PlannerDraftUpdate): Promise<v
   }
 }
 
-export function WizardShell({ plannerId, initialState, alreadyPublished }: WizardShellProps) {
+export function WizardShell({
+  plannerId,
+  initialState,
+  alreadyPublished,
+  authorizedSubjectIds,
+  authorizedClassLevelIds,
+}: WizardShellProps) {
   const router = useRouter();
   const [state, setState] = useState<WizardState>(initialState);
   const [currentStep, setCurrentStep] = useState(1);
@@ -61,6 +70,32 @@ export function WizardShell({ plannerId, initialState, alreadyPublished }: Wizar
   const classLevels = useCurriculumOptions(
     state.subjectId ? `/api/curriculum/class-levels?subjectId=${state.subjectId}` : null,
   );
+
+  // Step 1's subject/class-level selectors only ever offer the teacher's
+  // registered options — server-side enforcement lives in
+  // planner-authorization.service.ts; this is the UI-side mirror of it.
+  // The planner's current value is kept visible even if it's since fallen
+  // out of the teacher's profile (an already-authorised historical
+  // assignment), so continuing to edit an older draft never shows a blank
+  // or unrecognisable selection — it just can't be picked again from
+  // scratch once removed from authorised options.
+  const authorizedSubjects = useMemo(() => {
+    const authorized = subjects.options.filter((o) => authorizedSubjectIds.includes(o.id));
+    if (state.subjectId && !authorizedSubjectIds.includes(state.subjectId)) {
+      const current = subjects.options.find((o) => o.id === state.subjectId);
+      if (current) return [...authorized, current];
+    }
+    return authorized;
+  }, [subjects.options, authorizedSubjectIds, state.subjectId]);
+
+  const authorizedClassLevels = useMemo(() => {
+    const authorized = classLevels.options.filter((o) => authorizedClassLevelIds.includes(o.id));
+    if (state.classLevelId && !authorizedClassLevelIds.includes(state.classLevelId)) {
+      const current = classLevels.options.find((o) => o.id === state.classLevelId);
+      if (current) return [...authorized, current];
+    }
+    return authorized;
+  }, [classLevels.options, authorizedClassLevelIds, state.classLevelId]);
   const strands = useCurriculumOptions(
     state.subjectId && state.classLevelId
       ? `/api/curriculum/strands?subjectId=${state.subjectId}&classLevelId=${state.classLevelId}`
@@ -260,8 +295,8 @@ export function WizardShell({ plannerId, initialState, alreadyPublished }: Wizar
             updateField={updateField}
             onSubjectChange={handleSubjectChange}
             onClassLevelChange={handleClassLevelChange}
-            subjects={subjects}
-            classLevels={classLevels}
+            subjects={{ ...subjects, options: authorizedSubjects }}
+            classLevels={{ ...classLevels, options: authorizedClassLevels }}
             fieldErrors={showValidationErrors ? stepValidation.fieldErrors : {}}
           />
         ) : null}
@@ -313,8 +348,8 @@ export function WizardShell({ plannerId, initialState, alreadyPublished }: Wizar
         {currentStep === 7 ? (
           <Step7Review
             state={state}
-            subjects={subjects}
-            classLevels={classLevels}
+            subjects={{ ...subjects, options: authorizedSubjects }}
+            classLevels={{ ...classLevels, options: authorizedClassLevels }}
             strands={strands}
             subStrands={subStrands}
             contentStandards={contentStandards}

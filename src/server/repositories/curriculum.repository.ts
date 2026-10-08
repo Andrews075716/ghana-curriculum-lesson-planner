@@ -62,6 +62,36 @@ export async function listAllClassLevels(): Promise<CurriculumOption[]> {
   return rows.map((r) => ({ id: r.id, label: r.name }));
 }
 
+export interface TeacherAuthorizedCurriculumIds {
+  subjectIds: string[];
+  classLevelIds: string[];
+}
+
+/**
+ * The raw subject/class-level ids a teacher is authorised to plan against —
+ * straight from `TeacherProfileSubject`/`TeacherProfileClassLevel`, the
+ * authoritative source for an independent teacher's scope of practice (see
+ * `server/services/planner-authorization.service.ts`, the sole consumer).
+ */
+export async function getTeacherAuthorizedCurriculumIds(
+  teacherProfileId: string,
+): Promise<TeacherAuthorizedCurriculumIds> {
+  const [subjects, classLevels] = await Promise.all([
+    prisma.teacherProfileSubject.findMany({
+      where: { teacherProfileId },
+      select: { subjectId: true },
+    }),
+    prisma.teacherProfileClassLevel.findMany({
+      where: { teacherProfileId },
+      select: { classLevelId: true },
+    }),
+  ]);
+  return {
+    subjectIds: subjects.map((s) => s.subjectId),
+    classLevelIds: classLevels.map((c) => c.classLevelId),
+  };
+}
+
 /**
  * The curriculum document (one per subject, covering SHS 1-3) for each
  * subject on a teacher's profile, plus the teacher's own selected class
