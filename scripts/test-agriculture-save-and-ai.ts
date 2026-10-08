@@ -26,13 +26,24 @@
 // do — that is the only way a script's own AI_PROVIDER override actually
 // takes effect. SAVE (section 1) has zero AI involvement and safely stays
 // HTTP-based, matching what the browser's Save actually does.
+//
+// THIRD VERSION (Phase 0 reconciliation): the fixed `demo.teacher@...`
+// account is registered for Computing/SHS 1 only (see
+// prisma/seed-data/demo-teacher.ts), and Phase 0 now requires a teacher's
+// curriculum assignment to be within their own registered subjects/class
+// levels (see planner-authorization.service.ts). Using the demo teacher
+// for an Agricultural Science assignment would be correctly REJECTED, not
+// a save failure worth regression-testing. This version registers its own
+// throwaway teacher, authorised for exactly this fixture's subject/class
+// level, so the test still exercises genuine save/AI behaviour rather than
+// the (separately, directly tested) authorisation boundary itself.
 process.env.AI_PROVIDER = "mock";
 
 import { PrismaClient } from "@prisma/client";
 import { AIActivityDurationExceededError } from "@/server/errors/app-error";
 import * as aiService from "@/server/services/ai.service";
 import { createDraftPlanner, updatePlannerDraft } from "@/server/repositories/planner.repository";
-import { loginAsDemoTeacher } from "./_lib/authed-session";
+import { AuthedSession } from "./_lib/authed-session";
 
 const prisma = new PrismaClient();
 
@@ -49,7 +60,24 @@ function assert(condition: unknown, message: string): void {
   }
 }
 
+const EMAIL_PREFIX = "test-agriculture-teacher";
+
+/** Sweeps up fixtures left behind by an interrupted prior run, before this run creates its own. */
+async function cleanupOrphanedFixturesFromPriorRuns(): Promise<void> {
+  const pattern = { startsWith: `${EMAIL_PREFIX}-` };
+  const orphaned = await prisma.user.findMany({ where: { email: pattern }, select: { id: true, email: true } });
+  if (orphaned.length === 0) return;
+  console.log(
+    `  (cleanup) removing ${orphaned.length} leftover fixture(s) from an earlier interrupted run: ${orphaned.map((u) => u.email).join(", ")}`,
+  );
+  await prisma.lessonPlanner.deleteMany({ where: { teacher: { user: { email: pattern } } } });
+  await prisma.teacherProfile.deleteMany({ where: { user: { email: pattern } } });
+  await prisma.user.deleteMany({ where: { email: pattern } });
+}
+
 async function main() {
+  await cleanupOrphanedFixturesFromPriorRuns();
+
   const indicator = await prisma.learningIndicator.findFirstOrThrow({
     where: {
       code: "1.1.2.LI.1",
@@ -57,84 +85,123 @@ async function main() {
         contentStandard: { subStrand: { name: { contains: "EMERGING TECHNOLOGIES IN AGRICULTURE" } } },
       },
     },
+    include: {
+      learningOutcome: {
+        select: {
+          contentStandard: {
+            select: {
+              subStrand: { select: { strand: { select: { subjectId: true, classLevelId: true } } } },
+            },
+          },
+        },
+      },
+    },
   });
+  const { subjectId, classLevelId } = indicator.learningOutcome.contentStandard.subStrand.strand;
   console.log("Fixture resolved: Agricultural Science / SHS 1 /", indicator.code);
 
-  const teacher = await prisma.teacherProfile.findFirstOrThrow({
-    where: { user: { email: "demo.teacher@example.edu.gh" } },
+  // A throwaway teacher legitimately authorised for exactly this fixture's
+  // subject + class level (Phase 0 requires this for any curriculum
+  // assignment) — not the fixed demo.teacher account, which is only
+  // authorised for Computing/SHS 1.
+  const email = `${EMAIL_PREFIX}-${Date.now()}@example.edu.gh`;
+  const session = new AuthedSession();
+  const registerRes = await session.post("/api/auth/register", {
+    name: "Agriculture Fixture Teacher",
+    email,
+    password: "AgricultureTest1!",
+    confirmPassword: "AgricultureTest1!",
+    schoolName: "Agriculture Fixture School",
+    subjectIds: [subjectId],
+    classLevelIds: [classLevelId],
   });
+  if (registerRes.status !== 201) {
+    throw new Error(
+      `Failed to register the Agriculture fixture teacher: ${registerRes.status} ${JSON.stringify(registerRes.body)}`,
+    );
+  }
+  const teacher = await prisma.teacherProfile.findFirstOrThrow({ where: { user: { email } } });
+
   const createdPlannerIds: string[] = [];
 
-  console.log("\n1) SAVE (real HTTP, no AI involved, safe): create a planner and PATCH the exact Basic Info + Curriculum Alignment payload");
-  const session = await loginAsDemoTeacher();
-  const created = await session.post("/api/planners");
-  const plannerId: string = created.body.data.id;
-  createdPlannerIds.push(plannerId);
-  assert(created.status === 201, "POST /api/planners -> 201");
-
-  const patch = await session.patch(`/api/planners/${plannerId}`, {
-    classSection: "Form 1 Gold",
-    term: "TERM_1",
-    weekNumber: 5,
-    lessonNumber: 1,
-    durationMinutes: 90,
-    learningIndicatorId: indicator.id,
-  });
-  assert(patch.status === 200, `PATCH curriculum+duration -> 200 (got ${patch.status})`);
-  assert(patch.body?.data?.saved === true, "PATCH response body has the expected { data: { saved: true } } shape");
-
-  const reopened = await session.get(`/api/planners/${plannerId}`);
-  assert(reopened.status === 200, "GET the draft back -> 200");
-  assert(
-    reopened.body?.data?.learningIndicatorId === indicator.id,
-    "the exact Agriculture Learning Indicator id round-trips correctly",
-  );
-
-  console.log("\n2) AI (in-process, AI_PROVIDER=mock, ZERO live cost): essential-questions for this exact curriculum");
-  const eqResult = await aiService.generateEssentialQuestions(plannerId, teacher.id);
-  assert(eqResult.meta.provider === "mock", "confirms zero live Anthropic cost (mock provider)");
-  assert(eqResult.suggestion.essentialQuestions.length > 0, "essential-questions returns real content for this Agriculture indicator");
-
-  console.log("\n3) AI (in-process, mock): full-lesson-draft for this exact curriculum, generous duration -> succeeds");
-  await updatePlannerDraft(plannerId, teacher.id, { durationMinutes: 90 });
-  const fullDraftResult = await aiService.generateFullLessonDraft(plannerId, teacher.id);
-  assert(fullDraftResult.meta.provider === "mock", "confirms zero live Anthropic cost (mock provider)");
-  assert(
-    fullDraftResult.suggestion.lessonActivities.length > 0,
-    "full-lesson-draft returns real lesson activities for this Agriculture content",
-  );
-
-  console.log("\n4) AI (in-process, mock): full-lesson-draft with an INSUFFICIENT duration -> a SPECIFIC error, not a generic one");
-  const tightPlannerId = await createDraftPlanner(teacher.id, "2025/2026");
-  createdPlannerIds.push(tightPlannerId);
-  await updatePlannerDraft(tightPlannerId, teacher.id, {
-    learningIndicatorId: indicator.id,
-    durationMinutes: 45, // MockAIProvider's fixed full-draft total is 50 minutes
-  });
   try {
-    await aiService.generateFullLessonDraft(tightPlannerId, teacher.id);
-    assert(false, "should have thrown AIActivityDurationExceededError");
-  } catch (error) {
-    assert(
-      error instanceof AIActivityDurationExceededError,
-      "throws the SPECIFIC AIActivityDurationExceededError, not a generic/unhandled error",
+    console.log(
+      "\n1) SAVE (real HTTP, no AI involved, safe): create a planner and PATCH the exact Basic Info + Curriculum Alignment payload",
     );
-    if (error instanceof AIActivityDurationExceededError) {
-      assert(error.httpStatus === 422, "maps to HTTP 422, not a raw 500");
+    const created = await session.post("/api/planners");
+    const plannerId: string = created.body.data.id;
+    createdPlannerIds.push(plannerId);
+    assert(created.status === 201, "POST /api/planners -> 201");
+
+    const patch = await session.patch(`/api/planners/${plannerId}`, {
+      classSection: "Form 1 Gold",
+      term: "TERM_1",
+      weekNumber: 5,
+      lessonNumber: 1,
+      durationMinutes: 90,
+      learningIndicatorId: indicator.id,
+    });
+    assert(patch.status === 200, `PATCH curriculum+duration -> 200 (got ${patch.status})`);
+    assert(patch.body?.data?.saved === true, "PATCH response body has the expected { data: { saved: true } } shape");
+
+    const reopened = await session.get(`/api/planners/${plannerId}`);
+    assert(reopened.status === 200, "GET the draft back -> 200");
+    assert(
+      reopened.body?.data?.learningIndicatorId === indicator.id,
+      "the exact Agriculture Learning Indicator id round-trips correctly",
+    );
+
+    console.log("\n2) AI (in-process, AI_PROVIDER=mock, ZERO live cost): essential-questions for this exact curriculum");
+    const eqResult = await aiService.generateEssentialQuestions(plannerId, teacher.id);
+    assert(eqResult.meta.provider === "mock", "confirms zero live Anthropic cost (mock provider)");
+    assert(
+      eqResult.suggestion.essentialQuestions.length > 0,
+      "essential-questions returns real content for this Agriculture indicator",
+    );
+
+    console.log("\n3) AI (in-process, mock): full-lesson-draft for this exact curriculum, generous duration -> succeeds");
+    await updatePlannerDraft(plannerId, teacher.id, { durationMinutes: 90 });
+    const fullDraftResult = await aiService.generateFullLessonDraft(plannerId, teacher.id);
+    assert(fullDraftResult.meta.provider === "mock", "confirms zero live Anthropic cost (mock provider)");
+    assert(
+      fullDraftResult.suggestion.lessonActivities.length > 0,
+      "full-lesson-draft returns real lesson activities for this Agriculture content",
+    );
+
+    console.log("\n4) AI (in-process, mock): full-lesson-draft with an INSUFFICIENT duration -> a SPECIFIC error, not a generic one");
+    const tightPlannerId = await createDraftPlanner(teacher.id, "2025/2026");
+    createdPlannerIds.push(tightPlannerId);
+    await updatePlannerDraft(tightPlannerId, teacher.id, {
+      learningIndicatorId: indicator.id,
+      durationMinutes: 45, // MockAIProvider's fixed full-draft total is 50 minutes
+    });
+    try {
+      await aiService.generateFullLessonDraft(tightPlannerId, teacher.id);
+      assert(false, "should have thrown AIActivityDurationExceededError");
+    } catch (error) {
       assert(
-        typeof error.message === "string" && error.message.length > 20,
-        "carries a real, specific message a teacher would see instead of a generic fallback",
+        error instanceof AIActivityDurationExceededError,
+        "throws the SPECIFIC AIActivityDurationExceededError, not a generic/unhandled error",
       );
-      assert(
-        error.expectedDuration === 45 && error.generatedDuration === 50,
-        "carries the safe expectedDuration/generatedDuration diagnostic numbers",
-      );
+      if (error instanceof AIActivityDurationExceededError) {
+        assert(error.httpStatus === 422, "maps to HTTP 422, not a raw 500");
+        assert(
+          typeof error.message === "string" && error.message.length > 20,
+          "carries a real, specific message a teacher would see instead of a generic fallback",
+        );
+        assert(
+          error.expectedDuration === 45 && error.generatedDuration === 50,
+          "carries the safe expectedDuration/generatedDuration diagnostic numbers",
+        );
+      }
     }
+  } finally {
+    await prisma.lessonPlanner.deleteMany({ where: { id: { in: createdPlannerIds } } });
+    await prisma.teacherProfile.deleteMany({ where: { user: { email } } });
+    await prisma.user.deleteMany({ where: { email } });
   }
 
   console.log(`\n${passed} passed, ${failed} failed`);
-
-  await prisma.lessonPlanner.deleteMany({ where: { id: { in: createdPlannerIds } } });
   if (failed > 0) process.exitCode = 1;
 }
 

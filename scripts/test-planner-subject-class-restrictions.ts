@@ -294,6 +294,87 @@ async function main() {
       duplicateG1.status === 403,
       "Test G: duplicating a planner into a new one requires *current* authorisation -> 403",
     );
+
+    // --- Test K: clearing and reselecting a Learning Indicator ---
+    console.log("\nTest K: clearing and reselecting a Learning Indicator");
+    const draftK = await narrow.post("/api/planners");
+    const draftKId: string = draftK.body.data.id;
+    const assignK = await narrow.patch(`/api/planners/${draftKId}`, {
+      learningIndicatorId: computingShs1.indicatorId,
+    });
+    assert(assignK.status === 200, "Test K: initial authorised assignment accepted -> 200");
+
+    const clearK = await narrow.patch(`/api/planners/${draftKId}`, { learningIndicatorId: null });
+    assert(clearK.status === 200, "Test K: clearing the assignment (null) is always allowed -> 200");
+    const verifyClearedK = await narrow.get(`/api/planners/${draftKId}`);
+    assert(verifyClearedK.body.data.learningIndicatorId === null, "Test K: the assignment is actually cleared");
+
+    const reselectUnauthorizedK = await narrow.patch(`/api/planners/${draftKId}`, {
+      learningIndicatorId: physicsShs1.indicatorId,
+    });
+    assert(
+      reselectUnauthorizedK.status === 403,
+      "Test K: reselecting an unauthorised subject after clearing is still rejected -> 403",
+    );
+
+    const reselectAuthorizedK = await narrow.patch(`/api/planners/${draftKId}`, {
+      learningIndicatorId: computingShs1.indicatorId,
+    });
+    assert(
+      reselectAuthorizedK.status === 200,
+      "Test K: reselecting the authorised subject after clearing is accepted -> 200",
+    );
+
+    // --- Test L: publishing without any curriculum assignment is rejected
+    //     (pre-existing validation, confirmed unaffected by Phase 0) ---
+    console.log("\nTest L: publishing without any curriculum assignment is rejected");
+    const draftL = await narrow.post("/api/planners");
+    const draftLId: string = draftL.body.data.id;
+    await narrow.patch(`/api/planners/${draftLId}`, {
+      classSection: "SHS 1 Gold",
+      term: "TERM_1",
+      weekNumber: 2,
+      lessonNumber: 1,
+      durationMinutes: 40,
+    });
+    const publishL = await narrow.post(`/api/planners/${draftLId}/publish`);
+    assert(publishL.status === 400, "Test L: publishing with no Learning Indicator selected is rejected -> 400");
+
+    // --- Test M: a published planner's assignment can no longer be changed
+    //     at all (pre-existing lock, confirmed unaffected by Phase 0) ---
+    console.log("\nTest M: a published planner's curriculum assignment can no longer be changed");
+    const draftM = await narrow.post("/api/planners");
+    const draftMId: string = draftM.body.data.id;
+    await narrow.patch(`/api/planners/${draftMId}`, {
+      classSection: "SHS 1 Gold",
+      term: "TERM_1",
+      weekNumber: 3,
+      lessonNumber: 1,
+      durationMinutes: 40,
+      learningIndicatorId: computingShs1.indicatorId,
+    });
+    await narrow.patch(`/api/planners/${draftMId}`, {
+      lessonActivities: [
+        {
+          stage: "CLOSURE",
+          label: "Wrap up",
+          sequence: 1,
+          durationMinutes: 5,
+          teacherActivity: "Summarise",
+          learnerActivity: "Reflect",
+        },
+      ],
+      assessments: [{ dokLevel: "LEVEL_1", description: "Exit ticket", sequence: 1 }],
+    });
+    const publishM = await narrow.post(`/api/planners/${draftMId}/publish`);
+    assert(publishM.status === 200, "Test M setup: publish succeeds -> 200");
+    const patchAfterPublishM = await narrow.patch(`/api/planners/${draftMId}`, {
+      learningIndicatorId: physicsShs1.indicatorId,
+    });
+    assert(
+      patchAfterPublishM.status === 400,
+      "Test M: attempting to change a published planner's assignment is rejected -> 400 (locked, pre-existing rule)",
+    );
   } finally {
     console.log("\nCleaning up fixtures...");
     await prisma.lessonPlanner.deleteMany({ where: { teacher: { user: { email: { in: createdTeacherEmails } } } } });
